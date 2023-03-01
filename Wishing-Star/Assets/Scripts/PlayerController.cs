@@ -21,9 +21,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //Movement
-        //moveinput.y = Input.GetAxisRaw("Vertical");
-        //moveinput.x = Input.GetAxisRaw("Horizontal");
-
         tempVel = rb.velocity;
         tempVel.x = moveinput.x * movementSpeed;
         tempVel.y = moveinput.y * movementSpeed;

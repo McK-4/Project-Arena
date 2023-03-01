@@ -121,12 +121,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5319159326830151571}
     - target: {fileID: 6547034616071601023, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547034616071601023, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
       propertyPath: m_DefaultControlScheme
-      value: Keyboard
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547034616071601023, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6547034616071601023, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
       propertyPath: m_NeverAutoSwitchControlSchemes
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547034616071601023, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_ActionId
+      value: 22e46e01-9d63-4a1c-b893-d2b3936eb0a5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547034616071601023, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_ActionName
+      value: Player 2/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
