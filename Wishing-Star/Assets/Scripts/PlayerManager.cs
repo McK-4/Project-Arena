@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    private GameObject[] player;
+    private GameObject[] players;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +15,16 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        player = GameObject.FindGameObjectsWithTag("Player");
+        players = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach(GameObject player in players)
+        {
+            for(int i = 0; i < players.Length; i++)
+            {
+                player.name = "Player_"+i;
+            }
+        }
     }
+
+
 }

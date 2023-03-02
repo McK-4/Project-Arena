@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Attacks",
+                    "type": "Button",
+                    "id": "6d7eaec5-b494-4f7d-8ada-491ea3d99b89",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -143,7 +152,7 @@
                     "path": "<XInputController>/dpad/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Xbox D-Pad",
+                    "groups": "Xbox D-Pad;Xbox Controller",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -154,7 +163,7 @@
                     "path": "<XInputController>/dpad/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Xbox D-Pad",
+                    "groups": "Xbox D-Pad;Xbox Controller",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -165,7 +174,7 @@
                     "path": "<XInputController>/dpad/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Xbox D-Pad",
+                    "groups": "Xbox D-Pad;Xbox Controller",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -176,7 +185,7 @@
                     "path": "<XInputController>/dpad/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Xbox D-Pad",
+                    "groups": "Xbox D-Pad;Xbox Controller",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -198,7 +207,7 @@
                     "path": "<XInputController>/buttonNorth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Xbox ABXY",
+                    "groups": "Xbox ABXY;Xbox Controller",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -209,7 +218,7 @@
                     "path": "<XInputController>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Xbox ABXY",
+                    "groups": "Xbox ABXY;Xbox Controller",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -220,7 +229,7 @@
                     "path": "<XInputController>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Xbox ABXY",
+                    "groups": "Xbox ABXY;Xbox Controller",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -231,137 +240,43 @@
                     "path": "<XInputController>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Xbox ABXY",
+                    "groups": "Xbox ABXY;Xbox Controller",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
-                }
-            ]
-        },
-        {
-            "name": "Player 2",
-            "id": "95323735-0572-44b1-891c-690a1b68c38a",
-            "actions": [
+                },
                 {
-                    "name": "Movement",
-                    "type": "Button",
-                    "id": "22e46e01-9d63-4a1c-b893-d2b3936eb0a5",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "WASD",
-                    "id": "defaf710-907a-4e44-b8c1-6061e2309fce",
-                    "path": "2DVector",
+                    "name": "",
+                    "id": "96a9e17c-acfa-4b3a-a930-a69b36a792aa",
+                    "path": "<XInputController>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox Controller",
                     "action": "Movement",
-                    "isComposite": true,
+                    "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "3aaa4860-555e-49bd-a4d2-36b50a8008b3",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
+                    "name": "",
+                    "id": "5df89d9a-af81-404b-8122-c4362b497772",
+                    "path": "<XInputController>/rightTrigger",
+                    "interactions": "Press",
                     "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Movement",
+                    "groups": "Xbox Controller",
+                    "action": "Attacks",
                     "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "14ce1226-6e06-4377-8b12-93250b05563c",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "73246f42-0857-47f2-9366-27d70b8e6f86",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "b7455296-37cd-483e-a6ef-4f2251db5442",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "ARROW KEYS",
-                    "id": "c2ac51bb-6311-420e-a929-acb5f17494e4",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "ebf61163-c2ae-42dd-9086-7db655cc193b",
-                    "path": "<Keyboard>/upArrow",
+                    "name": "",
+                    "id": "e90baefe-5f1e-4ce2-bed0-1dc9c3dfb18d",
+                    "path": "<XInputController>/leftTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard 2 ",
-                    "action": "Movement",
+                    "groups": "Xbox Controller",
+                    "action": "Attacks",
                     "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "58cb9c3f-46fc-49a4-92c0-abfac27a8b82",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard 2 ",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "5695bbeb-bec1-41e7-bd04-c1bd193718a8",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard 2 ",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "d3860b23-5f90-488f-bccd-889a79a4e687",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard 2 ",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
+                    "isPartOfComposite": false
                 }
             ]
         }
@@ -403,6 +318,28 @@
         {
             "name": "Xbox ABXY",
             "bindingGroup": "Xbox ABXY",
+            "devices": [
+                {
+                    "devicePath": "<XInputController>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Xbox L Stick",
+            "bindingGroup": "Xbox L Stick",
+            "devices": [
+                {
+                    "devicePath": "<XInputController>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Xbox Controller",
+            "bindingGroup": "Xbox Controller",
             "devices": [
                 {
                     "devicePath": "<XInputController>",
