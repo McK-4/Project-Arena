@@ -7,11 +7,18 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
 
     public GameObject[] players;
+    public GameObject[] numPlayers;
     public GameObject[] attackPoints;
 
+    private int Players;
+
     //Health
-    public int maxHealth = 3;
+    //Vector2 Respawn;
+    public int maxHealth = 10;
     public int health;
+    private bool damaged;
+    public float healthTimer = 0;
+    public float healthCooldownTime = 0.5f;
 
     //Movement
     public float movementSpeed = 7.5f;
@@ -19,31 +26,63 @@ public class PlayerController : MonoBehaviour
     Vector2 moveinput = Vector2.zero;
 
     //Attacking
-    bool attack = false;
-    public GameObject attackPoint;
+    float angle;
+    bool shieldUp = false;
+
+    private GameObject attackPoint;
+    private GameObject shieldPoint;
+    private CircleCollider2D shieldCollider;
     public float attackRange = 0.5f;
+
     public LayerMask playerLayers;
-    public int attackDamage = 1;
+    public int basicSwordDamage = 2;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
+        attackPoint = GameObject.Find("AttackPoint");
+        shieldPoint = GameObject.Find("ShieldPoint");
+
+        shieldCollider = shieldPoint.GetComponent<CircleCollider2D>();
+
+        attackPoint.SetActive(false);
+        shieldPoint.SetActive(false);
+
         health = maxHealth;
 
-        for(int i = 0;i < 4;i++)
-            Physics2D.IgnoreCollision(players[i].GetComponent<BoxCollider2D>(), attackPoints[i].GetComponent<CircleCollider2D>());
+        // Physics2D.IgnoreCollision(players[i].GetComponent<BoxCollider2D>(), attackPoints[i].GetComponent<CircleCollider2D>());
+        // name = "Player: "+ i;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Make the attackpoint rotate to where the player is moving
+
+        //numPlayers = GameObject.FindGameObjectWithTag
+
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward) ;
+
         //Movement
         tempVel = rb.velocity;
         tempVel.x = moveinput.x * movementSpeed;
         tempVel.y = moveinput.y * movementSpeed;
         rb.velocity = tempVel;
+
+        if (shieldUp)
+        {
+            attackPoint.SetActive(false);
+            shieldPoint.SetActive(true);
+
+            //swordNshield.isTrigger = false;
+        }
+        else
+        {
+            shieldPoint.SetActive(false);
+        }
 
     }
 
@@ -54,10 +93,11 @@ public class PlayerController : MonoBehaviour
 
     public void Sword(InputAction.CallbackContext context)
     {
-        attack = context.ReadValueAsButton();
 
-        GameObject s = Instantiate(attackPoint, attackPoint.transform.position, Quaternion.identity);
-        Destroy(s, 0.4f);
+        StartCoroutine(Sword());
+        //GameObject s = Instantiate(attackPoint, attackPoint.transform.position, Quaternion.identity);
+        //Destroy(s, 0.4f);
+
         //Debug.Log("Attacked");
 
         /*
@@ -71,14 +111,55 @@ public class PlayerController : MonoBehaviour
         */
     }
 
-    public void Damage(int damge)
+    IEnumerator Sword()
     {
-        health -= damge;
-        Debug.Log(name+" was hit");
-        if (health <= 0)
-            Debug.Log("Player died!");
+        attackPoint.SetActive(true);
+        yield return new WaitForSeconds(0.4f);
+        attackPoint.SetActive(false);
     }
 
+    public void Shield(InputAction.CallbackContext context)
+    {
+        shieldUp = context.ReadValueAsButton();
+        while (shieldUp)
+        {
+            attackPoint.SetActive(true);
+        }
+    }
+
+    public void Damaged(int damage)
+    {
+        if (shieldUp == false)
+        {
+            health -= damage;
+            damaged = true;
+            Debug.Log(name + " was hit");
+        }
+
+        //Brief invencibility after getting hit with a attack
+        if (damaged)
+        {
+            if (healthTimer < healthCooldownTime)
+            {
+                healthTimer += Time.deltaTime;
+            }
+
+            if (healthTimer >= healthCooldownTime)
+            {
+                healthTimer = 0;
+                damaged = false;
+            }
+        }
+
+        if (health <= 0)
+        {
+            transform.SetPositionAndRotation(Vector2.zero, Quaternion.identity);
+            health = maxHealth;
+            Debug.Log("Player "+ name +" died!");
+        }
+    }
+
+    /*
     private void OnDrawGizmosSelected()
     {
         if (attackPoint == null)
@@ -86,12 +167,19 @@ public class PlayerController : MonoBehaviour
 
         Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
     }
+    */
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Sword")
         {
-            Damage(attackDamage);
+            Damaged(basicSwordDamage);
         }
+
+        if (collision.gameObject.tag == "Sword" && shieldUp )
+        {
+
+        }
+
     }
 }
