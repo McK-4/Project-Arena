@@ -15,9 +15,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Attacks",
+                    "name": "Sword",
                     "type": "Button",
                     "id": "6d7eaec5-b494-4f7d-8ada-491ea3d99b89",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Shield",
+                    "type": "Button",
+                    "id": "ce02eb0d-442b-474c-ad79-94b1f22ed368",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -263,7 +272,7 @@
                     "interactions": "Press",
                     "processors": "",
                     "groups": "Xbox Controller",
-                    "action": "Attacks",
+                    "action": "Sword",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -271,10 +280,21 @@
                     "name": "",
                     "id": "e90baefe-5f1e-4ce2-bed0-1dc9c3dfb18d",
                     "path": "<XInputController>/leftTrigger",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Xbox Controller",
+                    "action": "Shield",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fd074bc8-95bf-42d6-9c45-6ee1a124c86f",
+                    "path": "<XInputController>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "Xbox Controller",
-                    "action": "Attacks",
+                    "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

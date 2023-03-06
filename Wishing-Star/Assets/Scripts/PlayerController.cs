@@ -6,6 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
 
+    [SerializeField]
+    private InputActionReference movement, sword, shield;
+
     public GameObject[] players;
     public GameObject[] numPlayers;
     public GameObject[] attackPoints;
@@ -19,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private bool damaged;
     public float healthTimer = 0;
     public float healthCooldownTime = 0.5f;
+    private int damageTaken = 0;
 
     //Movement
     public float movementSpeed = 7.5f;
@@ -88,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        moveinput = context.ReadValue<Vector2>();
+        //moveinput = movement.action.ReadValue<Vector2>;
     }
 
     public void Sword(InputAction.CallbackContext context)
@@ -121,20 +125,22 @@ public class PlayerController : MonoBehaviour
     public void Shield(InputAction.CallbackContext context)
     {
         shieldUp = context.ReadValueAsButton();
-        while (shieldUp)
-        {
-            attackPoint.SetActive(true);
-        }
+
+    }
+
+    public void ShieldBlocked(int damage)
+    {
+        damageTaken += damage;
+        damageTaken -= 1;
+
+        Damaged(damageTaken);
     }
 
     public void Damaged(int damage)
     {
-        if (shieldUp == false)
-        {
-            health -= damage;
-            damaged = true;
-            Debug.Log(name + " was hit");
-        }
+        health -= damage;
+        damaged = true;
+        Debug.Log(name + " was hit");
 
         //Brief invencibility after getting hit with a attack
         if (damaged)
@@ -178,7 +184,11 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.tag == "Sword" && shieldUp )
         {
+            var nuller = (collision.transform.position - transform.position).normalized;
+            var shield = (shieldPoint.transform.position - transform.position).normalized;
+            var angleallowed = 10;
 
+            ShieldBlocked(basicSwordDamage);
         }
 
     }
