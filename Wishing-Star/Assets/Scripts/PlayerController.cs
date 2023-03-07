@@ -6,13 +6,18 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
 
-    [SerializeField]
-    private InputActionReference movement, sword, shield;
+    private InputActionMap playerControls;
 
     public GameObject[] players;
     public GameObject[] numPlayers;
-    public GameObject[] attackPoints;
-
+    public enum Directions
+    {
+        Up,
+        Down,
+        Right,
+        Left
+    }
+    public Directions characterFacing = Directions.Right;
     private int Players;
 
     //Health
@@ -68,41 +73,60 @@ public class PlayerController : MonoBehaviour
 
         //numPlayers = GameObject.FindGameObjectWithTag
 
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward) ;
-
         //Movement
         tempVel = rb.velocity;
         tempVel.x = moveinput.x * movementSpeed;
         tempVel.y = moveinput.y * movementSpeed;
         rb.velocity = tempVel;
+        if (moveinput.y > 0)
+        {
+            characterFacing = Directions.Up;
+            attackPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
+            shieldPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
+        }
+        if (moveinput.y < 0)
+        {
+            characterFacing = Directions.Down;
+            attackPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
+            shieldPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
+        }
+        if(moveinput.x > 0)
+        {
+            characterFacing = Directions.Right;
+            attackPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            shieldPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        }
+        if(moveinput.x < 0)
+        {
+            characterFacing = Directions.Left;
+            attackPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
+            shieldPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
+        }
 
         if (shieldUp)
         {
             attackPoint.SetActive(false);
             shieldPoint.SetActive(true);
-
             //swordNshield.isTrigger = false;
+            //Debug.Log("Shield is UP");
         }
         else
         {
             shieldPoint.SetActive(false);
+            //Debug.Log("Shield is Down");
         }
-
     }
 
     public void Move(InputAction.CallbackContext context)
     {
-        //moveinput = movement.action.ReadValue<Vector2>;
+        moveinput = context.ReadValue<Vector2>();
+
     }
 
     public void Sword(InputAction.CallbackContext context)
     {
 
         StartCoroutine(Sword());
-        //GameObject s = Instantiate(attackPoint, attackPoint.transform.position, Quaternion.identity);
-        //Destroy(s, 0.4f);
-
-        //Debug.Log("Attacked");
 
         /*
         Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayers);
@@ -186,7 +210,7 @@ public class PlayerController : MonoBehaviour
         {
             var nuller = (collision.transform.position - transform.position).normalized;
             var shield = (shieldPoint.transform.position - transform.position).normalized;
-            var angleallowed = 10;
+            //var angleallowed = 10;
 
             ShieldBlocked(basicSwordDamage);
         }

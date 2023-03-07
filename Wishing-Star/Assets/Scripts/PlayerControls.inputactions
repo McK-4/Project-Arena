@@ -145,116 +145,6 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "Xbox D-Pad",
-                    "id": "5cd2374a-301b-45b9-8d86-796c7a09470a",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "13adb171-b951-4424-a461-651a5d70c022",
-                    "path": "<XInputController>/dpad/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Xbox D-Pad;Xbox Controller",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "e2990f4c-85f2-414b-b518-5256e3539c17",
-                    "path": "<XInputController>/dpad/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Xbox D-Pad;Xbox Controller",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "d6ccb8b7-bfd9-4354-88e0-a7d227e649d4",
-                    "path": "<XInputController>/dpad/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Xbox D-Pad;Xbox Controller",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "0ce6d7f8-2662-4911-bc75-70a2dd169a5e",
-                    "path": "<XInputController>/dpad/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Xbox D-Pad;Xbox Controller",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Xbox ABXY",
-                    "id": "a7366545-f7f9-4470-89f7-b79c60c2bcd3",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "4a7643e2-62e2-4643-8664-7502e75cfefd",
-                    "path": "<XInputController>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Xbox ABXY;Xbox Controller",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "82d71be5-0d48-4a52-9eae-2d6687abf41c",
-                    "path": "<XInputController>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Xbox ABXY;Xbox Controller",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "02f6c5bd-b7e7-480f-bd97-d795e37d0786",
-                    "path": "<XInputController>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Xbox ABXY;Xbox Controller",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "f78546e1-42a4-4a35-a19b-809f444d1d77",
-                    "path": "<XInputController>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Xbox ABXY;Xbox Controller",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "",
                     "id": "96a9e17c-acfa-4b3a-a930-a69b36a792aa",
                     "path": "<XInputController>/leftStick",
@@ -268,8 +158,8 @@
                 {
                     "name": "",
                     "id": "5df89d9a-af81-404b-8122-c4362b497772",
-                    "path": "<XInputController>/rightTrigger",
-                    "interactions": "Press",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
                     "processors": "",
                     "groups": "Xbox Controller",
                     "action": "Sword",
@@ -279,8 +169,8 @@
                 {
                     "name": "",
                     "id": "e90baefe-5f1e-4ce2-bed0-1dc9c3dfb18d",
-                    "path": "<XInputController>/leftTrigger",
-                    "interactions": "Press",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
                     "processors": "",
                     "groups": "Xbox Controller",
                     "action": "Shield",
