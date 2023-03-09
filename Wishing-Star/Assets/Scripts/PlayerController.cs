@@ -109,26 +109,38 @@ public class PlayerController : MonoBehaviour
         if (moveinput.y > 0)
         {
             characterFacing = Directions.Up;
-            attackPoint.transform.position = new Vector2(0, 0.5f);
-            shieldPoint.transform.position = new Vector2(0, 0.345f);
+            if(shieldPoint.transform.position != new Vector3(transform.position.x, transform.position.y + 0.345f) && attackPoint.transform.position != new Vector3(transform.position.x, transform.position.y + 0.345f))
+            {
+                shieldPoint.transform.position = new Vector3(transform.position.x, transform.position.y + 0.345f);
+                attackPoint.transform.position = new Vector2(transform.position.x, transform.position.y + 0.345f);
+            }
         }
         if (moveinput.y < 0)
         {
             characterFacing = Directions.Down;
-            attackPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
-            shieldPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
+            if (shieldPoint.transform.position != new Vector3(transform.position.x, transform.position.y - 0.345f) && attackPoint.transform.position != new Vector3(transform.position.x, transform.position.y - 0.345f))
+            {
+                shieldPoint.transform.position = new Vector3(transform.position.x, transform.position.y - 0.345f);
+                attackPoint.transform.position = new Vector3(transform.position.x, transform.position.y - 0.345f);
+            }
         }
         if(moveinput.x > 0)
         {
             characterFacing = Directions.Right;
-            attackPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            shieldPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            if (shieldPoint.transform.position != new Vector3(transform.position.x + 0.345f, transform.position.y) && attackPoint.transform.position != new Vector3(transform.position.x + 0.345f, transform.position.y))
+            {
+                shieldPoint.transform.position = new Vector3(transform.position.x + 0.345f, transform.position.y);
+                attackPoint.transform.position = new Vector2(transform.position.x + 0.345f, transform.position.y);
+            }
         }
         if(moveinput.x < 0)
         {
             characterFacing = Directions.Left;
-            attackPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
-            shieldPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
+            if (shieldPoint.transform.position != new Vector3(transform.position.x - 0.345f, transform.position.y) && attackPoint.transform.position != new Vector3(transform.position.x - 0.345f, transform.position.y))
+            {
+                shieldPoint.transform.position = new Vector3(transform.position.x - 0.345f, transform.position.y);
+                attackPoint.transform.position = new Vector2(transform.position.x - 0.345f, transform.position.y);
+            }
         }
         
         if (shieldUp)

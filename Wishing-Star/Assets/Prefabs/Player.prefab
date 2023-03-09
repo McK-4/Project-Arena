@@ -215,6 +215,7 @@ MonoBehaviour:
   healthTimer: 0
   healthCooldownTime: 0.5
   movementSpeed: 7.5
+  angle: 0
   rotationSpeed: 0
   attackRange: 0.5
   playerLayers:
@@ -232,6 +233,7 @@ GameObject:
   - component: {fileID: 8992624193075612997}
   - component: {fileID: 8600438748898451414}
   - component: {fileID: 74731652946990155}
+  - component: {fileID: 8757976534588042287}
   m_Layer: 0
   m_Name: ShieldPoint
   m_TagString: Untagged
@@ -322,3 +324,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &8757976534588042287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8021831207539426761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d5e7d6a1ecd343409f24dd0cb0d0f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
