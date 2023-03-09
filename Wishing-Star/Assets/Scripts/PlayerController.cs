@@ -35,7 +35,9 @@ public class PlayerController : MonoBehaviour
     Vector2 moveinput = Vector2.zero;
 
     //Attacking
-    float angle;
+    Vector2 movingTo;
+    public float angle;
+    public float rotationSpeed;
     bool shieldUp = false;
 
     private GameObject attackPoint;
@@ -69,7 +71,30 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        movingTo = moveinput + (Vector2)transform.position;
         //Make the attackpoint rotate to where the player is moving
+        angle = Mathf.Atan((movingTo.y - transform.position.y) / (movingTo.x - transform.position.x)) * Mathf.Rad2Deg;
+
+        if ((movingTo.y - transform.position.y) > 0 && (movingTo.x - transform.position.x) > 0)
+        {
+            //quadrant 1
+            angle = Mathf.Atan(Mathf.Abs((movingTo.y - transform.position.y) / (movingTo.x - transform.position.x))) * Mathf.Rad2Deg;
+        }
+        else if ((movingTo.y - transform.position.y) > 0 && (movingTo.x - transform.position.x) < 0)
+        {
+            //quadrant 2
+            angle = Mathf.Atan(Mathf.Abs((movingTo.x - transform.position.x) / (movingTo.y - transform.position.y))) * Mathf.Rad2Deg + 90;
+        }
+        else if ((movingTo.y - transform.position.y) < 0 && (movingTo.x - transform.position.x) < 0)
+        {
+            //quadrant 3
+            angle = Mathf.Atan(Mathf.Abs((movingTo.y - transform.position.y) / (movingTo.x - transform.position.x))) * Mathf.Rad2Deg + 180;
+        }
+        else if ((movingTo.y - transform.position.y) < 0 && (movingTo.x - transform.position.x) > 0)
+        {
+            //quadrant 4
+            angle = Mathf.Atan(Mathf.Abs((movingTo.x - transform.position.x) / (movingTo.y - transform.position.y))) * Mathf.Rad2Deg + 270;
+        }
 
         //numPlayers = GameObject.FindGameObjectWithTag
 
@@ -78,11 +103,14 @@ public class PlayerController : MonoBehaviour
         tempVel.x = moveinput.x * movementSpeed;
         tempVel.y = moveinput.y * movementSpeed;
         rb.velocity = tempVel;
+
+        //shieldPoint.transform.RotateAround(transform.position, new Vector3(0, 0, 1), angle);
+
         if (moveinput.y > 0)
         {
             characterFacing = Directions.Up;
-            attackPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
-            shieldPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
+            attackPoint.transform.position = new Vector2(0, 0.5f);
+            shieldPoint.transform.position = new Vector2(0, 0.345f);
         }
         if (moveinput.y < 0)
         {
@@ -102,7 +130,7 @@ public class PlayerController : MonoBehaviour
             attackPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
             shieldPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
         }
-
+        
         if (shieldUp)
         {
             attackPoint.SetActive(false);
@@ -120,7 +148,7 @@ public class PlayerController : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         moveinput = context.ReadValue<Vector2>();
-
+        Debug.Log(moveinput);
     }
 
     public void Sword(InputAction.CallbackContext context)
