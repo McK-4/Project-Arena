@@ -6,19 +6,20 @@ public class PlayerManager : MonoBehaviour
 {
     private GameObject[] players;
 
-    private GameObject player_1;
-    private GameObject player_2;
-    private GameObject player_3;
-    private GameObject player_4;
+    public GameObject player_1;
+    public GameObject player_2;
+    public GameObject player_3;
+    public GameObject player_4;
 
     //Anti-Player Camping Variable
-    private Vector2 playerSpawn_1;
-    private Vector2 playerSpawn_2;
-    private Vector2 playerSpawn_3;
-    private Vector2 playerSpawn_4;
+    public Vector2 playerSpawn_1;
+    public Vector2 playerSpawn_2;
+    public Vector2 playerSpawn_3;
+    public Vector2 playerSpawn_4;
 
     public LayerMask playerLayers;
     public float antiCampRange = 1;
+    public bool playerCamping = false;
 
     // Start is called before the first frame update
     void Start()
@@ -28,10 +29,10 @@ public class PlayerManager : MonoBehaviour
         playerSpawn_3 = GameObject.Find("PlayerParent_2").transform.position;
         playerSpawn_4 = GameObject.Find("PlayerParent_3").transform.position;
 
-        player_1 = GameObject.Find("PlayerParent");
-        player_2 = GameObject.Find("PlayerParent_1");
-        player_3 = GameObject.Find("PlayerParent_2");
-        player_4 = GameObject.Find("PlayerParent_3");
+        player_1 = GameObject.Find("Player_1");
+        player_2 = GameObject.Find("Player_2");
+        player_3 = GameObject.Find("Player_3");
+        player_4 = GameObject.Find("Player_4");
     }
 
     // Update is called once per frame
@@ -55,8 +56,12 @@ public class PlayerManager : MonoBehaviour
 
         foreach (Collider2D player in hitPlayers_1)
         {
-            Physics2D.IgnoreCollision(player_1.GetComponentInChildren<BoxCollider2D>(), player);
+            Physics2D.IgnoreCollision(player_1.GetComponent<BoxCollider2D>(), player);
             Debug.Log("Hit " + player.name);
+            if (player.name == "Player_2" || player.name == "Player_3" || player.name == "Player_4")
+            {
+                playerCamping = true;
+            }
         }
 
         //Player 2
@@ -64,8 +69,12 @@ public class PlayerManager : MonoBehaviour
 
         foreach (Collider2D player in hitPlayers_2)
         {
-            Physics2D.IgnoreCollision(player_2.GetComponentInChildren<BoxCollider2D>(), player);
+            Physics2D.IgnoreCollision(player_2.GetComponent<BoxCollider2D>(), player);
             Debug.Log("Hit " + player.name);
+            if (player.name == "Player_1" || player.name == "Player_3" || player.name == "Player_4")
+            {
+                playerCamping = true;
+            }
         }
         
         //Player 3
@@ -73,8 +82,12 @@ public class PlayerManager : MonoBehaviour
 
         foreach (Collider2D player in hitPlayers_3)
         {
-            Physics2D.IgnoreCollision(player_3.GetComponentInChildren<BoxCollider2D>(), player);
+            Physics2D.IgnoreCollision(player_3.GetComponent<BoxCollider2D>(), player);
             Debug.Log("Hit " + player.name);
+            if (player.name == "Player_1" || player.name == "Player_2" || player.name == "Player_3")
+            {
+                playerCamping = true;
+            }
         }
         
         //Player 4
@@ -82,8 +95,12 @@ public class PlayerManager : MonoBehaviour
 
         foreach (Collider2D player in hitPlayers_4)
         {
-            Physics2D.IgnoreCollision(player_4.GetComponentInChildren<BoxCollider2D>(), player);
+            Physics2D.IgnoreCollision(player_4.GetComponent<BoxCollider2D>(), player);
             Debug.Log("Hit " + player.name);
+            if (player.name == "Player_1" || player.name == "Player_2" || player.name == "Player_3")
+            {
+                playerCamping = true;
+            }
         }
 
     }

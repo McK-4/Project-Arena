@@ -6,10 +6,12 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
 
-    private InputActionMap playerControls;
+    //private InputActionMap playerControls;
+    private PlayerManager playerManager;
 
     public GameObject[] players;
     public GameObject[] numPlayers;
+
     public enum Directions
     {
         Up,
@@ -21,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private int Players;
 
     //Health
-    //Vector2 Respawn;
+    Vector2 respawn;
     public int maxHealth = 10;
     public int health;
     private bool damaged;
@@ -53,6 +55,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
+        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+
         attackPoint = GameObject.Find("AttackPoint");
         shieldPoint = GameObject.Find("ShieldPoint");
 
@@ -63,38 +67,16 @@ public class PlayerController : MonoBehaviour
 
         health = maxHealth;
 
+        respawn = transform.position;
+
         // Physics2D.IgnoreCollision(players[i].GetComponent<BoxCollider2D>(), attackPoints[i].GetComponent<CircleCollider2D>());
         // name = "Player: "+ i;
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        movingTo = moveinput + (Vector2)transform.position;
-        //Make the attackpoint rotate to where the player is moving
-        angle = Mathf.Atan((movingTo.y - transform.position.y) / (movingTo.x - transform.position.x)) * Mathf.Rad2Deg;
-
-        if ((movingTo.y - transform.position.y) > 0 && (movingTo.x - transform.position.x) > 0)
-        {
-            //quadrant 1
-            angle = Mathf.Atan(Mathf.Abs((movingTo.y - transform.position.y) / (movingTo.x - transform.position.x))) * Mathf.Rad2Deg;
-        }
-        else if ((movingTo.y - transform.position.y) > 0 && (movingTo.x - transform.position.x) < 0)
-        {
-            //quadrant 2
-            angle = Mathf.Atan(Mathf.Abs((movingTo.x - transform.position.x) / (movingTo.y - transform.position.y))) * Mathf.Rad2Deg + 90;
-        }
-        else if ((movingTo.y - transform.position.y) < 0 && (movingTo.x - transform.position.x) < 0)
-        {
-            //quadrant 3
-            angle = Mathf.Atan(Mathf.Abs((movingTo.y - transform.position.y) / (movingTo.x - transform.position.x))) * Mathf.Rad2Deg + 180;
-        }
-        else if ((movingTo.y - transform.position.y) < 0 && (movingTo.x - transform.position.x) > 0)
-        {
-            //quadrant 4
-            angle = Mathf.Atan(Mathf.Abs((movingTo.x - transform.position.x) / (movingTo.y - transform.position.y))) * Mathf.Rad2Deg + 270;
-        }
 
         //numPlayers = GameObject.FindGameObjectWithTag
 
@@ -104,8 +86,13 @@ public class PlayerController : MonoBehaviour
         tempVel.y = moveinput.y * movementSpeed;
         rb.velocity = tempVel;
 
-        //shieldPoint.transform.RotateAround(transform.position, new Vector3(0, 0, 1), angle);
+        //Anti-Player Spawn Camping
+        if(playerManager.playerCamping == true)
+        {
+            playerRespawnShuffle();
+        }
 
+        //Rotating the ShieldPoint and AttackPoint
         if (moveinput.y > 0)
         {
             characterFacing = Directions.Up;
@@ -221,11 +208,35 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        //Reaspawn
         if (health <= 0)
         {
-            transform.SetPositionAndRotation(Vector2.zero, Quaternion.identity);
+            transform.SetPositionAndRotation(respawn, Quaternion.identity);
             health = maxHealth;
             Debug.Log("Player "+ name +" died!");
+        }
+    }
+    
+    private void playerRespawnShuffle()
+    {
+        if (name == "Player_1")
+        {
+            //respawn = new Vector2(PlayerManager.player_1.transform.position.x, PlayerManager.playerSpawn_2.y);
+        }
+        
+        if (name == "Player_2")
+        {
+            respawn = new Vector2(2, 2);
+        }
+        
+        if (name == "Player_3")
+        {
+            respawn = new Vector2(2, 2);
+        }
+        
+        if (name == "Player_4")
+        {
+            respawn = new Vector2(2, 2);
         }
     }
 
