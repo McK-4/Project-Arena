@@ -2132,7 +2132,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      water tile ani sheet _24: 1204790585
+      water tile ani sheet _52: -1527837304
       water tile ani sheet _44: -472145627
       water tile ani sheet _92: 449479155
       water tile ani sheet _70: 779829045
@@ -2140,7 +2140,7 @@ TextureImporter:
       water tile ani sheet _51: 1377875999
       water tile ani sheet _53: -2050587832
       water tile ani sheet _55: -533321087
-      water tile ani sheet _87: 1820718824
+      water tile ani sheet _24: 1204790585
       water tile ani sheet _35: 1871523607
       water tile ani sheet _18: 97898014
       water tile ani sheet _6: 1434966743
@@ -2161,12 +2161,12 @@ TextureImporter:
       water tile ani sheet _50: -1924981159
       water tile ani sheet _58: -1348584179
       water tile ani sheet _2: -1654829813
-      water tile ani sheet _5: 1589596625
       water tile ani sheet _73: -497409625
+      water tile ani sheet _5: 1589596625
       water tile ani sheet _10: 466149322
-      water tile ani sheet _14: -1412910064
       water tile ani sheet _67: -1021559543
       water tile ani sheet _81: 1660630963
+      water tile ani sheet _14: -1412910064
       water tile ani sheet _74: 578712597
       water tile ani sheet _36: 152222514
       water tile ani sheet _61: -857017498
@@ -2185,8 +2185,8 @@ TextureImporter:
       water tile ani sheet _1: -502854748
       water tile ani sheet _30: -112471064
       water tile ani sheet _31: 2049203874
-      water tile ani sheet _38: -1046197076
       water tile ani sheet _93: 1514614934
+      water tile ani sheet _38: -1046197076
       water tile ani sheet _56: -1239350947
       water tile ani sheet _95: 2099270480
       water tile ani sheet _20: -2123367923
@@ -2227,7 +2227,7 @@ TextureImporter:
       water tile ani sheet _77: 1795439121
       water tile ani sheet _66: -392517421
       water tile ani sheet _90: -516986058
-      water tile ani sheet _52: -1527837304
+      water tile ani sheet _87: 1820718824
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 
