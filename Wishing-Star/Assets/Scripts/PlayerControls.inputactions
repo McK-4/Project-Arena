@@ -90,72 +90,6 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "ARROW KEYS",
-                    "id": "321f9f9e-43a6-40df-889e-ae1d735dffea",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "be995a98-cc2c-4f5c-a768-b023b75dae1d",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard 2 ",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "ccd9df5b-1979-4c83-b8b3-24d881f95f76",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard 2 ",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "88fc6116-1376-4e8b-a996-6bef993897e2",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard 2 ",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "3c7dc429-190c-4a7e-985a-a7120d25880f",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard 2 ",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "96a9e17c-acfa-4b3a-a930-a69b36a792aa",
-                    "path": "<XInputController>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Xbox Controller",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "",
                     "id": "5df89d9a-af81-404b-8122-c4362b497772",
                     "path": "<XInputController>/buttonSouth",
@@ -172,7 +106,18 @@
                     "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/trigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick with Triggers",
+                    "groups": "Arcade",
+                    "action": "Sword",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "08af1d3e-a3b7-48d5-bb49-c6dfe4a39b40",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
                     "action": "Sword",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -191,22 +136,22 @@
                 {
                     "name": "",
                     "id": "3090e247-f737-4c69-912b-b736b813315a",
-                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button2",
+                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button10",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick with Triggers",
+                    "groups": "Arcade",
                     "action": "Shield",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "fd074bc8-95bf-42d6-9c45-6ee1a124c86f",
-                    "path": "<XInputController>/rightStick",
+                    "id": "347747da-7183-4cc5-8c29-ffe08074c8e8",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Xbox Controller",
-                    "action": "Movement",
+                    "groups": "Keyboard",
+                    "action": "Shield",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -220,50 +165,6 @@
                     "action": "Movement",
                     "isComposite": true,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "9b29cfad-8aa5-46b1-9978-21501366cb8b",
-                    "path": "<XInputController>/dpad/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "1a270d6e-8447-4156-b537-e1defcc52030",
-                    "path": "<XInputController>/dpad/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "cf5d7ab1-f473-4881-98bd-9d8ef9b0bb22",
-                    "path": "<XInputController>/dpad/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "4d0b9fb3-0135-48e3-acd7-8e33c16d1303",
-                    "path": "<XInputController>/dpad/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "Joystick",
@@ -282,7 +183,7 @@
                     "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/stick/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick with Triggers",
+                    "groups": "Arcade",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -293,7 +194,7 @@
                     "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/stick/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick with Triggers",
+                    "groups": "Arcade",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -304,7 +205,7 @@
                     "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/stick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick with Triggers",
+                    "groups": "Arcade",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -315,7 +216,62 @@
                     "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/stick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick with Triggers",
+                    "groups": "Arcade",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "D-Pad",
+                    "id": "e97de9d7-2a47-41ce-a8b7-cf5c09b5aab1",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "f1e87b53-a1a3-4931-949a-5c8c309ac8d3",
+                    "path": "<XInputController>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Xbox Controller",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "bdfd902e-bed5-4c3d-845c-1a4e1a789e94",
+                    "path": "<XInputController>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Xbox Controller",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "35e36617-3632-47d9-b835-a32ac63e3a6e",
+                    "path": "<XInputController>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Xbox Controller",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "4f5c4a2a-d7e4-4f36-9b7e-686b7c76db3d",
+                    "path": "<XInputController>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Xbox Controller",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -336,50 +292,6 @@
             ]
         },
         {
-            "name": "Keyboard 2 ",
-            "bindingGroup": "Keyboard 2 ",
-            "devices": [
-                {
-                    "devicePath": "<Keyboard>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Xbox D-Pad",
-            "bindingGroup": "Xbox D-Pad",
-            "devices": [
-                {
-                    "devicePath": "<XInputController>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Xbox ABXY",
-            "bindingGroup": "Xbox ABXY",
-            "devices": [
-                {
-                    "devicePath": "<XInputController>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Xbox L Stick",
-            "bindingGroup": "Xbox L Stick",
-            "devices": [
-                {
-                    "devicePath": "<XInputController>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
             "name": "Xbox Controller",
             "bindingGroup": "Xbox Controller",
             "devices": [
@@ -391,8 +303,8 @@
             ]
         },
         {
-            "name": "Joystick with Triggers",
-            "bindingGroup": "Joystick with Triggers",
+            "name": "Arcade",
+            "bindingGroup": "Arcade",
             "devices": [
                 {
                     "devicePath": "<HID::DragonRise Inc.   Generic   USB  Joystick  >",
