@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
-
+    Animator anim;
     //private InputActionMap playerControls;
     private PlayerManager playerManager;
 
@@ -42,8 +42,8 @@ public class PlayerController : MonoBehaviour
     public float rotationSpeed;
     bool shieldUp = false;
 
-    private GameObject attackPoint;
-    private GameObject shieldPoint;
+    [SerializeField]GameObject attackPoint;
+    [SerializeField]GameObject shieldPoint;
     private CircleCollider2D shieldCollider;
     public float attackRange = 0.5f;
 
@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
 
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
 
@@ -61,9 +62,6 @@ public class PlayerController : MonoBehaviour
         shieldPoint = GameObject.Find("ShieldPoint");
 
         shieldCollider = shieldPoint.GetComponent<CircleCollider2D>();
-
-        attackPoint.SetActive(false);
-        shieldPoint.SetActive(false);
 
         health = maxHealth;
 
@@ -85,6 +83,7 @@ public class PlayerController : MonoBehaviour
         tempVel.x = moveinput.x * movementSpeed;
         tempVel.y = moveinput.y * movementSpeed;
         rb.velocity = tempVel;
+        anim.SetFloat("Velocity", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y));
 
         //Anti-Player Spawn Camping
         if(playerManager.playerCamping == true)
@@ -96,6 +95,8 @@ public class PlayerController : MonoBehaviour
         if (moveinput.y > 0)
         {
             characterFacing = Directions.Up;
+            anim.SetInteger("Direction", 1);
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
             if(shieldPoint.transform.position != new Vector3(transform.position.x, transform.position.y + 0.345f) && attackPoint.transform.position != new Vector3(transform.position.x, transform.position.y + 0.345f))
             {
                 shieldPoint.transform.position = new Vector3(transform.position.x, transform.position.y + 0.345f);
@@ -105,6 +106,8 @@ public class PlayerController : MonoBehaviour
         if (moveinput.y < 0)
         {
             characterFacing = Directions.Down;
+            anim.SetInteger("Direction", 0);
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
             if (shieldPoint.transform.position != new Vector3(transform.position.x, transform.position.y - 0.345f) && attackPoint.transform.position != new Vector3(transform.position.x, transform.position.y - 0.345f))
             {
                 shieldPoint.transform.position = new Vector3(transform.position.x, transform.position.y - 0.345f);
@@ -114,6 +117,8 @@ public class PlayerController : MonoBehaviour
         if(moveinput.x > 0)
         {
             characterFacing = Directions.Right;
+            anim.SetInteger("Direction", 2);
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
             if (shieldPoint.transform.position != new Vector3(transform.position.x + 0.345f, transform.position.y) && attackPoint.transform.position != new Vector3(transform.position.x + 0.345f, transform.position.y))
             {
                 shieldPoint.transform.position = new Vector3(transform.position.x + 0.345f, transform.position.y);
@@ -123,6 +128,8 @@ public class PlayerController : MonoBehaviour
         if(moveinput.x < 0)
         {
             characterFacing = Directions.Left;
+            anim.SetInteger("Direction", 2);
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
             if (shieldPoint.transform.position != new Vector3(transform.position.x - 0.345f, transform.position.y) && attackPoint.transform.position != new Vector3(transform.position.x - 0.345f, transform.position.y))
             {
                 shieldPoint.transform.position = new Vector3(transform.position.x - 0.345f, transform.position.y);
