@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
         attackPoint = GameObject.Find("AttackPoint");
         shieldPoint = GameObject.Find("ShieldPoint");
 
-        shieldCollider = shieldPoint.GetComponent<CircleCollider2D>();
+        //shieldCollider = shieldPoint.GetComponent<CircleCollider2D>();
 
         health = maxHealth;
 
@@ -139,14 +139,14 @@ public class PlayerController : MonoBehaviour
         
         if (shieldUp)
         {
-            attackPoint.SetActive(false);
-            shieldPoint.SetActive(true);
+            //attackPoint.SetActive(false);
+            //shieldPoint.SetActive(true);
             //swordNshield.isTrigger = false;
             //Debug.Log("Shield is UP");
         }
         else
         {
-            shieldPoint.SetActive(false);
+            //shieldPoint.SetActive(false);
             //Debug.Log("Shield is Down");
         }
     }
