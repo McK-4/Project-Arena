@@ -56,7 +56,7 @@ public class PlayerManager : MonoBehaviour
 
         foreach (Collider2D player in hitPlayers_1)
         {
-            Physics2D.IgnoreCollision(player_1.GetComponent<BoxCollider2D>(), player);
+            //Physics2D.IgnoreCollision(player_1.GetComponent<BoxCollider2D>(), player);
             Debug.Log("Hit " + player.name);
             if (player.name == "Player_2" || player.name == "Player_3" || player.name == "Player_4")
             {

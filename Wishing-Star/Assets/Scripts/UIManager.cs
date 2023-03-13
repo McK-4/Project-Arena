@@ -2,33 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField]GameObject[] icons;
-    [SerializeField]GameObject[] players;
-    PlayerController pC1;
+    [SerializeField]Image icon;
+    [SerializeField]Image manaFill;
+    [SerializeField]Image manaBar;
+    [SerializeField]List<Sprite> manaBarSprites;
+    [SerializeField]GameObject player;
+    PlayerController pC;
     [SerializeField]List<Image> healthIconsP1;
     [SerializeField]List<Sprite> healthSprites;
+    [SerializeField]List<Image> buttons;
+    [SerializeField]List<Sprite> buttonSprites;
 
-    int p1HP;
-    int p1MHP;
+    int mana;
+    int hP;
+    int mHP;
 
     void Start()
     {
-        pC1 = players[0].GetComponent<PlayerController>();
-        p1HP = pC1.health;
-        p1MHP = pC1.maxHealth;
+        pC = player.GetComponent<PlayerController>();
+        hP = pC.health;
+        mHP = pC.maxHealth;
     }
 
     void Update()
     {
-        if (p1HP != pC1.health || p1MHP != pC1.maxHealth)
+        if (hP != pC.health || mHP != pC.maxHealth)
         {
-            p1HP = pC1.health;
-            p1MHP = pC1.maxHealth;
+            hP = pC.health;
+            mHP = pC.maxHealth;
             UIUpdate();
         }
+
+        var screenPos = Camera.main.WorldToScreenPoint(player.transform.position);
+        screenPos.y += 60;
+        icon.transform.position = screenPos;
     }
 
     void UIUpdate()
@@ -37,16 +48,16 @@ public class UIManager : MonoBehaviour
         {
             //checking if hp is greater than the max hp there.
             //ex : heart 1 is 2 and hp is 9, therefor it runs and gives us a full heart
-            if (p1MHP > (i) * (healthSprites.Count - 1))
+            if (mHP > (i) * (healthSprites.Count - 1))
             {
                 healthIconsP1[i].GetComponent<Transform>().gameObject.SetActive(true);
-                if (p1HP > (i + 1) * (healthSprites.Count - 1))
+                if (hP > (i + 1) * (healthSprites.Count - 1))
                 {
                     healthIconsP1[i].sprite = healthSprites[healthSprites.Count - 1];
                 }
-                else if (p1HP - (i) * (healthSprites.Count - 1) >= 0)
+                else if (hP - (i) * (healthSprites.Count - 1) >= 0)
                 {
-                    healthIconsP1[i].sprite = healthSprites[p1HP - (i) * (healthSprites.Count - 1)];
+                    healthIconsP1[i].sprite = healthSprites[hP - (i) * (healthSprites.Count - 1)];
                 }
                 else
                 {
@@ -57,6 +68,54 @@ public class UIManager : MonoBehaviour
             {
                 healthIconsP1[i].GetComponent<Transform>().gameObject.SetActive(false);
             }
+        }
+    }
+
+    public void Button1(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            buttons[0].sprite = buttonSprites[1];
+        }
+        if (context.canceled)
+        {
+            buttons[0].sprite = buttonSprites[0];
+        }
+    }
+
+    public void Button2(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            buttons[1].sprite = buttonSprites[3];
+        }
+        if (context.canceled)
+        {
+            buttons[1].sprite = buttonSprites[2];
+        }
+    }
+
+    public void Button3(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            buttons[2].sprite = buttonSprites[5];
+        }
+        if (context.canceled)
+        {
+            buttons[2].sprite = buttonSprites[4];
+        }
+    }
+
+    public void Button4(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            buttons[3].sprite = buttonSprites[7];
+        }
+        if (context.canceled)
+        {
+            buttons[3].sprite = buttonSprites[6];
         }
     }
 }

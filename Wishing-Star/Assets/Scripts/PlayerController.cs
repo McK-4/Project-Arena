@@ -42,9 +42,11 @@ public class PlayerController : MonoBehaviour
     public float rotationSpeed;
     bool shieldUp = false;
 
+    Vector2 scale = new Vector2(1,1);
+    Vector2 iScale = new Vector2(-1, 1);
+
     [SerializeField]GameObject attackPoint;
     [SerializeField]GameObject shieldPoint;
-    private CircleCollider2D shieldCollider;
     public float attackRange = 0.5f;
 
     public LayerMask playerLayers;
@@ -57,9 +59,6 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
 
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
-
-        attackPoint = GameObject.Find("AttackPoint");
-        shieldPoint = GameObject.Find("ShieldPoint");
 
         //shieldCollider = shieldPoint.GetComponent<CircleCollider2D>();
 
@@ -97,44 +96,28 @@ public class PlayerController : MonoBehaviour
             characterFacing = Directions.Up;
             anim.SetInteger("Direction", 1);
             gameObject.GetComponent<SpriteRenderer>().flipX = false;
-            if(shieldPoint.transform.position != new Vector3(transform.position.x, transform.position.y + 0.345f) && attackPoint.transform.position != new Vector3(transform.position.x, transform.position.y + 0.345f))
-            {
-                shieldPoint.transform.position = new Vector3(transform.position.x, transform.position.y + 0.345f);
-                attackPoint.transform.position = new Vector2(transform.position.x, transform.position.y + 0.345f);
-            }
         }
         if (moveinput.y < 0)
         {
             characterFacing = Directions.Down;
             anim.SetInteger("Direction", 0);
             gameObject.GetComponent<SpriteRenderer>().flipX = false;
-            if (shieldPoint.transform.position != new Vector3(transform.position.x, transform.position.y - 0.345f) && attackPoint.transform.position != new Vector3(transform.position.x, transform.position.y - 0.345f))
-            {
-                shieldPoint.transform.position = new Vector3(transform.position.x, transform.position.y - 0.345f);
-                attackPoint.transform.position = new Vector3(transform.position.x, transform.position.y - 0.345f);
-            }
         }
         if(moveinput.x > 0)
         {
             characterFacing = Directions.Right;
             anim.SetInteger("Direction", 2);
+            attackPoint.transform.localScale = iScale;
+            shieldPoint.transform.localScale = iScale;
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
-            if (shieldPoint.transform.position != new Vector3(transform.position.x + 0.345f, transform.position.y) && attackPoint.transform.position != new Vector3(transform.position.x + 0.345f, transform.position.y))
-            {
-                shieldPoint.transform.position = new Vector3(transform.position.x + 0.345f, transform.position.y);
-                attackPoint.transform.position = new Vector2(transform.position.x + 0.345f, transform.position.y);
-            }
         }
         if(moveinput.x < 0)
         {
             characterFacing = Directions.Left;
             anim.SetInteger("Direction", 2);
+            attackPoint.transform.localScale = scale;
+            shieldPoint.transform.localScale = scale;
             gameObject.GetComponent<SpriteRenderer>().flipX = false;
-            if (shieldPoint.transform.position != new Vector3(transform.position.x - 0.345f, transform.position.y) && attackPoint.transform.position != new Vector3(transform.position.x - 0.345f, transform.position.y))
-            {
-                shieldPoint.transform.position = new Vector3(transform.position.x - 0.345f, transform.position.y);
-                attackPoint.transform.position = new Vector2(transform.position.x - 0.345f, transform.position.y);
-            }
         }
         
         if (shieldUp)
@@ -159,31 +142,22 @@ public class PlayerController : MonoBehaviour
 
     public void Sword(InputAction.CallbackContext context)
     {
-
-        StartCoroutine(Sword());
-
-        /*
-        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayers);
-
-        foreach (Collider2D player in hitPlayers)
+        if(context.performed)
         {
-            //Physics2D.IgnoreCollision(GetComponent<Collider2D>(), player);
-            Debug.Log("Hit " + player.name);
+            anim.SetTrigger("Attack");
         }
-        */
-    }
-
-    IEnumerator Sword()
-    {
-        attackPoint.SetActive(true);
-        yield return new WaitForSeconds(0.4f);
-        attackPoint.SetActive(false);
     }
 
     public void Shield(InputAction.CallbackContext context)
     {
-        shieldUp = context.ReadValueAsButton();
-
+        if (context.performed)
+        {
+            anim.SetBool("Shield", true);
+        }
+        if (context.canceled)
+        {
+            anim.SetBool("Shield", false);
+        }
     }
 
     public void ShieldBlocked(int damage)
