@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
-
+    private SpriteRenderer spriteRen;
+    Animator anim;
     //private InputActionMap playerControls;
     private PlayerManager playerManager;
 
@@ -30,6 +31,11 @@ public class PlayerController : MonoBehaviour
     public float healthTimer = 0;
     public float healthCooldownTime = 0.5f;
     private int damageTaken = 0;
+    private int ranNum;
+    public float deathTimer = 0;
+    private float deathCooldownTime = 5;
+    private Vector2 diedPos = new Vector2(123, 456);
+    private bool died = false;
 
     //Movement
     public float movementSpeed = 7.5f;
@@ -42,9 +48,11 @@ public class PlayerController : MonoBehaviour
     public float rotationSpeed;
     bool shieldUp = false;
 
-    private GameObject attackPoint;
-    private GameObject shieldPoint;
-    private CircleCollider2D shieldCollider;
+    Vector2 scale = new Vector2(1,1);
+    Vector2 iScale = new Vector2(-1, 1);
+
+    [SerializeField]GameObject attackPoint;
+    [SerializeField]GameObject shieldPoint;
     public float attackRange = 0.5f;
 
     public LayerMask playerLayers;
@@ -54,16 +62,12 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRen = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
 
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
 
-        attackPoint = GameObject.Find("AttackPoint");
-        shieldPoint = GameObject.Find("ShieldPoint");
-
-        shieldCollider = shieldPoint.GetComponent<CircleCollider2D>();
-
-        attackPoint.SetActive(false);
-        shieldPoint.SetActive(false);
+        //shieldCollider = shieldPoint.GetComponent<CircleCollider2D>();
 
         health = maxHealth;
 
@@ -85,6 +89,7 @@ public class PlayerController : MonoBehaviour
         tempVel.x = moveinput.x * movementSpeed;
         tempVel.y = moveinput.y * movementSpeed;
         rb.velocity = tempVel;
+        anim.SetFloat("Velocity", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y));
 
         //Anti-Player Spawn Camping
         if(playerManager.playerCamping == true)
@@ -96,51 +101,61 @@ public class PlayerController : MonoBehaviour
         if (moveinput.y > 0)
         {
             characterFacing = Directions.Up;
-            if(shieldPoint.transform.position != new Vector3(transform.position.x, transform.position.y + 0.345f) && attackPoint.transform.position != new Vector3(transform.position.x, transform.position.y + 0.345f))
-            {
-                shieldPoint.transform.position = new Vector3(transform.position.x, transform.position.y + 0.345f);
-                attackPoint.transform.position = new Vector2(transform.position.x, transform.position.y + 0.345f);
-            }
+            anim.SetInteger("Direction", 1);
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
         if (moveinput.y < 0)
         {
             characterFacing = Directions.Down;
-            if (shieldPoint.transform.position != new Vector3(transform.position.x, transform.position.y - 0.345f) && attackPoint.transform.position != new Vector3(transform.position.x, transform.position.y - 0.345f))
-            {
-                shieldPoint.transform.position = new Vector3(transform.position.x, transform.position.y - 0.345f);
-                attackPoint.transform.position = new Vector3(transform.position.x, transform.position.y - 0.345f);
-            }
+            anim.SetInteger("Direction", 0);
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
         if(moveinput.x > 0)
         {
             characterFacing = Directions.Right;
-            if (shieldPoint.transform.position != new Vector3(transform.position.x + 0.345f, transform.position.y) && attackPoint.transform.position != new Vector3(transform.position.x + 0.345f, transform.position.y))
-            {
-                shieldPoint.transform.position = new Vector3(transform.position.x + 0.345f, transform.position.y);
-                attackPoint.transform.position = new Vector2(transform.position.x + 0.345f, transform.position.y);
-            }
+            anim.SetInteger("Direction", 2);
+            attackPoint.transform.localScale = iScale;
+            shieldPoint.transform.localScale = iScale;
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
         if(moveinput.x < 0)
         {
             characterFacing = Directions.Left;
-            if (shieldPoint.transform.position != new Vector3(transform.position.x - 0.345f, transform.position.y) && attackPoint.transform.position != new Vector3(transform.position.x - 0.345f, transform.position.y))
-            {
-                shieldPoint.transform.position = new Vector3(transform.position.x - 0.345f, transform.position.y);
-                attackPoint.transform.position = new Vector2(transform.position.x - 0.345f, transform.position.y);
-            }
+            anim.SetInteger("Direction", 2);
+            attackPoint.transform.localScale = scale;
+            shieldPoint.transform.localScale = scale;
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
         
         if (shieldUp)
         {
-            attackPoint.SetActive(false);
-            shieldPoint.SetActive(true);
+            //attackPoint.SetActive(false);
+            //shieldPoint.SetActive(true);
             //swordNshield.isTrigger = false;
             //Debug.Log("Shield is UP");
         }
         else
         {
-            shieldPoint.SetActive(false);
+            //shieldPoint.SetActive(false);
             //Debug.Log("Shield is Down");
+        }
+
+        if (died)
+        {
+            
+
+            if (deathTimer < deathCooldownTime)
+            {
+                deathTimer += Time.deltaTime;
+                Debug.LogError(deathTimer);
+            }
+            else
+            {
+                deathTimer = 0;
+                died = false;
+                transform.SetPositionAndRotation(respawn, Quaternion.identity);
+                health = maxHealth;
+            }
         }
     }
 
@@ -152,31 +167,24 @@ public class PlayerController : MonoBehaviour
 
     public void Sword(InputAction.CallbackContext context)
     {
-
-        StartCoroutine(Sword());
-
-        /*
-        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayers);
-
-        foreach (Collider2D player in hitPlayers)
+        if(context.performed)
         {
-            //Physics2D.IgnoreCollision(GetComponent<Collider2D>(), player);
-            Debug.Log("Hit " + player.name);
+            anim.SetTrigger("Attack");
         }
-        */
-    }
-
-    IEnumerator Sword()
-    {
-        attackPoint.SetActive(true);
-        yield return new WaitForSeconds(0.4f);
-        attackPoint.SetActive(false);
     }
 
     public void Shield(InputAction.CallbackContext context)
     {
-        shieldUp = context.ReadValueAsButton();
-
+        if (context.performed)
+        {
+            anim.SetBool("Shield", true);
+            movementSpeed = 0;
+        }
+        if (context.canceled)
+        {
+            anim.SetBool("Shield", false);
+            movementSpeed = 7.5f;
+        }
     }
 
     public void ShieldBlocked(int damage)
@@ -209,35 +217,63 @@ public class PlayerController : MonoBehaviour
         }
 
         //Reaspawn
-        if (health <= 0)
+        if (health <= 0 && !died)
         {
-            transform.SetPositionAndRotation(respawn, Quaternion.identity);
-            health = maxHealth;
-            Debug.Log("Player "+ name +" died!");
+            died = true;
+            transform.SetPositionAndRotation(diedPos, Quaternion.identity);
+            Debug.LogWarning("TELEPORTED!!!");
         }
+        
     }
     
     private void playerRespawnShuffle()
     {
+        RandomNum();
+
         if (name == "Player_1")
         {
-            //respawn = new Vector2(PlayerManager.player_1.transform.position.x, PlayerManager.playerSpawn_2.y);
+            if (ranNum == 1)
+                respawn = new Vector2(playerManager.playerSpawn_2.x, playerManager.playerSpawn_2.y);
+            else if (ranNum == 2)
+                respawn = new Vector2(playerManager.playerSpawn_3.x, playerManager.playerSpawn_3.y);
+            else if (ranNum == 3)
+                respawn = new Vector2(playerManager.playerSpawn_4.x, playerManager.playerSpawn_4.y);
         }
         
         if (name == "Player_2")
         {
-            respawn = new Vector2(2, 2);
+            if (ranNum == 1)
+                respawn = new Vector2(playerManager.playerSpawn_1.x, playerManager.playerSpawn_1.y);
+            else if (ranNum == 2)
+                respawn = new Vector2(playerManager.playerSpawn_3.x, playerManager.playerSpawn_3.y);
+            else if (ranNum == 3)
+                respawn = new Vector2(playerManager.playerSpawn_4.x, playerManager.playerSpawn_4.y);
         }
         
         if (name == "Player_3")
         {
-            respawn = new Vector2(2, 2);
+            if (ranNum == 1)
+                respawn = new Vector2(playerManager.playerSpawn_2.x, playerManager.playerSpawn_2.y);
+            else if (ranNum == 2)
+                respawn = new Vector2(playerManager.playerSpawn_1.x, playerManager.playerSpawn_1.y);
+            else if (ranNum == 3)
+                respawn = new Vector2(playerManager.playerSpawn_4.x, playerManager.playerSpawn_4.y);
         }
         
         if (name == "Player_4")
         {
-            respawn = new Vector2(2, 2);
+            if (ranNum == 1)
+                respawn = new Vector2(playerManager.playerSpawn_2.x, playerManager.playerSpawn_2.y);
+            else if (ranNum == 2)
+                respawn = new Vector2(playerManager.playerSpawn_3.x, playerManager.playerSpawn_3.y);
+            else if (ranNum == 3)
+                respawn = new Vector2(playerManager.playerSpawn_1.x, playerManager.playerSpawn_1.y);
         }
+    }
+
+    void RandomNum()
+    {
+        ranNum = Random.Range(1,3);
     }
 
     /*
