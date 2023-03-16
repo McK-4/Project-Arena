@@ -4,14 +4,20 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
+    public int player = 0;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRen;
     Animator anim;
-    //private InputActionMap playerControls;
+
     private PlayerManager playerManager;
 
     public GameObject[] players;
     public GameObject[] numPlayers;
+
+    //Rewarding players with points
+    public string killerName;
+
+    public int points;
 
     public enum Directions
     {
@@ -31,11 +37,12 @@ public class PlayerController : MonoBehaviour
     public float healthTimer = 0;
     public float healthCooldownTime = 0.5f;
     private int damageTaken = 0;
+    //Death
     private int ranNum;
     public float deathTimer = 0;
     private float deathCooldownTime = 5;
     private Vector2 diedPos = new Vector2(123, 456);
-    private bool died = false;
+    public bool died = false;
 
     //Movement
     public float movementSpeed = 7.5f;
@@ -72,6 +79,9 @@ public class PlayerController : MonoBehaviour
         health = maxHealth;
 
         respawn = transform.position;
+
+        points = 0;
+
 
         // Physics2D.IgnoreCollision(players[i].GetComponent<BoxCollider2D>(), attackPoints[i].GetComponent<CircleCollider2D>());
         // name = "Player: "+ i;
@@ -140,6 +150,9 @@ public class PlayerController : MonoBehaviour
             //Debug.Log("Shield is Down");
         }
 
+
+
+        //Respawning
         if (died)
         {
             
@@ -147,7 +160,7 @@ public class PlayerController : MonoBehaviour
             if (deathTimer < deathCooldownTime)
             {
                 deathTimer += Time.deltaTime;
-                Debug.LogError(deathTimer);
+                //Debug.LogError(deathTimer);
             }
             else
             {
@@ -162,7 +175,7 @@ public class PlayerController : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         moveinput = context.ReadValue<Vector2>();
-        Debug.Log(moveinput);
+        //Debug.Log(moveinput);
     }
 
     public void Sword(InputAction.CallbackContext context)
@@ -199,7 +212,7 @@ public class PlayerController : MonoBehaviour
     {
         health -= damage;
         damaged = true;
-        Debug.Log(name + " was hit");
+        Debug.Log(name + " was hit by " + killerName);
 
         //Brief invencibility after getting hit with a attack
         if (damaged)
@@ -219,9 +232,10 @@ public class PlayerController : MonoBehaviour
         //Reaspawn
         if (health <= 0 && !died)
         {
+            Debug.Log("Player " + name[0] + " was killed by Player " + killerName[0]);
             died = true;
             transform.SetPositionAndRotation(diedPos, Quaternion.identity);
-            Debug.LogWarning("TELEPORTED!!!");
+            //Debug.LogWarning("TELEPORTED!!!");
         }
         
     }
@@ -271,25 +285,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     void RandomNum()
     {
         ranNum = Random.Range(1,3);
     }
 
-    /*
-    private void OnDrawGizmosSelected()
-    {
-        if (attackPoint == null)
-            return;
-
-        Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
-    }
-    */
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Sword")
         {
+            killerName = collision.gameObject.transform.parent.name;
             Damaged(basicSwordDamage);
         }
 
