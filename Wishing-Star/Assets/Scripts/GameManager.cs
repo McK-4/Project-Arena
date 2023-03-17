@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     PlayerController player_3_Controller;
     PlayerController player_4_Controller;
 
+    public GameObject killer;
+    PlayerController killerController;
+    private bool awarded = false;
 
     public int totalGameTime = 300;
     public float gameTimeRemaining;
@@ -35,14 +38,21 @@ public class GameManager : MonoBehaviour
     {
         currentScene = SceneManager.GetActiveScene();
 
-        if (player_1_Controller.died || player_2_Controller.died || player_3_Controller.died || player_4_Controller.died)
+        if (player_1_Controller.died)
         {
-            /*
-            for(int i = 0; i <= 4; i++)
-            {
-
-            }
-            */
+            AwardPlayerKills();
+        }
+        else if (player_2_Controller.died)
+        {
+            AwardPlayerKills();
+        }
+        else if (player_3_Controller.died)
+        {
+            AwardPlayerKills();
+        }
+        else if (player_4_Controller.died)
+        {
+            AwardPlayerKills();
         }
 
         //Change "Alex Test" to the name of the scene we are using for the game
@@ -64,6 +74,18 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void AwardPlayerKills()
+    {
+        killer = GameObject.Find(player_1_Controller.killerName[0] + "_Player");
+        killerController = killer.GetComponent<PlayerController>();
+
+        if (!awarded)
+        {
+            killerController.points++;
+            awarded = true;
+            //Debug.Log(killer.name + " got awarded a point for their kill!");
+        }
+    }
 
     void GameEnd()
     {

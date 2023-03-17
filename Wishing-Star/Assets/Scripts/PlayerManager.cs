@@ -31,10 +31,10 @@ public class PlayerManager : MonoBehaviour
         playerSpawn_3 = GameObject.Find("PlayerParent_2").transform.position;
         playerSpawn_4 = GameObject.Find("PlayerParent_3").transform.position;
 
-        player_1 = GameObject.Find("Player_1");
-        player_2 = GameObject.Find("Player_2");
-        player_3 = GameObject.Find("Player_3");
-        player_4 = GameObject.Find("Player_4");
+        player_1 = GameObject.Find("1_Player");
+        player_2 = GameObject.Find("2_Player");
+        player_3 = GameObject.Find("3_Player");
+        player_4 = GameObject.Find("4_Player");
 
        // playerController = 
     }
@@ -67,7 +67,7 @@ public class PlayerManager : MonoBehaviour
 
             //Debug.Log("Hit " + player.name);
 
-            if (player.name == "Player_2" || player.name == "Player_3" || player.name == "Player_4")
+            if (player.name == "2_Player" || player.name == "3_Player" || player.name == "4_Player")
             {
                 playerCamping = true;
             }
@@ -82,7 +82,7 @@ public class PlayerManager : MonoBehaviour
 
             //Debug.Log("Hit " + player.name);
 
-            if (player.name == "Player_1" || player.name == "Player_3" || player.name == "Player_4")
+            if (player.name == "1_Player" || player.name == "3_Player" || player.name == "4_Player")
             {
                 playerCamping = true;
             }
@@ -97,7 +97,7 @@ public class PlayerManager : MonoBehaviour
 
             //Debug.Log("Hit " + player.name);
 
-            if (player.name == "Player_1" || player.name == "Player_2" || player.name == "Player_3")
+            if (player.name == "1_Player" || player.name == "2_Player" || player.name == "4_Player")
             {
                 playerCamping = true;
             }
@@ -112,7 +112,7 @@ public class PlayerManager : MonoBehaviour
 
             //Debug.Log("Hit " + player.name);
 
-            if (player.name == "Player_1" || player.name == "Player_2" || player.name == "Player_3")
+            if (player.name == "1_Player" || player.name == "2_Player" || player.name == "3_Player")
             {
                 playerCamping = true;
             }

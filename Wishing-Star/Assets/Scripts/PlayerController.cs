@@ -45,7 +45,8 @@ public class PlayerController : MonoBehaviour
     public bool died = false;
 
     //Movement
-    public float movementSpeed = 7.5f;
+    public float movementSpeedMax = 7.5f;
+    public float movementSpeed = 0;
     Vector2 tempVel;
     Vector2 moveinput = Vector2.zero;
 
@@ -65,6 +66,10 @@ public class PlayerController : MonoBehaviour
     public LayerMask playerLayers;
     public int basicSwordDamage = 2;
 
+    //Mana 
+    public int manaMax = 10;
+    public int mana;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -80,8 +85,11 @@ public class PlayerController : MonoBehaviour
 
         respawn = transform.position;
 
+        mana = 10;
+
         points = 0;
 
+        movementSpeed = 0.1f;
 
         // Physics2D.IgnoreCollision(players[i].GetComponent<BoxCollider2D>(), attackPoints[i].GetComponent<CircleCollider2D>());
         // name = "Player: "+ i;
@@ -96,8 +104,10 @@ public class PlayerController : MonoBehaviour
 
         //Movement
         tempVel = rb.velocity;
+
         tempVel.x = moveinput.x * movementSpeed;
         tempVel.y = moveinput.y * movementSpeed;
+
         rb.velocity = tempVel;
         anim.SetFloat("Velocity", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y));
 

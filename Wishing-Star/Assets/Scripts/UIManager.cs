@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-
+using TMPro;
 public class UIManager : MonoBehaviour
 {
     [SerializeField]Image icon;
@@ -16,24 +16,31 @@ public class UIManager : MonoBehaviour
     [SerializeField]List<Sprite> healthSprites;
     [SerializeField]List<Image> buttons;
     [SerializeField]List<Sprite> buttonSprites;
+    [SerializeField]TextMeshProUGUI pointsText;
 
-    int mana;
+    float mana;
+    float manaFillAmount;
     int hP;
     int mHP;
+    int points;
 
     void Start()
     {
         pC = player.GetComponent<PlayerController>();
         hP = pC.health;
         mHP = pC.maxHealth;
+        mana = pC.mana;
     }
 
     void Update()
     {
-        if (hP != pC.health || mHP != pC.maxHealth)
+        if (hP != pC.health || mHP != pC.maxHealth || points != pC.points || mana != pC.mana)
         {
             hP = pC.health;
             mHP = pC.maxHealth;
+            mana = pC.mana;
+            manaFillAmount = mana / pC.manaMax;
+            points = pC.points;
             UIUpdate();
         }
 
@@ -69,6 +76,16 @@ public class UIManager : MonoBehaviour
                 healthIconsP1[i].GetComponent<Transform>().gameObject.SetActive(false);
             }
         }
+        pointsText.text = points.ToString();
+        //pointsText.GetComponent<TMPro.TextMeshProUGUI>().text = ("" + points);
+
+        if(mana == 0)
+        {
+
+        }
+
+        manaFill.fillAmount = manaFillAmount;
+
     }
 
     public void Button1(InputAction.CallbackContext context)
