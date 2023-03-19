@@ -70,7 +70,6 @@ public class PlayerController : MonoBehaviour
     public int manaMax = 10;
     public int mana;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -96,7 +95,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
 

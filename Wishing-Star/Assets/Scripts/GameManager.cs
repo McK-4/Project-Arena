@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     public float gameTimeRemaining;
     public int minutesLeft;
     public int secondsLeft;
+    [SerializeField]TextMeshProUGUI pointsText;
 
     // Start is called before the first frame update
     void Start()
@@ -65,6 +67,12 @@ public class GameManager : MonoBehaviour
                 minutesLeft = Mathf.FloorToInt(gameTimeRemaining / 60);
                 secondsLeft = Mathf.FloorToInt(gameTimeRemaining % 60);
             }
+
+            if (minutesLeft !< 0)
+            {
+                pointsText.text = minutesLeft.ToString() + ":" + secondsLeft.ToString();
+            }
+            
 
             if (gameTimeRemaining <= 0)
             {

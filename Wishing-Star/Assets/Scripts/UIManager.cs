@@ -30,6 +30,9 @@ public class UIManager : MonoBehaviour
         hP = pC.health;
         mHP = pC.maxHealth;
         mana = pC.mana;
+        manaFillAmount = mana / pC.manaMax;
+        points = pC.points;
+        UIUpdate();
     }
 
     void Update()
@@ -77,11 +80,14 @@ public class UIManager : MonoBehaviour
             }
         }
         pointsText.text = points.ToString();
-        //pointsText.GetComponent<TMPro.TextMeshProUGUI>().text = ("" + points);
 
-        if(mana == 0)
+        if(mana <= 0)
         {
-
+            manaBar.sprite = manaBarSprites[2];
+        }
+        else if(mana > 0)
+        {
+            manaBar.sprite = manaBarSprites[0];
         }
 
         manaFill.fillAmount = manaFillAmount;
