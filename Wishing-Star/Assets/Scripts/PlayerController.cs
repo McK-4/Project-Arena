@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
         points = 0;
 
-        movementSpeed = 0.1f;
+        //movementSpeed = 0.1f;
 
         // Physics2D.IgnoreCollision(players[i].GetComponent<BoxCollider2D>(), attackPoints[i].GetComponent<CircleCollider2D>());
         // name = "Player: "+ i;
@@ -183,6 +183,12 @@ public class PlayerController : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         moveinput = context.ReadValue<Vector2>();
+
+        /*
+        if(context.performed && movementSpeed < movementSpeedMax)
+        {
+        }
+        */
         //Debug.Log(moveinput);
     }
 
