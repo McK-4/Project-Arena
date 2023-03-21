@@ -16278,6 +16278,10 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2136144570736759948, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 2579525695347032942, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: player
       value: 1
@@ -16285,7 +16289,7 @@ PrefabInstance:
     - target: {fileID: 3553643081534022638, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 22100000, guid: f22cb4718dcb7d0429b4986955105c32, type: 2}
+      objectReference: {fileID: 9100000, guid: b341577d40e11a24d86c78048cf7d8d4, type: 2}
     - target: {fileID: 5319159326026977324, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: m_Name
       value: PlayerParent
@@ -21396,7 +21400,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1372136025565903908, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: m_DefaultControlScheme
-      value: Xbox Controller
+      value: Keyboard
       objectReference: {fileID: 0}
     - target: {fileID: 1372136025565903908, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -21438,10 +21442,22 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2136144570736759948, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 677452607, guid: 17cf582a0c80b974795c6c50257329b1, type: 3}
+    - target: {fileID: 2136144570736759948, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 531154588d53c024a8f2daeb4995999b, type: 2}
     - target: {fileID: 2579525695347032942, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: player
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3553643081534022638, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: f22cb4718dcb7d0429b4986955105c32, type: 2}
     - target: {fileID: 5319159326026977324, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: m_Name
       value: PlayerParent_1
@@ -21549,6 +21565,10 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2136144570736759948, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31c1cf5277be0af419b157568c66d11f, type: 2}
     - target: {fileID: 2579525695347032942, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: player
       value: 3
@@ -23691,6 +23711,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1372136025565903908, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Arcade
+      objectReference: {fileID: 0}
+    - target: {fileID: 1372136025565903908, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 0
       objectReference: {fileID: 0}
@@ -23730,6 +23754,10 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2136144570736759948, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ff5b2038a671294cad809555ab1c26a, type: 2}
     - target: {fileID: 2579525695347032942, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: player
       value: 4
