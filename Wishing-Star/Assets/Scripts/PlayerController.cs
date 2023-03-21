@@ -258,7 +258,7 @@ public class PlayerController : MonoBehaviour
     {
         RandomNum();
 
-        if (name == "Player_1")
+        if (name == "1_Player")
         {
             if (ranNum == 1)
                 respawn = new Vector2(playerManager.playerSpawn_2.x, playerManager.playerSpawn_2.y);
@@ -268,7 +268,7 @@ public class PlayerController : MonoBehaviour
                 respawn = new Vector2(playerManager.playerSpawn_4.x, playerManager.playerSpawn_4.y);
         }
         
-        if (name == "Player_2")
+        if (name == "2_Player")
         {
             if (ranNum == 1)
                 respawn = new Vector2(playerManager.playerSpawn_1.x, playerManager.playerSpawn_1.y);
@@ -278,7 +278,7 @@ public class PlayerController : MonoBehaviour
                 respawn = new Vector2(playerManager.playerSpawn_4.x, playerManager.playerSpawn_4.y);
         }
         
-        if (name == "Player_3")
+        if (name == "3_Player")
         {
             if (ranNum == 1)
                 respawn = new Vector2(playerManager.playerSpawn_2.x, playerManager.playerSpawn_2.y);
@@ -288,7 +288,7 @@ public class PlayerController : MonoBehaviour
                 respawn = new Vector2(playerManager.playerSpawn_4.x, playerManager.playerSpawn_4.y);
         }
         
-        if (name == "Player_4")
+        if (name == "4_Player")
         {
             if (ranNum == 1)
                 respawn = new Vector2(playerManager.playerSpawn_2.x, playerManager.playerSpawn_2.y);

@@ -26,10 +26,10 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerSpawn_1 = GameObject.Find("PlayerParent").transform.position;
-        playerSpawn_2 = GameObject.Find("PlayerParent_1").transform.position;
-        playerSpawn_3 = GameObject.Find("PlayerParent_2").transform.position;
-        playerSpawn_4 = GameObject.Find("PlayerParent_3").transform.position;
+        playerSpawn_1 = GameObject.Find("1_Player").transform.position;
+        playerSpawn_2 = GameObject.Find("2_Player").transform.position;
+        playerSpawn_3 = GameObject.Find("3_Player").transform.position;
+        playerSpawn_4 = GameObject.Find("4_Player").transform.position;
 
         player_1 = GameObject.Find("1_Player");
         player_2 = GameObject.Find("2_Player");

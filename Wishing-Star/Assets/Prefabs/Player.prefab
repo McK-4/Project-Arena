@@ -470,13 +470,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c553e29bcf4a26e45a50d05704c35866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: 0
   players: []
   numPlayers: []
+  killerName: 
+  points: 0
   characterFacing: 2
   maxHealth: 10
   health: 0
   healthTimer: 0
   healthCooldownTime: 0.5
+  deathTimer: 0
+  died: 0
+  movementSpeedMax: 7.5
   movementSpeed: 7.5
   angle: 0
   rotationSpeed: 0
@@ -487,6 +493,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   basicSwordDamage: 2
+  manaMax: 10
+  mana: 0
 --- !u!61 &2241705164052626360
 BoxCollider2D:
   m_ObjectHideFlags: 0
