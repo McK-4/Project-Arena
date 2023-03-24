@@ -18,18 +18,19 @@ public class MenuManager : MonoBehaviour
     private Scene currentScene;
     public int activeGame = 1;
     private bool started = false;
-    
+
+    public Vector2 playerSelectInput;
+
     //Player Select Menu Variables
     [SerializeField] GameObject playerSelectMenu;
-    public List<Sprite> playerArtList;
+    /*public List<Sprite> playerArtList;
     public Image playerArt;
-    public Vector2 playerSelectInput;
     public int currentArtNum;
     private GameObject joinText_1;
     private GameObject joinText_2;
     private GameObject joinText_3;
     private GameObject joinText_4;
-
+    */
     //Map Select Menu Variables
     private GameObject mapSelectMenu;
 
@@ -48,18 +49,18 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
 
-        mainMenu = GameObject.Find("Main Menu");
+        //mainMenu = GameObject.Find("Main Menu");
 
         //Player Select Menu
         playerSelectMenu = GameObject.Find("Player Select Menu");
 
-        currentArtNum = 0;
-        playerArt = GameObject.Find("Player Art").GetComponent<Image>();
+        //currentArtNum = 0;
+        //playerArt = GameObject.Find("Player Art").GetComponent<Image>();
 
-        joinText_1 = GameObject.Find("Join Text_1");
-        joinText_2 = GameObject.Find("Join Text_2");
-        joinText_3 = GameObject.Find("Join Text_3");
-        joinText_4 = GameObject.Find("Join Text_4");
+        //joinText_1 = GameObject.Find("Join Text_1");
+        //joinText_2 = GameObject.Find("Join Text_2");
+        //joinText_3 = GameObject.Find("Join Text_3");
+        //joinText_4 = GameObject.Find("Join Text_4");
 
         //Map Select Menu
         mapSelectMenu = GameObject.Find("Map Select");
@@ -113,7 +114,7 @@ public class MenuManager : MonoBehaviour
                 }
             }
         }
-
+        /*
         //Cycling Player Select Art
         if(playerSelectMenu)
         {
@@ -132,7 +133,7 @@ public class MenuManager : MonoBehaviour
                 playerArt.sprite = playerArtList[currentArtNum];
             }
         }
-
+        */
         //Map Select Menu
         if (mapSelectMenu)
         {

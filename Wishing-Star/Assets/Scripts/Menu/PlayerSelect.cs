@@ -7,15 +7,15 @@ public class PlayerSelect : MonoBehaviour
 {
     private MenuManager menuManager;
 
-    private float buttonTimer = 0;
-    private float buttonCooldownTime = 0.8f;
+    //private float buttonTimer = 0;
+    //private float buttonCooldownTime = 0.8f;
 
     public List<Sprite> playerArtList;
     public Image playerArt;
     public int currentArtNum;
 
-    private GameObject joinText;
-    private bool joined;
+    //private GameObject joinText;
+   // private bool joined;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +25,7 @@ public class PlayerSelect : MonoBehaviour
         currentArtNum = 0;
         playerArt = GameObject.Find("Player Art").GetComponent<Image>();
 
-        joinText = GameObject.Find("Join Text_1");
+        //joinText = GameObject.Find("Join Text_1");
     }
 
     // Update is called once per frame
