@@ -9,13 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 36b222cf645307e4ab40233ac2763008
   - enabled: 1
-    path: Assets/Scenes/Alex Test.unity
-    guid: c95cecaeff1c1454e94f73abfc783bc1
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    path: Assets/Scenes/Map 1.unity
+    guid: a668a29cde794254ba081e34b37685a2
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: fdd8838a008b5134abfbb52aaa5a9079, type: 2}
