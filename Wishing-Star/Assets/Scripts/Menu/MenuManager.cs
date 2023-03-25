@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
@@ -15,83 +16,60 @@ public class MenuManager : MonoBehaviour
     private float buttonTimer = 0;
     private float buttonCooldownTime = 0.8f;
 
-    private Scene currentScene;
     public int activeGame = 1;
-    private bool started = false;
+    private bool started;
 
     public Vector2 playerSelectInput;
 
     //Player Select Menu Variables
     [SerializeField] GameObject playerSelectMenu;
-    /*public List<Sprite> playerArtList;
-    public Image playerArt;
-    public int currentArtNum;
-    private GameObject joinText_1;
-    private GameObject joinText_2;
-    private GameObject joinText_3;
-    private GameObject joinText_4;
-    */
-    //Map Select Menu Variables
-    private GameObject mapSelectMenu;
+    public int playersReady;
+    private PlayerMenu player1Check;
+    private PlayerMenu player2Check;
+    private PlayerMenu player3Check;
+    private PlayerMenu player4Check;
+    bool player1Active;
+    bool player2Active;
+    bool player3Active;
+    bool player4Active;
+    [SerializeField]TextMeshProUGUI selectTimer;
+    float startTimer;
+    float waitTime = 5f;
 
-    private GameObject mapCheckMark;
+    [SerializeField] GameObject mapSelectMenu;
+
+    [SerializeField] GameObject mapCheckMark;
 
     private GameObject player1;
     private GameObject player2;
     private GameObject player3;
     private GameObject player4;
 
-    private GameObject player1Check;
-    private GameObject player2Check;
-    private GameObject player3Check;
-    private GameObject player4Check;
+    
 
     void Start()
     {
+        //player1 = GameObject.Find("1_Player Mark");
+        //player2 = GameObject.Find("2_Player Mark");
+        //player3 = GameObject.Find("3_Player Mark");
+        //player4 = GameObject.Find("4_Player Mark");
 
-        //mainMenu = GameObject.Find("Main Menu");
-
-        //Player Select Menu
-        playerSelectMenu = GameObject.Find("Player Select Menu");
-
-        //currentArtNum = 0;
-        //playerArt = GameObject.Find("Player Art").GetComponent<Image>();
-
-        //joinText_1 = GameObject.Find("Join Text_1");
-        //joinText_2 = GameObject.Find("Join Text_2");
-        //joinText_3 = GameObject.Find("Join Text_3");
-        //joinText_4 = GameObject.Find("Join Text_4");
-
-        //Map Select Menu
-        mapSelectMenu = GameObject.Find("Map Select");
-
-        mapCheckMark = GameObject.Find("Map Selected Check");
-
-        player1 = GameObject.Find("1_Player Mark");
-        player2 = GameObject.Find("2_Player Mark");
-        player3 = GameObject.Find("3_Player Mark");
-        player4 = GameObject.Find("4_Player Mark");
-
-        player1Check = GameObject.Find("1_Player Selected");
-        player2Check = GameObject.Find("1_Player Selected");
-        player3Check = GameObject.Find("1_Player Selected");
-        player4Check = GameObject.Find("1_Player Selected");
-
+        player1Check = GameObject.Find("Player_1 Player Select").GetComponent<PlayerMenu>();
+        player2Check = GameObject.Find("Player_2 Player Select").GetComponent<PlayerMenu>();
+        player3Check = GameObject.Find("Player_3 Player Select").GetComponent<PlayerMenu>();
+        player4Check = GameObject.Find("Player_4 Player Select").GetComponent<PlayerMenu>();
     }
 
     void Update()
     {
-        currentScene = SceneManager.GetActiveScene();
-
         //Blinking Start Button
-        if(currentScene.name == "Menu" && !started)
+        if(!started)
         {
             if (startButton.activeSelf)
             {
                 if (buttonTimer < buttonCooldownTime)
                 {
                     buttonTimer += Time.deltaTime;
-                    //Debug.LogError(deathTimer);
                 }
                 else
                 {
@@ -105,7 +83,6 @@ public class MenuManager : MonoBehaviour
                 if (buttonTimer < buttonCooldownTime)
                 {
                     buttonTimer += Time.deltaTime;
-                    //Debug.LogError(deathTimer);
                 }
                 else
                 {
@@ -114,34 +91,30 @@ public class MenuManager : MonoBehaviour
                 }
             }
         }
-        /*
-        //Cycling Player Select Art
-        if(playerSelectMenu)
+
+        if (playersReady >= 2)
         {
-            if (playerSelectInput.y > 0)
+            if (startTimer > 0)
             {
-                if (currentArtNum <= 0)
-                    currentArtNum++;
-
-                playerArt.sprite = playerArtList[currentArtNum];
+                startTimer -= Time.deltaTime;
+                selectTimer.text = startTimer.ToString("f0");
             }
-            else if (playerSelectInput.y < 0)
+            else if (startTimer <= 0)
             {
-                if (currentArtNum >= playerArtList.Count - 1)
-                    currentArtNum--;
-
-                playerArt.sprite = playerArtList[currentArtNum];
+                player1Active = player1Check.skinSelected;
+                player2Active = player2Check.skinSelected;
+                player3Active = player3Check.skinSelected;
+                player4Active = player4Check.skinSelected;
+                
+                playerSelectMenu.SetActive(false);
+                mapSelectMenu.SetActive(true);
             }
         }
-        */
-        //Map Select Menu
-        if (mapSelectMenu)
+        else
         {
-            //If more than one maps, use playerSelectInput to move the player's mark
-            
-
+            selectTimer.text = "";
+            startTimer = waitTime;
         }
-
     }
 
     public void StartGame()
@@ -150,37 +123,8 @@ public class MenuManager : MonoBehaviour
         started = true;
         startButton.SetActive(false);
 
-        //Change this when we add title art
-        //titleArt.SetActive(false);
-
         mainMenu.SetActive(false);
 
         playerSelectMenu.SetActive(true);
     }
-
-
-    public void PlayerSelect(InputAction.CallbackContext context)
-    {
-        playerSelectInput = context.ReadValue<Vector2>();
-    }
-
-    /*
-    public void Settings()
-    {
-        mainMenu.SetActive(false);
-        settingsMenu.SetActive(true);
-    }
-    
-    public void Back()
-    {
-        settingsMenu.SetActive(false);
-        mainMenu.SetActive(true);
-    }
-    
-    public void Quit()
-    {
-        Application.Quit();
-    }
-    */
-
 }

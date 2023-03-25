@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
+
 public class PlayerController : MonoBehaviour
 {
     public int player = 0;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRen;
     Animator anim;
+    PlayerInput input;
+    public int user;
 
     private PlayerManager playerManager;
 
@@ -75,6 +79,9 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRen = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        input = GetComponent<PlayerInput>();
+
+        user = input.user.index;
 
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
 

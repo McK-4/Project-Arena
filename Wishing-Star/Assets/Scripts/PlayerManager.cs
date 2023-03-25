@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    //private PlayerController playerController;
-
-    private GameObject[] players;
-
+    //Players
     public GameObject player_1;
     public GameObject player_2;
     public GameObject player_3;
@@ -23,39 +20,36 @@ public class PlayerManager : MonoBehaviour
     public float antiCampRange = 1;
     public bool playerCamping = false;
 
+    //Controller Tracker
+    int user1ID;
+    int user2ID;
+    int user3ID;
+    int user4ID;
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
-        playerSpawn_1 = GameObject.Find("1_Player").transform.position;
-        playerSpawn_2 = GameObject.Find("2_Player").transform.position;
-        playerSpawn_3 = GameObject.Find("3_Player").transform.position;
-        playerSpawn_4 = GameObject.Find("4_Player").transform.position;
-
         player_1 = GameObject.Find("1_Player");
         player_2 = GameObject.Find("2_Player");
         player_3 = GameObject.Find("3_Player");
         player_4 = GameObject.Find("4_Player");
 
-       // playerController = 
+        playerSpawn_1 = player_1.transform.position;
+        playerSpawn_2 = player_2.transform.position;
+        playerSpawn_3 = player_3.transform.position;
+        playerSpawn_4 = player_4.transform.position;
+
+        user1ID = player_1.GetComponent<PlayerController>().user;
+        user2ID = player_2.GetComponent<PlayerController>().user;
+        user3ID = player_3.GetComponent<PlayerController>().user;
+        user4ID = player_4.GetComponent<PlayerController>().user;
     }
 
     // Update is called once per frame
     void Update()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
-
-        /*
-        foreach(GameObject player in players)
-        {
-            
-            //if (playerController.died)
-           // {
-                
-            //}
-            
-        }
-        */
-
         //Anti-Player Camping
         
         //Player1

@@ -124,6 +124,17 @@
                 },
                 {
                     "name": "",
+                    "id": "e599c216-e4a5-457d-a232-f12644586f83",
+                    "path": "<DualShockGamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "DualShock",
+                    "action": "Sword",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "e90baefe-5f1e-4ce2-bed0-1dc9c3dfb18d",
                     "path": "<XInputController>/buttonEast",
                     "interactions": "",
@@ -151,6 +162,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
+                    "action": "Shield",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "319beb53-aa59-4e2b-8a4b-03f11d958230",
+                    "path": "<DualShockGamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "DualShock",
                     "action": "Shield",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -275,6 +297,61 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "DPad",
+                    "id": "bf6e5aed-a9e1-4400-9da7-0a0bc6131a42",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "69c968df-db03-4dfb-ae2d-400567f1d143",
+                    "path": "<DualShockGamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "DualShock",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "1911cbba-8e3c-4acd-b2a2-cfd31493d094",
+                    "path": "<DualShockGamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "DualShock",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "e6a6db95-ea7f-447e-9f7e-74cee82fdb43",
+                    "path": "<DualShockGamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "DualShock",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "29ba474c-145f-40d2-a88d-102aaab0199d",
+                    "path": "<DualShockGamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "DualShock",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
@@ -308,6 +385,17 @@
             "devices": [
                 {
                     "devicePath": "<HID::DragonRise Inc.   Generic   USB  Joystick  >",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "DualShock",
+            "bindingGroup": "DualShock",
+            "devices": [
+                {
+                    "devicePath": "<DualShockGamepad>",
                     "isOptional": false,
                     "isOR": false
                 }

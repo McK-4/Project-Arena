@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &94412117 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3981984043576972904, guid: 1cc35769a6e83a644850092228013660, type: 3}
+  m_PrefabInstance: {fileID: 2034520278}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e7b945b4898d14418b4a65743399da0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &112717767
 GameObject:
   m_ObjectHideFlags: 0
@@ -15092,11 +15103,11 @@ PrefabInstance:
     - target: {fileID: 1372136025565903908, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1234065858}
     - target: {fileID: 1372136025565903908, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1234065858}
     - target: {fileID: 1372136025565903908, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: Button1
@@ -18086,6 +18097,28 @@ MonoBehaviour:
   m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
+--- !u!114 &1234065858 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3981984044042382794, guid: 1cc35769a6e83a644850092228013660, type: 3}
+  m_PrefabInstance: {fileID: 2034520278}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e7b945b4898d14418b4a65743399da0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1323569353 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3981984043965881107, guid: 1cc35769a6e83a644850092228013660, type: 3}
+  m_PrefabInstance: {fileID: 2034520278}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e7b945b4898d14418b4a65743399da0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1463899813
 GameObject:
   m_ObjectHideFlags: 0
@@ -18216,11 +18249,11 @@ PrefabInstance:
     - target: {fileID: 1372136025565903908, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1963253214}
     - target: {fileID: 1372136025565903908, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1963253214}
     - target: {fileID: 1372136025565903908, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: Button1
@@ -18339,11 +18372,11 @@ PrefabInstance:
     - target: {fileID: 1372136025565903908, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 94412117}
     - target: {fileID: 1372136025565903908, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 94412117}
     - target: {fileID: 1372136025565903908, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: Button1
@@ -18538,6 +18571,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1963253214 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3981984042274007943, guid: 1cc35769a6e83a644850092228013660, type: 3}
+  m_PrefabInstance: {fileID: 2034520278}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e7b945b4898d14418b4a65743399da0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2031600590 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6856600195958498853, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
@@ -19079,11 +19123,11 @@ PrefabInstance:
     - target: {fileID: 1372136025565903908, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1323569353}
     - target: {fileID: 1372136025565903908, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1323569353}
     - target: {fileID: 1372136025565903908, guid: 1b2739977d3f39a48ab61ef6efea13b6, type: 3}
       propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: Button1
