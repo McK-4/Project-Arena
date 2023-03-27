@@ -24,10 +24,10 @@ public class MenuManager : MonoBehaviour
     //Player Select Menu Variables
     [SerializeField] GameObject playerSelectMenu;
     public int playersReady;
-    private PlayerMenu player1Check;
-    private PlayerMenu player2Check;
-    private PlayerMenu player3Check;
-    private PlayerMenu player4Check;
+    [SerializeField]PlayerMenu player1Select;
+    [SerializeField]PlayerMenu player2Select;
+    [SerializeField]PlayerMenu player3Select;
+    [SerializeField]PlayerMenu player4Select;
     bool player1Active;
     bool player2Active;
     bool player3Active;
@@ -36,28 +36,11 @@ public class MenuManager : MonoBehaviour
     float startTimer;
     float waitTime = 5f;
 
+    //Map Select Menu Variables
     [SerializeField] GameObject mapSelectMenu;
-
-    [SerializeField] GameObject mapCheckMark;
-
-    private GameObject player1;
-    private GameObject player2;
-    private GameObject player3;
-    private GameObject player4;
-
-    
 
     void Start()
     {
-        //player1 = GameObject.Find("1_Player Mark");
-        //player2 = GameObject.Find("2_Player Mark");
-        //player3 = GameObject.Find("3_Player Mark");
-        //player4 = GameObject.Find("4_Player Mark");
-
-        player1Check = GameObject.Find("Player_1 Player Select").GetComponent<PlayerMenu>();
-        player2Check = GameObject.Find("Player_2 Player Select").GetComponent<PlayerMenu>();
-        player3Check = GameObject.Find("Player_3 Player Select").GetComponent<PlayerMenu>();
-        player4Check = GameObject.Find("Player_4 Player Select").GetComponent<PlayerMenu>();
     }
 
     void Update()
@@ -101,13 +84,23 @@ public class MenuManager : MonoBehaviour
             }
             else if (startTimer <= 0)
             {
-                player1Active = player1Check.skinSelected;
-                player2Active = player2Check.skinSelected;
-                player3Active = player3Check.skinSelected;
-                player4Active = player4Check.skinSelected;
+                player1Active = player1Select.skinSelected;
+                player2Active = player2Select.skinSelected;
+                player3Active = player3Select.skinSelected;
+                player4Active = player4Select.skinSelected;
                 
                 playerSelectMenu.SetActive(false);
+
+                player1Select.playerSelectMenu = false;
+                player2Select.playerSelectMenu = false;
+                player3Select.playerSelectMenu = false;
+                player4Select.playerSelectMenu = false;
+
                 mapSelectMenu.SetActive(true);
+                player1Select.mapSelectMenu = true;
+                player2Select.mapSelectMenu = true;
+                player3Select.mapSelectMenu = true;
+                player4Select.mapSelectMenu = true;
             }
         }
         else
@@ -117,14 +110,18 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void StartGame()
+    public void StartGame(InputAction.CallbackContext context)
     {
-        //Hardware to software ???
-        started = true;
-        startButton.SetActive(false);
+        if(context.performed)
+        {
+            started = true;
+            mainMenu.SetActive(false);
 
-        mainMenu.SetActive(false);
-
-        playerSelectMenu.SetActive(true);
+            playerSelectMenu.SetActive(true);
+            player1Select.playerSelectMenu = true;
+            player2Select.playerSelectMenu = true;
+            player3Select.playerSelectMenu = true;
+            player4Select.playerSelectMenu = true;
+        }
     }
 }

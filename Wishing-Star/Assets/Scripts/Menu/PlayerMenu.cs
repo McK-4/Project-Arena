@@ -18,9 +18,16 @@ public class PlayerMenu : MonoBehaviour
     public bool skinSelected;
     [SerializeField] TextMeshProUGUI readyText;
 
+    [SerializeField] List<GameObject> maps;
+    [SerializeField] List<GameObject> readyMarks;
+    [SerializeField] GameObject mark;
+    public int activeMap;
+    public bool mapSelected;
+    [SerializeField] Vector3 offset;
+
     //Menus
-    [SerializeField] GameObject mapSelectMenu;
-    [SerializeField] GameObject playerSelectMenu;
+    public bool mapSelectMenu;
+    public bool playerSelectMenu;
 
     void Start()
     {
@@ -70,7 +77,22 @@ public class PlayerMenu : MonoBehaviour
 
         if (mapSelectMenu)
         {
-
+            if (playerSelectInput.x > 0)
+            {
+                if (activeMap == 0)
+                {
+                    activeMap = 1;
+                    mark.transform.position = maps[activeMap].transform.position + offset;
+                }
+            }
+            else if (playerSelectInput.x < 0)
+            {
+                if (activeMap == 1)
+                {
+                    activeMap = 0;
+                    mark.transform.position = maps[activeMap].transform.position + offset;
+                }
+            }
         }
     }
 
