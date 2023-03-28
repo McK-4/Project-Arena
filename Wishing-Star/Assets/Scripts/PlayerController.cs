@@ -6,12 +6,15 @@ using UnityEngine.InputSystem.Users;
 
 public class PlayerController : MonoBehaviour
 {
-    public int player = 0;
+    //public int player = 0;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRen;
     Animator anim;
     PlayerInput input;
     public int user;
+
+    public int playerOrderInLayer;
+    public string playerName;
 
     private PlayerManager playerManager;
 
