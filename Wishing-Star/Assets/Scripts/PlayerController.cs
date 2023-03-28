@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
+using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,8 +14,9 @@ public class PlayerController : MonoBehaviour
     PlayerInput input;
     public int user;
 
-    public int playerOrderInLayer;
-    public string playerName;
+    public TilemapRenderer tileRen;
+    public int orderInLayer;
+    public string layerName;
 
     private PlayerManager playerManager;
 
@@ -315,6 +317,11 @@ public class PlayerController : MonoBehaviour
         ranNum = Random.Range(1,3);
     }
 
+    void Sort()
+    {
+        spriteRen.sortingLayerName = layerName;
+        spriteRen.sortingOrder = orderInLayer;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -331,6 +338,11 @@ public class PlayerController : MonoBehaviour
             //var angleallowed = 10;
 
             ShieldBlocked(basicSwordDamage);
+        }
+
+        if(collision.gameObject.name == "Stairs")
+        {
+
         }
 
     }

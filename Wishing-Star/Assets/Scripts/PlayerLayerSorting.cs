@@ -6,14 +6,16 @@ using UnityEditor;
 [CustomEditor(typeof(PlayerController))]
 public class PlayerLayerSorting : MonoBehaviour
 {
+    public PlayerController playerCon;
 
     SerializedProperty pName;
     SerializedProperty pOrder;
 
     private SpriteRenderer rend;
+
     void OnEnable()
     {
-
+        playerCon = Selection.activeGameObject.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -21,4 +23,14 @@ public class PlayerLayerSorting : MonoBehaviour
     {
         
     }
+
+    void CheckRenderer()
+    {
+        rend = Selection.activeGameObject.GetComponent<SpriteRenderer>();
+
+        //rend.sortingLayerName = playerCon.playerName;
+
+        //rend.sortingOrder = playerCon.playerOrderInLayer;
+    }
+
 }
