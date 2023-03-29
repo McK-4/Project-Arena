@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Sword
+  - Top Stair
+  - Bottom Stair
   layers:
   - Default
   - TransparentFX

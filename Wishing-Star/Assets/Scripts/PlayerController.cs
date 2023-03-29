@@ -14,9 +14,12 @@ public class PlayerController : MonoBehaviour
     PlayerInput input;
     public int user;
 
+    //Map Layering
     public TilemapRenderer tileRen;
     public int orderInLayer;
     public string layerName;
+    private bool movingFloors = false;
+    [SerializeField] Collider2D mapCollider;
 
     private PlayerManager playerManager;
 
@@ -55,9 +58,12 @@ public class PlayerController : MonoBehaviour
 
     //Movement
     public float movementSpeedMax = 7.5f;
-    public float movementSpeed = 0;
+    public float movementSpeed = 3.75f;
+    private float movementSpeedStart = 3.75f;
+    private float acceleration = 0.1f;
     Vector2 tempVel;
     Vector2 moveinput = Vector2.zero;
+    public bool moving = false;
 
     //Attacking
     Vector2 movingTo;
@@ -79,6 +85,10 @@ public class PlayerController : MonoBehaviour
     public int manaMax = 10;
     public int mana;
 
+    //Items
+    private ItemLibary itemLib;
+    public string itemTag;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -89,16 +99,15 @@ public class PlayerController : MonoBehaviour
         user = input.user.index;
 
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
-
-        //shieldCollider = shieldPoint.GetComponent<CircleCollider2D>();
+        itemLib = GameObject.Find("GameManager").GetComponent<ItemLibary>();
 
         health = maxHealth;
-
         respawn = transform.position;
-
         mana = 10;
-
         points = 0;
+
+        orderInLayer = 1;
+        spriteRen.sortingOrder = orderInLayer;
 
         //movementSpeed = 0.1f;
 
@@ -118,8 +127,25 @@ public class PlayerController : MonoBehaviour
         tempVel.x = moveinput.x * movementSpeed;
         tempVel.y = moveinput.y * movementSpeed;
 
+        if (movementSpeed <= movementSpeedStart)
+            movementSpeed = movementSpeedStart;
+        
+        if (movementSpeed >= movementSpeedMax)
+            movementSpeed = movementSpeedMax;
+        if (tempVel == new Vector2(0, 0))
+            moving = false;
+
+        if (moving)
+            movementSpeed += acceleration;
+        else if (!moving)
+            movementSpeed -= acceleration;
+
         rb.velocity = tempVel;
         anim.SetFloat("Velocity", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y));
+
+        //Map Layering
+        spriteRen.sortingOrder = orderInLayer;
+        //Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), mapCollider);
 
         //Anti-Player Spawn Camping
         if(playerManager.playerCamping == true)
@@ -195,7 +221,10 @@ public class PlayerController : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         moveinput = context.ReadValue<Vector2>();
-
+        if (context.performed)
+            moving = true;
+        if (context.canceled)
+            moving = false;
         /*
         if(context.performed && movementSpeed < movementSpeedMax)
         {
@@ -209,7 +238,10 @@ public class PlayerController : MonoBehaviour
         if(context.performed)
         {
             anim.SetTrigger("Attack");
+            movementSpeed = 0;
         }
+        if (context.canceled)
+            movementSpeed = movementSpeedStart;
     }
 
     public void Shield(InputAction.CallbackContext context)
@@ -222,7 +254,7 @@ public class PlayerController : MonoBehaviour
         if (context.canceled)
         {
             anim.SetBool("Shield", false);
-            movementSpeed = 7.5f;
+            movementSpeed = movementSpeedStart;
         }
     }
 
@@ -317,6 +349,22 @@ public class PlayerController : MonoBehaviour
         ranNum = Random.Range(1,3);
     }
 
+    public void Item1(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            itemLib.ItemLibFind(itemTag);
+        }
+    }
+
+    public void Item2(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            itemLib.ItemLibFind(itemTag);
+        }
+    }
+
     void Sort()
     {
         spriteRen.sortingLayerName = layerName;
@@ -340,10 +388,26 @@ public class PlayerController : MonoBehaviour
             ShieldBlocked(basicSwordDamage);
         }
 
-        if(collision.gameObject.name == "Stairs")
+        if(collision.gameObject.tag == "Top Stair")
         {
-
+            if (!movingFloors)
+                movingFloors = true;
+            else
+            {
+                movingFloors = false;
+                orderInLayer++;
+            }
         }
 
+        if (collision.gameObject.tag == "Bottom Stair")
+        {
+            if (!movingFloors)
+                movingFloors = true;
+            else
+            {
+                movingFloors = false;
+                orderInLayer--;
+            }
+        }
     }
 }
