@@ -49,10 +49,10 @@ public class PlayerController : MonoBehaviour
     Vector2 respawn;
     public int maxHealth = 10;
     public int health;
-    private bool damaged;
+    public bool damaged;
     public float healthTimer = 0;
     public float healthCooldownTime = 0.5f;
-    private int damageTaken = 0;
+    //private int damageTaken = 0;
     //Death
     private int ranNum;
     public float deathTimer = 0;
@@ -63,18 +63,21 @@ public class PlayerController : MonoBehaviour
     //Movement
     public float movementSpeedMax = 7.5f;
     public float movementSpeed = 3.75f;
-    private float movementSpeedStart = 3.75f;
+    private float movementSpeedStart = 0f;
     private float acceleration = 0.1f;
     Vector2 tempVel;
     Vector2 moveinput = Vector2.zero;
     public bool moving = false;
+    private bool moveAble = true;
 
     //Attacking
     Vector2 movingTo;
     public float angle;
     public float rotationSpeed;
     bool shieldUp = false;
-
+    private bool attacked = false;
+    public float attackTimer = 0;
+    public float attackCooldownTime = 1f;
     Vector2 scale = new Vector2(1,1);
     Vector2 iScale = new Vector2(-1, 1);
 
@@ -84,6 +87,7 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask playerLayers;
     public int basicSwordDamage = 2;
+    private int damageReduction = 1;
 
     //Mana 
     public int manaMax = 10;
@@ -128,8 +132,15 @@ public class PlayerController : MonoBehaviour
         //Movement
         tempVel = rb.velocity;
 
-        tempVel.x = moveinput.x * movementSpeed;
-        tempVel.y = moveinput.y * movementSpeed;
+        if(moveAble)
+        {
+            tempVel.x = moveinput.x * movementSpeed;
+            tempVel.y = moveinput.y * movementSpeed;
+        }
+        if(!moveAble)
+        {
+            tempVel = new Vector2(0,0);
+        }
 
         if (movementSpeed <= movementSpeedStart)
             movementSpeed = movementSpeedStart;
@@ -186,31 +197,27 @@ public class PlayerController : MonoBehaviour
             shieldPoint.transform.localScale = scale;
             gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
-        
-        if (shieldUp)
-        {
-            //attackPoint.SetActive(false);
-            //shieldPoint.SetActive(true);
-            //swordNshield.isTrigger = false;
-            //Debug.Log("Shield is UP");
-        }
-        else
-        {
-            //shieldPoint.SetActive(false);
-            //Debug.Log("Shield is Down");
-        }
 
-
+        //Attack delay
+        if(attacked)
+        {
+            if (attackTimer < attackCooldownTime)
+            {
+                attackTimer += Time.deltaTime;
+            }
+            else
+            {
+                attackTimer = 0;
+                attacked = false;
+            }
+        }
 
         //Respawning
         if (died)
         {
-            
-
             if (deathTimer < deathCooldownTime)
             {
                 deathTimer += Time.deltaTime;
-                //Debug.LogError(deathTimer);
             }
             else
             {
@@ -225,6 +232,7 @@ public class PlayerController : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         moveinput = context.ReadValue<Vector2>();
+
         if (context.performed)
             moving = true;
         if (context.canceled)
@@ -239,13 +247,20 @@ public class PlayerController : MonoBehaviour
 
     public void Sword(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if(context.performed && !attacked)
         {
             anim.SetTrigger("Attack");
-            movementSpeed = 0;
+            moveAble = false;
+            attacked = true;
+            basicSwordDamage = 2;
         }
+        
         if (context.canceled)
-            movementSpeed = movementSpeedStart;
+        {
+            moveAble = true;
+            //movementSpeed = movementSpeedStart;
+        }
+        
     }
 
     public void Shield(InputAction.CallbackContext context)
@@ -253,26 +268,31 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
             anim.SetBool("Shield", true);
-            movementSpeed = 0;
+            moveAble = false;
+            //movementSpeed = 0;
         }
         if (context.canceled)
         {
             anim.SetBool("Shield", false);
-            movementSpeed = movementSpeedStart;
+            moveAble = true;
+            //movementSpeed = movementSpeedStart;
         }
     }
 
     public void ShieldBlocked(int damage)
     {
-        damageTaken += damage;
-        damageTaken -= 1;
-
-        Damaged(damageTaken);
+        Debug.Log(damage);
+        damageReduction = 1;
+        damage -= damageReduction;
+        Debug.Log(damage);
+        Damaged(damage);
     }
 
     public void Damaged(int damage)
     {
+        Debug.Log(health);
         health -= damage;
+        Debug.Log(health);
         damaged = true;
         Debug.Log(name + " was hit by " + killerName);
 
@@ -377,19 +397,18 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Sword")
+        if (collision.gameObject.tag == "Sword" && !damaged)
         {
             killerName = collision.gameObject.transform.parent.name;
             Damaged(basicSwordDamage);
         }
-
-        if (collision.gameObject.tag == "Sword" && shieldUp )
+        else if (collision.gameObject.tag == "Sword" && shieldUp && !damaged)
         {
             var nuller = (collision.transform.position - transform.position).normalized;
             var shield = (shieldPoint.transform.position - transform.position).normalized;
             //var angleallowed = 10;
-
-            ShieldBlocked(basicSwordDamage);
+            killerName = collision.gameObject.transform.parent.name;
+            //ShieldBlocked(basicSwordDamage);
         }
 
         if(collision.gameObject.tag == "Top Stair")

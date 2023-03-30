@@ -21,7 +21,7 @@ public class ShieldBlock : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Sword")
+        if (collision.gameObject.tag == "Sword" && !playerController.damaged)
         {
             playerController.ShieldBlocked(playerController.basicSwordDamage);
         }

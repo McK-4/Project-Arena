@@ -57,19 +57,19 @@ public class PlayerManager : MonoBehaviour
 
         if (!master.player1Active)
         {
-            Destroy(player_1);
+            player_1.SetActive(false);
         }
         if (!master.player2Active)
         {
-            Destroy(player_2);
+            player_2.SetActive(false);
         }
         if (!master.player3Active)
         {
-            Destroy(player_3);
+            player_3.SetActive(false);
         }
         if (!master.player4Active)
         {
-            Destroy(player_4);
+            player_4.SetActive(false);
         }
 
         if (master.player1Input != null)

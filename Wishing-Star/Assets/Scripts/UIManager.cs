@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
     float mana;
     float manaFillAmount;
     int hP;
-    int mHP;
+    float mHP;
     int points;
 
     void Start()
@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (player == null)
+        if (!player.activeInHierarchy)
         {
             icon.gameObject.SetActive(false);
             gameObject.SetActive(false);

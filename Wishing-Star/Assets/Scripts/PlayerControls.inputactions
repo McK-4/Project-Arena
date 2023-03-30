@@ -110,7 +110,7 @@
                 {
                     "name": "",
                     "id": "5df89d9a-af81-404b-8122-c4362b497772",
-                    "path": "<XInputController>/buttonSouth",
+                    "path": "<XInputController>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "Xbox Controller",
@@ -154,7 +154,7 @@
                 {
                     "name": "",
                     "id": "e90baefe-5f1e-4ce2-bed0-1dc9c3dfb18d",
-                    "path": "<XInputController>/buttonEast",
+                    "path": "<XInputController>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Xbox Controller",
@@ -193,17 +193,6 @@
                     "groups": "DualShock",
                     "action": "Shield",
                     "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "D-Pad",
-                    "id": "0ced8916-6cad-4fee-8035-886f3a716a30",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
