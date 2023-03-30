@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
@@ -11,7 +12,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer spriteRen;
     Animator anim;
+    [SerializeField]AnimatorOverrideController[] skin;
+    public int activeSkin;
     PlayerInput input;
+    public InputDevice inputDevice;
     public int user;
 
     //Map Layering
@@ -409,5 +413,11 @@ public class PlayerController : MonoBehaviour
                 orderInLayer--;
             }
         }
+    }
+
+    public void RePair()
+    {
+        InputUser.PerformPairingWithDevice(inputDevice, input.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
+        anim.runtimeAnimatorController = skin[activeSkin];
     }
 }

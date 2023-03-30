@@ -11,6 +11,7 @@ public class PlayerMenu : MonoBehaviour
 
     public Vector2 playerSelectInput;
 
+    public InputDevice inputDevice;
 
     public List<Sprite> playerArtList;
     [SerializeField] Image playerArt;
@@ -20,10 +21,9 @@ public class PlayerMenu : MonoBehaviour
 
     [SerializeField] List<GameObject> maps;
     [SerializeField] List<GameObject> readyMarks;
-    [SerializeField] GameObject mark;
+    public GameObject mark;
     public int activeMap;
     public bool mapSelected;
-    [SerializeField] Vector3 offset;
 
     //Menus
     public bool mapSelectMenu;
@@ -32,11 +32,6 @@ public class PlayerMenu : MonoBehaviour
     void Start()
     {
         menuManager = GameObject.Find("Menu Manager").GetComponent<MenuManager>();
-    }
-
-    void Update()
-    {
-
     }
 
     public void PlayerSelect(InputAction.CallbackContext context)
@@ -75,14 +70,14 @@ public class PlayerMenu : MonoBehaviour
             }
         }
 
-        if (mapSelectMenu)
+        if (mapSelectMenu && !mapSelected)
         {
             if (playerSelectInput.x > 0)
             {
                 if (activeMap == 0)
                 {
                     activeMap = 1;
-                    mark.transform.position = maps[activeMap].transform.position + offset;
+                    mark.transform.position = maps[activeMap].transform.position;
                 }
             }
             else if (playerSelectInput.x < 0)
@@ -90,7 +85,7 @@ public class PlayerMenu : MonoBehaviour
                 if (activeMap == 1)
                 {
                     activeMap = 0;
-                    mark.transform.position = maps[activeMap].transform.position + offset;
+                    mark.transform.position = maps[activeMap].transform.position;
                 }
             }
         }
@@ -105,6 +100,7 @@ public class PlayerMenu : MonoBehaviour
                 skinSelected = true;
                 readyText.text = "- Ready -";
                 menuManager.playersReady++;
+                inputDevice = gameObject.GetComponent<PlayerInput>().devices[0];
             }
             else if (context.performed && skinSelected == true)
             {
@@ -116,7 +112,22 @@ public class PlayerMenu : MonoBehaviour
 
         if (mapSelectMenu)
         {
-
+            if (context.performed && mapSelected == false)
+            {
+                mapSelected = true;
+                readyMarks[activeMap].SetActive(true);
+                mark.SetActive(false);
+                menuManager.playersVoted++;
+                //menuManager.MapVote(activeMap, 1);
+            }
+            else if (context.performed && mapSelected == true)
+            {
+                mapSelected = false;
+                readyMarks[activeMap].SetActive(false);
+                mark.SetActive(true);
+                menuManager.playersVoted--;
+                //menuManager.MapVote(activeMap, -1);
+            }
         }
     }
 }

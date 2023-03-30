@@ -37,6 +37,12 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
+        if (player == null)
+        {
+            icon.gameObject.SetActive(false);
+            gameObject.SetActive(false);
+        }
+
         if (hP != pC.health || mHP != pC.maxHealth || points != pC.points || mana != pC.mana)
         {
             hP = pC.health;

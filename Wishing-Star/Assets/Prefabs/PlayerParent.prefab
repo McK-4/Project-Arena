@@ -88,6 +88,50 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6547034616071601023, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547034616071601023, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
+      propertyPath: m_NeverAutoSwitchControlSchemes
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547034616071601023, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionId
+      value: bb8d21f6-8b26-413d-84ed-4ba21b728006
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547034616071601023, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionId
+      value: 1ef66d84-148a-4a35-9596-4eeac5ac5546
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547034616071601023, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionName
+      value: Player/1_Item[/Keyboard/r]
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547034616071601023, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionName
+      value: Player/2_Item[/Keyboard/f]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7646307094250521653, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
+      propertyPath: skin.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7646307094250521653, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
+      propertyPath: skin.Array.data[0]
+      value: 
+      objectReference: {fileID: 22100000, guid: 98f643db5821ba243aa00758aeb2afdd, type: 2}
+    - target: {fileID: 7646307094250521653, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
+      propertyPath: skin.Array.data[1]
+      value: 
+      objectReference: {fileID: 22100000, guid: f22cb4718dcb7d0429b4986955105c32, type: 2}
+    - target: {fileID: 7646307094250521653, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
+      propertyPath: skin.Array.data[2]
+      value: 
+      objectReference: {fileID: 22100000, guid: 1d97a4ff78cb0524787f83b024c0cac4, type: 2}
+    - target: {fileID: 7646307094250521653, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
+      propertyPath: skin.Array.data[3]
+      value: 
+      objectReference: {fileID: 22100000, guid: 86dc6a182fc497f4b8c260c8a3263864, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
