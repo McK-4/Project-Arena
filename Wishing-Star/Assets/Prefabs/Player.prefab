@@ -111,7 +111,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.2}
+  m_Offset: {x: -0.3065849, y: 0.096747935}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -122,7 +122,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.7}
+  m_Size: {x: 0.43766344, y: 0.70983696}
   m_EdgeRadius: 0
 --- !u!1 &493176480387860392
 GameObject:
@@ -280,6 +280,7 @@ Transform:
   - {fileID: 7680650257107386053}
   - {fileID: 5978640809511522586}
   - {fileID: 7575306970291259932}
+  - {fileID: 3526280613669542168}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -432,6 +433,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ce02eb0d-442b-474c-ad79-94b1f22ed368
     m_ActionName: Player/Shield
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bb8d21f6-8b26-413d-84ed-4ba21b728006
+    m_ActionName: Player/1_Item[/XInputControllerWindows/buttonWest,/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1ef66d84-148a-4a35-9596-4eeac5ac5546
+    m_ActionName: Player/2_Item[/XInputControllerWindows/buttonNorth,/Keyboard/f]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Xbox Controller
   m_DefaultActionMap: Player
@@ -470,7 +479,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c553e29bcf4a26e45a50d05704c35866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: 0
+  skin: []
+  activeSkin: 0
+  tileRen: {fileID: 0}
+  orderInLayer: 0
+  layerName: 
+  mapCollider: {fileID: 0}
   players: []
   numPlayers: []
   killerName: 
@@ -478,14 +492,17 @@ MonoBehaviour:
   characterFacing: 2
   maxHealth: 10
   health: 0
+  damaged: 0
   healthTimer: 0
-  healthCooldownTime: 0.5
   deathTimer: 0
   died: 0
   movementSpeedMax: 7.5
   movementSpeed: 7.5
+  moving: 0
   angle: 0
   rotationSpeed: 0
+  attackTimer: 0
+  attackCooldownTime: 1
   attackPoint: {fileID: 493176480387860392}
   shieldPoint: {fileID: 461438071577750643}
   attackRange: 0.47
@@ -495,6 +512,8 @@ MonoBehaviour:
   basicSwordDamage: 2
   manaMax: 10
   mana: 0
+  itemTag1: 
+  itemTag2: 
 --- !u!61 &2241705164052626360
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -652,7 +671,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.2}
+  m_Offset: {x: -0.004918456, y: 0.12789811}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -663,7 +682,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.7}
+  m_Size: {x: 0.9098369, y: 0.5885147}
   m_EdgeRadius: 0
 --- !u!1 &6441347278142255657
 GameObject:
@@ -1021,3 +1040,51 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.7}
   m_EdgeRadius: 0
+--- !u!1 &8882703156015851046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3526280613669542168}
+  - component: {fileID: 4778191226827540433}
+  m_Layer: 6
+  m_Name: PickUpSphere
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3526280613669542168
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8882703156015851046}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1519777579213486883}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &4778191226827540433
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8882703156015851046}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

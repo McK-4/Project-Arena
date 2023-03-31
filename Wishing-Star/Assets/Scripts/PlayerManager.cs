@@ -79,7 +79,7 @@ public class PlayerManager : MonoBehaviour
         }
         if(master.player2Input != null)
         {
-            player2.inputDevice = master.player1Input;
+            player2.inputDevice = master.player2Input;
             player2.RePair();
         }
         if(master.player3Input != null)

@@ -100,7 +100,7 @@ public class PlayerMenu : MonoBehaviour
                 skinSelected = true;
                 readyText.text = "- Ready -";
                 menuManager.playersReady++;
-                inputDevice = gameObject.GetComponent<PlayerInput>().devices[0];
+                inputDevice = gameObject.GetComponent<PlayerInput>().devices[0].device;
             }
             else if (context.performed && skinSelected == true)
             {

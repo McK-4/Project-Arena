@@ -121,7 +121,7 @@
                 {
                     "name": "",
                     "id": "bfc25536-8d2c-4291-8146-d9da848fb79a",
-                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/trigger",
+                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button9",
                     "interactions": "",
                     "processors": "",
                     "groups": "Arcade",
@@ -165,7 +165,7 @@
                 {
                     "name": "",
                     "id": "3090e247-f737-4c69-912b-b736b813315a",
-                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button10",
+                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button8",
                     "interactions": "",
                     "processors": "",
                     "groups": "Arcade",
@@ -209,7 +209,7 @@
                 {
                     "name": "up",
                     "id": "85891044-0946-42df-ac78-5b301d570d3c",
-                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/stick/up",
+                    "path": "<Joystick>/stick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "Arcade",
@@ -220,7 +220,7 @@
                 {
                     "name": "down",
                     "id": "88eccef9-2ef1-4a77-9fb7-5174c41553a3",
-                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/stick/down",
+                    "path": "<Joystick>/stick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "Arcade",
@@ -231,7 +231,7 @@
                 {
                     "name": "left",
                     "id": "a93634d3-99cf-44dc-acda-87b537b669de",
-                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/stick/left",
+                    "path": "<Joystick>/stick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "Arcade",
@@ -242,7 +242,7 @@
                 {
                     "name": "right",
                     "id": "210fcea5-c8ec-4171-8f6c-9dda5bbac578",
-                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/stick/right",
+                    "path": "<Joystick>/stick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "Arcade",

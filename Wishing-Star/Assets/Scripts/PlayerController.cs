@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
     public int activeSkin;
     PlayerInput input;
     public InputDevice inputDevice;
-    public int user;
 
     //Map Layering
     public TilemapRenderer tileRen;
@@ -51,7 +50,7 @@ public class PlayerController : MonoBehaviour
     public int health;
     public bool damaged;
     public float healthTimer = 0;
-    public float healthCooldownTime = 0.5f;
+    float healthCooldownTime = 0.5f;
     //private int damageTaken = 0;
     //Death
     private int ranNum;
@@ -95,7 +94,10 @@ public class PlayerController : MonoBehaviour
 
     //Items
     private ItemLibary itemLib;
-    public string itemTag;
+    public string itemTag1;
+    public string itemTag2;
+    public Vector2 facing;
+    public Vector2 pos;
 
     void Start()
     {
@@ -104,7 +106,6 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         input = GetComponent<PlayerInput>();
 
-        user = input.user.index;
 
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         itemLib = GameObject.Find("GameManager").GetComponent<ItemLibary>();
@@ -126,8 +127,31 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        //Item stuff
+        pos = transform.position;
+        //Facing (for items)
+        switch (characterFacing)
+        {
+            case Directions.Up:
+                facing = new Vector2 (0, 1);
+                break;
 
-        //numPlayers = GameObject.FindGameObjectWithTag
+            case Directions.Down:
+                facing = new Vector2(0, -1);
+                break;
+
+            case Directions.Right:
+                facing = new Vector2(1, 0);
+                break;
+
+            case Directions.Left:
+                facing = new Vector2(-1, 0);
+                break;
+
+            default:
+                Debug.Log("Characting facing is wrong, currently looking into the 4th dimintion");
+                break;
+        }
 
         //Movement
         tempVel = rb.velocity;
@@ -227,6 +251,20 @@ public class PlayerController : MonoBehaviour
                 health = maxHealth;
             }
         }
+
+        //Brief invencibility after getting hit with a attack
+        if (damaged)
+        {
+            if (healthTimer < healthCooldownTime)
+            {
+                healthTimer += Time.deltaTime;
+            }
+            else if (healthTimer >= healthCooldownTime)
+            {
+                healthTimer = 0;
+                damaged = false;
+            }
+        }
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -237,11 +275,7 @@ public class PlayerController : MonoBehaviour
             moving = true;
         if (context.canceled)
             moving = false;
-        /*
-        if(context.performed && movementSpeed < movementSpeedMax)
-        {
-        }
-        */
+
         //Debug.Log(moveinput);
     }
 
@@ -279,6 +313,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Item1(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            itemTag1 = "Bow";
+            itemLib.ItemLibFind(itemTag1, facing, pos);
+        }
+    }
+
+    public void Item2(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            itemLib.ItemLibFind(itemTag2, facing, pos);
+        }
+    }
+
     public void ShieldBlocked(int damage)
     {
         Debug.Log(damage);
@@ -295,21 +346,6 @@ public class PlayerController : MonoBehaviour
         Debug.Log(health);
         damaged = true;
         Debug.Log(name + " was hit by " + killerName);
-
-        //Brief invencibility after getting hit with a attack
-        if (damaged)
-        {
-            if (healthTimer < healthCooldownTime)
-            {
-                healthTimer += Time.deltaTime;
-            }
-
-            if (healthTimer >= healthCooldownTime)
-            {
-                healthTimer = 0;
-                damaged = false;
-            }
-        }
 
         //Reaspawn
         if (health <= 0 && !died)
@@ -367,26 +403,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     void RandomNum()
     {
         ranNum = Random.Range(1,3);
-    }
-
-    public void Item1(InputAction.CallbackContext context)
-    {
-        if(context.performed)
-        {
-            itemLib.ItemLibFind(itemTag);
-        }
-    }
-
-    public void Item2(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            itemLib.ItemLibFind(itemTag);
-        }
     }
 
     void Sort()
@@ -437,6 +456,7 @@ public class PlayerController : MonoBehaviour
     public void RePair()
     {
         InputUser.PerformPairingWithDevice(inputDevice, input.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
+        input.SwitchCurrentControlScheme(inputDevice);
         anim.runtimeAnimatorController = skin[activeSkin];
     }
 }

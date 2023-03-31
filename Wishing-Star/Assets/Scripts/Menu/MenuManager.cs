@@ -119,7 +119,7 @@ public class MenuManager : MonoBehaviour
                 }
                 else if(player1Active)
                 {
-                    player1Input = player1Select.inputDevice;
+                    player1Input = player1Select.inputDevice.device;
                 }
                 if (!player2Active)
                 {
@@ -127,7 +127,7 @@ public class MenuManager : MonoBehaviour
                 }
                 else if (player2Active)
                 {
-                    player2Input = player2Select.inputDevice;
+                    player2Input = player2Select.inputDevice.device;
                 }
                 if (!player3Active)
                 {
@@ -135,7 +135,7 @@ public class MenuManager : MonoBehaviour
                 }
                 else if (player3Active)
                 {
-                    player3Input = player3Select.inputDevice;
+                    player3Input = player3Select.inputDevice.device;
                 }
                 if (!player4Active)
                 {
@@ -143,7 +143,7 @@ public class MenuManager : MonoBehaviour
                 }
                 else if (player4Active)
                 {
-                    player4Input = player4Select.inputDevice;
+                    player4Input = player4Select.inputDevice.device;
                 }
                 master.player1Input = player1Input;
                 master.player2Input = player2Input;
