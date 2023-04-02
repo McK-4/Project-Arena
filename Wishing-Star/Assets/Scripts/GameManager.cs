@@ -8,10 +8,10 @@ public class GameManager : MonoBehaviour
 {
     Scene currentScene;
 
-    PlayerController player_1_Controller;
-    PlayerController player_2_Controller;
-    PlayerController player_3_Controller;
-    PlayerController player_4_Controller;
+    [SerializeField]PlayerController player_1;
+    [SerializeField]PlayerController player_2;
+    [SerializeField]PlayerController player_3;
+    [SerializeField]PlayerController player_4;
 
     public GameObject killer;
     PlayerController killerController;
@@ -21,18 +21,12 @@ public class GameManager : MonoBehaviour
     public float gameTimeRemaining;
     public int minutesLeft;
     public int secondsLeft;
-    [SerializeField]TextMeshProUGUI pointsText;
+    [SerializeField]TextMeshProUGUI timeText;
 
     // Start is called before the first frame update
     void Start()
     {
-        player_1_Controller = GameObject.Find("1_Player").GetComponentInChildren<PlayerController>();
-        player_2_Controller = GameObject.Find("2_Player").GetComponentInChildren<PlayerController>();
-        player_3_Controller = GameObject.Find("3_Player").GetComponentInChildren<PlayerController>();
-        player_4_Controller = GameObject.Find("4_Player").GetComponentInChildren<PlayerController>();
-
         gameTimeRemaining = totalGameTime;
-
     }
 
     // Update is called once per frame
@@ -40,25 +34,25 @@ public class GameManager : MonoBehaviour
     {
         currentScene = SceneManager.GetActiveScene();
 
-        if (player_1_Controller.died)
+        if (player_1.died)
         {
-            AwardPlayerKills();
+            AwardPlayerKills(player_1.killerName);
         }
-        else if (player_2_Controller.died)
+        if (player_2.died)
         {
-            AwardPlayerKills();
+            AwardPlayerKills(player_2.killerName);
         }
-        else if (player_3_Controller.died)
+        if (player_3.died)
         {
-            AwardPlayerKills();
+            AwardPlayerKills(player_3.killerName);
         }
-        else if (player_4_Controller.died)
+        if (player_4.died)
         {
-            AwardPlayerKills();
+            AwardPlayerKills(player_4.killerName);
         }
 
         //Change "Alex Test" to the name of the scene we are using for the game
-        if (currentScene.name == "Alex Test")
+        if (currentScene.buildIndex >= 1)
         {
             if (gameTimeRemaining > 0)
             {
@@ -68,9 +62,9 @@ public class GameManager : MonoBehaviour
                 secondsLeft = Mathf.FloorToInt(gameTimeRemaining % 60);
             }
 
-            if (minutesLeft !< 0)
+            if (minutesLeft >= 0)
             {
-                pointsText.text = minutesLeft.ToString() + ":" + secondsLeft.ToString();
+                timeText.text = minutesLeft.ToString() + ":" + secondsLeft.ToString();
             }
             
 
@@ -82,13 +76,11 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void AwardPlayerKills()
+    public void AwardPlayerKills(string killer)
     {
-        killer = GameObject.Find(player_1_Controller.killerName[0] + "_Player");
-        killerController = killer.GetComponent<PlayerController>();
-
         if (!awarded)
         {
+            killerController = GameObject.Find(killer).GetComponent<PlayerController>();
             killerController.points++;
             awarded = true;
             //Debug.Log(killer.name + " got awarded a point for their kill!");

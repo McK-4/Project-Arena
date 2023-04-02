@@ -19,9 +19,8 @@ public class PlayerController : MonoBehaviour
 
     //Map Layering
     public TilemapRenderer tileRen;
-    public int orderInLayer;
+    [SerializeField]int orderInLayer = 1;
     public string layerName;
-    private bool movingFloors = false;
     [SerializeField] Collider2D mapCollider;
 
     private PlayerManager playerManager;
@@ -57,7 +56,7 @@ public class PlayerController : MonoBehaviour
     public float deathTimer = 0;
     private float deathCooldownTime = 5;
     private Vector2 diedPos = new Vector2(123, 456);
-    public bool died = false;
+    public bool died;
 
     //Movement
     public float movementSpeedMax = 7.5f;
@@ -115,8 +114,7 @@ public class PlayerController : MonoBehaviour
         mana = 10;
         points = 0;
 
-        orderInLayer = 1;
-        spriteRen.sortingOrder = orderInLayer;
+        Order(orderInLayer);
 
         //movementSpeed = 0.1f;
 
@@ -182,9 +180,6 @@ public class PlayerController : MonoBehaviour
         rb.velocity = tempVel;
         anim.SetFloat("Velocity", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y));
 
-        //Map Layering
-        spriteRen.sortingOrder = orderInLayer;
-        //Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), mapCollider);
 
         //Anti-Player Spawn Camping
         if(playerManager.playerCamping == true)
@@ -408,12 +403,6 @@ public class PlayerController : MonoBehaviour
         ranNum = Random.Range(1,3);
     }
 
-    void Sort()
-    {
-        spriteRen.sortingLayerName = layerName;
-        spriteRen.sortingOrder = orderInLayer;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Sword" && !damaged)
@@ -430,26 +419,14 @@ public class PlayerController : MonoBehaviour
             //ShieldBlocked(basicSwordDamage);
         }
 
-        if(collision.gameObject.tag == "Top Stair")
+        if(collision.gameObject.tag == "Layer 1")
         {
-            if (!movingFloors)
-                movingFloors = true;
-            else
-            {
-                movingFloors = false;
-                orderInLayer++;
-            }
+            Order(1);
         }
 
-        if (collision.gameObject.tag == "Bottom Stair")
+        if (collision.gameObject.tag == "Layer 2")
         {
-            if (!movingFloors)
-                movingFloors = true;
-            else
-            {
-                movingFloors = false;
-                orderInLayer--;
-            }
+            Order(2);
         }
     }
 
@@ -458,5 +435,26 @@ public class PlayerController : MonoBehaviour
         InputUser.PerformPairingWithDevice(inputDevice, input.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
         input.SwitchCurrentControlScheme(inputDevice);
         anim.runtimeAnimatorController = skin[activeSkin];
+    }
+
+    void Order(int layer)
+    {
+        switch(layer)
+        {
+            case 1:
+                spriteRen.sortingOrder = 1;
+                Physics2D.IgnoreLayerCollision(6, 7, false);
+                Physics2D.IgnoreLayerCollision(6, 8);
+                break;
+            case 2:
+                spriteRen.sortingOrder = 3;
+                Physics2D.IgnoreLayerCollision(6, 8, false);
+                Physics2D.IgnoreLayerCollision(6, 7);
+                break;
+            default:
+                spriteRen.sortingOrder = 1;
+                Physics2D.IgnoreLayerCollision(6, 8);
+                break;
+        }
     }
 }

@@ -33,12 +33,11 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        master = GameObject.FindGameObjectWithTag("Master").GetComponent<MasterManager>();
-
-        player_1 = GameObject.Find("1_Player");
-        player_2 = GameObject.Find("2_Player");
-        player_3 = GameObject.Find("3_Player");
-        player_4 = GameObject.Find("4_Player");
+        try
+        {
+            master = GameObject.FindGameObjectWithTag("Master").GetComponent<MasterManager>();
+        }
+        catch { }
 
         player1 = player_1.GetComponent<PlayerController>();
         player2 = player_2.GetComponent<PlayerController>();
@@ -50,47 +49,50 @@ public class PlayerManager : MonoBehaviour
         playerSpawn_3 = player_3.transform.position;
         playerSpawn_4 = player_4.transform.position;
 
-        player1.activeSkin = master.player1Skin;
-        player2.activeSkin = master.player2Skin;
-        player3.activeSkin = master.player3Skin;
-        player4.activeSkin = master.player4Skin;
+        if (master != null)
+        {
+            player1.activeSkin = master.player1Skin;
+            player2.activeSkin = master.player2Skin;
+            player3.activeSkin = master.player3Skin;
+            player4.activeSkin = master.player4Skin;
 
-        if (!master.player1Active)
-        {
-            player_1.SetActive(false);
-        }
-        if (!master.player2Active)
-        {
-            player_2.SetActive(false);
-        }
-        if (!master.player3Active)
-        {
-            player_3.SetActive(false);
-        }
-        if (!master.player4Active)
-        {
-            player_4.SetActive(false);
-        }
+            if (!master.player1Active)
+            {
+                player_1.SetActive(false);
+            }
+            if (!master.player2Active)
+            {
+                player_2.SetActive(false);
+            }
+            if (!master.player3Active)
+            {
+                player_3.SetActive(false);
+            }
+            if (!master.player4Active)
+            {
+                player_4.SetActive(false);
+            }
 
-        if (master.player1Input != null)
-        {
-            player1.inputDevice = master.player1Input;
-            player1.RePair();
-        }
-        if(master.player2Input != null)
-        {
-            player2.inputDevice = master.player2Input;
-            player2.RePair();
-        }
-        if(master.player3Input != null)
-        {
-            player3.inputDevice = master.player3Input;
-            player3.RePair();
-        }
-        if(master.player4Input != null)
-        {
-            player4.inputDevice = master.player4Input;
-            player4.RePair();
+            if (master.player1Input != null)
+            {
+                player1.inputDevice = master.player1Input;
+                player1.RePair();
+            }
+            if (master.player2Input != null)
+            {
+                player2.inputDevice = master.player2Input;
+                player2.RePair();
+            }
+            if (master.player3Input != null)
+            {
+                player3.inputDevice = master.player3Input;
+                player3.RePair();
+            }
+            if (master.player4Input != null)
+            {
+                player4.inputDevice = master.player4Input;
+                player4.RePair();
+            }
         }
     }
 
