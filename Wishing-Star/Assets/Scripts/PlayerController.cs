@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
 
     //Rewarding players with points
     public string killerName;
-
     public int points;
 
     public enum Directions
@@ -62,6 +61,7 @@ public class PlayerController : MonoBehaviour
     public float movementSpeedMax = 7.5f;
     public float movementSpeed = 3.75f;
     private float movementSpeedStart = 0f;
+    private float shieldMoveSpeed = 2f;
     private float acceleration = 0.1f;
     Vector2 tempVel;
     Vector2 moveinput = Vector2.zero;
@@ -83,9 +83,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]GameObject shieldPoint;
     public float attackRange = 0.5f;
 
+    //Shield Stuff
     public LayerMask playerLayers;
     public int basicSwordDamage = 2;
     private int damageReduction = 1;
+    private GameObject attacker;
+    private bool validBlock;
 
     //Mana 
     public int manaMax = 10;
@@ -147,7 +150,7 @@ public class PlayerController : MonoBehaviour
                 break;
 
             default:
-                Debug.Log("Characting facing is wrong, currently looking into the 4th dimintion");
+                Debug.Log("You are facing the wrong way, and currently looking into the 4th dimintion");
                 break;
         }
 
@@ -163,6 +166,8 @@ public class PlayerController : MonoBehaviour
         {
             tempVel = new Vector2(0,0);
         }
+        if (shieldUp)
+            tempVel = moveinput * shieldMoveSpeed;
 
         if (movementSpeed <= movementSpeedStart)
             movementSpeed = movementSpeedStart;
@@ -260,6 +265,20 @@ public class PlayerController : MonoBehaviour
                 damaged = false;
             }
         }
+
+        //Shield collision
+        //disToAttackerX = Mathf.Abs(attacker.transform.position.x - pos.x);
+        //disToAttackerY = Mathf.Abs(attackerPos.y - pos.y);
+        angle = Mathf.Atan2(Mathf.Abs(attacker.transform.position.y - pos.y), Mathf.Abs(attacker.transform.position.x - pos.x)) * Mathf.Rad2Deg;
+
+        if(characterFacing == Directions.Up && shieldUp && angle > 0 && angle < 180)
+            validBlock = true;
+        if (characterFacing == Directions.Down && shieldUp && angle < 0 && angle > 180)
+            validBlock = true;
+        if (characterFacing == Directions.Left && shieldUp && angle > 90 && angle < 270)
+            validBlock = true;
+        if (characterFacing == Directions.Right && shieldUp && angle < 90 && angle > 270)
+            validBlock = true;
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -297,13 +316,15 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
             anim.SetBool("Shield", true);
-            moveAble = false;
+            shieldUp = true;
+            //moveAble = false;
             //movementSpeed = 0;
         }
         if (context.canceled)
         {
             anim.SetBool("Shield", false);
-            moveAble = true;
+            shieldUp = false;
+            //moveAble = true;
             //movementSpeed = movementSpeedStart;
         }
     }
@@ -327,20 +348,24 @@ public class PlayerController : MonoBehaviour
 
     public void ShieldBlocked(int damage)
     {
-        Debug.Log(damage);
+        //Debug.Log(damage);
         damageReduction = 1;
         damage -= damageReduction;
-        Debug.Log(damage);
+        //Debug.Log(damage);
+        
+        //ADD KNOCKBACK FORCE!!!!
+
         Damaged(damage);
     }
 
     public void Damaged(int damage)
     {
-        Debug.Log(health);
+
+        //Debug.Log(health);
         health -= damage;
-        Debug.Log(health);
+        //Debug.Log(health);
         damaged = true;
-        Debug.Log(name + " was hit by " + killerName);
+        //Debug.Log(name + " was hit by " + killerName);
 
         //Reaspawn
         if (health <= 0 && !died)
@@ -408,8 +433,17 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Sword" && !damaged)
         {
             killerName = collision.gameObject.transform.parent.name;
-            Damaged(basicSwordDamage);
+            attacker = collision.gameObject;
+
+            //if Shield Blocking
+            if (shieldUp && validBlock)
+                ShieldBlocked(basicSwordDamage);
+
+            //No Shield Blocking
+            else
+                Damaged(basicSwordDamage);
         }
+        /*
         else if (collision.gameObject.tag == "Sword" && shieldUp && !damaged)
         {
             var nuller = (collision.transform.position - transform.position).normalized;
@@ -418,7 +452,7 @@ public class PlayerController : MonoBehaviour
             killerName = collision.gameObject.transform.parent.name;
             //ShieldBlocked(basicSwordDamage);
         }
-
+        */
         if(collision.gameObject.tag == "Layer 1")
         {
             Order(1);
