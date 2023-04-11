@@ -23,7 +23,7 @@ public class ShieldBlock : MonoBehaviour
     {
         if (collision.gameObject.tag == "Sword" && !playerController.damaged)
         {
-            playerController.ShieldBlocked(playerController.basicSwordDamage);
+            //playerController.ShieldBlocked(playerController.basicSwordDamage);
         }
     }
 
