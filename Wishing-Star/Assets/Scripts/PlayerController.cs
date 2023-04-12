@@ -64,9 +64,13 @@ public class PlayerController : MonoBehaviour
     private float shieldMoveSpeed = 2f;
     private float acceleration = 0.1f;
     Vector2 tempVel;
+    private float maxVelocityX = 7.60f;
+    private float maxVelocityY = 7.60f;
     Vector2 moveinput = Vector2.zero;
     public bool moving = false;
     private bool moveAble = true;
+   // private bool moveMaxX = false;
+   // private bool moveMaxY = false;
 
     //Attacking
     Vector2 movingTo;
@@ -178,13 +182,18 @@ public class PlayerController : MonoBehaviour
             moving = false;
 
         if (moving)
+        {
             movementSpeed += acceleration;
+            //Debug.Log(rb.velocity);
+        }
         else if (!moving)
             movementSpeed -= acceleration;
 
-        //if(rb.velocity < new Vector2(7.60f,7.60f))
+        tempVel.x = Mathf.Clamp(tempVel.x, -maxVelocityX, maxVelocityX);
+        tempVel.y = Mathf.Clamp(tempVel.y, -maxVelocityY, maxVelocityY);
+
         rb.velocity = tempVel;
-        
+
         anim.SetFloat("Velocity", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y));
 
 
@@ -273,13 +282,13 @@ public class PlayerController : MonoBehaviour
         //disToAttackerY = Mathf.Abs(attackerPos.y - pos.y);
         //angle = Mathf.Atan2(Mathf.Abs(attacker.transform.position.y - pos.y), Mathf.Abs(attacker.transform.position.x - pos.x)) * Mathf.Rad2Deg;
 
-        if(characterFacing == Directions.Up && shieldUp && angle >= 0 && angle <= 180)
+        if(characterFacing == Directions.Up && shieldUp && angle >= 45 && angle <= 135)
             validBlock = true;
-        if (characterFacing == Directions.Down && shieldUp && angle <= 0 && angle >= 180)
+        if (characterFacing == Directions.Down && shieldUp && angle <= 315 && angle >= 225)
             validBlock = true;
-        if (characterFacing == Directions.Left && shieldUp && angle >= 90 && angle <= 270)
+        if (characterFacing == Directions.Left && shieldUp && angle >= 135 && angle <= 225)
             validBlock = true;
-        if (characterFacing == Directions.Right && shieldUp && angle <= 90 && angle >= 270)
+        if (characterFacing == Directions.Right && shieldUp && angle <= 45 || angle >= 315 && characterFacing == Directions.Right && shieldUp)
             validBlock = true;
 
         if (damaged)
@@ -360,16 +369,10 @@ public class PlayerController : MonoBehaviour
         damage -= damageReduction;
         //Debug.Log(damage);
 
-        //otherPlayer.GetComponent<Rigidbody2D>().velocity = (otherPlayer.transform.position - transform.position).normalized * (knockbackForce);
-        //rb.velocity = (transform.position - otherPlayer.transform.position).normalized * (knockbackForce);
-        rb.AddForce(new Vector2(transform.position.x - otherPlayer.transform.position.x, transform.position.y - otherPlayer.transform.position.y), ForceMode2D.Impulse);
-        //Debug.Log(rb.velocity);
-        //rb.AddForce(otherPlayer.transform.position , ForceMode2D.Impulse);
-
-        Damaged(damage);
+        Damaged(damage, otherPlayer);
     }
 
-    public void Damaged(int damage)
+    public void Damaged(int damage, GameObject otherPlayer)
     {
 
         //Debug.Log(health);
@@ -377,6 +380,13 @@ public class PlayerController : MonoBehaviour
         //Debug.Log(health);
         damaged = true;
         //Debug.Log(name + " was hit by " + killerName);
+
+        //otherPlayer.GetComponent<Rigidbody2D>().velocity = (otherPlayer.transform.position - transform.position).normalized * (knockbackForce);
+        //otherPlayer.GetComponent<PlayerController>().rb.velocity = (otherPlayer.transform.position - transform.position).normalized * (knockbackForce);
+        //rb.velocity = (transform.position - otherPlayer.transform.position).normalized * (knockbackForce);
+
+        otherPlayer.GetComponent<Rigidbody2D>().AddForce(new Vector2 ((otherPlayer.transform.position.x - transform.position.x) * knockbackForce, (otherPlayer.transform.position.y - transform.position.y) * knockbackForce), ForceMode2D.Impulse);
+        rb.AddForce(new Vector2((transform.position.x - otherPlayer.transform.position.x) * knockbackForce, (transform.position.y - otherPlayer.transform.position.y) * knockbackForce), ForceMode2D.Impulse);
 
         //Reaspawn
         if (health <= 0 && !died)
@@ -446,7 +456,7 @@ public class PlayerController : MonoBehaviour
             killerName = collision.gameObject.transform.parent.name;
             GameObject attacker = collision.gameObject.transform.parent.gameObject;
 
-            //angle = Mathf.Atan((Mathf.Abs(attacker.transform.position.y - pos.y)) / (Mathf.Abs(attacker.transform.position.x - pos.x))) * Mathf.Rad2Deg;
+            //Calculating the angle to attacker
             if ((attacker.transform.position.y - transform.position.y) > 0 && (attacker.transform.position.x - transform.position.x) > 0)
             {
                 //quadrant 1
@@ -468,6 +478,8 @@ public class PlayerController : MonoBehaviour
                 angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.x - transform.position.x) / (attacker.transform.position.y - transform.position.y))) * Mathf.Rad2Deg + 270;
             }
 
+            Debug.Log(angle);
+
             //if Shield Blocking
             if (shieldUp && validBlock)
             {
@@ -477,7 +489,7 @@ public class PlayerController : MonoBehaviour
             //No Shield Blocking
             else
             {
-                Damaged(basicSwordDamage);
+                Damaged(basicSwordDamage, attacker);
             }
 
         }
@@ -530,6 +542,3 @@ public class PlayerController : MonoBehaviour
         }
     }
 }
-/*
- where it 
- */
