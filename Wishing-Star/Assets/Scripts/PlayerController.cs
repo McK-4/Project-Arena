@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviour
     private int damageReduction = 1;
     public bool validBlock;
     private float knockbackForce = 20000;
+    private GameObject attacker;
 
     //Mana 
     public int manaMax = 10;
@@ -282,17 +283,6 @@ public class PlayerController : MonoBehaviour
         //disToAttackerY = Mathf.Abs(attackerPos.y - pos.y);
         //angle = Mathf.Atan2(Mathf.Abs(attacker.transform.position.y - pos.y), Mathf.Abs(attacker.transform.position.x - pos.x)) * Mathf.Rad2Deg;
 
-        if(characterFacing == Directions.Up && shieldUp && angle >= 45 && angle <= 135)
-            validBlock = true;
-        if (characterFacing == Directions.Down && shieldUp && angle <= 315 && angle >= 225)
-            validBlock = true;
-        if (characterFacing == Directions.Left && shieldUp && angle >= 135 && angle <= 225)
-            validBlock = true;
-        if (characterFacing == Directions.Right && shieldUp && angle <= 45 || angle >= 315 && characterFacing == Directions.Right && shieldUp)
-            validBlock = true;
-
-        if (damaged)
-            validBlock = false;
 
         //knockbackPos = transform.position
     }
@@ -451,35 +441,61 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        killerName = collision.gameObject.transform.parent.name;
+
+        attacker = collision.gameObject.transform.parent.gameObject;
+
+        //Calculating the angle to attacker
+        if ((attacker.transform.position.y - transform.position.y) > 0 && (attacker.transform.position.x - transform.position.x) > 0)
+        {
+            //quadrant 1
+            angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.y - transform.position.y) / (attacker.transform.position.x - transform.position.x))) * Mathf.Rad2Deg;
+        }
+        else if ((attacker.transform.position.y - transform.position.y) > 0 && (attacker.transform.position.x - transform.position.x) < 0)
+        {
+            //quadrant 2
+            angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.x - transform.position.x) / (attacker.transform.position.y - transform.position.y))) * Mathf.Rad2Deg + 90;
+        }
+        else if ((attacker.transform.position.y - transform.position.y) < 0 && (attacker.transform.position.x - transform.position.x) < 0)
+        {
+            //quadrant 3
+            angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.y - transform.position.y) / (attacker.transform.position.x - transform.position.x))) * Mathf.Rad2Deg + 180;
+        }
+        else if ((attacker.transform.position.y - transform.position.y) < 0 && (attacker.transform.position.x - transform.position.x) > 0)
+        {
+            //quadrant 4
+            angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.x - transform.position.x) / (attacker.transform.position.y - transform.position.y))) * Mathf.Rad2Deg + 270;
+        }
+
+        Debug.Log(name + " " + angle);
+
+        if (characterFacing == Directions.Up && shieldUp && angle >= 22.5 && angle <= 157.5)
+        {
+            validBlock = true;
+        }
+
+        else if (characterFacing == Directions.Down && shieldUp && angle <= 292.5 && angle >= 202.5)
+        {
+            validBlock = true;
+        }
+
+        else if (characterFacing == Directions.Left && shieldUp && angle >= 112.5 && angle <= 247.5)
+        {
+            validBlock = true;
+        }
+
+        else if (characterFacing == Directions.Right && shieldUp && angle <= 67.5 || angle >= 112.5 && characterFacing == Directions.Right && shieldUp)
+        {
+            validBlock = true;
+        }
+
+        if (damaged)
+        {
+            validBlock = false;
+        }
+
         if (collision.gameObject.tag == "Sword" && !damaged)
         {
-            killerName = collision.gameObject.transform.parent.name;
-            GameObject attacker = collision.gameObject.transform.parent.gameObject;
-
-            //Calculating the angle to attacker
-            if ((attacker.transform.position.y - transform.position.y) > 0 && (attacker.transform.position.x - transform.position.x) > 0)
-            {
-                //quadrant 1
-                angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.y - transform.position.y) / (attacker.transform.position.x - transform.position.x))) * Mathf.Rad2Deg;
-            }
-            else if ((attacker.transform.position.y - transform.position.y) > 0 && (attacker.transform.position.x - transform.position.x) < 0)
-            {
-                //quadrant 2
-                angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.x - transform.position.x) / (attacker.transform.position.y - transform.position.y))) * Mathf.Rad2Deg + 90;
-            }
-            else if ((attacker.transform.position.y - transform.position.y) < 0 && (attacker.transform.position.x - transform.position.x) < 0)
-            {
-                //quadrant 3
-                angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.y - transform.position.y) / (attacker.transform.position.x - transform.position.x))) * Mathf.Rad2Deg + 180;
-            }
-            else if ((attacker.transform.position.y - transform.position.y) < 0 && (attacker.transform.position.x - transform.position.x) > 0)
-            {
-                //quadrant 4
-                angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.x - transform.position.x) / (attacker.transform.position.y - transform.position.y))) * Mathf.Rad2Deg + 270;
-            }
-
-            Debug.Log(angle);
-
             //if Shield Blocking
             if (shieldUp && validBlock)
             {
