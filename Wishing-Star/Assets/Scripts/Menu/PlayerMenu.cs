@@ -78,6 +78,7 @@ public class PlayerMenu : MonoBehaviour
                 {
                     activeMap = 1;
                     mark.transform.position = maps[activeMap].transform.position;
+                    menuManager.ButtonPressed.Play();
                 }
             }
             else if (playerSelectInput.x < 0)
@@ -101,6 +102,7 @@ public class PlayerMenu : MonoBehaviour
                 readyText.text = "- Ready -";
                 menuManager.playersReady++;
                 inputDevice = gameObject.GetComponent<PlayerInput>().devices[0].device;
+                menuManager.ButtonPressed.Play();
             }
             else if (context.performed && skinSelected == true)
             {

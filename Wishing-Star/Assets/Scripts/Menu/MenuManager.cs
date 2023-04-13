@@ -17,6 +17,7 @@ public class MenuManager : MonoBehaviour
     public GameObject startButton;
     private float buttonTimer = 0;
     private float buttonCooldownTime = 0.8f;
+    public AudioSource ButtonPressed;
 
     public int activeGame = 1;
     private bool started;
@@ -199,6 +200,7 @@ public class MenuManager : MonoBehaviour
         {
             started = true;
             mainMenu.SetActive(false);
+            ButtonPressed.Play();
 
             playerSelectMenu.SetActive(true);
             player1Select.playerSelectMenu = true;
