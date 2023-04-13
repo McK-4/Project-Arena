@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     private int Players;
 
     //Health
-    Vector2 respawn;
+    public Vector2 respawn;
     public int maxHealth = 10;
     public int health;
     public bool damaged;
@@ -389,7 +389,7 @@ public class PlayerController : MonoBehaviour
         
     }
     
-    private void playerRespawnShuffle()
+    public void playerRespawnShuffle()
     {
         RandomNum();
 

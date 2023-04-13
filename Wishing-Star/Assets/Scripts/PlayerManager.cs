@@ -1,4 +1,4 @@
-Playerusing System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -158,6 +158,36 @@ public class PlayerManager : MonoBehaviour
             if (player.name == "1_Player" || player.name == "2_Player" || player.name == "3_Player")
             {
                 playerCamping = true;
+            }
+        }
+
+        //Making sure players don't respawn at the same spot
+        if (player1.died)
+        {
+            if (player1.respawn == player2.respawn || player1.respawn == player3.respawn || player1.respawn == player4.respawn)
+            {
+                player1.playerRespawnShuffle();
+            }
+        }
+        if (player2.died)
+        {
+            if (player2.respawn == player1.respawn || player2.respawn == player3.respawn || player2.respawn == player4.respawn)
+            {
+                player2.playerRespawnShuffle();
+            }
+        }
+        if (player3.died)
+        {
+            if (player3.respawn == player2.respawn || player3.respawn == player1.respawn || player3.respawn == player4.respawn)
+            {
+                player3.playerRespawnShuffle();
+            }
+        }
+        if (player4.died)
+        {
+            if (player4.respawn == player2.respawn || player4.respawn == player3.respawn || player4.respawn == player1.respawn)
+            {
+                player4.playerRespawnShuffle();
             }
         }
 
