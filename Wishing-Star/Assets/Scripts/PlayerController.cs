@@ -259,6 +259,7 @@ public class PlayerController : MonoBehaviour
             {
                 deathTimer = 0;
                 died = false;
+                attacker.GetComponent<PlayerController>().points += 1;
                 transform.SetPositionAndRotation(respawn, Quaternion.identity);
                 health = maxHealth;
             }

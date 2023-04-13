@@ -28,7 +28,14 @@ public class PlayerManager : MonoBehaviour
     public float antiCampRange = 1;
     public bool playerCamping = false;
 
-    
+    //Points
+    public bool p1PointsRewarded = false;
+    public bool p2PointsRewarded = false;
+    public bool p3PointsRewarded = false;
+    public bool p4PointsRewarded = false;
+
+    private float pointsTimer = 0;
+    private float pointsCooldownTimer = 0.01f;
 
     // Start is called before the first frame update
     void Start()
@@ -168,6 +175,26 @@ public class PlayerManager : MonoBehaviour
             {
                 player1.playerRespawnShuffle();
             }
+            /*
+            if(player1.killerName == player2.name && !p2PointsRewarded)
+            {
+                player2.points += 1;
+                p2PointsRewarded = true;
+                PlayerPointsTimer();
+            }
+            else if(player1.killerName == player3.name && !p3PointsRewarded)
+            {
+                player3.points += 1;
+                p3PointsRewarded = true;
+                PlayerPointsTimer();
+            }
+            else if(player1.killerName == player4.name && !p4PointsRewarded)
+            {
+                player4.points += 1;
+                p4PointsRewarded = true;
+                PlayerPointsTimer();
+            }
+            */
         }
         if (player2.died)
         {
@@ -175,6 +202,26 @@ public class PlayerManager : MonoBehaviour
             {
                 player2.playerRespawnShuffle();
             }
+            /*
+            if (player2.killerName == player1.name && !p1PointsRewarded)
+            {
+                player1.points += 1;
+                p1PointsRewarded = true;
+                PlayerPointsTimer();
+            }
+            else if (player2.killerName == player3.name && !p3PointsRewarded)
+            {
+                player3.points += 1;
+                p3PointsRewarded = true;
+                PlayerPointsTimer();
+            }
+            else if (player2.killerName == player4.name && !p4PointsRewarded)
+            {
+                player4.points += 1;
+                p4PointsRewarded = true;
+                PlayerPointsTimer();
+            }
+            */
         }
         if (player3.died)
         {
@@ -182,6 +229,26 @@ public class PlayerManager : MonoBehaviour
             {
                 player3.playerRespawnShuffle();
             }
+            /*
+            if (player3.killerName == player2.name && !p2PointsRewarded)
+            {
+                player2.points += 1;
+                p2PointsRewarded = true;
+                PlayerPointsTimer();
+            }
+            else if (player3.killerName == player1.name && !p1PointsRewarded)
+            {
+                player1.points += 1;
+                p1PointsRewarded = true;
+                PlayerPointsTimer();
+            }
+            else if (player3.killerName == player4.name && !p4PointsRewarded)
+            {
+                player4.points += 1;
+                p4PointsRewarded = true;
+                PlayerPointsTimer();
+            }
+            */
         }
         if (player4.died)
         {
@@ -189,6 +256,26 @@ public class PlayerManager : MonoBehaviour
             {
                 player4.playerRespawnShuffle();
             }
+            /*
+            if (player4.killerName == player2.name && !p2PointsRewarded)
+            {
+                player2.points += 1;
+                p2PointsRewarded = true;
+                PlayerPointsTimer();
+            }
+            else if (player4.killerName == player3.name && !p3PointsRewarded)
+            {
+                player3.points += 1;
+                p3PointsRewarded = true;
+                PlayerPointsTimer();
+            }
+            else if (player4.killerName == player1.name && !p1PointsRewarded)
+            {
+                player1.points += 1;
+                p1PointsRewarded = true;
+                PlayerPointsTimer();
+            }
+            */
         }
 
     }
@@ -204,5 +291,59 @@ public class PlayerManager : MonoBehaviour
         Gizmos.DrawWireSphere(playerSpawn_4, antiCampRange);
     }
 
+    private void PlayerPointsTimer()
+    {
+        if(p1PointsRewarded)
+        {
+            if (pointsTimer < pointsCooldownTimer)
+            {
+                pointsTimer += Time.deltaTime;
+            }
+            else if (pointsTimer >= pointsCooldownTimer)
+            {
+                pointsTimer = 0;
+                p1PointsRewarded = false;
+            }
+        }
+
+        if(p2PointsRewarded)
+        {
+            if (pointsTimer < pointsCooldownTimer)
+            {
+                pointsTimer += Time.deltaTime;
+            }
+            else if (pointsTimer >= pointsCooldownTimer)
+            {
+                pointsTimer = 0;
+                p2PointsRewarded = false;
+            }
+        }
+
+        if(p3PointsRewarded)
+        {
+            if (pointsTimer < pointsCooldownTimer)
+            {
+                pointsTimer += Time.deltaTime;
+            }
+            else if (pointsTimer >= pointsCooldownTimer)
+            {
+                pointsTimer = 0;
+                p3PointsRewarded = false;
+            }
+        }
+
+        if(p4PointsRewarded)
+        {
+            if (pointsTimer < pointsCooldownTimer)
+            {
+                pointsTimer += Time.deltaTime;
+            }
+            else if (pointsTimer >= pointsCooldownTimer)
+            {
+                pointsTimer = 0;
+                p4PointsRewarded = false;
+            }
+        }
+    }
 
 }
