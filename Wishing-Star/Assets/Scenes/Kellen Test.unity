@@ -183,6 +183,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 31c1cf5277be0af419b157568c66d11f, type: 2}
+    - target: {fileID: 6366363051119864513, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
+      propertyPath: m_LinearDrag
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
@@ -14106,6 +14110,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 531154588d53c024a8f2daeb4995999b, type: 2}
+    - target: {fileID: 6366363051119864513, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
+      propertyPath: m_LinearDrag
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
@@ -16470,6 +16478,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5ff5b2038a671294cad809555ab1c26a, type: 2}
+    - target: {fileID: 6366363051119864513, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
+      propertyPath: m_LinearDrag
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
@@ -16607,6 +16619,10 @@ MonoBehaviour:
     m_Bits: 64
   antiCampRange: 7
   playerCamping: 0
+  p1PointsRewarded: 0
+  p2PointsRewarded: 0
+  p3PointsRewarded: 0
+  p4PointsRewarded: 0
 --- !u!4 &1827963090
 Transform:
   m_ObjectHideFlags: 0
@@ -16677,6 +16693,10 @@ PrefabInstance:
     - target: {fileID: 1654785569651679614, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
       propertyPath: m_Name
       value: 1_Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6366363051119864513, guid: dd6ae16501d5c334db6739eb4e7912ae, type: 3}
+      propertyPath: m_LinearDrag
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

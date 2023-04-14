@@ -36,6 +36,18 @@ public class ItemLibary : MonoBehaviour
             case "Bomb":
                 break;
 
+            case "Blizzard Storm":
+                break;
+
+            case "Blazing Storm":
+                break;
+            
+            case "Dark Leech":
+                break;
+            
+            case "Invisibility Mask":
+                break;
+            
             default:
                 Debug.Log("Nothing");
                 break;

@@ -92,7 +92,11 @@ public class PlayerController : MonoBehaviour
     public int basicSwordDamage = 2;
     private int damageReduction = 1;
     public bool validBlock;
+    private Vector2 eDirection;
+    private Vector2 pDirection;
     private float knockbackForce = 20000;
+    private Vector2 eKnockback;
+    private Vector2 pKnockback;
     private GameObject attacker;
 
     //Mana 
@@ -160,7 +164,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Movement
-        tempVel = rb.velocity;
+        //tempVel = rb.velocity;
 
         if(moveAble)
         {
@@ -172,13 +176,22 @@ public class PlayerController : MonoBehaviour
             tempVel = new Vector2(0,0);
         }
         if (shieldUp)
+        {
             tempVel = moveinput * shieldMoveSpeed;
-
+            maxVelocityX = 3.4f;
+            maxVelocityY = 3.4f;
+        }
+        if(!shieldUp)
+        {
+            maxVelocityX = 7.60f;
+            maxVelocityY = 7.60f;
+        }
         if (movementSpeed <= movementSpeedStart)
             movementSpeed = movementSpeedStart;
         
         if (movementSpeed >= movementSpeedMax)
             movementSpeed = movementSpeedMax;
+
         if (tempVel == new Vector2(0, 0))
             moving = false;
 
@@ -187,14 +200,25 @@ public class PlayerController : MonoBehaviour
             movementSpeed += acceleration;
             //Debug.Log(rb.velocity);
         }
-        else if (!moving)
+        else if (!moving )//&& !attacked)
+        {
             movementSpeed -= acceleration;
+            //tempVel.x -= acceleration;
+            //tempVel.y -= acceleration;
+        }
 
-        tempVel.x = Mathf.Clamp(tempVel.x, -maxVelocityX, maxVelocityX);
-        tempVel.y = Mathf.Clamp(tempVel.y, -maxVelocityY, maxVelocityY);
-
-        rb.velocity = tempVel;
-
+        //rb.velocity.x = Mathf.Clamp(tempVel.x, -maxVelocityX, maxVelocityX);
+        rb.velocity += tempVel;
+        rb.velocity = new Vector2 (Mathf.Clamp(rb.velocity.x, -maxVelocityX, maxVelocityX), Mathf.Clamp(rb.velocity.y, -maxVelocityY, maxVelocityY));
+        //tempVel.y = Mathf.Clamp(tempVel.y, -maxVelocityY, maxVelocityY);
+        /*
+        if (moveinput.y == 0 && moveinput.x == 0)
+        {
+            tempVel.x = 0;
+            tempVel.y = 0;
+            Debug.Log(tempVel);
+        }
+        */
         anim.SetFloat("Velocity", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y));
 
 
@@ -372,12 +396,16 @@ public class PlayerController : MonoBehaviour
         damaged = true;
         //Debug.Log(name + " was hit by " + killerName);
 
-        //otherPlayer.GetComponent<Rigidbody2D>().velocity = (otherPlayer.transform.position - transform.position).normalized * (knockbackForce);
-        //otherPlayer.GetComponent<PlayerController>().rb.velocity = (otherPlayer.transform.position - transform.position).normalized * (knockbackForce);
-        //rb.velocity = (transform.position - otherPlayer.transform.position).normalized * (knockbackForce);
+        //Maybe add a knockbackAble bool?
+        eDirection = new Vector2(otherPlayer.transform.position.x - pos.x, otherPlayer.transform.position.y - pos.y);
+        pDirection = new Vector2(pos.x - otherPlayer.transform.position.x, pos.y - otherPlayer.transform.position.y);
 
-        otherPlayer.GetComponent<Rigidbody2D>().AddForce(new Vector2 ((otherPlayer.transform.position.x - transform.position.x) * knockbackForce, (otherPlayer.transform.position.y - transform.position.y) * knockbackForce), ForceMode2D.Impulse);
-        rb.AddForce(new Vector2((transform.position.x - otherPlayer.transform.position.x) * knockbackForce, (transform.position.y - otherPlayer.transform.position.y) * knockbackForce), ForceMode2D.Impulse);
+        eKnockback = eDirection * knockbackForce;
+        pKnockback = pDirection * knockbackForce;
+
+        otherPlayer.GetComponent<Rigidbody2D>().AddForce(eKnockback, ForceMode2D.Impulse);
+        Debug.Log(eKnockback);
+        rb.AddForce(pKnockback, ForceMode2D.Impulse);
 
         //Reaspawn
         if (health <= 0 && !died)
