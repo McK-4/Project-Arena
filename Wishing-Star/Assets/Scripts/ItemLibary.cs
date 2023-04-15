@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ItemLibary : MonoBehaviour
 {
-    //PlayerController PlayerController;
+    //PlayerController pC;
 
     public string itemTag;
 
     //Bow
     [SerializeField] GameObject arrow;
-
+    private float angle;
 
     // Start is called before the first frame update
     void Start()
@@ -24,13 +24,13 @@ public class ItemLibary : MonoBehaviour
         
     }
 
-    public void ItemLibFind(string tag, Vector2 direction, Vector2 pos)
+    public void ItemLibFind(string tag, Vector2 direction, Vector2 pos, int mana, Collider2D col)
     {
         
-        switch (itemTag)
+        switch (tag)
         {
             case "Bow":
-                //Bow(direction, pos);
+                Bow(direction, pos, mana, col);
                 break;
 
             case "Bomb":
@@ -48,34 +48,50 @@ public class ItemLibary : MonoBehaviour
             case "Invisibility Mask":
                 break;
             
+            case "Glove of Thunder":
+                break;
+
+            case "Tome of Ash":
+                break;
+
             default:
                 Debug.Log("Nothing");
                 break;
         }
         
     }
-    /*
-    private void Bow(Vector2 direction, Vector2 pos)
+    
+    private void Bow(Vector2 direction, Vector2 pos, int mana, Collider2D col)
     {
+
+
+        //Getting the angle:
+        //Up
         if(direction == new Vector2 (0, 1))
         {
-
+            angle = 0;
         }
+        //Down
         else if (direction == new Vector2(0, -1))
         {
-
+            angle = 180;
         }
+        //Right
         else if (direction == new Vector2(1, 0))
         {
-
+            angle = 270;
         }
+        //Left
         else if (direction == new Vector2(-1, 0))
         {
-
+            angle = 90;
         }
 
-        GameObject a = Instantiate(arrow, pos, );
+        GameObject a = Instantiate(arrow, pos, Quaternion.Euler(0, 0, angle) );
+        Physics2D.IgnoreCollision(col, a.GetComponent<Collider2D>());
+        a.GetComponent<Rigidbody2D>().velocity = direction * 10;
+        Destroy(a, 2f);
     }
-    */
+    
 
 }

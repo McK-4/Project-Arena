@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 {
     //public int player = 0;
     private Rigidbody2D rb;
+    public Collider2D col;
     private SpriteRenderer spriteRen;
     Animator anim;
     [SerializeField]AnimatorOverrideController[] skin;
@@ -100,7 +101,7 @@ public class PlayerController : MonoBehaviour
     private GameObject attacker;
 
     //Mana 
-    public int manaMax = 10;
+    public int manaMax = 100;
     public int mana;
 
     //Items
@@ -109,10 +110,12 @@ public class PlayerController : MonoBehaviour
     public string itemTag2;
     public Vector2 facing;
     public Vector2 pos;
+    public bool canUse;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<Collider2D>();
         spriteRen = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         input = GetComponent<PlayerInput>();
@@ -123,8 +126,10 @@ public class PlayerController : MonoBehaviour
 
         health = maxHealth;
         respawn = transform.position;
-        mana = 10;
+        manaMax = 100;
+        mana = manaMax;
         points = 0;
+        canUse = true;
 
         Order(orderInLayer);
 
@@ -139,6 +144,7 @@ public class PlayerController : MonoBehaviour
     {
         //Item stuff
         pos = transform.position;
+
         //Facing (for items)
         switch (characterFacing)
         {
@@ -365,7 +371,15 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
             itemTag1 = "Bow";
-            itemLib.ItemLibFind(itemTag1, facing, pos);
+            if(itemTag1 == "Bow" && canUse)
+            {
+                itemLib.ItemLibFind(itemTag1, facing, pos, mana, col);
+            }
+
+            if(itemTag1 == "Bow" && mana >= 10)
+            {
+                mana -= 10;
+            }
         }
     }
 
@@ -373,7 +387,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            itemLib.ItemLibFind(itemTag2, facing, pos);
+            itemLib.ItemLibFind(itemTag2, facing, pos, mana, col);
         }
     }
 
@@ -470,10 +484,18 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision != null)
+        {
         killerName = collision.gameObject.transform.parent.name;
 
         attacker = collision.gameObject.transform.parent.gameObject;
+        }
+        /*
+        if(collision == null)
+        {
 
+        }
+        */
         //Calculating the angle to attacker
         if ((attacker.transform.position.y - transform.position.y) > 0 && (attacker.transform.position.x - transform.position.x) > 0)
         {
@@ -523,6 +545,7 @@ public class PlayerController : MonoBehaviour
             validBlock = false;
         }
 
+        //Sword
         if (collision.gameObject.tag == "Sword" && !damaged)
         {
             //if Shield Blocking
@@ -537,6 +560,22 @@ public class PlayerController : MonoBehaviour
                 Damaged(basicSwordDamage, attacker);
             }
 
+        }
+
+        //Bow and Arrow
+        if(collision.gameObject.tag == "Bow" && !damaged)
+        {
+            //if Shield Blocking
+            if (shieldUp && validBlock)
+            {
+                ShieldBlocked(2, attacker);
+            }
+
+            //No Shield Blocking
+            else
+            {
+                Damaged(2, attacker);
+            }
         }
         /*
         else if (collision.gameObject.tag == "Sword" && shieldUp && !damaged)
