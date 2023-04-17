@@ -24,7 +24,7 @@ public class ItemLibary : MonoBehaviour
         
     }
 
-    public void ItemLibFind(string tag, Vector2 direction, Vector2 pos, int mana, Collider2D col)
+    public void ItemLibFind(string tag, Vector2 direction, Vector2 pos, float mana, Collider2D col)
     {
         
         switch (tag)
@@ -61,7 +61,7 @@ public class ItemLibary : MonoBehaviour
         
     }
     
-    private void Bow(Vector2 direction, Vector2 pos, int mana, Collider2D col)
+    private void Bow(Vector2 direction, Vector2 pos, float mana, Collider2D col)
     {
 
 

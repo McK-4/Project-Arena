@@ -102,7 +102,12 @@ public class PlayerController : MonoBehaviour
 
     //Mana 
     public int manaMax = 100;
-    public int mana;
+    public float mana;
+    public float tempMana;
+    public bool manaUsed = false;
+    public bool gainingMana = false;
+    public float manaTimer = 0;
+    private float manaCooldownTime = 5;
 
     //Items
     private ItemLibary itemLib;
@@ -128,6 +133,8 @@ public class PlayerController : MonoBehaviour
         respawn = transform.position;
         manaMax = 100;
         mana = manaMax;
+        tempMana = mana;
+        manaUsed = false;
         points = 0;
         canUse = true;
 
@@ -145,6 +152,42 @@ public class PlayerController : MonoBehaviour
         //Item stuff
         pos = transform.position;
 
+        //Mana Regeneration
+        if(mana != tempMana && !gainingMana)
+        {
+            manaUsed = true;
+            manaTimer = 0;
+            mana = tempMana;
+        }
+
+        if(manaUsed)
+        {
+            if (manaTimer < manaCooldownTime)
+            {
+                manaTimer += Time.deltaTime;
+            }
+            else
+            {
+                manaTimer = 0;
+                manaUsed = false;
+            }
+        }
+
+        //This doesn't work, right now while it is gaining mana you have infinate mana and can't stop it
+        if(!manaUsed && mana != manaMax)
+        {
+            mana += (5 * Time.deltaTime);
+            tempMana = mana;
+            gainingMana = true;
+        }
+
+        if(mana > manaMax)
+        {
+            mana = manaMax;
+            tempMana = mana;
+            gainingMana = false;
+        }
+    
         //Facing (for items)
         switch (characterFacing)
         {
@@ -388,9 +431,9 @@ public class PlayerController : MonoBehaviour
                 itemLib.ItemLibFind(itemTag1, facing, pos, mana, col);
             }
 
-            if(itemTag1 == "Bow" && mana >= 10)
+            if(itemTag1 == "Bow" && tempMana >= 10)
             {
-                mana -= 10;
+                tempMana -= 10;
             }
         }
     }
