@@ -61,13 +61,13 @@ public class PlayerController : MonoBehaviour
     //Movement
     public float movementSpeedMax = 7.5f;
     public float movementSpeed = 3.75f;
-    private float movementSpeedStart = 0f;
+    private float movementSpeedStart = 0.1f;
     private float shieldMoveSpeed = 2f;
     private float acceleration = 0.1f;
     Vector2 tempVel;
     private float maxVelocityX = 7.60f;
     private float maxVelocityY = 7.60f;
-    Vector2 moveinput = Vector2.zero;
+    [SerializeField] Vector2 moveinput = Vector2.zero;
     public bool moving = false;
     private bool moveAble = true;
    // private bool moveMaxX = false;
@@ -172,6 +172,18 @@ public class PlayerController : MonoBehaviour
         //Movement
         //tempVel = rb.velocity;
 
+        if (moving)
+        {
+            movementSpeed += acceleration;
+            //Debug.Log(rb.velocity);
+        }
+        else if (!moving )
+        {
+            movementSpeed -= acceleration;
+            //tempVel.x -= acceleration;
+            //tempVel.y -= acceleration;
+        }
+
         if(moveAble)
         {
             tempVel.x = moveinput.x * movementSpeed;
@@ -192,26 +204,17 @@ public class PlayerController : MonoBehaviour
             maxVelocityX = 7.60f;
             maxVelocityY = 7.60f;
         }
-        if (movementSpeed <= movementSpeedStart)
+        if (movementSpeed <= movementSpeedStart && !moving)
+        {
             movementSpeed = movementSpeedStart;
+        }
+
         
         if (movementSpeed >= movementSpeedMax)
             movementSpeed = movementSpeedMax;
 
         if (tempVel == new Vector2(0, 0))
             moving = false;
-
-        if (moving)
-        {
-            movementSpeed += acceleration;
-            //Debug.Log(rb.velocity);
-        }
-        else if (!moving )//&& !attacked)
-        {
-            movementSpeed -= acceleration;
-            //tempVel.x -= acceleration;
-            //tempVel.y -= acceleration;
-        }
 
         //rb.velocity.x = Mathf.Clamp(tempVel.x, -maxVelocityX, maxVelocityX);
         rb.velocity += tempVel;
@@ -323,9 +326,14 @@ public class PlayerController : MonoBehaviour
         moveinput = context.ReadValue<Vector2>();
 
         if (context.performed)
+        {
             moving = true;
+        }
+
         if (context.canceled)
+        {
             moving = false;
+        }
 
         //Debug.Log(moveinput);
     }
@@ -343,6 +351,10 @@ public class PlayerController : MonoBehaviour
         if (context.canceled)
         {
             moveAble = true;
+            if(moveinput.y != 0 || moveinput.x != 0)
+            {
+                moving = true;
+            }
             //movementSpeed = movementSpeedStart;
         }
         
