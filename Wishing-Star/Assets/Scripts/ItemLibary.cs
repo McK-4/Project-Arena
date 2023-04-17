@@ -24,13 +24,14 @@ public class ItemLibary : MonoBehaviour
         
     }
 
-    public void ItemLibFind(string tag, Vector2 direction, Vector2 pos, float mana, Collider2D col)
+    public void ItemLibFind(string tag, Vector2 direction, Vector2 pos, float mana, Collider2D col, string name)
     {
-        
+        //attacker = who is shooting the arrow
+
         switch (tag)
         {
             case "Bow":
-                Bow(direction, pos, mana, col);
+                Bow(direction, pos, mana, col, name);
                 break;
 
             case "Bomb":
@@ -61,11 +62,11 @@ public class ItemLibary : MonoBehaviour
         
     }
     
-    private void Bow(Vector2 direction, Vector2 pos, float mana, Collider2D col)
+    private void Bow(Vector2 direction, Vector2 pos, float mana, Collider2D col, string attacker)
     {
-
-
+        
         //Getting the angle:
+
         //Up
         if(direction == new Vector2 (0, 1))
         {
@@ -91,6 +92,9 @@ public class ItemLibary : MonoBehaviour
         Physics2D.IgnoreCollision(col, a.GetComponent<Collider2D>());
         a.GetComponent<Rigidbody2D>().velocity = direction * 10;
         Destroy(a, 2f);
+
+        a.name = (attacker + "'s arrow");
+
     }
     
 

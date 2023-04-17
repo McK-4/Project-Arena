@@ -15402,6 +15402,10 @@ MonoBehaviour:
     m_Bits: 64
   antiCampRange: 7
   playerCamping: 0
+  p1PointsRewarded: 0
+  p2PointsRewarded: 0
+  p3PointsRewarded: 0
+  p4PointsRewarded: 0
 --- !u!4 &1307577645
 Transform:
   m_ObjectHideFlags: 0

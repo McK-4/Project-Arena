@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e77c0160a39395947b47f8be542e210d
+guid: 39eb64d9f98350f4088fd61dd1a96a7a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -68,7 +68,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -106,787 +106,673 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: stone tile_0
+      name: Projectiles v1_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 100
-        width: 20
-        height: 20
+        y: 45
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -10, y: 10}
-        - {x: -10, y: -10}
-        - {x: 0, y: -10}
-        - {x: 0, y: 0}
-        - {x: 10, y: 0}
-        - {x: 10, y: 10}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6c2e9150835dd374f8c6001f7054f8ab
-      internalID: -630103046
+      spriteID: 62590167d01c70840969498ca7492d47
+      internalID: 1256249937
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stone tile_1
+      name: Projectiles v1_1
       rect:
         serializedVersion: 2
-        x: 20
-        y: 100
-        width: 20
-        height: 20
+        x: 15
+        y: 45
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -10, y: 10}
-        - {x: -10, y: 0}
-        - {x: 10, y: 0}
-        - {x: 10, y: 10}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12b57e57b29146b4dbbe252174f2131e
-      internalID: 1528832144
+      spriteID: a64b0ee342850334facde68a218d7fcb
+      internalID: -504444097
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stone tile_2
+      name: Projectiles v1_2
       rect:
         serializedVersion: 2
-        x: 40
-        y: 100
-        width: 20
-        height: 20
+        x: 30
+        y: 45
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -10, y: 10}
-        - {x: -10, y: 0}
-        - {x: 0, y: 0}
-        - {x: 0, y: -10}
-        - {x: 10, y: -10}
-        - {x: 10, y: 10}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 303ee39d6ba492e4c932bd4cf56f0c06
-      internalID: -2090997486
+      spriteID: 45bf4405490c05c4d8f7069b126cc49c
+      internalID: 1540414168
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stone tile_3
+      name: Projectiles v1_3
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 45
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1aba0cff489b5a45bddae339ada39ab
+      internalID: -656210007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectiles v1_4
       rect:
         serializedVersion: 2
         x: 60
-        y: 100
-        width: 20
-        height: 20
+        y: 45
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c8c189c6a2ff3a4e928726992acce15
-      internalID: -1910347234
+      spriteID: 1fdbfcf7dd9ce5249885e0a3ed15eceb
+      internalID: -1689977845
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stone tile_4
+      name: Projectiles v1_5
       rect:
         serializedVersion: 2
-        x: 80
-        y: 100
-        width: 20
-        height: 20
+        x: 75
+        y: 45
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2873151d3609c6e4aa1fed82bb9c91f0
-      internalID: 795980152
+      spriteID: 4dab4d721d0ba724088b1f883e3d31ab
+      internalID: -422789186
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stone tile_5
+      name: Projectiles v1_6
       rect:
         serializedVersion: 2
-        x: 100
-        y: 100
-        width: 20
-        height: 20
+        x: 90
+        y: 45
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 469d2a2146d585849be92c3916444e00
-      internalID: -1858076268
+      spriteID: d6f9d9b7c8a99ea40b7d5fcc3c911b1a
+      internalID: 1237777790
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stone tile_6
+      name: Projectiles v1_7
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 45
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 179b59fd73dc91841ab3b064db768eda
+      internalID: 296058618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectiles v1_8
       rect:
         serializedVersion: 2
         x: 0
-        y: 80
-        width: 20
-        height: 20
+        y: 30
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -10, y: 10}
-        - {x: -10, y: -10}
-        - {x: 0, y: -10}
-        - {x: 0, y: 10}
-      tessellationDetail: 0
-      bones: []
-      spriteID: ca52f0cd4f7c2104ab927156619f7722
-      internalID: 1998572796
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stone tile_7
-      rect:
-        serializedVersion: 2
-        x: 20
-        y: 80
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6d28440b16e1cf34db0751842e829635
-      internalID: -402870316
+      spriteID: 8ea867f6c1ca64f43956c34dc1712208
+      internalID: 1539200503
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stone tile_8
+      name: Projectiles v1_9
       rect:
         serializedVersion: 2
-        x: 40
-        y: 80
-        width: 20
-        height: 20
+        x: 15
+        y: 30
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: 0, y: 10}
-        - {x: 0, y: -10}
-        - {x: 10, y: -10}
-        - {x: 10, y: 10}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60c58066ee5e8a042b9a2515a9851a49
-      internalID: -1191782416
+      spriteID: e3199254a4cfec441864db9de3213928
+      internalID: 766017639
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stone tile_9
+      name: Projectiles v1_10
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 30
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8d0c7d6d21415f448b3531c8711b836
+      internalID: -2144579064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectiles v1_11
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 30
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a69da421a57d847408f7fedba7c0bba1
+      internalID: -1739758846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectiles v1_12
       rect:
         serializedVersion: 2
         x: 60
-        y: 80
-        width: 20
-        height: 20
+        y: 30
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 121c501e35fc31d46b327f146ca0e974
-      internalID: 654109014
+      spriteID: 15846261637bbc84a981cc30269ab910
+      internalID: 1944366803
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stone tile_10
+      name: Projectiles v1_13
       rect:
         serializedVersion: 2
-        x: 80
-        y: 80
-        width: 20
-        height: 20
+        x: 75
+        y: 30
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e464f551a28e524e935c348e9c2b144
-      internalID: -612760537
+      spriteID: e702fdc3dfbff2c41bb87e5fa223579e
+      internalID: -1342600644
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stone tile_11
+      name: Projectiles v1_14
       rect:
         serializedVersion: 2
-        x: 100
-        y: 80
-        width: 20
-        height: 20
+        x: 90
+        y: 30
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5f89f96d6b8df54e8c4ea5b90cf3c01
-      internalID: 166474832
+      spriteID: 14ef9b83511e57e408accd3b997aee6e
+      internalID: 1836196481
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stone tile_12
+      name: Projectiles v1_15
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 30
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2823dae7111fd94095aaf5e14a16f26
+      internalID: 195185016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectiles v1_16
       rect:
         serializedVersion: 2
         x: 0
-        y: 60
-        width: 20
-        height: 20
+        y: 15
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: 0, y: 10}
-        - {x: -10, y: 10}
-        - {x: -10, y: -10}
-        - {x: 10, y: -10}
-        - {x: 10, y: 0}
-        - {x: 0, y: 0}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5363c377e70645c44a4573c819bfdc50
-      internalID: 933845482
+      spriteID: 7abc7370b0e8ff7428a8336447a14110
+      internalID: -621910146
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stone tile_13
+      name: Projectiles v1_17
       rect:
         serializedVersion: 2
-        x: 20
-        y: 60
-        width: 20
-        height: 20
+        x: 15
+        y: 15
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -10, y: 0}
-        - {x: -10, y: -10}
-        - {x: 10, y: -10}
-        - {x: 10, y: 0}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce5cefd0eaa3aaf48a2e2bc218ebeeb5
-      internalID: 772392987
+      spriteID: 3ac2d5eb2b43bfd41b501337a757573d
+      internalID: 1347492026
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stone tile_14
+      name: Projectiles v1_18
       rect:
         serializedVersion: 2
-        x: 40
-        y: 60
-        width: 20
-        height: 20
+        x: 30
+        y: 15
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: 0, y: 10}
-        - {x: 0, y: 0}
-        - {x: -10, y: 0}
-        - {x: -10, y: -10}
-        - {x: 10, y: -10}
-        - {x: 10, y: 10}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c15ec1b1e0a882245abd024514f76db2
-      internalID: -1972402670
+      spriteID: ea1dcbec098144a4f913620fed1b6cc0
+      internalID: 445252739
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stone tile_15
+      name: Projectiles v1_19
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 15
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60ef6d98a0cc35d4ea3908c86f481453
+      internalID: 730340836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectiles v1_20
       rect:
         serializedVersion: 2
         x: 60
-        y: 60
-        width: 20
-        height: 20
+        y: 15
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6c62e564b592f614c89bad94c9137097
-      internalID: -310015067
+      spriteID: 66677b7cf44d64345b6e15145a9490f4
+      internalID: -343404707
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stone tile_16
+      name: Projectiles v1_21
       rect:
         serializedVersion: 2
-        x: 80
-        y: 60
-        width: 20
-        height: 20
+        x: 75
+        y: 15
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 661f15ff00957a54e8a1d434a128b73f
-      internalID: -1587965982
+      spriteID: 301467a10e878cf4eba182402157fed9
+      internalID: -1400819213
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stone tile_17
+      name: Projectiles v1_22
       rect:
         serializedVersion: 2
-        x: 100
-        y: 60
-        width: 20
-        height: 20
+        x: 90
+        y: 15
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d8dab21b2e08e84eb5d4c546b75b35e
-      internalID: 2007372367
+      spriteID: 83e665e4bd512d84cb6ae467214d1abf
+      internalID: -1538377523
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stone tile_18
+      name: Projectiles v1_23
       rect:
         serializedVersion: 2
-        x: 0
-        y: 40
-        width: 20
-        height: 20
+        x: 105
+        y: 15
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8dd9c536c5d4ae44eb1cb33932f22bc4
-      internalID: -19621695
+      spriteID: 06713b73b77dd724481f01b5753ed9a1
+      internalID: 1430088648
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stone tile_19
-      rect:
-        serializedVersion: 2
-        x: 20
-        y: 40
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f78772b077116264c8cfe26ac798cd89
-      internalID: -1509162332
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stone tile_20
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 40
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3b35353bf8bf1d4489caf24b7855bfb3
-      internalID: 1198289319
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stone tile_21
-      rect:
-        serializedVersion: 2
-        x: 60
-        y: 40
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2c4bb879b83f5244e9633362fa373051
-      internalID: 1929886984
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stone tile_22
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 40
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: 2, y: -2}
-        - {x: 2, y: -10}
-        - {x: 10, y: -10}
-        - {x: 10, y: -2}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 616f3a8216d1ab6499f5930ab2bd525f
-      internalID: -932059831
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stone tile_23
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 40
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -10, y: -2}
-        - {x: -10, y: -10}
-        - {x: -2, y: -10}
-        - {x: -2, y: -2}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 61e9c62ff1cf83043ab9fef968b6891c
-      internalID: 677668560
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stone tile_24
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 20
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 64e64d4ae8529ce44a10fe0df5cc74c0
-      internalID: 1073282059
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stone tile_25
-      rect:
-        serializedVersion: 2
-        x: 20
-        y: 20
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b8551a4f900f11c458a25cd5a658376c
-      internalID: -36243419
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stone tile_26
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 20
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a0784a607194073459afa1fb3276efa9
-      internalID: -993134697
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stone tile_27
-      rect:
-        serializedVersion: 2
-        x: 60
-        y: 20
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ef15035582447d14c9a9a8c97e1716dc
-      internalID: 979124229
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stone tile_28
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 20
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: 2, y: 10}
-        - {x: 2, y: 2}
-        - {x: 10, y: 2}
-        - {x: 10, y: 10}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8c475551c9d45794b88bf1ccbaa1c49f
-      internalID: 1076730824
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stone tile_29
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 20
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -10, y: 10}
-        - {x: -10, y: 2}
-        - {x: -2, y: 2}
-        - {x: -2, y: 10}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6d457670a46926146b3e5e9e07f7c6b5
-      internalID: 1917058554
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stone tile_30
+      name: Projectiles v1_24
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 20
-        height: 20
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -10, y: -3}
-        - {x: -10, y: 10}
-        - {x: 10, y: 10}
-        - {x: 10, y: -3}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: afe51ae80fbb279478d2ba6adc4f27e8
-      internalID: -1125893260
+      spriteID: f1dd5df0a80d5fe4c8ba4d6d3349ba6b
+      internalID: 1808124038
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stone tile_31
+      name: Projectiles v1_25
       rect:
         serializedVersion: 2
-        x: 20
+        x: 15
         y: 0
-        width: 20
-        height: 20
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -10, y: -3}
-        - {x: -10, y: 10}
-        - {x: 10, y: 10}
-        - {x: 10, y: -3}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a694aa20df79f024fb63f95be23b33e1
-      internalID: 2058872082
+      spriteID: f5be6ae999a30be4c8625f5bb019a6d3
+      internalID: 470424445
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stone tile_32
+      name: Projectiles v1_26
       rect:
         serializedVersion: 2
-        x: 40
+        x: 30
         y: 0
-        width: 20
-        height: 20
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -10, y: -3}
-        - {x: -10, y: 10}
-        - {x: 10, y: 10}
-        - {x: 10, y: -3}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f74156edad4e85445814b49e18414f1e
-      internalID: -305062319
+      spriteID: 9598e33a870326741883e2bb02580c75
+      internalID: -1909272232
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stone tile_33
+      name: Projectiles v1_27
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 0
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1da878723ef46124fab050695fe3a23a
+      internalID: -1035346752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectiles v1_28
       rect:
         serializedVersion: 2
         x: 60
         y: 0
-        width: 20
-        height: 20
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -10, y: -3}
-        - {x: -10, y: 10}
-        - {x: 10, y: 10}
-        - {x: 10, y: -3}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 92b0334f216d1144990e57db9439b4a7
-      internalID: -952921453
+      spriteID: 8a8fb6f187b071b4e8498b26a391a505
+      internalID: -1312674660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectiles v1_29
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 0
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10c91f1f0b584c944996967012415810
+      internalID: 874906376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectiles v1_30
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 0
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c53cf42169cf81344985c3c7fca6b4b1
+      internalID: 58644193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectiles v1_31
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 0
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9030ef5554fa29b40a5bd0cfab7d293e
+      internalID: 161339818
       vertices: []
       indices: 
       edges: []
@@ -902,42 +788,38 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      stone tile_20: 1198289319
-      stone tile_31: 2058872082
-      stone tile_12: 933845482
-      stone tile_18: -19621695
-      stone tile_33: -952921453
-      stone tile_19: -1509162332
-      stone tile_30: -1125893260
-      stone tile_7: -402870316
-      stone tile_11: 166474832
-      stone tile_5: -1858076268
-      stone tile_25: -36243419
-      stone tile_15: -310015067
-      stone tile_21: 1929886984
-      stone tile_35: 1232521420
-      stone tile_2: -2090997486
-      stone tile_14: -1972402670
-      stone tile_27: 979124229
-      stone tile_10: -612760537
-      stone tile_13: 772392987
-      stone tile_32: -305062319
-      stone tile_8: -1191782416
-      stone tile_28: 1076730824
-      stone tile_29: 1917058554
-      stone tile_6: 1998572796
-      stone tile_34: -834216193
-      stone tile_4: 795980152
-      stone tile_0: -630103046
-      stone tile_3: -1910347234
-      stone tile_22: -932059831
-      stone tile_23: 677668560
-      stone tile_16: -1587965982
-      stone tile_26: -993134697
-      stone tile_17: 2007372367
-      stone tile_9: 654109014
-      stone tile_24: 1073282059
-      stone tile_1: 1528832144
+      Projectiles v1_4: -1689977845
+      Projectiles v1_5: -422789186
+      Projectiles v1_0: 1256249937
+      Projectiles v1_6: 1237777790
+      Projectiles v1_15: 195185016
+      Projectiles v1_10: -2144579064
+      Projectiles v1_11: -1739758846
+      Projectiles v1_24: 1808124038
+      Projectiles v1_17: 1347492026
+      Projectiles v1_29: 874906376
+      Projectiles v1_12: 1944366803
+      Projectiles v1_19: 730340836
+      Projectiles v1_23: 1430088648
+      Projectiles v1_20: -343404707
+      Projectiles v1_27: -1035346752
+      Projectiles v1_2: 1540414168
+      Projectiles v1_9: 766017639
+      Projectiles v1_22: -1538377523
+      Projectiles v1_25: 470424445
+      Projectiles v1_7: 296058618
+      Projectiles v1_26: -1909272232
+      Projectiles v1_18: 445252739
+      Projectiles v1_1: -504444097
+      Projectiles v1_31: 161339818
+      Projectiles v1_3: -656210007
+      Projectiles v1_30: 58644193
+      Projectiles v1_21: -1400819213
+      Projectiles v1_8: 1539200503
+      Projectiles v1_14: 1836196481
+      Projectiles v1_16: -621910146
+      Projectiles v1_28: -1312674660
+      Projectiles v1_13: -1342600644
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

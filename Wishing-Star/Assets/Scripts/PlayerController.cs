@@ -157,8 +157,13 @@ public class PlayerController : MonoBehaviour
         pos = transform.position;
 
         //Mana Regeneration
-        if(mana != tempMana && !gainingMana)
+        if(mana != tempMana)
         {
+            if(gainingMana)
+            {
+                gainingMana = false;
+            }
+
             manaUsed = true;
             manaTimer = 0;
             mana = tempMana;
@@ -185,7 +190,7 @@ public class PlayerController : MonoBehaviour
             gainingMana = true;
         }
 
-        if(mana > manaMax)
+        if(mana > manaMax )
         {
             mana = manaMax;
             tempMana = mana;
@@ -432,7 +437,7 @@ public class PlayerController : MonoBehaviour
             itemTag1 = "Bow";
             if(itemTag1 == "Bow" && canUse)
             {
-                itemLib.ItemLibFind(itemTag1, facing, pos, mana, col);
+                itemLib.ItemLibFind(itemTag1, facing, pos, mana, col, name);
             }
 
             if(itemTag1 == "Bow" && tempMana >= 10)
@@ -446,7 +451,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            itemLib.ItemLibFind(itemTag2, facing, pos, mana, col);
+            itemLib.ItemLibFind(itemTag2, facing, pos, mana, col, name);
         }
     }
 
@@ -565,9 +570,18 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.transform.parent.tag == "Player")
         {
-            killerName = collision.gameObject.transform.parent.name;
+            if(collision.gameObject.tag == "Sword")
+            {
+                killerName = collision.gameObject.transform.parent.name;
 
-            attacker = collision.gameObject.transform.parent.gameObject;
+                attacker = collision.gameObject.transform.parent.gameObject;
+            }
+
+            if(collision.gameObject.tag == "Bow")
+            {
+                //Get only #_Player of the name DON'T INCLUDE "'s arrow" or anything extra
+                //killerName = collision.gameObject.transform.name;
+            }
 
             if ((attacker.transform.position.y - transform.position.y) > 0 && (attacker.transform.position.x - transform.position.x) > 0)
             {
