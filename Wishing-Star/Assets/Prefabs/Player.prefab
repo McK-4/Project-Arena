@@ -242,7 +242,7 @@ Transform:
   - {fileID: 7575306970291259932}
   - {fileID: 3526280613669542168}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6085611123809833943
 SpriteRenderer:
@@ -457,7 +457,7 @@ MonoBehaviour:
   - {fileID: 22100000, guid: f22cb4718dcb7d0429b4986955105c32, type: 2}
   - {fileID: 22100000, guid: 1d97a4ff78cb0524787f83b024c0cac4, type: 2}
   - {fileID: 22100000, guid: 86dc6a182fc497f4b8c260c8a3263864, type: 2}
-  activeSkin: 0
+  activeSkin: 2
   tileRen: {fileID: 0}
   orderInLayer: 0
   layerName: 
@@ -493,7 +493,10 @@ MonoBehaviour:
   validBlock: 0
   manaMax: 10
   mana: 0
+  tempMana: 0
   manaUsed: 0
+  gainingMana: 0
+  manaTimer: 0
   itemTag1: 
   itemTag2: 
   facing: {x: 0, y: 0}
@@ -535,7 +538,7 @@ Animator:
   m_GameObject: {fileID: 1654785569651679614}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b341577d40e11a24d86c78048cf7d8d4, type: 2}
+  m_Controller: {fileID: 22100000, guid: 86dc6a182fc497f4b8c260c8a3263864, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

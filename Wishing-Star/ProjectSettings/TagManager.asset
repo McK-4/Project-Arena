@@ -7,21 +7,22 @@ TagManager:
   - Sword
   - Layer 1
   - Layer 2
+  - Bow
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Projectiles
   - Water
   - UI
-  - Player
   - Layer 1
   - Layer 2
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Layer 3
+  - Layer 4
+  - Player 1
+  - Player 2
+  - Player 3
+  - Player 4
   - 
   - 
   - 

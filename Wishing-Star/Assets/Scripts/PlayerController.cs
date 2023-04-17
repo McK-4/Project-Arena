@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public TilemapRenderer tileRen;
     [SerializeField]int orderInLayer = 1;
     public string layerName;
+    int playerLayer;
     [SerializeField] Collider2D mapCollider;
 
     private PlayerManager playerManager;
@@ -128,6 +129,9 @@ public class PlayerController : MonoBehaviour
 
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         itemLib = GameObject.Find("GameManager").GetComponent<ItemLibary>();
+
+        playerLayer = gameObject.layer;
+        anim.runtimeAnimatorController = skin[activeSkin];
 
         health = maxHealth;
         respawn = transform.position;
@@ -539,60 +543,74 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision != null)
+        if (collision.gameObject.tag == "Layer 1")
         {
-        killerName = collision.gameObject.transform.parent.name;
-
-        attacker = collision.gameObject.transform.parent.gameObject;
-        }
-        /*
-        if(collision == null)
-        {
-
-        }
-        */
-        //Calculating the angle to attacker
-        if ((attacker.transform.position.y - transform.position.y) > 0 && (attacker.transform.position.x - transform.position.x) > 0)
-        {
-            //quadrant 1
-            angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.y - transform.position.y) / (attacker.transform.position.x - transform.position.x))) * Mathf.Rad2Deg;
-        }
-        else if ((attacker.transform.position.y - transform.position.y) > 0 && (attacker.transform.position.x - transform.position.x) < 0)
-        {
-            //quadrant 2
-            angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.x - transform.position.x) / (attacker.transform.position.y - transform.position.y))) * Mathf.Rad2Deg + 90;
-        }
-        else if ((attacker.transform.position.y - transform.position.y) < 0 && (attacker.transform.position.x - transform.position.x) < 0)
-        {
-            //quadrant 3
-            angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.y - transform.position.y) / (attacker.transform.position.x - transform.position.x))) * Mathf.Rad2Deg + 180;
-        }
-        else if ((attacker.transform.position.y - transform.position.y) < 0 && (attacker.transform.position.x - transform.position.x) > 0)
-        {
-            //quadrant 4
-            angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.x - transform.position.x) / (attacker.transform.position.y - transform.position.y))) * Mathf.Rad2Deg + 270;
+            Order(1);
         }
 
-        Debug.Log(name + " " + angle);
-
-        if (characterFacing == Directions.Up && shieldUp && angle >= 22.5 && angle <= 157.5)
+        if (collision.gameObject.tag == "Layer 2")
         {
-            validBlock = true;
+            Order(2);
         }
 
-        else if (characterFacing == Directions.Down && shieldUp && angle <= 292.5 && angle >= 202.5)
+        if (collision.gameObject.tag == "Layer 3")
         {
-            validBlock = true;
+            Order(3);
         }
 
-        else if (characterFacing == Directions.Left && shieldUp && angle >= 112.5 && angle <= 247.5)
+        if (collision.gameObject.tag == "Layer 4")
         {
-            validBlock = true;
+            Order(4);
         }
 
-        else if (characterFacing == Directions.Right && shieldUp && angle <= 67.5 || angle >= 112.5 && characterFacing == Directions.Right && shieldUp)
+        if (collision.gameObject.transform.parent.tag == "Player")
         {
-            validBlock = true;
+            killerName = collision.gameObject.transform.parent.name;
+
+            attacker = collision.gameObject.transform.parent.gameObject;
+
+            if ((attacker.transform.position.y - transform.position.y) > 0 && (attacker.transform.position.x - transform.position.x) > 0)
+            {
+                //quadrant 1
+                angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.y - transform.position.y) / (attacker.transform.position.x - transform.position.x))) * Mathf.Rad2Deg;
+            }
+            else if ((attacker.transform.position.y - transform.position.y) > 0 && (attacker.transform.position.x - transform.position.x) < 0)
+            {
+                //quadrant 2
+                angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.x - transform.position.x) / (attacker.transform.position.y - transform.position.y))) * Mathf.Rad2Deg + 90;
+            }
+            else if ((attacker.transform.position.y - transform.position.y) < 0 && (attacker.transform.position.x - transform.position.x) < 0)
+            {
+                //quadrant 3
+                angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.y - transform.position.y) / (attacker.transform.position.x - transform.position.x))) * Mathf.Rad2Deg + 180;
+            }
+            else if ((attacker.transform.position.y - transform.position.y) < 0 && (attacker.transform.position.x - transform.position.x) > 0)
+            {
+                //quadrant 4
+                angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.x - transform.position.x) / (attacker.transform.position.y - transform.position.y))) * Mathf.Rad2Deg + 270;
+            }
+
+            Debug.Log(name + " " + angle);
+
+            if (characterFacing == Directions.Up && shieldUp && angle >= 22.5 && angle <= 157.5)
+            {
+                validBlock = true;
+            }
+
+            else if (characterFacing == Directions.Down && shieldUp && angle <= 292.5 && angle >= 202.5)
+            {
+                validBlock = true;
+            }
+
+            else if (characterFacing == Directions.Left && shieldUp && angle >= 112.5 && angle <= 247.5)
+            {
+                validBlock = true;
+            }
+
+            else if (characterFacing == Directions.Right && shieldUp && angle <= 67.5 || angle >= 112.5 && characterFacing == Directions.Right && shieldUp)
+            {
+                validBlock = true;
+            }
         }
 
         if (damaged)
@@ -642,15 +660,6 @@ public class PlayerController : MonoBehaviour
             //ShieldBlocked(basicSwordDamage);
         }
         */
-        if(collision.gameObject.tag == "Layer 1")
-        {
-            Order(1);
-        }
-
-        if (collision.gameObject.tag == "Layer 2")
-        {
-            Order(2);
-        }
     }
 
     public void RePair()
@@ -666,17 +675,35 @@ public class PlayerController : MonoBehaviour
         {
             case 1:
                 spriteRen.sortingOrder = 1;
-                Physics2D.IgnoreLayerCollision(6, 7, false);
-                Physics2D.IgnoreLayerCollision(6, 8);
+                Physics2D.IgnoreLayerCollision(playerLayer, 6, false);
+                Physics2D.IgnoreLayerCollision(playerLayer, 7);
+                Physics2D.IgnoreLayerCollision(playerLayer, 8);
+                Physics2D.IgnoreLayerCollision(playerLayer, 9);
                 break;
             case 2:
                 spriteRen.sortingOrder = 3;
-                Physics2D.IgnoreLayerCollision(6, 8, false);
-                Physics2D.IgnoreLayerCollision(6, 7);
+                Physics2D.IgnoreLayerCollision(playerLayer, 6);
+                Physics2D.IgnoreLayerCollision(playerLayer, 7, false);
+                Physics2D.IgnoreLayerCollision(playerLayer, 8);
+                Physics2D.IgnoreLayerCollision(playerLayer, 9);
+                break;
+            case 3:
+                spriteRen.sortingOrder = 4;
+                Physics2D.IgnoreLayerCollision(playerLayer, 6);
+                Physics2D.IgnoreLayerCollision(playerLayer, 7);
+                Physics2D.IgnoreLayerCollision(playerLayer, 8, false);
+                Physics2D.IgnoreLayerCollision(playerLayer, 9);
+                break;
+            case 4:
+                spriteRen.sortingOrder = 5;
+                Physics2D.IgnoreLayerCollision(playerLayer, 6);
+                Physics2D.IgnoreLayerCollision(playerLayer, 7);
+                Physics2D.IgnoreLayerCollision(playerLayer, 8);
+                Physics2D.IgnoreLayerCollision(playerLayer, 9, false);
                 break;
             default:
                 spriteRen.sortingOrder = 1;
-                Physics2D.IgnoreLayerCollision(6, 8);
+                Physics2D.IgnoreLayerCollision(playerLayer, 7);
                 break;
         }
     }
