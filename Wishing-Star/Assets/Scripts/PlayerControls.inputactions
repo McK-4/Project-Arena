@@ -363,7 +363,7 @@
                 {
                     "name": "",
                     "id": "c4d48cd0-b2ca-41e4-bc16-566873c82c6a",
-                    "path": "<XInputController>/buttonWest",
+                    "path": "<XInputController>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Xbox Controller",
@@ -385,7 +385,7 @@
                 {
                     "name": "",
                     "id": "87092a89-cfc1-4fb4-a304-86a1532493f6",
-                    "path": "<XInputController>/buttonNorth",
+                    "path": "<XInputController>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "Xbox Controller",

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8499652568684708869}
   - component: {fileID: 8499652568684708868}
   - component: {fileID: 8499652568684708859}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Arrow
   m_TagString: Bow
   m_Icon: {fileID: 0}
@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8499652568684708869
 SpriteRenderer:

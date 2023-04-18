@@ -34,6 +34,12 @@ public class PlayerController : MonoBehaviour
     public string killerName;
     public int points;
 
+    //Leaderboard help
+    public bool winner;
+    public bool second;
+    public bool third;
+    public bool fourth;
+
     public enum Directions
     {
         Up,
@@ -116,7 +122,9 @@ public class PlayerController : MonoBehaviour
     public string itemTag2;
     public Vector2 facing;
     public Vector2 pos;
-    public bool canUse;
+    public bool canUse1;
+    public bool canUse2;
+    private bool protection = false;
 
     void Start()
     {
@@ -140,7 +148,13 @@ public class PlayerController : MonoBehaviour
         tempMana = mana;
         manaUsed = false;
         points = 0;
-        canUse = true;
+        canUse1 = true;
+        canUse2 = true;
+
+        winner = false;
+        second = false;
+        third = false;
+        fourth = false;
 
         Order(orderInLayer);
 
@@ -364,13 +378,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //Shield collision
-        //disToAttackerX = Mathf.Abs(attacker.transform.position.x - pos.x);
-        //disToAttackerY = Mathf.Abs(attackerPos.y - pos.y);
-        //angle = Mathf.Atan2(Mathf.Abs(attacker.transform.position.y - pos.y), Mathf.Abs(attacker.transform.position.x - pos.x)) * Mathf.Rad2Deg;
 
-
-        //knockbackPos = transform.position
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -435,7 +443,7 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
             itemTag1 = "Bow";
-            if(itemTag1 == "Bow" && canUse)
+            if(canUse1)
             {
                 itemLib.ItemLibFind(itemTag1, facing, pos, mana, col, name);
             }
@@ -444,6 +452,11 @@ public class PlayerController : MonoBehaviour
             {
                 tempMana -= 10;
             }
+
+            else
+            {
+                canUse1 = false;
+            }
         }
     }
 
@@ -451,7 +464,10 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            itemLib.ItemLibFind(itemTag2, facing, pos, mana, col, name);
+            if(canUse2)
+            {
+                itemLib.ItemLibFind(itemTag2, facing, pos, mana, col, name);
+            }
         }
     }
 
@@ -568,7 +584,15 @@ public class PlayerController : MonoBehaviour
             Order(4);
         }
 
-        if (collision.gameObject.transform.parent.tag == "Player")
+        if (collision.gameObject.tag == "Bow")
+        {
+            killerName = collision.gameObject.transform.name.Substring(0,8);
+
+            attacker = collision.gameObject;
+            Debug.Log(name + " " + attacker + " " +killerName);
+        }
+
+        else if (collision.gameObject.transform.parent.tag == "Player")
         {
             if(collision.gameObject.tag == "Sword")
             {
@@ -576,55 +600,47 @@ public class PlayerController : MonoBehaviour
 
                 attacker = collision.gameObject.transform.parent.gameObject;
             }
+        }
 
-            if(collision.gameObject.tag == "Bow")
-            {
-                //Get only #_Player of the name DON'T INCLUDE "'s arrow" or anything extra
-                //killerName = collision.gameObject.transform.name;
-            }
+        if ((attacker.transform.position.y - transform.position.y) > 0 && (attacker.transform.position.x - transform.position.x) > 0)
+        {
+            //quadrant 1
+            angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.y - transform.position.y) / (attacker.transform.position.x - transform.position.x))) * Mathf.Rad2Deg;
+        }
+        else if ((attacker.transform.position.y - transform.position.y) > 0 && (attacker.transform.position.x - transform.position.x) < 0)
+        {
+            //quadrant 2
+            angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.x - transform.position.x) / (attacker.transform.position.y - transform.position.y))) * Mathf.Rad2Deg + 90;
+        }
+        else if ((attacker.transform.position.y - transform.position.y) < 0 && (attacker.transform.position.x - transform.position.x) < 0)
+        {
+            //quadrant 3
+            angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.y - transform.position.y) / (attacker.transform.position.x - transform.position.x))) * Mathf.Rad2Deg + 180;
+        }
+        else if ((attacker.transform.position.y - transform.position.y) < 0 && (attacker.transform.position.x - transform.position.x) > 0)
+        {
+            //quadrant 4
+            angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.x - transform.position.x) / (attacker.transform.position.y - transform.position.y))) * Mathf.Rad2Deg + 270;
+        }
 
-            if ((attacker.transform.position.y - transform.position.y) > 0 && (attacker.transform.position.x - transform.position.x) > 0)
-            {
-                //quadrant 1
-                angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.y - transform.position.y) / (attacker.transform.position.x - transform.position.x))) * Mathf.Rad2Deg;
-            }
-            else if ((attacker.transform.position.y - transform.position.y) > 0 && (attacker.transform.position.x - transform.position.x) < 0)
-            {
-                //quadrant 2
-                angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.x - transform.position.x) / (attacker.transform.position.y - transform.position.y))) * Mathf.Rad2Deg + 90;
-            }
-            else if ((attacker.transform.position.y - transform.position.y) < 0 && (attacker.transform.position.x - transform.position.x) < 0)
-            {
-                //quadrant 3
-                angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.y - transform.position.y) / (attacker.transform.position.x - transform.position.x))) * Mathf.Rad2Deg + 180;
-            }
-            else if ((attacker.transform.position.y - transform.position.y) < 0 && (attacker.transform.position.x - transform.position.x) > 0)
-            {
-                //quadrant 4
-                angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.x - transform.position.x) / (attacker.transform.position.y - transform.position.y))) * Mathf.Rad2Deg + 270;
-            }
+        if (characterFacing == Directions.Up && shieldUp && angle >= 22.5 && angle <= 157.5)
+        {
+            validBlock = true;
+        }
 
-            Debug.Log(name + " " + angle);
+        else if (characterFacing == Directions.Down && shieldUp && angle <= 292.5 && angle >= 202.5)
+        {
+            validBlock = true;
+        }
 
-            if (characterFacing == Directions.Up && shieldUp && angle >= 22.5 && angle <= 157.5)
-            {
-                validBlock = true;
-            }
+        else if (characterFacing == Directions.Left && shieldUp && angle >= 112.5 && angle <= 247.5)
+        {
+            validBlock = true;
+        }
 
-            else if (characterFacing == Directions.Down && shieldUp && angle <= 292.5 && angle >= 202.5)
-            {
-                validBlock = true;
-            }
-
-            else if (characterFacing == Directions.Left && shieldUp && angle >= 112.5 && angle <= 247.5)
-            {
-                validBlock = true;
-            }
-
-            else if (characterFacing == Directions.Right && shieldUp && angle <= 67.5 || angle >= 112.5 && characterFacing == Directions.Right && shieldUp)
-            {
-                validBlock = true;
-            }
+        else if (characterFacing == Directions.Right && shieldUp && angle <= 67.5 || angle >= 112.5 && characterFacing == Directions.Right && shieldUp)
+        {
+            validBlock = true;
         }
 
         if (damaged)
@@ -646,15 +662,16 @@ public class PlayerController : MonoBehaviour
             {
                 Damaged(basicSwordDamage, attacker);
             }
-
         }
 
         //Bow and Arrow
-        if(collision.gameObject.tag == "Bow" && !damaged)
+        if (collision.gameObject.tag == "Bow" && !damaged && collision.name.Substring(0, 8) != name)
         {
+            Debug.Log("AHHHHH!");
             //if Shield Blocking
             if (shieldUp && validBlock)
             {
+                Debug.Log("BILL!");
                 ShieldBlocked(2, attacker);
             }
 
@@ -664,16 +681,6 @@ public class PlayerController : MonoBehaviour
                 Damaged(2, attacker);
             }
         }
-        /*
-        else if (collision.gameObject.tag == "Sword" && shieldUp && !damaged)
-        {
-            var nuller = (collision.transform.position - transform.position).normalized;
-            var shield = (shieldPoint.transform.position - transform.position).normalized;
-            //var angleallowed = 10;
-            killerName = collision.gameObject.transform.parent.name;
-            //ShieldBlocked(basicSwordDamage);
-        }
-        */
     }
 
     public void RePair()

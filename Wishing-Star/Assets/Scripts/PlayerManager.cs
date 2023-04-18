@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -36,6 +37,11 @@ public class PlayerManager : MonoBehaviour
 
     private float pointsTimer = 0;
     private float pointsCooldownTimer = 0.01f;
+
+    private Vector2 winnerPos;
+    private Vector2 secondPos;
+    private Vector2 thirdPos;
+    private Vector2 fourthPos;
 
     // Start is called before the first frame update
     void Start()
@@ -175,26 +181,6 @@ public class PlayerManager : MonoBehaviour
             {
                 player1.playerRespawnShuffle();
             }
-            /*
-            if(player1.killerName == player2.name && !p2PointsRewarded)
-            {
-                player2.points += 1;
-                p2PointsRewarded = true;
-                PlayerPointsTimer();
-            }
-            else if(player1.killerName == player3.name && !p3PointsRewarded)
-            {
-                player3.points += 1;
-                p3PointsRewarded = true;
-                PlayerPointsTimer();
-            }
-            else if(player1.killerName == player4.name && !p4PointsRewarded)
-            {
-                player4.points += 1;
-                p4PointsRewarded = true;
-                PlayerPointsTimer();
-            }
-            */
         }
         if (player2.died)
         {
@@ -202,26 +188,6 @@ public class PlayerManager : MonoBehaviour
             {
                 player2.playerRespawnShuffle();
             }
-            /*
-            if (player2.killerName == player1.name && !p1PointsRewarded)
-            {
-                player1.points += 1;
-                p1PointsRewarded = true;
-                PlayerPointsTimer();
-            }
-            else if (player2.killerName == player3.name && !p3PointsRewarded)
-            {
-                player3.points += 1;
-                p3PointsRewarded = true;
-                PlayerPointsTimer();
-            }
-            else if (player2.killerName == player4.name && !p4PointsRewarded)
-            {
-                player4.points += 1;
-                p4PointsRewarded = true;
-                PlayerPointsTimer();
-            }
-            */
         }
         if (player3.died)
         {
@@ -229,26 +195,6 @@ public class PlayerManager : MonoBehaviour
             {
                 player3.playerRespawnShuffle();
             }
-            /*
-            if (player3.killerName == player2.name && !p2PointsRewarded)
-            {
-                player2.points += 1;
-                p2PointsRewarded = true;
-                PlayerPointsTimer();
-            }
-            else if (player3.killerName == player1.name && !p1PointsRewarded)
-            {
-                player1.points += 1;
-                p1PointsRewarded = true;
-                PlayerPointsTimer();
-            }
-            else if (player3.killerName == player4.name && !p4PointsRewarded)
-            {
-                player4.points += 1;
-                p4PointsRewarded = true;
-                PlayerPointsTimer();
-            }
-            */
         }
         if (player4.died)
         {
@@ -256,30 +202,31 @@ public class PlayerManager : MonoBehaviour
             {
                 player4.playerRespawnShuffle();
             }
-            /*
-            if (player4.killerName == player2.name && !p2PointsRewarded)
-            {
-                player2.points += 1;
-                p2PointsRewarded = true;
-                PlayerPointsTimer();
-            }
-            else if (player4.killerName == player3.name && !p3PointsRewarded)
-            {
-                player3.points += 1;
-                p3PointsRewarded = true;
-                PlayerPointsTimer();
-            }
-            else if (player4.killerName == player1.name && !p1PointsRewarded)
-            {
-                player1.points += 1;
-                p1PointsRewarded = true;
-                PlayerPointsTimer();
-            }
-            */
         }
 
-    }
+        //Player Leaderboard sorting:
+        Player[] playerPoints = { new Player(player1.gameObject,player1.points), new Player(player2.gameObject, player2.points), new Player(player3.gameObject, player3.points), new Player(player4.gameObject, player4.points), };
+        playerPoints = playerPoints.OrderByDescending(p => p.score).ToArray();
 
+        //Setting the Player's win screen position
+        /* This needs to be changed to changing a UI image position, not the actual gameobject
+        playerPoints[0].playerGameObject.transform.position = winnerPos;
+        playerPoints[1].playerGameObject.transform.position = secondPos;
+        playerPoints[2].playerGameObject.transform.position = thirdPos;
+        playerPoints[3].playerGameObject.transform.position = fourthPos;
+        */
+    }
+    class Player
+    {
+        public GameObject playerGameObject;
+        public int score;
+        public Player(GameObject playerGameObject, int score)
+        {
+            this.playerGameObject = playerGameObject;
+            this.score = score;
+        }
+    }
+    //Anti-camping suff
     private void OnDrawGizmosSelected()
     {
         if (playerSpawn_1 == null)
@@ -290,7 +237,6 @@ public class PlayerManager : MonoBehaviour
         Gizmos.DrawWireSphere(playerSpawn_3, antiCampRange);
         Gizmos.DrawWireSphere(playerSpawn_4, antiCampRange);
     }
-
     private void PlayerPointsTimer()
     {
         if(p1PointsRewarded)

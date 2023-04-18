@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
 
     void GameEnd()
     {
+
         //Replace this with Win Screen
         SceneManager.LoadScene(0);
     }

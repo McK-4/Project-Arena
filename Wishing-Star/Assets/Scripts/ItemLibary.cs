@@ -64,9 +64,9 @@ public class ItemLibary : MonoBehaviour
     
     private void Bow(Vector2 direction, Vector2 pos, float mana, Collider2D col, string attacker)
     {
-        
-        //Getting the angle:
+        //The bow needs a "drawback" delay so you can't spam it
 
+        //Getting the angle:
         //Up
         if(direction == new Vector2 (0, 1))
         {
