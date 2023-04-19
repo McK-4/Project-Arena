@@ -683,6 +683,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<Rigidbody2D>().mass = 1000000;
+            //rb.mass = 1;
+            if(collision.gameObject.GetComponent<Rigidbody2D>().mass == rb.mass)
+            {
+                rb.mass = 1;
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<Rigidbody2D>().mass = 1;
+        }
+    }
+
     public void RePair()
     {
         InputUser.PerformPairingWithDevice(inputDevice, input.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
