@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ca00cbca64ebf554f8c05461ed7cdfed
+guid: 7908cffcacb51784faed54e857afe55c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,7 +106,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tiles_stone_v2_0
+      name: bridge  v2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,22 +118,20 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -10, y: 10}
-        - {x: -10, y: -10}
-        - {x: 0, y: -10}
-        - {x: 0, y: 5}
-        - {x: 10, y: 5}
-        - {x: 10, y: 10}
+      - - {x: -10, y: -5}
+        - {x: 10, y: -5}
+        - {x: 10, y: 3}
+        - {x: -10, y: 3}
       tessellationDetail: 0
       bones: []
-      spriteID: 98121408bc1989d408d1e36546b91980
-      internalID: -1038830966
+      spriteID: 3a508f66ffeb50a46a737f79b7f4af31
+      internalID: 1121864221
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_stone_v2_1
+      name: bridge  v2_1
       rect:
         serializedVersion: 2
         x: 20
@@ -145,20 +143,20 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -10, y: 10}
-        - {x: -10, y: 5}
-        - {x: 10, y: 5}
-        - {x: 10, y: 10}
+      - - {x: -10, y: -5}
+        - {x: 10, y: -5}
+        - {x: 10, y: 3}
+        - {x: -10, y: 3}
       tessellationDetail: 0
       bones: []
-      spriteID: 586d09fb505d72b43a31fb84b02f02b3
-      internalID: -1958562720
+      spriteID: c3c93cea27a5b784bacee85b4cd9f053
+      internalID: -1146845651
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_stone_v2_2
+      name: bridge  v2_2
       rect:
         serializedVersion: 2
         x: 40
@@ -170,22 +168,20 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -10, y: 10}
-        - {x: -10, y: 5}
-        - {x: 0, y: 5}
-        - {x: 0, y: -10}
-        - {x: 10, y: -10}
-        - {x: 10, y: 10}
+      - - {x: -10, y: -5}
+        - {x: 10, y: -5}
+        - {x: 10, y: 3}
+        - {x: -10, y: 3}
       tessellationDetail: 0
       bones: []
-      spriteID: 9a0d1713a7f25414c84e7579ac20666c
-      internalID: -1566080343
+      spriteID: 3a93a16cfe66def4ebbd7463166fe059
+      internalID: 1098711647
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_stone_v2_3
+      name: bridge  v2_3
       rect:
         serializedVersion: 2
         x: 60
@@ -196,17 +192,23 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -5, y: -4}
+        - {x: -5, y: -10}
+        - {x: 1, y: -10}
+        - {x: 1, y: -4}
+        - {x: 1, y: -4}
+        - {x: -5, y: -4}
       tessellationDetail: 0
       bones: []
-      spriteID: f365cf80dca3b3d4aa69902d1d257d4d
-      internalID: 1416426637
+      spriteID: 8fbbb83db55f3164da72751d81c3e54e
+      internalID: -922363814
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_stone_v2_4
+      name: bridge  v2_4
       rect:
         serializedVersion: 2
         x: 80
@@ -217,38 +219,23 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -1, y: -4}
+        - {x: -1, y: -10}
+        - {x: 5, y: -10}
+        - {x: 5, y: -4}
+        - {x: 5, y: -4}
+        - {x: -1, y: -4}
       tessellationDetail: 0
       bones: []
-      spriteID: 8ebe37b3be6173d409f2fede492d580c
-      internalID: 863043839
+      spriteID: de1a51b1b04358a4bb527a216f580a21
+      internalID: -765586725
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_stone_v2_5
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 100
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f43213f93f10d584e84253b381b6451a
-      internalID: -1539899842
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tiles_stone_v2_6
+      name: bridge  v2_5
       rect:
         serializedVersion: 2
         x: 0
@@ -259,21 +246,17 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -10, y: 10}
-        - {x: -10, y: -10}
-        - {x: 0, y: -10}
-        - {x: 0, y: 10}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64e667e5c7bc8894bad3ae4f2ef2c2c4
-      internalID: 1494980111
+      spriteID: be34b6f88290f4145ad3e31f0efc0cba
+      internalID: 1821667398
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_stone_v2_7
+      name: bridge  v2_6
       rect:
         serializedVersion: 2
         x: 20
@@ -287,14 +270,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5fb135d9fc310b649812d36aaca22676
-      internalID: 1642338729
+      spriteID: 3081f0f662ccb934da1d7c1f3925677e
+      internalID: 137027507
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_stone_v2_8
+      name: bridge  v2_7
       rect:
         serializedVersion: 2
         x: 40
@@ -305,21 +288,17 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: 0, y: 10}
-        - {x: 0, y: -10}
-        - {x: 10, y: -10}
-        - {x: 10, y: 10}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66e28c9f3e6791c42b1b5761854ce1d1
-      internalID: 346652487
+      spriteID: 37d530a5de2c2984cb87292cd8e7f2b2
+      internalID: 1492735739
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_stone_v2_9
+      name: bridge  v2_8
       rect:
         serializedVersion: 2
         x: 60
@@ -330,17 +309,23 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -5, y: 10}
+        - {x: -5, y: 2}
+        - {x: -5, y: 2}
+        - {x: 1, y: 2}
+        - {x: 1, y: 2}
+        - {x: 1, y: 10}
       tessellationDetail: 0
       bones: []
-      spriteID: dc0768c85513ab14191ed68f6e020d37
-      internalID: 601039391
+      spriteID: 201f86e1f2e14a747b11ee2c2af09c7c
+      internalID: 694504300
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_stone_v2_10
+      name: bridge  v2_9
       rect:
         serializedVersion: 2
         x: 80
@@ -351,38 +336,23 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -1, y: 10}
+        - {x: -1, y: 2}
+        - {x: -1, y: 2}
+        - {x: 5, y: 2}
+        - {x: 5, y: 2}
+        - {x: 5, y: 10}
       tessellationDetail: 0
       bones: []
-      spriteID: 0309fe091c92d3743911a8c3cd0cbf26
-      internalID: 2122189258
+      spriteID: 4a1f38010eb675b408e8ba4960f6bc6c
+      internalID: -2107769774
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_stone_v2_11
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 80
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 30169f01e611a3a41bd5550bdb1ddd65
-      internalID: 992811401
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tiles_stone_v2_12
+      name: bridge  v2_10
       rect:
         serializedVersion: 2
         x: 0
@@ -394,22 +364,20 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 0, y: 10}
-        - {x: -10, y: 10}
-        - {x: -10, y: -10}
-        - {x: 10, y: -10}
-        - {x: 10, y: 0}
-        - {x: 0, y: 0}
+      - - {x: -10, y: 7}
+        - {x: -10, y: -1}
+        - {x: 10, y: -1}
+        - {x: 10, y: 7}
       tessellationDetail: 0
       bones: []
-      spriteID: 9254baad2567978438206379aab36fc4
-      internalID: 1720413842
+      spriteID: 2ad690060529ed14a8d079efafdc2a00
+      internalID: -250992846
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_stone_v2_13
+      name: bridge  v2_11
       rect:
         serializedVersion: 2
         x: 20
@@ -421,20 +389,20 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -10, y: 0}
-        - {x: -10, y: -10}
-        - {x: 10, y: -10}
-        - {x: 10, y: 0}
+      - - {x: -10, y: 7}
+        - {x: -10, y: -1}
+        - {x: 10, y: -1}
+        - {x: 10, y: 7}
       tessellationDetail: 0
       bones: []
-      spriteID: 0d4094ef6f1b4f4409f034bf430bc394
-      internalID: -1226419054
+      spriteID: efe842e4bddbc6a46a13c1654eae8812
+      internalID: 622427223
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_stone_v2_14
+      name: bridge  v2_12
       rect:
         serializedVersion: 2
         x: 40
@@ -446,22 +414,20 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 0, y: 10}
-        - {x: 0, y: 0}
-        - {x: -10, y: 0}
-        - {x: -10, y: -10}
-        - {x: 10, y: -10}
-        - {x: 10, y: 10}
+      - - {x: -10, y: 7}
+        - {x: -10, y: -1}
+        - {x: 10, y: -1}
+        - {x: 10, y: 7}
       tessellationDetail: 0
       bones: []
-      spriteID: 9c80b3b13f628a444a37359219a8ffec
-      internalID: 229339571
+      spriteID: cfc7a7a3b7287eb41a8439e70e1d42cc
+      internalID: -912196990
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_stone_v2_15
+      name: bridge  v2_13
       rect:
         serializedVersion: 2
         x: 60
@@ -472,305 +438,179 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bc21156d96be13241b0931d9f98a976f
-      internalID: -608602804
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tiles_stone_v2_16
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 60
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d58617f15414fc743b7dad463ad21a9f
-      internalID: 1132796112
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tiles_stone_v2_17
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 60
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 594878db9b1770e4d9c6485d35f529b4
-      internalID: 1804238274
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tiles_stone_v2_18
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 40
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ea70e973e6c7b164db913671404ff44e
-      internalID: -1553838299
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tiles_stone_v2_19
-      rect:
-        serializedVersion: 2
-        x: 20
-        y: 40
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0310216aba65fe2468db94f6ce513bc8
-      internalID: 113887785
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tiles_stone_v2_20
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 40
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 740685cc13e298240a2350bedfd01af7
-      internalID: -1017426585
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tiles_stone_v2_21
-      rect:
-        serializedVersion: 2
-        x: 60
-        y: 40
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b662246aef5d3974e9ebc22df6006ee5
-      internalID: -869839864
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tiles_stone_v2_22
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 40
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
       physicsShape:
-      - - {x: 2, y: -2}
-        - {x: 2, y: -10}
-        - {x: 10, y: -10}
-        - {x: 10, y: -2}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4f2933f2952d23d4e9550c4ddcaaba47
-      internalID: 139891990
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tiles_stone_v2_23
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 40
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -10, y: -2}
-        - {x: -10, y: -10}
-        - {x: -2, y: -10}
-        - {x: -2, y: -2}
-      tessellationDetail: 0
-      bones: []
-      spriteID: a05fbe9ad8733d946ae8c0dc9181bfd4
-      internalID: -295221448
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tiles_stone_v2_24
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 20
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3588abf7253832342826e420d6a63b5f
-      internalID: -959347030
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tiles_stone_v2_25
-      rect:
-        serializedVersion: 2
-        x: 20
-        y: 20
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dacc9c3511d43a54ca877bf5d2f0c310
-      internalID: -697095447
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tiles_stone_v2_26
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 20
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: deb58112f41b46445ae6abb5b3c9c7fd
-      internalID: 1253928212
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tiles_stone_v2_27
-      rect:
-        serializedVersion: 2
-        x: 60
-        y: 20
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0d110d5606102604d827fc2a1b815e88
-      internalID: 1556387240
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tiles_stone_v2_28
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 20
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: 2, y: 10}
-        - {x: 2, y: 2}
+      - - {x: 4, y: -4}
+        - {x: 4, y: -4}
+        - {x: 10, y: -4}
         - {x: 10, y: 2}
-        - {x: 10, y: 10}
+        - {x: 4, y: 2}
+        - {x: 4, y: 2}
       tessellationDetail: 0
       bones: []
-      spriteID: 0da99d96994ee0c4e8ac63ef62d4acdf
-      internalID: -930446183
+      spriteID: f4baf5a21b0afe04780291ebfadda4a2
+      internalID: -949038202
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_stone_v2_29
+      name: bridge  v2_14
       rect:
         serializedVersion: 2
-        x: 100
+        x: 80
+        y: 60
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -4, y: 2}
+        - {x: -10, y: 2}
+        - {x: -10, y: -4}
+        - {x: -10, y: -4}
+        - {x: -4, y: -4}
+        - {x: -4, y: -4}
+        - {x: -4, y: 2}
+      tessellationDetail: 0
+      bones: []
+      spriteID: e32e40cb80397724c85a256b3a80cf24
+      internalID: -1410474063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bridge  v2_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 40
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -1, y: 10}
+        - {x: -1, y: -10}
+        - {x: 5, y: -10}
+        - {x: 5, y: 10}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65876acc1ff69e7429628edbac2b36f9
+      internalID: -1108551049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bridge  v2_16
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 40
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6aac164620f368045b11f6247fbe49a1
+      internalID: 812472898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bridge  v2_17
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 40
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 1, y: -10}
+        - {x: 1, y: 10}
+        - {x: -5, y: 10}
+        - {x: -5, y: -10}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d5d68ebba2edba41984570e56ee3466
+      internalID: -1525183234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bridge  v2_18
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 40
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 4, y: 6}
+        - {x: 4, y: 6}
+        - {x: 4, y: 0}
+        - {x: 4, y: 0}
+        - {x: 10, y: 0}
+        - {x: 10, y: 6}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 470be585cd0447e4688cebd381f033cd
+      internalID: -1390432802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bridge  v2_19
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 40
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -10, y: 6}
+        - {x: -10, y: 0}
+        - {x: -4, y: 0}
+        - {x: -4, y: 0}
+        - {x: -4, y: 6}
+        - {x: -4, y: 6}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3eda7de4e9580a94388c908565b3e0e3
+      internalID: -871621800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bridge  v2_20
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 20
         width: 20
         height: 20
@@ -779,20 +619,66 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -10, y: 10}
-        - {x: -10, y: 2}
-        - {x: -2, y: 2}
-        - {x: -2, y: 10}
+      - - {x: -1, y: 10}
+        - {x: -1, y: -10}
+        - {x: 5, y: -10}
+        - {x: 5, y: 10}
       tessellationDetail: 0
       bones: []
-      spriteID: e284be5b13d39c148bd2b70572ed8c7d
-      internalID: -2125085056
+      spriteID: 6fc53dbd0977ff64ca4bec4b2cb6efa3
+      internalID: 1565732016
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_stone_v2_30
+      name: bridge  v2_21
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 20
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e4009a6641de2f4a832e1a4c4ba4aeb
+      internalID: 1219699074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bridge  v2_22
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 20
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 1, y: -10}
+        - {x: 1, y: 10}
+        - {x: -5, y: 10}
+        - {x: -5, y: -10}
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbd6a23b5de3964448453abc48c05e4c
+      internalID: -1291365654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bridge  v2_23
       rect:
         serializedVersion: 2
         x: 0
@@ -804,20 +690,20 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -10, y: 10}
-        - {x: -10, y: -2}
-        - {x: 10, y: -2}
-        - {x: 10, y: 10}
+      - - {x: -1, y: 10}
+        - {x: -1, y: -10}
+        - {x: 5, y: -10}
+        - {x: 5, y: 10}
       tessellationDetail: 0
       bones: []
-      spriteID: 0016662c9d9e09d499806cea85e4e52e
-      internalID: 2022213940
+      spriteID: c3d4cf0b964634745b240060389812bf
+      internalID: 2131044999
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_stone_v2_31
+      name: bridge  v2_24
       rect:
         serializedVersion: 2
         x: 20
@@ -828,21 +714,17 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -10, y: 10}
-        - {x: -10, y: -2}
-        - {x: 10, y: -2}
-        - {x: 10, y: 10}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 93b4074fef7ecfd4a993a7d85ee6e717
-      internalID: 1820543076
+      spriteID: 98f787ce4c82a7345a22e5f06fa7bad2
+      internalID: -789576946
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_stone_v2_32
+      name: bridge  v2_25
       rect:
         serializedVersion: 2
         x: 40
@@ -854,35 +736,14 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -10, y: 10}
-        - {x: -10, y: -2}
-        - {x: 10, y: -2}
-        - {x: 10, y: 10}
+      - - {x: 1, y: -10}
+        - {x: 1, y: 10}
+        - {x: -5, y: 10}
+        - {x: -5, y: -10}
       tessellationDetail: 0
       bones: []
-      spriteID: 598cfd42eb47ac84e88f9f3f1c2f19b4
-      internalID: -1515004088
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tiles_stone_v2_33
-      rect:
-        serializedVersion: 2
-        x: 60
-        y: 0
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a14e637b9c144ea4fb396629e5fb1962
-      internalID: 1740165694
+      spriteID: c848f006c6f61104f9d57b74d768a45a
+      internalID: 597097630
       vertices: []
       indices: 
       edges: []
@@ -898,42 +759,32 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      tiles_stone_v2_32: -1515004088
-      tiles_stone_v2_28: -930446183
-      tiles_stone_v2_24: -959347030
-      tiles_stone_v2_8: 346652487
-      tiles_stone_v2_23: -295221448
-      tiles_stone_v2_12: 1720413842
-      tiles_stone_v2_13: -1226419054
-      tiles_stone_v2_20: -1017426585
-      tiles_stone_v2_4: 863043839
-      tiles_stone_v2_26: 1253928212
-      tiles_stone_v2_29: -2125085056
-      tiles_stone_v2_0: -1038830966
-      tiles_stone_v2_5: -1539899842
-      tiles_stone_v2_6: 1494980111
-      tiles_stone_v2_3: 1416426637
-      tiles_stone_v2_21: -869839864
-      tiles_stone_v2_9: 601039391
-      tiles_stone_v2_1: -1958562720
-      tiles_stone_v2_18: -1553838299
-      tiles_stone_v2_33: 1740165694
-      tiles_stone_v2_34: 29192419
-      tiles_stone_v2_19: 113887785
-      tiles_stone_v2_22: 139891990
-      tiles_stone_v2_10: 2122189258
-      tiles_stone_v2_2: -1566080343
-      tiles_stone_v2_14: 229339571
-      tiles_stone_v2_11: 992811401
-      tiles_stone_v2_7: 1642338729
-      tiles_stone_v2_31: 1820543076
-      tiles_stone_v2_25: -697095447
-      tiles_stone_v2_27: 1556387240
-      tiles_stone_v2_16: 1132796112
-      tiles_stone_v2_17: 1804238274
-      tiles_stone_v2_30: 2022213940
-      tiles_stone_v2_15: -608602804
-      tiles_stone_v2_35: 2124616040
+      bridge  v2_10: -250992846
+      bridge  v2_11: 622427223
+      bridge  v2_5: 1821667398
+      bridge  v2_9: -2107769774
+      bridge  v2_14: -1410474063
+      bridge  v2_2: 1098711647
+      bridge  v2_20: 1565732016
+      bridge  v2_19: -871621800
+      bridge  v2_22: -1291365654
+      bridge  v2_18: -1390432802
+      bridge  v2_7: 1492735739
+      bridge  v2_25: 597097630
+      bridge  v2_4: -765586725
+      bridge  v2_1: -1146845651
+      bridge  v2_23: 2131044999
+      bridge  v2_3: -922363814
+      bridge  v2_6: 137027507
+      bridge  v2_15: -1108551049
+      bridge  v2_0: 1121864221
+      bridge  v2_17: -1525183234
+      bridge  v2_8: 694504300
+      bridge  v2_24: -789576946
+      bridge  v2_13: -949038202
+      bridge  v2_21: 1219699074
+      bridge  v2_12: -912196990
+      bridge  v2_16: 812472898
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 
