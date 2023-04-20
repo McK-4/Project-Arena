@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
@@ -124,7 +123,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 pos;
     public bool canUse1;
     public bool canUse2;
-    private bool protection = false;
+    //private bool protection = false;
 
     void Start()
     {
@@ -383,6 +382,7 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
+        WallCollision();
         moveinput = context.ReadValue<Vector2>();
 
         if (context.performed)
@@ -683,27 +683,49 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void WallCollision()
     {
-        if(collision.gameObject.tag == "Player")
+        float rayDis = 10f;
+        RaycastHit2D hit;
+        hit = Physics2D.Raycast(transform.position, facing, rayDis);
+        if(hit.transform.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<Rigidbody2D>().mass = 1000000;
-            //rb.mass = 1;
-            if(collision.gameObject.GetComponent<Rigidbody2D>().mass == rb.mass)
+            if(hit.transform.gameObject.GetComponent<PlayerController>().characterFacing == characterFacing && moveinput == new Vector2(0, 0))
             {
-                rb.mass = 1;
+
             }
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<Rigidbody2D>().mass = 1;
+
+            //UP
+            if (collision.gameObject.GetComponent<PlayerController>().characterFacing == Directions.Up && moveinput.y != 0)
+            {
+
+            }
+            //Down
+            else if (collision.transform.position.y < pos.y)
+            {
+
+            }
+            //Left
+            else if (collision.transform.position.x < pos.x)
+            {
+
+            }
+            //Right
+            else if (collision.transform.position.x > pos.x)
+            {
+
+            }
+            //Debug.Log("YOU ARE IN MY WAY");
         }
     }
-
+    
     public void RePair()
     {
         InputUser.PerformPairingWithDevice(inputDevice, input.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);

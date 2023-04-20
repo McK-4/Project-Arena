@@ -13,6 +13,7 @@ public class ItemLibary : MonoBehaviour
     private float angle;
 
     //Bomb
+    [SerializeField] GameObject bomb;
     private float bombtimer = 0;
     private float bombCooldownTime = 3f;
     private bool exploded = false;
@@ -42,23 +43,17 @@ public class ItemLibary : MonoBehaviour
             case "Bomb":
                 Bomb(pos, direction);
                 break;
-
-            case "Blizzard Storm":
-                break;
-
-            case "Blazing Storm":
-                break;
             
             case "Dark Leech":
                 break;
             
             case "Invisibility Mask":
                 break;
-            
-            case "Glove of Thunder":
-                break;
 
             case "Tome of Ash":
+                break;
+
+            case "Glove of Thunder":
                 break;
 
             default:
@@ -121,7 +116,17 @@ public class ItemLibary : MonoBehaviour
         //When Bomb explodes
         if(exploded)
         {
-
+            /*
+            Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(b.transform.position, 4);
+            
+            foreach(Collider2D player in hitPlayers)
+            {
+                if(player.gameObject.GetComponent<PlayerController>().shieldUp && player.gameObject.GetComponent<PlayerController>().validBlock)
+                {
+                    player.gameObject.GetComponent<PlayerController>().ShieldBlock(6, b);
+                }
+            }
+            */
         }
 
     }
