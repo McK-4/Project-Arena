@@ -12,6 +12,11 @@ public class ItemLibary : MonoBehaviour
     [SerializeField] GameObject arrow;
     private float angle;
 
+    //Bomb
+    private float bombtimer = 0;
+    private float bombCooldownTime = 3f;
+    private bool exploded = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,10 +36,11 @@ public class ItemLibary : MonoBehaviour
         switch (tag)
         {
             case "Bow":
-                Bow(direction, pos, mana, col, name);
+                Bow(direction, pos, col, name);
                 break;
 
             case "Bomb":
+                Bomb(pos, direction);
                 break;
 
             case "Blizzard Storm":
@@ -62,7 +68,7 @@ public class ItemLibary : MonoBehaviour
         
     }
     
-    private void Bow(Vector2 direction, Vector2 pos, float mana, Collider2D col, string attacker)
+    private void Bow(Vector2 direction, Vector2 pos, Collider2D col, string attacker)
     {
         //The bow needs a "drawback" delay so you can't spam it
 
@@ -97,5 +103,27 @@ public class ItemLibary : MonoBehaviour
 
     }
     
+    private void Bomb(Vector2 pos, Vector2 direction)
+    {
+        //GameObject b = Instantiate(bomb, pos + direction, Quaternion.identity);
+
+        //Timer until it explodes
+        if (bombtimer < bombCooldownTime)
+        {
+            bombtimer += Time.deltaTime;
+        }
+        else if (bombtimer >= bombCooldownTime)
+        {
+            bombtimer = 0;
+            exploded = true;
+        }
+
+        //When Bomb explodes
+        if(exploded)
+        {
+
+        }
+
+    }
 
 }
