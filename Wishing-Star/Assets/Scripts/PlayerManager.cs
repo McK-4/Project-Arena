@@ -43,6 +43,10 @@ public class PlayerManager : MonoBehaviour
     private Vector2 thirdPos;
     private Vector2 fourthPos;
 
+    public GameObject winningPlayer;
+
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -107,6 +111,8 @@ public class PlayerManager : MonoBehaviour
                 player4.RePair();
             }
         }
+
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -209,12 +215,20 @@ public class PlayerManager : MonoBehaviour
         playerPoints = playerPoints.OrderByDescending(p => p.score).ToArray();
 
         //Setting the Player's win screen position
-        /* This needs to be changed to changing a UI image position, not the actual gameobject
+        //This needs to be changed to changing a UI image position, not the actual gameobject
+        winningPlayer = playerPoints[0].playerGameObject;
+
+        //Debug.Log(winningPlayer.name);
+        /*
         playerPoints[0].playerGameObject.transform.position = winnerPos;
         playerPoints[1].playerGameObject.transform.position = secondPos;
         playerPoints[2].playerGameObject.transform.position = thirdPos;
         playerPoints[3].playerGameObject.transform.position = fourthPos;
         */
+    }
+    public void GameWin()
+    {
+        gameManager.winPlayerArtMat = winningPlayer.GetComponent<SpriteRenderer>();
     }
     class Player
     {

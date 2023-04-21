@@ -85,8 +85,10 @@ public class UIManager : MonoBehaviour
                 healthIconsP1[i].GetComponent<Transform>().gameObject.SetActive(false);
             }
         }
+        //Points UI
         pointsText.text = points.ToString();
 
+        //Mana UI
         if(mana <= 0)
         {
             manaBar.sprite = manaBarSprites[2];
@@ -112,6 +114,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    //Button Presses
     public void Button2(InputAction.CallbackContext context)
     {
         if (context.performed)

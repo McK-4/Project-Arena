@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,10 +25,25 @@ public class GameManager : MonoBehaviour
     public int secondsLeft;
     [SerializeField]TextMeshProUGUI timeText;
 
+    // Win Screen (UI Stuff)
+    private PlayerManager playerManager;
+    [SerializeField] List<GameObject> playerUI;
+    [SerializeField] GameObject gameWinUI;
+    public SpriteRenderer winPlayerArtMat;
+    [SerializeField] Image winPlayerArt;
+    [SerializeField] TextMeshProUGUI winPlayerNum;
+    [SerializeField] GameObject contButton;
+    private float buttonTimer = 0;
+    private float buttonCooldownTime = 0.8f;
+    public bool readyForScene = false;
+
     // Start is called before the first frame update
     void Start()
     {
         gameTimeRemaining = totalGameTime;
+
+        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+        gameWinUI.SetActive(false);
     }
 
     // Update is called once per frame
@@ -89,8 +106,50 @@ public class GameManager : MonoBehaviour
 
     void GameEnd()
     {
+        readyForScene = true;
+        //Turning Off Active Game UI and Turning On Game Win UI
+        foreach (GameObject ui in playerUI)
+        {
+            ui.SetActive(false);
+        }
 
-        //Replace this with Win Screen
-        SceneManager.LoadScene(0);
+        gameWinUI.SetActive(true);
+
+        //Getting Winning Player Art
+        //winPlayerArtMat = playerManager.winningPlayer.GetComponent<SpriteRenderer>();
+
+        playerManager.GameWin();
+
+        winPlayerArt.sprite = winPlayerArtMat.sprite;
+        winPlayerArt.material = winPlayerArtMat.material;
+        //Debug.Log(playerManager.winningPlayer.name);
+        winPlayerNum.text = playerManager.winningPlayer.name.Substring(1,0);
+
+        //Blinking Continue Button
+        if (contButton.activeSelf)
+        {
+            if (buttonTimer < buttonCooldownTime)
+            {
+                buttonTimer += Time.deltaTime;
+            }
+            else
+            {
+                buttonTimer = 0;
+                contButton.SetActive(false);
+            }
+        }
+
+        else if (!contButton.activeSelf)
+        {
+            if (buttonTimer < buttonCooldownTime)
+            {
+                buttonTimer += Time.deltaTime;
+            }
+            else
+            {
+                buttonTimer = 0;
+                contButton.SetActive(true);
+            }
+        }
     }
 }

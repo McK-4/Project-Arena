@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -124,7 +125,7 @@ public class PlayerController : MonoBehaviour
     public bool canUse1;
     public bool canUse2;
 
-    //private bool protection = false;
+    private GameManager gameManager;
 
     void Start()
     {
@@ -157,6 +158,8 @@ public class PlayerController : MonoBehaviour
         fourth = false;
 
         Order(orderInLayer);
+
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         //movementSpeed = 0.1f;
 
@@ -755,7 +758,19 @@ public class PlayerController : MonoBehaviour
             //Debug.Log("YOU ARE IN MY WAY");
         }
     }
-    
+
+    public void NextScene(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if(gameManager.readyForScene)
+            {
+                moveAble = false;
+                SceneManager.LoadScene(0);
+            }
+        }
+    }
+
     public void RePair()
     {
         InputUser.PerformPairingWithDevice(inputDevice, input.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
