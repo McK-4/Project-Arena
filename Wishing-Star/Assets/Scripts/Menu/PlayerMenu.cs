@@ -17,7 +17,10 @@ public class PlayerMenu : MonoBehaviour
     [SerializeField] Image playerArt;
     public int currentArtNum;
     public bool skinSelected;
-    [SerializeField] TextMeshProUGUI readyText;
+    [SerializeField] Image box;
+    [SerializeField] List<Sprite> playerBox;
+    [SerializeField] Color selected;
+    [SerializeField] List<Image> arrows;
 
     [SerializeField] List<GameObject> maps;
     [SerializeField] List<GameObject> readyMarks;
@@ -42,6 +45,9 @@ public class PlayerMenu : MonoBehaviour
         {
             if (playerSelectInput.y > 0)
             {
+                arrows[0].color = Color.white;
+                arrows[1].color = selected;
+
                 if (currentArtNum != playerArtList.Count - 1)
                 {
                     currentArtNum++;
@@ -56,6 +62,9 @@ public class PlayerMenu : MonoBehaviour
             }
             else if (playerSelectInput.y < 0)
             {
+                arrows[1].color = Color.white;
+                arrows[0].color = selected;
+
                 if (currentArtNum != 0)
                 {
                     currentArtNum--;
@@ -67,6 +76,11 @@ public class PlayerMenu : MonoBehaviour
 
 
                 playerArt.sprite = playerArtList[currentArtNum];
+            }
+            else if (playerSelectInput.y == 0)
+            {
+                arrows[0].color = Color.white;
+                arrows[1].color = Color.white;
             }
         }
 
@@ -99,7 +113,9 @@ public class PlayerMenu : MonoBehaviour
             if (context.performed && skinSelected == false)
             {
                 skinSelected = true;
-                readyText.text = "- Ready -";
+                box.sprite = playerBox[1];
+                arrows[0].color = Color.white;
+                arrows[1].color = Color.white;
                 menuManager.playersReady++;
                 inputDevice = gameObject.GetComponent<PlayerInput>().devices[0].device;
                 menuManager.ButtonPressed.Play();
@@ -107,7 +123,7 @@ public class PlayerMenu : MonoBehaviour
             else if (context.performed && skinSelected == true)
             {
                 skinSelected = false;
-                readyText.text = "- Press Blue -";
+                box.sprite = playerBox[0];
                 menuManager.playersReady--;
             }
         }

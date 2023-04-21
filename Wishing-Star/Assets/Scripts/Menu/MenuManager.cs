@@ -159,27 +159,29 @@ public class MenuManager : MonoBehaviour
                 master.player3Skin = player3Select.currentArtNum;
                 master.player4Skin = player4Select.currentArtNum;
 
-                mapSelectMenu.SetActive(true);
-                player1Select.mapSelectMenu = true;
-                player2Select.mapSelectMenu = true;
-                player3Select.mapSelectMenu = true;
-                player4Select.mapSelectMenu = true;
-                if (!player1Active)
-                {
-                    player1Select.mark.SetActive(false);
-                }
-                if (!player2Active)
-                {
-                    player2Select.mark.SetActive(false);
-                }
-                if (!player3Active)
-                {
-                    player3Select.mark.SetActive(false);
-                }
-                if (!player4Active)
-                {
-                    player4Select.mark.SetActive(false);
-                }
+                SceneManager.LoadScene(1);
+
+                //mapSelectMenu.SetActive(true);
+                //player1Select.mapSelectMenu = true;
+                //player2Select.mapSelectMenu = true;
+                //player3Select.mapSelectMenu = true;
+                //player4Select.mapSelectMenu = true;
+                //if (!player1Active)
+                //{
+                //    player1Select.mark.SetActive(false);
+                //}
+                //if (!player2Active)
+                //{
+                //    player2Select.mark.SetActive(false);
+                //}
+                //if (!player3Active)
+                //{
+                //    player3Select.mark.SetActive(false);
+                //}
+                //if (!player4Active)
+                //{
+                //    player4Select.mark.SetActive(false);
+                //}
             }
         }
         else
