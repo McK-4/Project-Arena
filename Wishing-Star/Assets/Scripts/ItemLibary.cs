@@ -14,9 +14,12 @@ public class ItemLibary : MonoBehaviour
 
     //Bomb
     [SerializeField] GameObject bomb;
-    private float bombtimer = 0;
-    private float bombCooldownTime = 3f;
-    private bool exploded = false;
+    [SerializeField] float bombtimer = 0;
+    [SerializeField] float bombCooldownTime = 3f;
+    public bool bombPlaced = false;
+    [SerializeField] bool exploded = false;
+    [SerializeField] string bombName;
+    private GameObject bombSummoned;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +30,50 @@ public class ItemLibary : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //Timer until bomb explodes
+        if(bombPlaced)
+        {
+            if (bombtimer < bombCooldownTime)
+            {
+                bombtimer += Time.deltaTime;
+            }
+            else if (bombtimer >= bombCooldownTime)
+            {
+                bombtimer = 0;
+                exploded = true;
+            }
+        }
+
+        //When Bomb explodes
+        if(exploded)
+        {
+            /*
+            bombSummoned = GameObject.Find(bombName);
+
+            Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(GameObject.Find(bombName).transform.position, 4);
+            
+            foreach(Collider2D player in hitPlayers)
+            {
+                if(player.gameObject.tag == "Player")
+                {
+                    if(player.gameObject.GetComponent<PlayerController>().shieldUp && player.gameObject.GetComponent<PlayerController>().validBlock)
+                    {
+                        player.gameObject.GetComponent<PlayerController>().ShieldBlocked(6, bombSummoned);
+                        exploded = false;
+                        Destroy(bombSummoned);
+                        bombPlaced = false;
+                    }
+                    else
+                    {
+                        player.gameObject.GetComponent<PlayerController>().Damaged(6, bombSummoned);
+                        exploded = false;
+                        Destroy(bombSummoned);
+                        bombPlaced = false;
+                    }
+                }
+            }
+            */
+        }
     }
 
     public void ItemLibFind(string tag, Vector2 direction, Vector2 pos, float mana, Collider2D col, string name)
@@ -41,7 +87,7 @@ public class ItemLibary : MonoBehaviour
                 break;
 
             case "Bomb":
-                Bomb(pos, direction);
+                Bomb(pos, direction, name);
                 break;
             
             case "Dark Leech":
@@ -98,11 +144,16 @@ public class ItemLibary : MonoBehaviour
 
     }
     
-    private void Bomb(Vector2 pos, Vector2 direction)
+    private void Bomb(Vector2 pos, Vector2 direction, string attacker)
     {
-        //GameObject b = Instantiate(bomb, pos + direction, Quaternion.identity);
+        GameObject b = Instantiate(bomb, pos + direction, Quaternion.identity);
+        bombPlaced = true;
 
+        b.name = (attacker + "'s bomb");
+        bombName = b.name;
         //Timer until it explodes
+        /*
+        bombtimer = 0;
         if (bombtimer < bombCooldownTime)
         {
             bombtimer += Time.deltaTime;
@@ -111,24 +162,35 @@ public class ItemLibary : MonoBehaviour
         {
             bombtimer = 0;
             exploded = true;
+            Destroy(b);
         }
-
+        */
         //When Bomb explodes
+        /*
         if(exploded)
         {
-            /*
+            
             Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(b.transform.position, 4);
             
             foreach(Collider2D player in hitPlayers)
             {
-                if(player.gameObject.GetComponent<PlayerController>().shieldUp && player.gameObject.GetComponent<PlayerController>().validBlock)
+                if(player.gameObject.tag == "Player")
                 {
-                    player.gameObject.GetComponent<PlayerController>().ShieldBlock(6, b);
+                    bombSummoned = gameObject.Find(bombName);
+                    if(player.gameObject.GetComponent<PlayerController>().shieldUp && player.gameObject.GetComponent<PlayerController>().validBlock)
+                    {
+                        player.gameObject.GetComponent<PlayerController>().ShieldBlocked(6, bombSummoned);
+                    }
+                    else
+                    {
+                        player.gameObject.GetComponent<PlayerController>().Damaged(6, bombSummoned);
+                    }
                 }
             }
-            */
+            
+            
         }
-
+        */
     }
 
 }

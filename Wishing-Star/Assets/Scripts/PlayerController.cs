@@ -123,6 +123,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 pos;
     public bool canUse1;
     public bool canUse2;
+
     //private bool protection = false;
 
     void Start()
@@ -448,11 +449,17 @@ public class PlayerController : MonoBehaviour
                 itemLib.ItemLibFind(itemTag1, facing, pos, mana, col, name);
             }
 
+            //Mana Cost for items:
             if(itemTag1 == "Bow" && tempMana >= 10)
             {
                 tempMana -= 10;
+                canUse1 = true;
             }
-
+            else if(itemTag1 == "Bomb" && tempMana >= 20 && itemLib.bombPlaced)
+            {
+                tempMana -= 20;
+                canUse1 = true;
+            }
             else
             {
                 canUse1 = false;
@@ -464,13 +471,36 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
+            itemTag2 = "Bomb";
             if(canUse2)
             {
                 itemLib.ItemLibFind(itemTag2, facing, pos, mana, col, name);
             }
+
+            //Mana Cost for items:
+            if(itemTag2 == "Bow" && tempMana >= 10)
+            {
+                tempMana -= 10;
+                canUse2 = true;
+            }
+            else if(itemTag2 == "Bomb" && tempMana >= 20 && !itemLib.bombPlaced)
+            {
+                tempMana -= 20;
+                canUse2 = true;
+            }
+            else
+            {
+                canUse2 = false;
+            }
         }
     }
-
+    /*
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(pos, 4);
+    }
+    */
     public void ShieldBlocked(int damage, GameObject otherPlayer)
     {
         //Debug.Log(damage);
