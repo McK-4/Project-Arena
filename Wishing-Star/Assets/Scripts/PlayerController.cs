@@ -126,6 +126,11 @@ public class PlayerController : MonoBehaviour
     public bool canUse1;
     public bool canUse2;
 
+    public bool leeched;
+    [SerializeField] float leechtimer = 0;
+    [SerializeField] float leechCooldownTime = 1f;
+
+    //End Game (For switching scenes back to the menu)
     private GameManager gameManager;
 
     void Start()
@@ -152,6 +157,8 @@ public class PlayerController : MonoBehaviour
         points = 0;
         canUse1 = true;
         canUse2 = true;
+
+        leeched = false;
 
         winner = false;
         second = false;
@@ -382,6 +389,19 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        //Dark Leech CoolDown Timer
+        if(leeched)
+        {
+            if (leechtimer < leechCooldownTime)
+            {
+                leechtimer += Time.deltaTime;
+            }
+            else if (leechtimer >= leechCooldownTime)
+            {
+                leechtimer = 0;
+                leeched = false;
+            }
+        }
 
     }
 
@@ -464,6 +484,11 @@ public class PlayerController : MonoBehaviour
                 tempMana -= 20;
                 canUse1 = true;
             }
+            else if(itemTag1 == "Dark Leech" && tempMana >= 50)
+            {
+                tempMana -= 50;
+                canUse2 = true;
+            }
             else
             {
                 canUse1 = false;
@@ -475,7 +500,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            itemTag2 = "Bomb";
+            itemTag2 = "Dark Leech";
             if(canUse2)
             {
                 itemLib.ItemLibFind(itemTag2, facing, pos, mana, col, name);
@@ -492,13 +517,18 @@ public class PlayerController : MonoBehaviour
                 tempMana -= 20;
                 canUse2 = true;
             }
+            else if(itemTag2 == "Dark Leech" && tempMana >= 50)
+            {
+                tempMana -= 50;
+                canUse2 = true;
+            }
             else
             {
                 canUse2 = false;
             }
         }
     }
-    /*
+    /* area test for bomb and dark leech
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
