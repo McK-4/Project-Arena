@@ -102,7 +102,8 @@ public class PlayerController : MonoBehaviour
     public bool validBlock;
     private Vector2 eDirection;
     private Vector2 pDirection;
-    private float knockbackForce = 20000;
+    //private float knockbackForce = 20000;
+    private float knockbackForce = 20;
     private Vector2 eKnockback;
     private Vector2 pKnockback;
     private GameObject attacker;
@@ -617,23 +618,22 @@ public class PlayerController : MonoBehaviour
             Order(4);
         }
 
-        if (collision.gameObject.tag == "Bow")
+        if (collision.gameObject.tag == "Bow" && name != collision.gameObject.transform.name.Substring(0,8))
         {
             killerName = collision.gameObject.transform.name.Substring(0,8);
 
             attacker = collision.gameObject;
+            Destroy(collision.gameObject);
             Debug.Log(name + " " + attacker + " " +killerName);
         }
 
-        else if (collision.gameObject.transform.parent.tag == "Player")
+        if(collision.gameObject.tag == "Sword")
         {
-            if(collision.gameObject.tag == "Sword")
-            {
-                killerName = collision.gameObject.transform.parent.name;
+            killerName = collision.gameObject.transform.parent.name;
 
-                attacker = collision.gameObject.transform.parent.gameObject;
-            }
+            attacker = collision.gameObject.transform.parent.gameObject;
         }
+        
 
         if ((attacker.transform.position.y - transform.position.y) > 0 && (attacker.transform.position.x - transform.position.x) > 0)
         {

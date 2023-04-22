@@ -47,7 +47,7 @@ public class ItemLibary : MonoBehaviour
         //When Bomb explodes
         if(exploded)
         {
-            /*
+            
             bombSummoned = GameObject.Find(bombName);
 
             Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(GameObject.Find(bombName).transform.position, 4);
@@ -72,7 +72,7 @@ public class ItemLibary : MonoBehaviour
                     }
                 }
             }
-            */
+            
         }
     }
 

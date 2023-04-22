@@ -20031,6 +20031,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1593490301875527970, guid: 51a971ae1e61d9641afcc56c4abff943, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2202851207085213772, guid: 51a971ae1e61d9641afcc56c4abff943, type: 3}
       propertyPath: m_Name
       value: Bomb
