@@ -369,7 +369,14 @@ public class PlayerController : MonoBehaviour
             {
                 deathTimer = 0;
                 died = false;
-                attacker.GetComponent<PlayerController>().points += 1;
+                if(attacker.tag == "Player")
+                {
+                   attacker.GetComponent<PlayerController>().points += 1;
+                }
+                else
+                {
+                    GameObject.Find(killerName).GetComponent<PlayerController>().points += 1;
+                }
                 transform.SetPositionAndRotation(respawn, Quaternion.identity);
                 health = maxHealth;
             }
@@ -487,7 +494,12 @@ public class PlayerController : MonoBehaviour
             else if(itemTag1 == "Dark Leech" && tempMana >= 50)
             {
                 tempMana -= 50;
-                canUse2 = true;
+                canUse1 = true;
+            }
+            else if(itemTag1 == "Tome of Ash" && tempMana >= 25)
+            {
+                tempMana -= 25;
+                canUse1 = true;
             }
             else
             {
@@ -500,7 +512,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            itemTag2 = "Dark Leech";
+            itemTag2 = "Tome of Ash";
             if(canUse2)
             {
                 itemLib.ItemLibFind(itemTag2, facing, pos, mana, col, name);
@@ -520,6 +532,11 @@ public class PlayerController : MonoBehaviour
             else if(itemTag2 == "Dark Leech" && tempMana >= 50)
             {
                 tempMana -= 50;
+                canUse2 = true;
+            }
+            else if(itemTag2 == "Tome of Ash" && tempMana >= 25)
+            {
+                tempMana -= 25;
                 canUse2 = true;
             }
             else
@@ -657,6 +674,15 @@ public class PlayerController : MonoBehaviour
             Debug.Log(name + " " + attacker + " " +killerName);
         }
 
+        if (collision.gameObject.tag == "Tome of Ash" && name != collision.gameObject.transform.name.Substring(0,8))
+        {
+            killerName = collision.gameObject.transform.name.Substring(0,8);
+
+            attacker = collision.gameObject;
+            Destroy(collision.gameObject);
+            Debug.Log(name + " " + attacker + " " +killerName);
+        }
+
         if(collision.gameObject.tag == "Sword")
         {
             killerName = collision.gameObject.transform.parent.name;
@@ -664,26 +690,29 @@ public class PlayerController : MonoBehaviour
             attacker = collision.gameObject.transform.parent.gameObject;
         }
         
-
-        if ((attacker.transform.position.y - transform.position.y) > 0 && (attacker.transform.position.x - transform.position.x) > 0)
+        //Making sure that there is an attacker before getting a angle
+        if(attacker != null)
         {
-            //quadrant 1
-            angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.y - transform.position.y) / (attacker.transform.position.x - transform.position.x))) * Mathf.Rad2Deg;
-        }
-        else if ((attacker.transform.position.y - transform.position.y) > 0 && (attacker.transform.position.x - transform.position.x) < 0)
-        {
-            //quadrant 2
-            angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.x - transform.position.x) / (attacker.transform.position.y - transform.position.y))) * Mathf.Rad2Deg + 90;
-        }
-        else if ((attacker.transform.position.y - transform.position.y) < 0 && (attacker.transform.position.x - transform.position.x) < 0)
-        {
-            //quadrant 3
-            angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.y - transform.position.y) / (attacker.transform.position.x - transform.position.x))) * Mathf.Rad2Deg + 180;
-        }
-        else if ((attacker.transform.position.y - transform.position.y) < 0 && (attacker.transform.position.x - transform.position.x) > 0)
-        {
-            //quadrant 4
-            angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.x - transform.position.x) / (attacker.transform.position.y - transform.position.y))) * Mathf.Rad2Deg + 270;
+            if ((attacker.transform.position.y - transform.position.y) > 0 && (attacker.transform.position.x - transform.position.x) > 0)
+            {
+                //quadrant 1
+                angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.y - transform.position.y) / (attacker.transform.position.x - transform.position.x))) * Mathf.Rad2Deg;
+            }
+            else if ((attacker.transform.position.y - transform.position.y) > 0 && (attacker.transform.position.x - transform.position.x) < 0)
+            {
+                //quadrant 2
+                angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.x - transform.position.x) / (attacker.transform.position.y - transform.position.y))) * Mathf.Rad2Deg + 90;
+            }
+            else if ((attacker.transform.position.y - transform.position.y) < 0 && (attacker.transform.position.x - transform.position.x) < 0)
+            {
+                //quadrant 3
+                angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.y - transform.position.y) / (attacker.transform.position.x - transform.position.x))) * Mathf.Rad2Deg + 180;
+            }
+            else if ((attacker.transform.position.y - transform.position.y) < 0 && (attacker.transform.position.x - transform.position.x) > 0)
+            {
+                //quadrant 4
+                angle = Mathf.Atan(Mathf.Abs((attacker.transform.position.x - transform.position.x) / (attacker.transform.position.y - transform.position.y))) * Mathf.Rad2Deg + 270;
+            }
         }
 
         if (characterFacing == Directions.Up && shieldUp && angle >= 22.5 && angle <= 157.5)
@@ -730,11 +759,11 @@ public class PlayerController : MonoBehaviour
         //Bow and Arrow
         if (collision.gameObject.tag == "Bow" && !damaged && collision.name.Substring(0, 8) != name)
         {
-            Debug.Log("AHHHHH!");
+            //Debug.Log("AHHHHH!");
             //if Shield Blocking
             if (shieldUp && validBlock)
             {
-                Debug.Log("BILL!");
+                //Debug.Log("BILL!");
                 ShieldBlocked(2, attacker);
             }
 
@@ -742,6 +771,24 @@ public class PlayerController : MonoBehaviour
             else
             {
                 Damaged(2, attacker);
+            }
+        }
+
+        //Tome of Ash
+        if (collision.gameObject.tag == "Tome of Ash" && !damaged && collision.name.Substring(0, 8) != name)
+        {
+            //Debug.Log("AHHHHH!");
+            //if Shield Blocking
+            if (shieldUp && validBlock)
+            {
+                //Debug.Log("BILL!");
+                ShieldBlocked(4, attacker);
+            }
+
+            //No Shield Blocking
+            else
+            {
+                Damaged(4, attacker);
             }
         }
     }

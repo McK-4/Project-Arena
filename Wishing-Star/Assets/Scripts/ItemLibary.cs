@@ -8,9 +8,10 @@ public class ItemLibary : MonoBehaviour
 
     public string itemTag;
 
+    private float angle;
+
     //Bow
     [SerializeField] GameObject arrow;
-    private float angle;
 
     //Bomb
     [SerializeField] GameObject bomb;
@@ -25,8 +26,9 @@ public class ItemLibary : MonoBehaviour
     [SerializeField] GameObject leech;
     private string leechName;
     private bool leechThrown = false;
-    //[SerializeField] float leechtimer = 0;
-    //[SerializeField] float leechCooldownTime = 1f;
+
+    //Tome of Ash
+    [SerializeField] GameObject ash;
 
     // Start is called before the first frame update
     void Start()
@@ -117,14 +119,16 @@ public class ItemLibary : MonoBehaviour
             case "Dark Leech":
                 DarkLeech(pos, direction, name);
                 break;
-            
-            case "Invisibility Mask":
+
+            case "Glove of Thunder":
+                GloveOfThunder(pos, direction, name);
                 break;
 
             case "Tome of Ash":
+                TomeOfAsh(pos, direction, name);
                 break;
 
-            case "Glove of Thunder":
+            case "Invisibility Mask":
                 break;
 
             default:
@@ -210,4 +214,60 @@ public class ItemLibary : MonoBehaviour
         Destroy(dl, 7f);
     }
     
+    private void GloveOfThunder(Vector2 pos, Vector2 direction, string attacker)
+    {
+        //Getting the angle: 
+        //Up
+        if(direction == new Vector2 (0, 1))
+        {
+            angle = 0;
+        }
+        //Down
+        else if (direction == new Vector2(0, -1))
+        {
+            angle = 180;
+        }
+        //Right
+        else if (direction == new Vector2(1, 0))
+        {
+            angle = 270;
+        }
+        //Left
+        else if (direction == new Vector2(-1, 0))
+        {
+            angle = 90;
+        }
+
+    }
+
+    private void TomeOfAsh(Vector2 pos, Vector2 direction, string attacker)
+    {
+        //Getting the angle: 
+        //Up
+        if(direction == new Vector2 (0, 1))
+        {
+            angle = 0;
+        }
+        //Down
+        else if (direction == new Vector2(0, -1))
+        {
+            angle = 180;
+        }
+        //Right
+        else if (direction == new Vector2(1, 0))
+        {
+            angle = 270;
+        }
+        //Left
+        else if (direction == new Vector2(-1, 0))
+        {
+            angle = 90;
+        }
+
+        GameObject ta = Instantiate(ash, pos + direction, Quaternion.Euler(0,0, angle));
+        ta.GetComponent<Rigidbody2D>().velocity = direction * 10f;
+        ta.name = (attacker + "'s ash");
+        Destroy(ta, 2f);
+    }
+
 }
