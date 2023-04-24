@@ -519,6 +519,7 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
             itemTag2 = "Tome of Ash";
+            Debug.Log(itemTag2);
             if(canUse2)
             {
                 itemLib.ItemLibFind(itemTag2, facing, pos, mana, col, name);
@@ -747,7 +748,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Sword
-        if (collision.gameObject.tag == "Sword" && !damaged)
+        if (collision.gameObject.tag == "Sword" && !damaged && gameObject.layer == collision.gameObject.layer)
         {
             //if Shield Blocking
             if (shieldUp && validBlock)
@@ -856,6 +857,9 @@ public class PlayerController : MonoBehaviour
         switch(layer)
         {
             case 1:
+                if (gameObject.name == "3_Player")
+                    Debug.Log("I'm being called");
+
                 spriteRen.sortingOrder = 1;
                 Physics2D.IgnoreLayerCollision(playerLayer, 6, false);
                 Physics2D.IgnoreLayerCollision(playerLayer, 7);
