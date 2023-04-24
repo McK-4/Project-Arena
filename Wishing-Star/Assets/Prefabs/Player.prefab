@@ -466,6 +466,10 @@ MonoBehaviour:
   numPlayers: []
   killerName: 
   points: 0
+  winner: 0
+  second: 0
+  third: 0
+  fourth: 0
   characterFacing: 2
   respawn: {x: 0, y: 0}
   maxHealth: 10
@@ -501,7 +505,11 @@ MonoBehaviour:
   itemTag2: 
   facing: {x: 0, y: 0}
   pos: {x: 0, y: 0}
-  canUse: 0
+  canUse1: 0
+  canUse2: 0
+  leeched: 0
+  leechtimer: 0
+  leechCooldownTime: 1
 --- !u!61 &2241705164052626360
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -515,7 +523,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.2}
+  m_Offset: {x: 0, y: -0.3}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -526,7 +534,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.7}
+  m_Size: {x: 0.7, y: 0.5}
   m_EdgeRadius: 0
 --- !u!95 &8683046409141822645
 Animator:
@@ -990,7 +998,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

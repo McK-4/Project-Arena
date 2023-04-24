@@ -449,7 +449,13 @@ public class PlayerController : MonoBehaviour
             }
             //movementSpeed = movementSpeedStart;
         }
-        
+
+        if (gameManager.readyForScene)
+        {
+            moveAble = false;
+            SceneManager.LoadScene(0);
+        }
+
     }
 
     public void Shield(InputAction.CallbackContext context)
@@ -836,20 +842,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void NextScene(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            if(gameManager.readyForScene)
-            {
-                moveAble = false;
-                SceneManager.LoadScene(0);
-            }
-        }
-    }
 
     public void RePair()
     {
+        Debug.Log("Pairing" + inputDevice);
         InputUser.PerformPairingWithDevice(inputDevice, input.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
         input.SwitchCurrentControlScheme(inputDevice);
         anim.runtimeAnimatorController = skin[activeSkin];
@@ -867,21 +863,21 @@ public class PlayerController : MonoBehaviour
                 Physics2D.IgnoreLayerCollision(playerLayer, 9);
                 break;
             case 2:
-                spriteRen.sortingOrder = 3;
+                spriteRen.sortingOrder = 2;
                 Physics2D.IgnoreLayerCollision(playerLayer, 6);
                 Physics2D.IgnoreLayerCollision(playerLayer, 7, false);
                 Physics2D.IgnoreLayerCollision(playerLayer, 8);
                 Physics2D.IgnoreLayerCollision(playerLayer, 9);
                 break;
             case 3:
-                spriteRen.sortingOrder = 4;
+                spriteRen.sortingOrder = 3;
                 Physics2D.IgnoreLayerCollision(playerLayer, 6);
                 Physics2D.IgnoreLayerCollision(playerLayer, 7);
                 Physics2D.IgnoreLayerCollision(playerLayer, 8, false);
                 Physics2D.IgnoreLayerCollision(playerLayer, 9);
                 break;
             case 4:
-                spriteRen.sortingOrder = 5;
+                spriteRen.sortingOrder = 4;
                 Physics2D.IgnoreLayerCollision(playerLayer, 6);
                 Physics2D.IgnoreLayerCollision(playerLayer, 7);
                 Physics2D.IgnoreLayerCollision(playerLayer, 8);
