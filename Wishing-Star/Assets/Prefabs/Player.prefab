@@ -457,7 +457,7 @@ MonoBehaviour:
   - {fileID: 22100000, guid: f22cb4718dcb7d0429b4986955105c32, type: 2}
   - {fileID: 22100000, guid: 1d97a4ff78cb0524787f83b024c0cac4, type: 2}
   - {fileID: 22100000, guid: 86dc6a182fc497f4b8c260c8a3263864, type: 2}
-  activeSkin: 2
+  activeSkin: 0
   tileRen: {fileID: 0}
   orderInLayer: 0
   layerName: 
@@ -972,7 +972,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3526280613669542168
 Transform:
   m_ObjectHideFlags: 0

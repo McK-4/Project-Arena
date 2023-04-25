@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
     private float maxVelocityY = 7.60f;
     [SerializeField] Vector2 moveinput = Vector2.zero;
     public bool moving = false;
-    private bool moveAble = true;
+    public bool moveAble = true;
    // private bool moveMaxX = false;
    // private bool moveMaxY = false;
 
@@ -427,7 +427,6 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        WallCollision();
         moveinput = context.ReadValue<Vector2>();
 
         if (context.performed)
@@ -896,20 +895,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void WallCollision()
-    {
-        float rayDis = 10f;
-        RaycastHit2D hit;
-        hit = Physics2D.Raycast(transform.position, facing, rayDis);
-        if(hit.transform.gameObject.tag == "Player")
-        {
-            if(hit.transform.gameObject.GetComponent<PlayerController>().characterFacing == characterFacing && moveinput == new Vector2(0, 0))
-            {
-
-            }
-        }
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player")
@@ -953,9 +938,6 @@ public class PlayerController : MonoBehaviour
         switch(layer)
         {
             case 1:
-                if (gameObject.name == "3_Player")
-                    Debug.Log("I'm being called");
-
                 spriteRen.sortingOrder = 1;
                 Physics2D.IgnoreLayerCollision(playerLayer, 6, false);
                 Physics2D.IgnoreLayerCollision(playerLayer, 7);
@@ -963,21 +945,21 @@ public class PlayerController : MonoBehaviour
                 Physics2D.IgnoreLayerCollision(playerLayer, 9);
                 break;
             case 2:
-                spriteRen.sortingOrder = 2;
+                spriteRen.sortingOrder = 3;
                 Physics2D.IgnoreLayerCollision(playerLayer, 6);
                 Physics2D.IgnoreLayerCollision(playerLayer, 7, false);
                 Physics2D.IgnoreLayerCollision(playerLayer, 8);
                 Physics2D.IgnoreLayerCollision(playerLayer, 9);
                 break;
             case 3:
-                spriteRen.sortingOrder = 3;
+                spriteRen.sortingOrder = 5;
                 Physics2D.IgnoreLayerCollision(playerLayer, 6);
                 Physics2D.IgnoreLayerCollision(playerLayer, 7);
                 Physics2D.IgnoreLayerCollision(playerLayer, 8, false);
                 Physics2D.IgnoreLayerCollision(playerLayer, 9);
                 break;
             case 4:
-                spriteRen.sortingOrder = 4;
+                spriteRen.sortingOrder = 7;
                 Physics2D.IgnoreLayerCollision(playerLayer, 6);
                 Physics2D.IgnoreLayerCollision(playerLayer, 7);
                 Physics2D.IgnoreLayerCollision(playerLayer, 8);
@@ -988,5 +970,18 @@ public class PlayerController : MonoBehaviour
                 Physics2D.IgnoreLayerCollision(playerLayer, 7);
                 break;
         }
+    }
+
+    public IEnumerator Teleported(int layer)
+    {
+        Order(layer);
+        rb.velocity = Vector2.zero;
+        moveAble = false;
+        rb.AddForce(Vector2.down * 20, ForceMode2D.Impulse);
+        characterFacing = Directions.Down;
+        anim.SetInteger("Direction", 0);
+        gameObject.GetComponent<SpriteRenderer>().flipX = false;
+        yield return new WaitForSeconds(0.1f);
+        moveAble = true;
     }
 }
