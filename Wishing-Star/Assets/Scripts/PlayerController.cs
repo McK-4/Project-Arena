@@ -125,6 +125,15 @@ public class PlayerController : MonoBehaviour
     public Vector2 pos;
     public bool canUse1;
     public bool canUse2;
+    private bool holding1;
+    private bool holding2;
+    private bool swapping1;
+    private bool swapping2;
+    private bool pickingup1;
+    private bool pickingup2;
+
+    [SerializeField] float pickUptimer = 0;
+    [SerializeField] float pickUpCooldownTime = 2f;
 
     public bool leeched;
     [SerializeField] float leechtimer = 0;
@@ -163,7 +172,6 @@ public class PlayerController : MonoBehaviour
         points = 0;
         canUse1 = true;
         canUse2 = true;
-
         leeched = false;
 
         winner = false;
@@ -187,8 +195,39 @@ public class PlayerController : MonoBehaviour
         //Item stuff
         pos = transform.position;
 
+        //Item Pickup
+        if(itemTag1 != "")
+        {
+            holding1 = true;
+        }
+        if(itemTag1 == "")
+        {
+            holding1 = false;
+        }
+        if (itemTag2 != "")
+        {
+            holding2 = true;
+        }
+        if (itemTag2 == "")
+        {
+            holding2 = false;
+        }
+
+        if (swapping1)
+        {
+            if (pickUptimer < pickUpCooldownTime)
+            {
+                pickUptimer += Time.deltaTime;
+            }
+            else if (pickUptimer >= pickUpCooldownTime)
+            {
+                pickUptimer = 0;
+                pickingup1 = true;
+            }
+        }
+
         //Mana Regeneration
-        if(mana != tempMana)
+        if (mana != tempMana)
         {
             if(gainingMana)
             {
@@ -213,7 +252,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //This doesn't work, right now while it is gaining mana you have infinate mana and can't stop it
         if(!manaUsed && mana != manaMax)
         {
             mana += (5 * Time.deltaTime);
@@ -409,7 +447,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //Glove of Thunder stuff
+        //Glove of Thunder charge up
         if(charging && powerLvl < 2)
         {
             if (chargetimer < chargeCooldownTime)
@@ -427,7 +465,10 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        moveinput = context.ReadValue<Vector2>();
+        if(moveAble)
+        {
+            moveinput = context.ReadValue<Vector2>();
+        }
 
         if (context.performed)
         {
@@ -492,7 +533,14 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            itemTag1 = "Glove of Thunder";
+            if(!holding1)
+            {
+                pickingup1 = true;
+            }
+            if(holding1)
+            {
+                swapping1 = true;
+            }
             if(canUse1 && itemTag1 != "Glove of Thunder")
             {
                 itemLib.ItemLibFind(itemTag1, facing, pos, mana, col, name, powerLvl);
@@ -537,7 +585,15 @@ public class PlayerController : MonoBehaviour
 
         if(context.canceled)
         {
-            if(canUse1 && itemTag1 == "Glove of Thunder" && charging)
+            if(pickingup1)
+            {
+                pickingup1 = false;
+            }
+            if (swapping1)
+            {
+                swapping1 = false;
+            }
+            if (canUse1 && itemTag1 == "Glove of Thunder" && charging)
             {
                 charging = false;
                 chargetimer = 0f;
@@ -576,7 +632,10 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            itemTag2 = "Tome of Ash";
+            if (!holding2)
+            {
+                pickingup2 = true;
+            }
             Debug.Log(itemTag2);
             if(canUse2)
             {
@@ -607,6 +666,17 @@ public class PlayerController : MonoBehaviour
             else
             {
                 canUse2 = false;
+            }
+        }
+        if(context.canceled)
+        {
+            if (pickingup2)
+            {
+                pickingup2 = false;
+            }
+            if (swapping2)
+            {
+                swapping2 = false;
             }
         }
     }
@@ -729,8 +799,23 @@ public class PlayerController : MonoBehaviour
         {
             Order(4);
         }
+        
+        if(pickingup1 && collision.gameObject.tag == "Pick Up")
+        {
+            Debug.Log("LOU LOU");
+            itemTag1 = collision.gameObject.name;
+            Destroy(collision.gameObject);
+        }
 
-        if (collision.gameObject.tag == "Bow" && name != collision.gameObject.transform.name.Substring(0,8))
+        if (pickingup2 && collision.gameObject.tag == "Pick Up")
+        {
+            Debug.Log("BAW???");
+            itemTag2 = collision.gameObject.name;
+            Destroy(collision.gameObject);
+        }
+
+        //Getting item extra info
+        if (collision.gameObject.tag == "Bow" && name != collision.gameObject.transform.name.Substring(0,8) && collision.gameObject.transform.name.Substring(1,1) == "_")
         {
             killerName = collision.gameObject.transform.name.Substring(0,8);
 
@@ -739,7 +824,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log(name + " " + attacker + " " +killerName);
         }
 
-        if (collision.gameObject.tag == "Tome of Ash" && name != collision.gameObject.transform.name.Substring(0,8))
+        if (collision.gameObject.tag == "Tome of Ash" && name != collision.gameObject.transform.name.Substring(0,8) && collision.gameObject.transform.name.Substring(1, 1) == "_")
         {
             killerName = collision.gameObject.transform.name.Substring(0,8);
 
@@ -748,7 +833,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log(name + " " + attacker + " " +killerName);
         }
 
-        if (collision.gameObject.tag == "Glove of Thunder" && name != collision.gameObject.transform.name.Substring(0,8))
+        if (collision.gameObject.tag == "Glove of Thunder" && name != collision.gameObject.transform.name.Substring(0,8) && collision.gameObject.transform.name.Substring(1, 1) == "_")
         {
             killerName = collision.gameObject.transform.name.Substring(0,8);
 
@@ -831,7 +916,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Bow and Arrow
-        if (collision.gameObject.tag == "Bow" && !damaged && collision.name.Substring(0, 8) != name)
+        if (collision.gameObject.tag == "Bow" && !damaged && collision.name.Substring(0, 8) != name && collision.gameObject.transform.name.Substring(1, 1) == "_")
         {
             //Debug.Log("AHHHHH!");
             //if Shield Blocking
@@ -849,7 +934,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Tome of Ash
-        if (collision.gameObject.tag == "Tome of Ash" && !damaged && collision.name.Substring(0, 8) != name)
+        if (collision.gameObject.tag == "Tome of Ash" && !damaged && collision.name.Substring(0, 8) != name && collision.gameObject.transform.name.Substring(1, 1) == "_")
         {
             //Debug.Log("AHHHHH!");
             //if Shield Blocking
@@ -867,7 +952,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Glove of Thunder
-        if (collision.gameObject.tag == "Glove of Thunder" && !damaged && collision.name.Substring(0, 8) != name)
+        if (collision.gameObject.tag == "Glove of Thunder" && !damaged && collision.name.Substring(0, 8) != name && collision.gameObject.transform.name.Substring(1, 1) == "_")
         {
             //Debug.Log("Power level is " + powerLvl);
             //Debug.Log("My Bolt Damage is " + boltDmg);
@@ -894,7 +979,22 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (pickingup1 && collision.gameObject.tag == "Pick Up")
+        {
+            Debug.Log("LOU LOU");
+            itemTag1 = collision.gameObject.name;
+            Destroy(collision.gameObject);
+        }
 
+        if (pickingup2 && collision.gameObject.tag == "Pick Up")
+        {
+            Debug.Log("BAW???");
+            itemTag2 = collision.gameObject.name;
+            Destroy(collision.gameObject);
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player")
@@ -978,10 +1078,10 @@ public class PlayerController : MonoBehaviour
         rb.velocity = Vector2.zero;
         moveAble = false;
         rb.AddForce(Vector2.down * 20, ForceMode2D.Impulse);
+        gameObject.GetComponent<SpriteRenderer>().flipX = false;
+        yield return new WaitForSeconds(0.2f);
+        moveAble = true;
         characterFacing = Directions.Down;
         anim.SetInteger("Direction", 0);
-        gameObject.GetComponent<SpriteRenderer>().flipX = false;
-        yield return new WaitForSeconds(0.1f);
-        moveAble = true;
     }
 }

@@ -19,28 +19,34 @@ public class ItemExtra : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Something in here doesn't work (maybe playerName?)
-        playerName = name.Substring(0, 8);
-        if(tag == "Glove of Thunder" && GameObject.Find(playerName).GetComponent<PlayerController>().powerLvl == 2 && collision.name != playerName)
+
+        if(tag == "Glove of Thunder")
         {
-            Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(transform.position, 4);
-            
-            foreach(Collider2D player in hitPlayers)
+
+            //Something in here doesn't work (maybe playerName?)
+            playerName = name.Substring(0, 8);
+            if (tag == "Glove of Thunder" && GameObject.Find(playerName).GetComponent<PlayerController>().powerLvl == 2 && collision.name != playerName)
             {
-                Debug.Log("You Hit " + player.name);
-                if(player.gameObject.tag == "Player")
+                Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(transform.position, 4);
+                foreach (Collider2D player in hitPlayers)
                 {
-                    if(player.gameObject.GetComponent<PlayerController>().shieldUp && player.gameObject.GetComponent<PlayerController>().validBlock)
+                    Debug.Log("You Hit " + player.name);
+                    if (player.gameObject.tag == "Player")
                     {
-                        player.gameObject.GetComponent<PlayerController>().ShieldBlocked(GameObject.Find(playerName).GetComponent<PlayerController>().boltDmg, GameObject.Find(playerName).GetComponent<PlayerController>().attacker);
-                    }
-                    else
-                    {
-                        player.gameObject.GetComponent<PlayerController>().Damaged(GameObject.Find(playerName).GetComponent<PlayerController>().boltDmg, GameObject.Find(playerName).GetComponent<PlayerController>().attacker);
+                        if (player.gameObject.GetComponent<PlayerController>().shieldUp && player.gameObject.GetComponent<PlayerController>().validBlock)
+                        {
+                            player.gameObject.GetComponent<PlayerController>().ShieldBlocked(GameObject.Find(playerName).GetComponent<PlayerController>().boltDmg, GameObject.Find(playerName).GetComponent<PlayerController>().attacker);
+                        }
+                        else
+                        {
+                            player.gameObject.GetComponent<PlayerController>().Damaged(GameObject.Find(playerName).GetComponent<PlayerController>().boltDmg, GameObject.Find(playerName).GetComponent<PlayerController>().attacker);
+                        }
                     }
                 }
+                Destroy(gameObject);
             }
         }
+
     }
 
 }
