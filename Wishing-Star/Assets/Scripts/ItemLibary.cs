@@ -30,6 +30,9 @@ public class ItemLibary : MonoBehaviour
     //Tome of Ash
     [SerializeField] GameObject ash;
 
+    //Glove of Thunder
+    [SerializeField] GameObject bolt;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -102,7 +105,7 @@ public class ItemLibary : MonoBehaviour
 
     }
 
-    public void ItemLibFind(string tag, Vector2 direction, Vector2 pos, float mana, Collider2D col, string name)
+    public void ItemLibFind(string tag, Vector2 direction, Vector2 pos, float mana, Collider2D col, string name, int powerLvl)
     {
         //attacker = who is shooting the arrow
 
@@ -121,7 +124,7 @@ public class ItemLibary : MonoBehaviour
                 break;
 
             case "Glove of Thunder":
-                GloveOfThunder(pos, direction, name);
+                GloveOfThunder(pos, direction, name, powerLvl);
                 break;
 
             case "Tome of Ash":
@@ -214,7 +217,7 @@ public class ItemLibary : MonoBehaviour
         Destroy(dl, 7f);
     }
     
-    private void GloveOfThunder(Vector2 pos, Vector2 direction, string attacker)
+    private void GloveOfThunder(Vector2 pos, Vector2 direction, string attacker, int powerLvl)
     {
         //Getting the angle: 
         //Up
@@ -237,6 +240,13 @@ public class ItemLibary : MonoBehaviour
         {
             angle = 90;
         }
+
+        //lb = lighting bolt
+        GameObject lb = Instantiate(bolt, pos + direction, Quaternion.Euler(0,0, angle));
+        lb.GetComponent<Rigidbody2D>().velocity = direction * 10f;
+        lb.name = (attacker + "'s lighting bolt");
+        Destroy(lb, 2f);
+        //Debug.Log(powerLvl);
 
     }
 

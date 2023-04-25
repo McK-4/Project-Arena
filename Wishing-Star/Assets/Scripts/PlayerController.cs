@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
     private float knockbackForce = 20;
     private Vector2 eKnockback;
     private Vector2 pKnockback;
-    private GameObject attacker;
+    public GameObject attacker;
 
     //Mana 
     public int manaMax = 100;
@@ -129,6 +129,12 @@ public class PlayerController : MonoBehaviour
     public bool leeched;
     [SerializeField] float leechtimer = 0;
     [SerializeField] float leechCooldownTime = 1f;
+
+    private bool charging = false;
+    [SerializeField] float chargetimer = 0;
+    [SerializeField] float chargeCooldownTime = 3f;
+    public int powerLvl = 0;
+    public int boltDmg;
 
     //End Game (For switching scenes back to the menu)
     private GameManager gameManager;
@@ -369,14 +375,7 @@ public class PlayerController : MonoBehaviour
             {
                 deathTimer = 0;
                 died = false;
-                if(attacker.tag == "Player")
-                {
-                   attacker.GetComponent<PlayerController>().points += 1;
-                }
-                else
-                {
-                    GameObject.Find(killerName).GetComponent<PlayerController>().points += 1;
-                }
+                GameObject.Find(killerName).GetComponent<PlayerController>().points += 1;
                 transform.SetPositionAndRotation(respawn, Quaternion.identity);
                 health = maxHealth;
             }
@@ -407,6 +406,20 @@ public class PlayerController : MonoBehaviour
             {
                 leechtimer = 0;
                 leeched = false;
+            }
+        }
+
+        //Glove of Thunder stuff
+        if(charging && powerLvl < 2)
+        {
+            if (chargetimer < chargeCooldownTime)
+            {
+                chargetimer += Time.deltaTime;
+            }
+            else if (chargetimer >= chargeCooldownTime)
+            {
+                chargetimer = 0;
+                powerLvl += 1;
             }
         }
 
@@ -480,10 +493,15 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            itemTag1 = "Bow";
-            if(canUse1)
+            itemTag1 = "Glove of Thunder";
+            if(canUse1 && itemTag1 != "Glove of Thunder")
             {
-                itemLib.ItemLibFind(itemTag1, facing, pos, mana, col, name);
+                itemLib.ItemLibFind(itemTag1, facing, pos, mana, col, name, powerLvl);
+            }
+
+            if(canUse1 && itemTag1 == "Glove of Thunder")
+            {
+                charging = true;
             }
 
             //Mana Cost for items:
@@ -507,9 +525,50 @@ public class PlayerController : MonoBehaviour
                 tempMana -= 25;
                 canUse1 = true;
             }
+            else if(itemTag1 == "Glove of Thunder" && tempMana >= 5)
+            {
+                tempMana -= 5;
+                canUse1 = true;
+            }
             else
             {
                 canUse1 = false;
+            }
+        }
+
+        if(context.canceled)
+        {
+            if(canUse1 && itemTag1 == "Glove of Thunder" && charging)
+            {
+                charging = false;
+                chargetimer = 0f;
+                itemLib.ItemLibFind(itemTag1, facing, pos, mana, col, name, powerLvl);
+            }
+            if(itemTag1 == "Glove of Thunder")
+            {
+                if(powerLvl == 0)
+                {
+                    boltDmg = 1;
+                    Debug.Log("Bolt Damage is " + boltDmg);
+                }
+                else if(powerLvl == 1)
+                {
+                    //5 mana is being added becuase it was taken away for the instant charge (also it's less confusing than taking away 5 from the end cost)
+                    tempMana += 5;
+
+                    tempMana -= 20;
+                    powerLvl = 0;
+                    boltDmg = 4;
+                }
+                else if(powerLvl == 2)
+                {
+                    //5 mana is being added becuase it was taken away for the instant charge
+                    tempMana += 5;
+
+                    tempMana -= 40;
+                    powerLvl = 0;
+                    boltDmg = 7;
+                }
             }
         }
     }
@@ -522,7 +581,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log(itemTag2);
             if(canUse2)
             {
-                itemLib.ItemLibFind(itemTag2, facing, pos, mana, col, name);
+                itemLib.ItemLibFind(itemTag2, facing, pos, mana, col, name, powerLvl);
             }
 
             //Mana Cost for items:
@@ -690,6 +749,15 @@ public class PlayerController : MonoBehaviour
             Debug.Log(name + " " + attacker + " " +killerName);
         }
 
+        if (collision.gameObject.tag == "Glove of Thunder" && name != collision.gameObject.transform.name.Substring(0,8))
+        {
+            killerName = collision.gameObject.transform.name.Substring(0,8);
+
+            attacker = collision.gameObject;
+            Destroy(collision.gameObject);
+            Debug.Log(name + " " + attacker + " " +killerName);
+        }
+
         if(collision.gameObject.tag == "Sword")
         {
             killerName = collision.gameObject.transform.parent.name;
@@ -798,6 +866,34 @@ public class PlayerController : MonoBehaviour
                 Damaged(4, attacker);
             }
         }
+
+        //Glove of Thunder
+        if (collision.gameObject.tag == "Glove of Thunder" && !damaged && collision.name.Substring(0, 8) != name)
+        {
+            //Debug.Log("Power level is " + powerLvl);
+            //Debug.Log("My Bolt Damage is " + boltDmg);
+            Debug.Log("Your Bolt Damage is " + GameObject.Find(killerName).GetComponent<PlayerController>().boltDmg);
+            /*
+            if(boltDmg == 0)
+            {
+                boltDmg = 1;
+            }
+            */
+            //Debug.Log("AHHHHH!");
+            //if Shield Blocking
+            if (shieldUp && validBlock)
+            {
+                //Debug.Log("BILL!");
+                ShieldBlocked(GameObject.Find(killerName).GetComponent<PlayerController>().boltDmg, attacker);
+            }
+
+            //No Shield Blocking
+            else
+            {
+                Damaged(GameObject.Find(killerName).GetComponent<PlayerController>().boltDmg, attacker);
+            }
+        }
+
     }
 
     private void WallCollision()
