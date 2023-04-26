@@ -53,8 +53,8 @@ public class UIManager : MonoBehaviour
             UIUpdate();
         }
 
-        var screenPos = Camera.main.WorldToScreenPoint(player.transform.position);
-        screenPos.y += 60;
+        var screenPos = player.transform.position;
+        screenPos.y += 1.5f;
         icon.transform.position = screenPos;
     }
 

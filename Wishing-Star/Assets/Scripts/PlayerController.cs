@@ -900,7 +900,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Sword
-        if (collision.gameObject.tag == "Sword" && !damaged && gameObject.layer == collision.gameObject.layer)
+        if (collision.gameObject.tag == "Sword" && !damaged && gameObject.GetComponent<SpriteRenderer>().sortingOrder == collision.gameObject.transform.parent.GetComponent<SpriteRenderer>().sortingOrder)
         {
             //if Shield Blocking
             if (shieldUp && validBlock)
