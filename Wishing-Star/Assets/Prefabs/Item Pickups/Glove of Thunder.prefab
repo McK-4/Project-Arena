@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5967934509857577471}
   m_Layer: 0
   m_Name: Glove of Thunder
-  m_TagString: Untagged
+  m_TagString: Pick Up
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

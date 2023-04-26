@@ -240,7 +240,6 @@ Transform:
   - {fileID: 7680650257107386053}
   - {fileID: 5978640809511522586}
   - {fileID: 7575306970291259932}
-  - {fileID: 3526280613669542168}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -463,7 +462,8 @@ MonoBehaviour:
   layerName: 
   mapCollider: {fileID: 0}
   players: []
-  numPlayers: []
+  shieldPoints: []
+  attackPoints: []
   killerName: 
   points: 0
   winner: 0
@@ -482,6 +482,7 @@ MonoBehaviour:
   movementSpeed: 7.5
   moveinput: {x: 0, y: 0}
   moving: 0
+  moveAble: 1
   angle: 0
   rotationSpeed: 0
   shieldUp: 0
@@ -495,6 +496,7 @@ MonoBehaviour:
     m_Bits: 64
   basicSwordDamage: 2
   validBlock: 0
+  attacker: {fileID: 0}
   manaMax: 10
   mana: 0
   tempMana: 0
@@ -507,9 +509,17 @@ MonoBehaviour:
   pos: {x: 0, y: 0}
   canUse1: 0
   canUse2: 0
+  pickUptimer: 0
+  pickUpCooldownTime: 2
+  drawtimer: 0
+  drawCooldownTime: 0.3
   leeched: 0
   leechtimer: 0
   leechCooldownTime: 1
+  chargetimer: 0
+  chargeCooldownTime: 3
+  powerLvl: 0
+  boltDmg: 0
 --- !u!61 &2241705164052626360
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -956,51 +966,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &8882703156015851046
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3526280613669542168}
-  - component: {fileID: 4778191226827540433}
-  m_Layer: 6
-  m_Name: PickUpSphere
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &3526280613669542168
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8882703156015851046}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1519777579213486883}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &4778191226827540433
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8882703156015851046}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5

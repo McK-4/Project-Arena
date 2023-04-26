@@ -26,9 +26,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Collider2D mapCollider;
 
     private PlayerManager playerManager;
-
     public GameObject[] players;
-    public GameObject[] numPlayers;
+
+    [SerializeField] GameObject[] shieldPoints; 
+    [SerializeField] GameObject[] attackPoints; 
 
     //Rewarding players with points
     public string killerName;
@@ -131,14 +132,23 @@ public class PlayerController : MonoBehaviour
     private bool swapping2;
     private bool pickingup1;
     private bool pickingup2;
+    private bool canSwap = false;
 
     [SerializeField] float pickUptimer = 0;
     [SerializeField] float pickUpCooldownTime = 2f;
 
+    //Bow charge up
+    private bool drawing = false;
+    private bool drew = false;
+    [SerializeField] float drawtimer = 0;
+    [SerializeField] float drawCooldownTime = 0.3f;
+
+    //Dark Leech mana drain
     public bool leeched;
     [SerializeField] float leechtimer = 0;
     [SerializeField] float leechCooldownTime = 1f;
 
+    //Glove of Thunder charge up
     private bool charging = false;
     [SerializeField] float chargetimer = 0;
     [SerializeField] float chargeCooldownTime = 3f;
@@ -433,8 +443,22 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        //Bow charge up
+        if (drawing && !drew)
+        {
+            if (drawtimer < drawCooldownTime)
+            {
+                drawtimer += Time.deltaTime;
+            }
+            else if (drawtimer >= drawCooldownTime)
+            {
+                drawtimer = 0;
+                drew = true;
+            }
+        }
+
         //Dark Leech CoolDown Timer
-        if(leeched)
+        if (leeched)
         {
             if (leechtimer < leechCooldownTime)
             {
@@ -541,12 +565,18 @@ public class PlayerController : MonoBehaviour
             {
                 swapping1 = true;
             }
-            if(canUse1 && itemTag1 != "Glove of Thunder")
+            itemTag1 = "Bow";
+            if(canUse1 && itemTag1 != "Glove of Thunder" && itemTag1 != "Bow")
             {
                 itemLib.ItemLibFind(itemTag1, facing, pos, mana, col, name, powerLvl);
             }
 
-            if(canUse1 && itemTag1 == "Glove of Thunder")
+            if (canUse1 && itemTag1 == "Bow")
+            {
+                drawing = true;
+            }
+
+            if (canUse1 && itemTag1 == "Glove of Thunder")
             {
                 charging = true;
             }
@@ -593,6 +623,15 @@ public class PlayerController : MonoBehaviour
             {
                 swapping1 = false;
             }
+
+            if (itemTag1 == "Bow" && drew)
+            {
+                drew = false;
+                drawing = false;
+                drawtimer = 0f;
+                itemLib.ItemLibFind(itemTag1, facing, pos, mana, col, name, powerLvl);
+            }
+
             if (canUse1 && itemTag1 == "Glove of Thunder" && charging)
             {
                 charging = false;
@@ -799,19 +838,22 @@ public class PlayerController : MonoBehaviour
         {
             Order(4);
         }
-        
-        if(pickingup1 && collision.gameObject.tag == "Pick Up")
+        if(collision.gameObject.tag == "Pick Up")
         {
-            Debug.Log("LOU LOU");
-            itemTag1 = collision.gameObject.name;
-            Destroy(collision.gameObject);
-        }
+            canSwap = true;
+            if (pickingup1 && collision.gameObject.tag == "Pick Up")
+            {
+                Debug.Log("LOU LOU");
+                itemTag1 = collision.gameObject.name;
+                Destroy(collision.gameObject);
+            }
 
-        if (pickingup2 && collision.gameObject.tag == "Pick Up")
-        {
-            Debug.Log("BAW???");
-            itemTag2 = collision.gameObject.name;
-            Destroy(collision.gameObject);
+            else if (pickingup2 && collision.gameObject.tag == "Pick Up")
+            {
+                Debug.Log("BAW???");
+                itemTag2 = collision.gameObject.name;
+                Destroy(collision.gameObject);
+            }
         }
 
         //Getting item extra info
@@ -995,6 +1037,15 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Pick Up")
+        {
+            canSwap = false;
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player")
@@ -1043,6 +1094,14 @@ public class PlayerController : MonoBehaviour
                 Physics2D.IgnoreLayerCollision(playerLayer, 7);
                 Physics2D.IgnoreLayerCollision(playerLayer, 8);
                 Physics2D.IgnoreLayerCollision(playerLayer, 9);
+                foreach (GameObject shieldPoint in shieldPoints)
+                {
+                    shieldPoint.GetComponent<SpriteRenderer>().sortingOrder = spriteRen.sortingOrder;
+                }
+                foreach (GameObject attackPoint in attackPoints)
+                {
+                    attackPoint.GetComponent<SpriteRenderer>().sortingOrder = spriteRen.sortingOrder;
+                }
                 break;
             case 2:
                 spriteRen.sortingOrder = 3;
@@ -1050,6 +1109,14 @@ public class PlayerController : MonoBehaviour
                 Physics2D.IgnoreLayerCollision(playerLayer, 7, false);
                 Physics2D.IgnoreLayerCollision(playerLayer, 8);
                 Physics2D.IgnoreLayerCollision(playerLayer, 9);
+                foreach (GameObject shieldPoint in shieldPoints)
+                {
+                    shieldPoint.GetComponent<SpriteRenderer>().sortingOrder = spriteRen.sortingOrder;
+                }
+                foreach (GameObject attackPoint in attackPoints)
+                {
+                    attackPoint.GetComponent<SpriteRenderer>().sortingOrder = spriteRen.sortingOrder;
+                }
                 break;
             case 3:
                 spriteRen.sortingOrder = 5;
@@ -1057,6 +1124,14 @@ public class PlayerController : MonoBehaviour
                 Physics2D.IgnoreLayerCollision(playerLayer, 7);
                 Physics2D.IgnoreLayerCollision(playerLayer, 8, false);
                 Physics2D.IgnoreLayerCollision(playerLayer, 9);
+                foreach (GameObject shieldPoint in shieldPoints)
+                {
+                    shieldPoint.GetComponent<SpriteRenderer>().sortingOrder = spriteRen.sortingOrder;
+                }
+                foreach (GameObject attackPoint in attackPoints)
+                {
+                    attackPoint.GetComponent<SpriteRenderer>().sortingOrder = spriteRen.sortingOrder;
+                }
                 break;
             case 4:
                 spriteRen.sortingOrder = 7;
@@ -1064,6 +1139,14 @@ public class PlayerController : MonoBehaviour
                 Physics2D.IgnoreLayerCollision(playerLayer, 7);
                 Physics2D.IgnoreLayerCollision(playerLayer, 8);
                 Physics2D.IgnoreLayerCollision(playerLayer, 9, false);
+                foreach (GameObject shieldPoint in shieldPoints)
+                {
+                    shieldPoint.GetComponent<SpriteRenderer>().sortingOrder = spriteRen.sortingOrder;
+                }
+                foreach (GameObject attackPoint in attackPoints)
+                {
+                    attackPoint.GetComponent<SpriteRenderer>().sortingOrder = spriteRen.sortingOrder;
+                }
                 break;
             default:
                 spriteRen.sortingOrder = 1;
