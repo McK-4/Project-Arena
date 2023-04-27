@@ -28,11 +28,12 @@ public class ItemManager : MonoBehaviour
         if (currentScene.buildIndex == 1)
         {
             itemSpawnPos = new Vector2[4];
-            spawned = new bool[itemSpawnPos.Length];
+            //spawned = new bool[itemSpawnPos.Length];
             itemSpawnPos[0] = new Vector2(-9.5f, -3.1f);
             itemSpawnPos[1] = new Vector2(-7.5f, 2.85f);
             itemSpawnPos[2] = new Vector2(4.5f, 9.85f);
             itemSpawnPos[3] = new Vector2(6.5f, -5.1f);
+            //itemSpawnPos[4] = new Vector2(0f, 0f);
         }
 
         spawntimer = 30;
@@ -53,7 +54,10 @@ public class ItemManager : MonoBehaviour
         else if (spawntimer >= spawnCooldownTime)
         {
             spawntimer = 0;
-            ItemSpawn();
+            foreach(Vector2 itemSpawn in itemSpawnPos)
+            {
+                ItemSpawn();
+            }
         }
     }
 
@@ -72,10 +76,18 @@ public class ItemManager : MonoBehaviour
         {
             foreach(GameObject item in itemsInScene)
             {
+                if(possibleSpots.Count < 4)
+                {
+                    i--;
+                }
                 if(new Vector2(item.transform.position.x, item.transform.position.y) == possibleSpots[i])
                 {
                     possibleSpots.RemoveAt(i);
                     i--;
+                }
+                if(i < 0)
+                {
+                    i++;
                 }
             }
             
@@ -90,7 +102,7 @@ public class ItemManager : MonoBehaviour
             //spawning object
             GameObject ip;
             ip = Instantiate(items[ranItem], possibleSpots[ranIndex], Quaternion.identity);
-            spawned[ranIndex] = true;
+            //spawned[ranIndex] = true;
         }
     }
 

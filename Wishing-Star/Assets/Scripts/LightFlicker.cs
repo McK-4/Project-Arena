@@ -5,7 +5,7 @@ using UnityEngine.Rendering.Universal;
 
 public class LightFlicker : MonoBehaviour
 {
-    Light2D light;
+    Light2D Light;
 
     float max;
     [SerializeField]float min = 0.08f;
@@ -15,8 +15,8 @@ public class LightFlicker : MonoBehaviour
 
     void Start()
     {
-        light = gameObject.GetComponent<Light2D>();
-        max = light.intensity;
+        Light = gameObject.GetComponent<Light2D>();
+        max = Light.intensity;
         StartCoroutine(FlickIntensity());
     }
 
@@ -33,7 +33,7 @@ public class LightFlicker : MonoBehaviour
             {
                 t0 = Time.time;
                 float r = Random.Range(min, max);
-                light.intensity = r;
+                Light.intensity = r;
                 t = Random.Range(minT, maxT);
                 yield return wait;
             }

@@ -490,7 +490,7 @@ Tilemap:
       - {fileID: 1207441276, guid: cec7a519d6beadc40b0434a86ff063c5, type: 3}
       - {fileID: 1645537176, guid: cec7a519d6beadc40b0434a86ff063c5, type: 3}
       - {fileID: -1091359481, guid: cec7a519d6beadc40b0434a86ff063c5, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 2, y: 1, z: 0}
@@ -502,7 +502,7 @@ Tilemap:
       - {fileID: 1207441276, guid: cec7a519d6beadc40b0434a86ff063c5, type: 3}
       - {fileID: 1645537176, guid: cec7a519d6beadc40b0434a86ff063c5, type: 3}
       - {fileID: -1091359481, guid: cec7a519d6beadc40b0434a86ff063c5, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 3, y: 1, z: 0}
@@ -2193,7 +2193,7 @@ Tilemap:
       - {fileID: 951414541, guid: 2088af6ceb4365c4abebeb2c3367285c, type: 3}
       - {fileID: -989908427, guid: 2088af6ceb4365c4abebeb2c3367285c, type: 3}
       - {fileID: -163906873, guid: 2088af6ceb4365c4abebeb2c3367285c, type: 3}
-      m_AnimationSpeed: 6.0000005
+      m_AnimationSpeed: 6
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:
@@ -10034,7 +10034,7 @@ Tilemap:
       - {fileID: 951414541, guid: 2088af6ceb4365c4abebeb2c3367285c, type: 3}
       - {fileID: -989908427, guid: 2088af6ceb4365c4abebeb2c3367285c, type: 3}
       - {fileID: -163906873, guid: 2088af6ceb4365c4abebeb2c3367285c, type: 3}
-      m_AnimationSpeed: 6.0000005
+      m_AnimationSpeed: 6
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:
@@ -14066,7 +14066,7 @@ Tilemap:
       - {fileID: 951414541, guid: 2088af6ceb4365c4abebeb2c3367285c, type: 3}
       - {fileID: -989908427, guid: 2088af6ceb4365c4abebeb2c3367285c, type: 3}
       - {fileID: -163906873, guid: 2088af6ceb4365c4abebeb2c3367285c, type: 3}
-      m_AnimationSpeed: 6
+      m_AnimationSpeed: 6.0000005
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:
@@ -20570,7 +20570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1242255267
 SpriteRenderer:
   m_ObjectHideFlags: 0

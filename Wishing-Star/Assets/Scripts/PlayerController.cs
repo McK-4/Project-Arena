@@ -841,14 +841,14 @@ public class PlayerController : MonoBehaviour
         if(collision.gameObject.tag == "Pick Up")
         {
             canSwap = true;
-            if (pickingup1 && collision.gameObject.tag == "Pick Up")
+            if (pickingup1 && collision.gameObject.tag == "Pick Up" && canSwap)
             {
                 Debug.Log("LOU LOU");
                 itemTag1 = collision.gameObject.name;
                 Destroy(collision.gameObject);
             }
 
-            else if (pickingup2 && collision.gameObject.tag == "Pick Up")
+            else if (pickingup2 && collision.gameObject.tag == "Pick Up" && canSwap)
             {
                 Debug.Log("BAW???");
                 itemTag2 = collision.gameObject.name;
