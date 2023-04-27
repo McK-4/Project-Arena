@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 7646307094250521653}
   - component: {fileID: 2241705164052626360}
   - component: {fileID: 8683046409141822645}
+  - component: {fileID: 1783488539739199446}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -460,6 +461,8 @@ MonoBehaviour:
   tileRen: {fileID: 0}
   orderInLayer: 0
   layerName: 
+  playerLayer: 0
+  layer: 0
   mapCollider: {fileID: 0}
   players: []
   shieldPoints: []
@@ -476,8 +479,10 @@ MonoBehaviour:
   health: 0
   damaged: 0
   healthTimer: 0
+  ranNum: 0
   deathTimer: 0
   died: 0
+  respawnLayers: 
   movementSpeedMax: 7.5
   movementSpeed: 7.5
   moveinput: {x: 0, y: 0}
@@ -566,6 +571,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &1783488539739199446
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654785569651679614}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.000000029802322, y: 0.09803659}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.2, y: 1.5}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.9205957, y: 1.3039268}
+  m_EdgeRadius: 0
 --- !u!1 &4410748543114760453
 GameObject:
   m_ObjectHideFlags: 0

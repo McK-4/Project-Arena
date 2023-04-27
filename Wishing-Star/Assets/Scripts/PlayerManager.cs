@@ -25,6 +25,8 @@ public class PlayerManager : MonoBehaviour
     public Vector2 playerSpawn_3;
     public Vector2 playerSpawn_4;
 
+    [SerializeField] int[] playerOrders;
+
     public LayerMask playerLayers;
     public float antiCampRange = 1;
     public bool playerCamping = false;
@@ -65,6 +67,12 @@ public class PlayerManager : MonoBehaviour
         playerSpawn_2 = player_2.transform.position;
         playerSpawn_3 = player_3.transform.position;
         playerSpawn_4 = player_4.transform.position;
+
+        playerOrders = new int[4];
+        playerOrders[1] = player1.orderInLayer;
+        playerOrders[2] = player2.orderInLayer;
+        playerOrders[3] = player3.orderInLayer;
+        playerOrders[4] = player4.orderInLayer;
 
         if (master != null)
         {
@@ -132,6 +140,21 @@ public class PlayerManager : MonoBehaviour
             if (player.name == "2_Player" || player.name == "3_Player" || player.name == "4_Player")
             {
                 playerCamping = true;
+                if(player1.died)
+                {
+                    if (player1.ranNum == 1)
+                    {
+                        player1.Order(playerOrders[2]);
+                    }
+                    else if (player1.ranNum == 2)
+                    {
+                        player1.Order(playerOrders[3]);
+                    }
+                    else if (player1.ranNum == 3)
+                    {
+                        player1.Order(playerOrders[4]);
+                    }
+                }
             }
         }
 
@@ -147,6 +170,21 @@ public class PlayerManager : MonoBehaviour
             if (player.name == "1_Player" || player.name == "3_Player" || player.name == "4_Player")
             {
                 playerCamping = true;
+                if(player2.died)
+                {
+                    if (player2.ranNum == 1)
+                    {
+                        player2.Order(playerOrders[1]);
+                    }
+                    else if (player2.ranNum == 2)
+                    {
+                        player2.Order(playerOrders[3]);
+                    }
+                    else if (player2.ranNum == 3)
+                    {
+                        player2.Order(playerOrders[4]);
+                    }
+                }
             }
         }
         
@@ -162,6 +200,21 @@ public class PlayerManager : MonoBehaviour
             if (player.name == "1_Player" || player.name == "2_Player" || player.name == "4_Player")
             {
                 playerCamping = true;
+                if(player3.died)
+                {
+                    if (player3.ranNum == 1)
+                    {
+                        player3.Order(playerOrders[2]);
+                    }
+                    else if (player3.ranNum == 2)
+                    {
+                        player3.Order(playerOrders[1]);
+                    }
+                    else if (player3.ranNum == 3)
+                    {
+                        player3.Order(playerOrders[4]);
+                    }
+                }
             }
         }
         
@@ -177,6 +230,21 @@ public class PlayerManager : MonoBehaviour
             if (player.name == "1_Player" || player.name == "2_Player" || player.name == "3_Player")
             {
                 playerCamping = true;
+                if(player4.died)
+                {
+                    if (player4.ranNum == 1)
+                    {
+                        player4.Order(playerOrders[2]);
+                    }
+                    else if (player4.ranNum == 2)
+                    {
+                        player4.Order(playerOrders[3]);
+                    }
+                    else if (player4.ranNum == 3)
+                    {
+                        player4.Order(playerOrders[1]);
+                    }
+                }
             }
         }
 

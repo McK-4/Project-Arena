@@ -36,7 +36,7 @@ public class ItemManager : MonoBehaviour
             //itemSpawnPos[4] = new Vector2(0f, 0f);
         }
 
-        spawntimer = 30;
+        spawntimer = 30f;
         spawnCooldownTime = 30f;
 
     }
@@ -54,7 +54,7 @@ public class ItemManager : MonoBehaviour
         else if (spawntimer >= spawnCooldownTime)
         {
             spawntimer = 0;
-            foreach(Vector2 itemSpawn in itemSpawnPos)
+            foreach (Vector2 itemSpawn in itemSpawnPos)
             {
                 ItemSpawn();
             }
@@ -68,36 +68,33 @@ public class ItemManager : MonoBehaviour
 
         //getting all objects in scene
         GameObject[] itemsInScene = GameObject.FindGameObjectsWithTag("Pick Up");
-        
+
         //finding possible spawn locations
         List<Vector2> possibleSpots = new List<Vector2>(itemSpawnPos);
 
         for (int i = 0; i < possibleSpots.Count; i++)
         {
-            foreach(GameObject item in itemsInScene)
+            Debug.Log(i);
+            bool remove = false;
+            foreach (GameObject item in itemsInScene)
             {
-                if(possibleSpots.Count < 4)
+                if (new Vector2(item.transform.position.x, item.transform.position.y) == possibleSpots[i])
                 {
-                    i--;
-                }
-                if(new Vector2(item.transform.position.x, item.transform.position.y) == possibleSpots[i])
-                {
-                    possibleSpots.RemoveAt(i);
-                    i--;
-                }
-                if(i < 0)
-                {
-                    i++;
+                    remove = true;
                 }
             }
-            
-            
+            if (remove)
+            {
+                possibleSpots.RemoveAt(i);
+                i--;
+            }
         }
 
-        if(possibleSpots.Count > 0)
+        if (possibleSpots.Count > 0)
         {
             //getting random location out of possible locations
-            /*int*/ ranIndex = RandomNum(0, possibleSpots.Count - 1);
+            /*int*/
+            ranIndex = RandomNum(0, possibleSpots.Count - 1);
 
             //spawning object
             GameObject ip;

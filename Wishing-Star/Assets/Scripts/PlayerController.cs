@@ -20,9 +20,10 @@ public class PlayerController : MonoBehaviour
 
     //Map Layering
     public TilemapRenderer tileRen;
-    [SerializeField]int orderInLayer = 1;
+    public int orderInLayer = 1;
     public string layerName;
-    int playerLayer;
+    public int playerLayer;
+    //public int layer;
     [SerializeField] Collider2D mapCollider;
 
     private PlayerManager playerManager;
@@ -60,11 +61,12 @@ public class PlayerController : MonoBehaviour
     float healthCooldownTime = 0.5f;
     //private int damageTaken = 0;
     //Death
-    private int ranNum;
+    public int ranNum;
     public float deathTimer = 0;
     private float deathCooldownTime = 5;
     private Vector2 diedPos = new Vector2(123, 456);
     public bool died;
+    [SerializeField] int[] respawnLayers;
 
     //Movement
     public float movementSpeedMax = 7.5f;
@@ -425,7 +427,9 @@ public class PlayerController : MonoBehaviour
                 died = false;
                 GameObject.Find(killerName).GetComponent<PlayerController>().points += 1;
                 transform.SetPositionAndRotation(respawn, Quaternion.identity);
+
                 health = maxHealth;
+                //Order(layer);
             }
         }
 
@@ -1084,7 +1088,7 @@ public class PlayerController : MonoBehaviour
         anim.runtimeAnimatorController = skin[activeSkin];
     }
 
-    void Order(int layer)
+    public void Order(int layer)
     {
         switch(layer)
         {
