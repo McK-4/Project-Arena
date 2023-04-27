@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
 
             if (minutesLeft >= 0)
             {
-                timeText.text = minutesLeft.ToString() + ":" + secondsLeft.ToString();
+                timeText.text = minutesLeft.ToString() + ":" + secondsLeft.ToString("d2");
             }
             
 
