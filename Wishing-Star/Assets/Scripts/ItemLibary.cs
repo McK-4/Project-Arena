@@ -105,40 +105,54 @@ public class ItemLibary : MonoBehaviour
 
     }
 
-    public void ItemLibFind(string tag, Vector2 direction, Vector2 pos, float mana, Collider2D col, string name, int powerLvl)
+    public int ItemLibFind(string tag, Vector2 direction, Vector2 pos, float minusMana, Collider2D col, string name, int powerLvl)
     {
-        //attacker = who is shooting the arrow
+        //name = who is shooting the arrow
 
         switch (tag)
         {
             case "Bow":
                 Bow(direction, pos, col, name);
-                break;
+                return 10;
 
             case "Bomb":
                 Bomb(pos, direction, name);
-                break;
-            
+                return 20;
+
             case "Dark Leech":
                 DarkLeech(pos, direction, name);
-                break;
+                return 50;
 
             case "Glove of Thunder":
-                GloveOfThunder(pos, direction, name, powerLvl);
-                break;
+                GloveOfThunder(pos, direction, name);
+                if (powerLvl == 0)
+                {
+                    return 5;
+                }
+                else if (powerLvl == 1)
+                {
+                    //returning 5 less than the actual cost because it is accounting for the instant take away
+                    return 15;
+                }
+                else if (powerLvl == 2)
+                {
+                    //returning 5 less than the actual cost because it is accounting for the instant take away
+                    return 35;
+                    //powerLvl = 0;
+                }
+                return 10;
 
             case "Tome of Ash":
                 TomeOfAsh(pos, direction, name);
-                break;
+                return 25;
 
             case "Invisibility Mask":
-                break;
+                return 0;
 
             default:
                 Debug.Log("Nothing");
-                break;
+                return 0;
         }
-        
     }
     
     private void Bow(Vector2 direction, Vector2 pos, Collider2D col, string attacker)
@@ -146,26 +160,7 @@ public class ItemLibary : MonoBehaviour
         //The bow needs a "drawback" delay so you can't spam it
 
         //Getting the angle:
-        //Up
-        if(direction == new Vector2 (0, 1))
-        {
-            angle = 0;
-        }
-        //Down
-        else if (direction == new Vector2(0, -1))
-        {
-            angle = 180;
-        }
-        //Right
-        else if (direction == new Vector2(1, 0))
-        {
-            angle = 270;
-        }
-        //Left
-        else if (direction == new Vector2(-1, 0))
-        {
-            angle = 90;
-        }
+        Angle(direction);
 
         GameObject a = Instantiate(arrow, pos, Quaternion.Euler(0, 0, angle) );
         Physics2D.IgnoreCollision(col, a.GetComponent<Collider2D>());
@@ -188,26 +183,7 @@ public class ItemLibary : MonoBehaviour
     private void DarkLeech(Vector2 pos, Vector2 direction, string attacker)
     {
         //Getting the angle:
-        //Up
-        if(direction == new Vector2 (0, 1))
-        {
-            angle = 0;
-        }
-        //Down
-        else if (direction == new Vector2(0, -1))
-        {
-            angle = 180;
-        }
-        //Right
-        else if (direction == new Vector2(1, 0))
-        {
-            angle = 270;
-        }
-        //Left
-        else if (direction == new Vector2(-1, 0))
-        {
-            angle = 90;
-        }
+        Angle(direction);
 
         GameObject dl = Instantiate(leech, pos + direction, Quaternion.Euler(0,0, angle));
         dl.GetComponent<Rigidbody2D>().velocity = direction * 2.5f;
@@ -217,62 +193,23 @@ public class ItemLibary : MonoBehaviour
         Destroy(dl, 7f);
     }
     
-    private void GloveOfThunder(Vector2 pos, Vector2 direction, string attacker, int powerLvl)
+    private void GloveOfThunder(Vector2 pos, Vector2 direction, string attacker)
     {
         //Getting the angle: 
-        //Up
-        if(direction == new Vector2 (0, 1))
-        {
-            angle = 0;
-        }
-        //Down
-        else if (direction == new Vector2(0, -1))
-        {
-            angle = 180;
-        }
-        //Right
-        else if (direction == new Vector2(1, 0))
-        {
-            angle = 270;
-        }
-        //Left
-        else if (direction == new Vector2(-1, 0))
-        {
-            angle = 90;
-        }
+        Angle(direction);
 
         //lb = lighting bolt
         GameObject lb = Instantiate(bolt, pos + direction, Quaternion.Euler(0,0, angle));
         lb.GetComponent<Rigidbody2D>().velocity = direction * 10f;
         lb.name = (attacker + "'s lighting bolt");
         Destroy(lb, 2f);
-        //Debug.Log(powerLvl);
 
     }
 
     private void TomeOfAsh(Vector2 pos, Vector2 direction, string attacker)
     {
         //Getting the angle: 
-        //Up
-        if(direction == new Vector2 (0, 1))
-        {
-            angle = 0;
-        }
-        //Down
-        else if (direction == new Vector2(0, -1))
-        {
-            angle = 180;
-        }
-        //Right
-        else if (direction == new Vector2(1, 0))
-        {
-            angle = 270;
-        }
-        //Left
-        else if (direction == new Vector2(-1, 0))
-        {
-            angle = 90;
-        }
+        Angle(direction);
 
         GameObject ta = Instantiate(ash, pos + direction, Quaternion.Euler(0,0, angle));
         ta.GetComponent<Rigidbody2D>().velocity = direction * 10f;
@@ -280,4 +217,28 @@ public class ItemLibary : MonoBehaviour
         Destroy(ta, 2f);
     }
 
+    private void Angle(Vector2 direction)
+    {
+        //Getting the angle: 
+        //Up
+        if (direction == new Vector2(0, 1))
+        {
+            angle = 0;
+        }
+        //Down
+        else if (direction == new Vector2(0, -1))
+        {
+            angle = 180;
+        }
+        //Right
+        else if (direction == new Vector2(1, 0))
+        {
+            angle = 270;
+        }
+        //Left
+        else if (direction == new Vector2(-1, 0))
+        {
+            angle = 90;
+        }
+    }
 }

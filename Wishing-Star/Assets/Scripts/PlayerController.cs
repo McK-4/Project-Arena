@@ -115,6 +115,7 @@ public class PlayerController : MonoBehaviour
     public int manaMax = 100;
     public float mana;
     public float tempMana;
+    public float minusMana;
     public bool manaUsed = false;
     public bool gainingMana = false;
     public float manaTimer = 0;
@@ -572,7 +573,7 @@ public class PlayerController : MonoBehaviour
             itemTag1 = "Bow";
             if(canUse1 && itemTag1 != "Glove of Thunder" && itemTag1 != "Bow")
             {
-                itemLib.ItemLibFind(itemTag1, facing, pos, mana, col, name, powerLvl);
+                itemLib.ItemLibFind(itemTag1, facing, pos, minusMana, col, name, powerLvl);
             }
 
             if (canUse1 && itemTag1 == "Bow")
@@ -586,31 +587,36 @@ public class PlayerController : MonoBehaviour
             }
 
             //Mana Cost for items:
-            if(itemTag1 == "Bow" && tempMana >= 10)
+
+            minusMana = itemLib.ItemLibFind(itemTag1, facing, pos, minusMana, col, name, powerLvl);
+
+            if (itemTag1 == "Bow" && tempMana >= 10)
             {
-                tempMana -= 10;
+                tempMana -= minusMana;
                 canUse1 = true;
             }
             else if(itemTag1 == "Bomb" && tempMana >= 20 && itemLib.bombPlaced)
             {
-                tempMana -= 20;
+                tempMana -= minusMana;
                 canUse1 = true;
             }
             else if(itemTag1 == "Dark Leech" && tempMana >= 50)
             {
-                tempMana -= 50;
+                tempMana -= minusMana;
                 canUse1 = true;
             }
             else if(itemTag1 == "Tome of Ash" && tempMana >= 25)
             {
-                tempMana -= 25;
+                tempMana -= minusMana;
                 canUse1 = true;
             }
+            /* This may not be needed (still adjusting mana cost)
             else if(itemTag1 == "Glove of Thunder" && tempMana >= 5)
             {
-                tempMana -= 5;
+                tempMana -= minusMana;
                 canUse1 = true;
             }
+            */
             else
             {
                 canUse1 = false;
@@ -619,7 +625,9 @@ public class PlayerController : MonoBehaviour
 
         if(context.canceled)
         {
-            if(pickingup1)
+            minusMana = itemLib.ItemLibFind(itemTag1, facing, pos, minusMana, col, name, powerLvl);
+
+            if (pickingup1)
             {
                 pickingup1 = false;
             }
@@ -633,15 +641,17 @@ public class PlayerController : MonoBehaviour
                 drew = false;
                 drawing = false;
                 drawtimer = 0f;
-                itemLib.ItemLibFind(itemTag1, facing, pos, mana, col, name, powerLvl);
+                itemLib.ItemLibFind(itemTag1, facing, pos, minusMana, col, name, powerLvl);
             }
 
             if (canUse1 && itemTag1 == "Glove of Thunder" && charging)
             {
                 charging = false;
                 chargetimer = 0f;
-                itemLib.ItemLibFind(itemTag1, facing, pos, mana, col, name, powerLvl);
+                itemLib.ItemLibFind(itemTag1, facing, pos, minusMana, col, name, powerLvl);
+                tempMana -= minusMana;
             }
+            /* This may not be needed (still adjusting mana cost)
             if(itemTag1 == "Glove of Thunder")
             {
                 if(powerLvl == 0)
@@ -653,10 +663,13 @@ public class PlayerController : MonoBehaviour
                 {
                     //5 mana is being added becuase it was taken away for the instant charge (also it's less confusing than taking away 5 from the end cost)
                     tempMana += 5;
-
+                    
                     tempMana -= 20;
                     powerLvl = 0;
                     boltDmg = 4;
+
+                    minusMana = itemLib.ItemLibFind(itemTag1, facing, pos, minusMana, col, name, powerLvl);
+                    tempMana -= minusMana;
                 }
                 else if(powerLvl == 2)
                 {
@@ -668,6 +681,7 @@ public class PlayerController : MonoBehaviour
                     boltDmg = 7;
                 }
             }
+            */
         }
     }
 
@@ -682,7 +696,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log(itemTag2);
             if(canUse2)
             {
-                itemLib.ItemLibFind(itemTag2, facing, pos, mana, col, name, powerLvl);
+                itemLib.ItemLibFind(itemTag2, facing, pos, minusMana, col, name, powerLvl);
             }
 
             //Mana Cost for items:
@@ -730,7 +744,7 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawSphere(pos, 4);
     }
     */
-    public void ShieldBlocked(int damage, GameObject otherPlayer)
+            public void ShieldBlocked(int damage, GameObject otherPlayer)
     {
         //Debug.Log(damage);
         damageReduction = 1;
