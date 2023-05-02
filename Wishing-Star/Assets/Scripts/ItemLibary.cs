@@ -132,13 +132,12 @@ public class ItemLibary : MonoBehaviour
                 else if (powerLvl == 1)
                 {
                     //returning 5 less than the actual cost because it is accounting for the instant take away
-                    return 15;
+                    return 20;
                 }
                 else if (powerLvl == 2)
                 {
                     //returning 5 less than the actual cost because it is accounting for the instant take away
-                    return 35;
-                    //powerLvl = 0;
+                    return 40;
                 }
                 return 10;
 

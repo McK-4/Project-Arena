@@ -8,9 +8,13 @@ public class ItemManager : MonoBehaviour
 
     [SerializeField] GameObject[] items;
 
+    [SerializeField] GameObject[] powerUps;
+
     Scene currentScene;
 
     private Vector2[] itemSpawnPos;
+
+    private Vector2[] powerUpSpawnPos;
 
     private bool[] spawned;
 
@@ -28,12 +32,17 @@ public class ItemManager : MonoBehaviour
         if (currentScene.buildIndex == 1)
         {
             itemSpawnPos = new Vector2[4];
+
+            powerUpSpawnPos = new Vector2[2];
+
             //spawned = new bool[itemSpawnPos.Length];
             itemSpawnPos[0] = new Vector2(-9.5f, -3.1f);
             itemSpawnPos[1] = new Vector2(-7.5f, 2.85f);
             itemSpawnPos[2] = new Vector2(4.5f, 9.85f);
             itemSpawnPos[3] = new Vector2(6.5f, -5.1f);
-            //itemSpawnPos[4] = new Vector2(0f, 0f);
+
+            powerUpSpawnPos[0] = new Vector2(-6.5f, -9f);
+            powerUpSpawnPos[1] = new Vector2(6f, 1.5f);
         }
 
         spawntimer = 30f;
@@ -58,6 +67,12 @@ public class ItemManager : MonoBehaviour
             {
                 ItemSpawn();
             }
+            /*
+            foreach(Vector2 powerUpSpawn in powerUpSpawnPos)
+            {
+
+            }
+            */
         }
     }
 
@@ -74,7 +89,7 @@ public class ItemManager : MonoBehaviour
 
         for (int i = 0; i < possibleSpots.Count; i++)
         {
-            Debug.Log(i);
+            //Debug.Log(i);
             bool remove = false;
             foreach (GameObject item in itemsInScene)
             {

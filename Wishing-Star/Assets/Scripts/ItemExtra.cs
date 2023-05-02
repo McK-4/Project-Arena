@@ -30,7 +30,7 @@ public class ItemExtra : MonoBehaviour
                 Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(transform.position, 4);
                 foreach (Collider2D player in hitPlayers)
                 {
-                    Debug.Log("You Hit " + player.name);
+                    //Debug.Log("You Hit " + player.name);
                     if (player.gameObject.tag == "Player")
                     {
                         if (player.gameObject.GetComponent<PlayerController>().shieldUp && player.gameObject.GetComponent<PlayerController>().validBlock)

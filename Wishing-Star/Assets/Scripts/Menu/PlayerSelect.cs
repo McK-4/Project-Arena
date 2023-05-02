@@ -71,18 +71,29 @@ public class PlayerSelect : MonoBehaviour
         //Cycling Player Select Art
         if (menuManager.playerSelectInput.y > 0)
         {
-            if (currentArtNum <= 0)
-                currentArtNum++;
+            ArtNumChange();
 
             playerArt.sprite = playerArtList[currentArtNum];
         }
         else if (menuManager.playerSelectInput.y < 0)
         {
-            if (currentArtNum >= playerArtList.Count - 1)
-                currentArtNum--;
+            ArtNumChange();
 
             playerArt.sprite = playerArtList[currentArtNum];
         }
-        
     }
+
+    private void ArtNumChange()
+    {
+        if (currentArtNum <= 0)
+        {
+            currentArtNum++;
+        }
+
+        if (currentArtNum >= playerArtList.Count - 1)
+        {
+            currentArtNum--;
+        }
+    }
+
 }

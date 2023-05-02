@@ -125,6 +125,7 @@ public class PlayerController : MonoBehaviour
     private ItemLibary itemLib;
     public string itemTag1;
     public string itemTag2;
+    private string itemTagMinus;
     public Vector2 facing;
     public Vector2 pos;
     public bool canUse1;
@@ -152,7 +153,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float leechCooldownTime = 1f;
 
     //Glove of Thunder charge up
-    private bool charging = false;
+    [SerializeField] bool charging = false;
     [SerializeField] float chargetimer = 0;
     [SerializeField] float chargeCooldownTime = 3f;
     public int powerLvl = 0;
@@ -186,6 +187,7 @@ public class PlayerController : MonoBehaviour
         canUse1 = true;
         canUse2 = true;
         leeched = false;
+        powerLvl = 0;
 
         winner = false;
         second = false;
@@ -562,6 +564,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
+            Debug.Log("Pressed!!");
             if(!holding1)
             {
                 pickingup1 = true;
@@ -570,7 +573,7 @@ public class PlayerController : MonoBehaviour
             {
                 swapping1 = true;
             }
-            itemTag1 = "Bow";
+            itemTag1 = "Glove of Thunder";
             if(canUse1 && itemTag1 != "Glove of Thunder" && itemTag1 != "Bow")
             {
                 itemLib.ItemLibFind(itemTag1, facing, pos, minusMana, col, name, powerLvl);
@@ -583,12 +586,17 @@ public class PlayerController : MonoBehaviour
 
             if (canUse1 && itemTag1 == "Glove of Thunder")
             {
+                Debug.Log("Charging!");
+                powerLvl = 0;
                 charging = true;
             }
 
             //Mana Cost for items:
 
+            itemTagMinus = itemTag1;
+            itemTag1 = "minus";
             minusMana = itemLib.ItemLibFind(itemTag1, facing, pos, minusMana, col, name, powerLvl);
+            itemTag1 = itemTagMinus;
 
             if (itemTag1 == "Bow" && tempMana >= 10)
             {
@@ -610,13 +618,13 @@ public class PlayerController : MonoBehaviour
                 tempMana -= minusMana;
                 canUse1 = true;
             }
-            /* This may not be needed (still adjusting mana cost)
+            // This may not be needed (still adjusting mana cost)
             else if(itemTag1 == "Glove of Thunder" && tempMana >= 5)
             {
                 tempMana -= minusMana;
                 canUse1 = true;
             }
-            */
+            
             else
             {
                 canUse1 = false;
@@ -625,7 +633,11 @@ public class PlayerController : MonoBehaviour
 
         if(context.canceled)
         {
+            Debug.Log("Relesed!!");
+            itemTagMinus = itemTag1;
+            itemTag1 = "minus";
             minusMana = itemLib.ItemLibFind(itemTag1, facing, pos, minusMana, col, name, powerLvl);
+            itemTag1 = itemTagMinus;
 
             if (pickingup1)
             {
@@ -641,7 +653,19 @@ public class PlayerController : MonoBehaviour
                 drew = false;
                 drawing = false;
                 drawtimer = 0f;
-                itemLib.ItemLibFind(itemTag1, facing, pos, minusMana, col, name, powerLvl);
+                //itemLib.ItemLibFind(itemTag1, facing, pos, minusMana, col, name, powerLvl);
+            }
+
+            if (itemTag1 == "Glove of Thunder" && tempMana >= 20 && powerLvl == 1)
+            {
+                tempMana -= minusMana;
+                canUse1 = true;
+            }
+
+            if (itemTag1 == "Glove of Thunder" && tempMana >= 40 && powerLvl == 2)
+            {
+                tempMana -= minusMana;
+                canUse1 = true;
             }
 
             if (canUse1 && itemTag1 == "Glove of Thunder" && charging)
@@ -649,7 +673,9 @@ public class PlayerController : MonoBehaviour
                 charging = false;
                 chargetimer = 0f;
                 itemLib.ItemLibFind(itemTag1, facing, pos, minusMana, col, name, powerLvl);
+                Debug.Log("Thing!");
                 tempMana -= minusMana;
+                powerLvl = 0;
             }
             /* This may not be needed (still adjusting mana cost)
             if(itemTag1 == "Glove of Thunder")
@@ -744,7 +770,7 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawSphere(pos, 4);
     }
     */
-            public void ShieldBlocked(int damage, GameObject otherPlayer)
+    public void ShieldBlocked(int damage, GameObject otherPlayer)
     {
         //Debug.Log(damage);
         damageReduction = 1;
@@ -771,7 +797,7 @@ public class PlayerController : MonoBehaviour
         pKnockback = pDirection * knockbackForce;
 
         otherPlayer.GetComponent<Rigidbody2D>().AddForce(eKnockback, ForceMode2D.Impulse);
-        Debug.Log(eKnockback);
+        //Debug.Log(eKnockback);
         rb.AddForce(pKnockback, ForceMode2D.Impulse);
 
         //Reaspawn
