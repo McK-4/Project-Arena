@@ -8,6 +8,8 @@ public class ItemLibary : MonoBehaviour
 
     public string itemTag;
 
+    public int takeMana;
+
     private float angle;
 
     //Bow
@@ -105,52 +107,55 @@ public class ItemLibary : MonoBehaviour
 
     }
 
-    public int ItemLibFind(string tag, Vector2 direction, Vector2 pos, float minusMana, Collider2D col, string name, int powerLvl)
+    public void ItemLibFind(string tag, Vector2 direction, Vector2 pos, out int minusMana, Collider2D col, string name, int powerLvl)
     {
         //name = who is shooting the arrow
-
+        
+        Debug.Log(tag);
+        minusMana = 0;
         switch (tag)
         {
             case "Bow":
                 Bow(direction, pos, col, name);
-                return 10;
+                minusMana = 10;
+                break;
 
             case "Bomb":
                 Bomb(pos, direction, name);
-                return 20;
+                minusMana = 20;
+                break;
 
             case "Dark Leech":
                 DarkLeech(pos, direction, name);
-                return 50;
-
+                minusMana = 50;
+                break;
             case "Glove of Thunder":
+                Debug.Log("properStatment");
                 GloveOfThunder(pos, direction, name);
-                if (powerLvl == 0)
-                {
-                    return 5;
-                }
-                else if (powerLvl == 1)
+                if (powerLvl == 1)
                 {
                     //returning 5 less than the actual cost because it is accounting for the instant take away
-                    return 20;
+                    minusMana = 20;
                 }
                 else if (powerLvl == 2)
                 {
                     //returning 5 less than the actual cost because it is accounting for the instant take away
-                    return 40;
+                    minusMana = 40;
                 }
-                return 10;
+                else
+                {
+                    takeMana = 5;
+                    minusMana = 5;
 
+                }
+                break;
             case "Tome of Ash":
                 TomeOfAsh(pos, direction, name);
-                return 25;
-
+                minusMana = 25;
+                break;
             case "Invisibility Mask":
-                return 0;
-
-            default:
-                Debug.Log("Nothing");
-                return 0;
+                minusMana = 0;
+                break;
         }
     }
     

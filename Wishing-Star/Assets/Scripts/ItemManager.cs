@@ -108,12 +108,12 @@ public class ItemManager : MonoBehaviour
         if (possibleSpots.Count > 0)
         {
             //getting random location out of possible locations
-            /*int*/
             ranIndex = RandomNum(0, possibleSpots.Count - 1);
 
             //spawning object
             GameObject ip;
             ip = Instantiate(items[ranItem], possibleSpots[ranIndex], Quaternion.identity);
+            NameChange(ip);
             //spawned[ranIndex] = true;
         }
     }
@@ -121,6 +121,26 @@ public class ItemManager : MonoBehaviour
     private int RandomNum(int min, int max)
     {
         return Random.Range(min, max);
+    }
+
+    private void NameChange(GameObject ip)
+    {
+        if(ip.name.Substring(0, 3) == "Bow")
+        {
+            ip.name = "Bow";
+        }
+        else if(ip.name.Substring(0, 4) == "Bomb")
+        {
+            ip.name = "Bomb";
+        }
+        else if(ip.name.Substring(0, 10) == "Dark Leech")
+        {
+            ip.name = "Dark Leech";
+        }
+        else if(ip.name.Substring(0, 16) == "Glove of Thunder")
+        {
+            ip.name = "Glove of Thunder";
+        }
     }
 
 }

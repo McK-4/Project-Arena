@@ -69,10 +69,10 @@ public class PlayerManager : MonoBehaviour
         playerSpawn_4 = player_4.transform.position;
 
         playerOrders = new int[4];
-        playerOrders[1] = player1.orderInLayer;
-        playerOrders[2] = player2.orderInLayer;
-        playerOrders[3] = player3.orderInLayer;
-        playerOrders[4] = player4.orderInLayer;
+        playerOrders[0] = player1.orderInLayer;
+        playerOrders[1] = player2.orderInLayer;
+        playerOrders[2] = player3.orderInLayer;
+        playerOrders[3] = player4.orderInLayer;
 
         if (master != null)
         {

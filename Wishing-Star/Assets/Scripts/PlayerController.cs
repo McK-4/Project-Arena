@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
     public int manaMax = 100;
     public float mana;
     public float tempMana;
-    public float minusMana;
+    public int minusMana;
     public bool manaUsed = false;
     public bool gainingMana = false;
     public float manaTimer = 0;
@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour
     private bool swapping2;
     private bool pickingup1;
     private bool pickingup2;
-    private bool canSwap = false;
+    [SerializeField] bool canSwap = false;
 
     [SerializeField] float pickUptimer = 0;
     [SerializeField] float pickUpCooldownTime = 2f;
@@ -194,6 +194,8 @@ public class PlayerController : MonoBehaviour
         third = false;
         fourth = false;
 
+        itemTag1 = "Glove of Thunder";
+
         Order(orderInLayer);
 
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -228,7 +230,7 @@ public class PlayerController : MonoBehaviour
             holding2 = false;
         }
 
-        if (swapping1)
+        if (canSwap && swapping1 || swapping2 && canSwap)
         {
             if (pickUptimer < pickUpCooldownTime)
             {
@@ -266,7 +268,7 @@ public class PlayerController : MonoBehaviour
                 manaUsed = false;
             }
         }
-
+        
         if(!manaUsed && mana != manaMax)
         {
             mana += (5 * Time.deltaTime);
@@ -564,7 +566,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("Pressed!!");
+            //Debug.Log("Pressed!!");
             if(!holding1)
             {
                 pickingup1 = true;
@@ -573,10 +575,10 @@ public class PlayerController : MonoBehaviour
             {
                 swapping1 = true;
             }
-            itemTag1 = "Glove of Thunder";
+
             if(canUse1 && itemTag1 != "Glove of Thunder" && itemTag1 != "Bow")
             {
-                itemLib.ItemLibFind(itemTag1, facing, pos, minusMana, col, name, powerLvl);
+                itemLib.ItemLibFind(itemTag1, facing, pos, out minusMana, col, name, powerLvl);
             }
 
             if (canUse1 && itemTag1 == "Bow")
@@ -586,7 +588,7 @@ public class PlayerController : MonoBehaviour
 
             if (canUse1 && itemTag1 == "Glove of Thunder")
             {
-                Debug.Log("Charging!");
+                //Debug.Log("Charging!");
                 powerLvl = 0;
                 charging = true;
             }
@@ -594,8 +596,10 @@ public class PlayerController : MonoBehaviour
             //Mana Cost for items:
 
             itemTagMinus = itemTag1;
-            itemTag1 = "minus";
-            minusMana = itemLib.ItemLibFind(itemTag1, facing, pos, minusMana, col, name, powerLvl);
+            //itemTag1 = "minus";
+            //itemLib.ItemLibFind(itemTag1, facing, pos, out minusMana, col, name, powerLvl);
+            //minusMana = itemLib.takeMana;
+            Debug.Log(minusMana);
             itemTag1 = itemTagMinus;
 
             if (itemTag1 == "Bow" && tempMana >= 10)
@@ -633,10 +637,12 @@ public class PlayerController : MonoBehaviour
 
         if(context.canceled)
         {
-            Debug.Log("Relesed!!");
+            //Debug.Log("Relesed!!");
             itemTagMinus = itemTag1;
             itemTag1 = "minus";
-            minusMana = itemLib.ItemLibFind(itemTag1, facing, pos, minusMana, col, name, powerLvl);
+            Debug.Log("minusMana is Start: " + minusMana);
+            itemLib.ItemLibFind(itemTag1, facing, pos, out minusMana, col, name, powerLvl);
+            Debug.Log("minusMana is End: " + minusMana);
             itemTag1 = itemTagMinus;
 
             if (pickingup1)
@@ -646,6 +652,7 @@ public class PlayerController : MonoBehaviour
             if (swapping1)
             {
                 swapping1 = false;
+                pickUptimer = 0;
             }
 
             if (itemTag1 == "Bow" && drew)
@@ -672,8 +679,8 @@ public class PlayerController : MonoBehaviour
             {
                 charging = false;
                 chargetimer = 0f;
-                itemLib.ItemLibFind(itemTag1, facing, pos, minusMana, col, name, powerLvl);
-                Debug.Log("Thing!");
+                itemLib.ItemLibFind(itemTag1, facing, pos, out minusMana, col, name, powerLvl);
+                //Debug.Log("Thing!");
                 tempMana -= minusMana;
                 powerLvl = 0;
             }
@@ -722,7 +729,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log(itemTag2);
             if(canUse2)
             {
-                itemLib.ItemLibFind(itemTag2, facing, pos, minusMana, col, name, powerLvl);
+                itemLib.ItemLibFind(itemTag2, facing, pos, out minusMana, col, name, powerLvl);
             }
 
             //Mana Cost for items:
@@ -760,6 +767,7 @@ public class PlayerController : MonoBehaviour
             if (swapping2)
             {
                 swapping2 = false;
+                pickUptimer = 0;
             }
         }
     }
@@ -889,6 +897,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("LOU LOU");
                 itemTag1 = collision.gameObject.name;
+                Debug.Log(itemTag1);
                 Destroy(collision.gameObject);
             }
 
@@ -1069,8 +1078,10 @@ public class PlayerController : MonoBehaviour
     {
         if (pickingup1 && collision.gameObject.tag == "Pick Up")
         {
+            Debug.Log(itemTag1);
             Debug.Log("LOU LOU");
             itemTag1 = collision.gameObject.name;
+            Debug.Log(itemTag1);
             Destroy(collision.gameObject);
         }
 
