@@ -25,6 +25,9 @@ public class PlayerManager : MonoBehaviour
     public Vector2 playerSpawn_3;
     public Vector2 playerSpawn_4;
 
+    private float campTimer = 0;
+    private float campCooldownTimer = 0.2f;
+
     [SerializeField] int[] playerOrders;
 
     public LayerMask playerLayers;
@@ -36,9 +39,6 @@ public class PlayerManager : MonoBehaviour
     public bool p2PointsRewarded = false;
     public bool p3PointsRewarded = false;
     public bool p4PointsRewarded = false;
-
-    private float pointsTimer = 0;
-    private float pointsCooldownTimer = 0.01f;
 
     private Vector2 winnerPos;
     private Vector2 secondPos;
@@ -69,10 +69,14 @@ public class PlayerManager : MonoBehaviour
         playerSpawn_4 = player_4.transform.position;
 
         playerOrders = new int[4];
-        playerOrders[0] = player1.orderInLayer;
-        playerOrders[1] = player2.orderInLayer;
-        playerOrders[2] = player3.orderInLayer;
-        playerOrders[3] = player4.orderInLayer;
+        playerOrders[0] = player1.spriteRen.sortingOrder;
+        playerOrders[1] = player2.spriteRen.sortingOrder;
+        playerOrders[2] = player3.spriteRen.sortingOrder;
+        playerOrders[3] = player4.spriteRen.sortingOrder;
+        Debug.Log("P1: " + playerOrders[0]);
+        Debug.Log("P2: " + playerOrders[1]);
+        Debug.Log("P3: " + playerOrders[2]);
+        Debug.Log("P4: " + playerOrders[3]);
 
         if (master != null)
         {
@@ -127,7 +131,21 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         //Anti-Player Camping
-        
+
+        //Player camping refresh timer
+        if (playerCamping)
+        {
+            if (campTimer < campCooldownTimer)
+            {
+                campTimer += Time.deltaTime;
+            }
+            else if (campTimer >= campCooldownTimer)
+            {
+                campTimer = 0;
+                playerCamping = false;
+            }
+        }
+
         //Player1
         Collider2D[] hitPlayers_1 = Physics2D.OverlapCircleAll(playerSpawn_1, antiCampRange, playerLayers);
 
@@ -142,17 +160,18 @@ public class PlayerManager : MonoBehaviour
                 playerCamping = true;
                 if(player1.died)
                 {
+                    DEBUG(player_1.name);
                     if (player1.ranNum == 1)
                     {
-                        player1.Order(playerOrders[2]);
+                        player1.Order(playerOrders[1]);
                     }
                     else if (player1.ranNum == 2)
                     {
-                        player1.Order(playerOrders[3]);
+                        player1.Order(playerOrders[2]);
                     }
                     else if (player1.ranNum == 3)
                     {
-                        player1.Order(playerOrders[4]);
+                        player1.Order(playerOrders[3]);
                     }
                 }
             }
@@ -170,19 +189,20 @@ public class PlayerManager : MonoBehaviour
             if (player.name == "1_Player" || player.name == "3_Player" || player.name == "4_Player")
             {
                 playerCamping = true;
-                if(player2.died)
+                if (player2.died)
                 {
+                    DEBUG(player_2.name);
                     if (player2.ranNum == 1)
                     {
-                        player2.Order(playerOrders[1]);
+                        player2.Order(playerOrders[0]);
                     }
                     else if (player2.ranNum == 2)
                     {
-                        player2.Order(playerOrders[3]);
+                        player2.Order(playerOrders[2]);
                     }
                     else if (player2.ranNum == 3)
                     {
-                        player2.Order(playerOrders[4]);
+                        player2.Order(playerOrders[3]);
                     }
                 }
             }
@@ -200,19 +220,20 @@ public class PlayerManager : MonoBehaviour
             if (player.name == "1_Player" || player.name == "2_Player" || player.name == "4_Player")
             {
                 playerCamping = true;
-                if(player3.died)
+                if (player3.died)
                 {
+                    DEBUG(player_3.name);
                     if (player3.ranNum == 1)
-                    {
-                        player3.Order(playerOrders[2]);
-                    }
-                    else if (player3.ranNum == 2)
                     {
                         player3.Order(playerOrders[1]);
                     }
+                    else if (player3.ranNum == 2)
+                    {
+                        player3.Order(playerOrders[0]);
+                    }
                     else if (player3.ranNum == 3)
                     {
-                        player3.Order(playerOrders[4]);
+                        player3.Order(playerOrders[3]);
                     }
                 }
             }
@@ -230,19 +251,20 @@ public class PlayerManager : MonoBehaviour
             if (player.name == "1_Player" || player.name == "2_Player" || player.name == "3_Player")
             {
                 playerCamping = true;
-                if(player4.died)
+                if (player4.died)
                 {
+                    DEBUG(player_4.name);
                     if (player4.ranNum == 1)
                     {
-                        player4.Order(playerOrders[2]);
+                        player4.Order(playerOrders[1]);
                     }
                     else if (player4.ranNum == 2)
                     {
-                        player4.Order(playerOrders[3]);
+                        player4.Order(playerOrders[2]);
                     }
                     else if (player4.ranNum == 3)
                     {
-                        player4.Order(playerOrders[1]);
+                        player4.Order(playerOrders[0]);
                     }
                 }
             }
@@ -319,6 +341,7 @@ public class PlayerManager : MonoBehaviour
         Gizmos.DrawWireSphere(playerSpawn_3, antiCampRange);
         Gizmos.DrawWireSphere(playerSpawn_4, antiCampRange);
     }
+    /*
     private void PlayerPointsTimer()
     {
         if(p1PointsRewarded)
@@ -372,6 +395,15 @@ public class PlayerManager : MonoBehaviour
                 p4PointsRewarded = false;
             }
         }
+    }
+    */
+
+    void DEBUG(string name)
+    {
+        Debug.Log(name + " P1: " + playerOrders[0]);
+        Debug.Log(name + " P2: " + playerOrders[1]);
+        Debug.Log(name + " P3: " + playerOrders[2]);
+        Debug.Log(name + " P4: " + playerOrders[3]);
     }
 
 }

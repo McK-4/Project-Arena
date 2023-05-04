@@ -79,7 +79,7 @@ public class ItemManager : MonoBehaviour
     private void ItemSpawn()
     {
         //getting randomItems
-        int ranItem = RandomNum(1, items.Length);
+        int ranItem = RandomNum(0, items.Length);
 
         //getting all objects in scene
         GameObject[] itemsInScene = GameObject.FindGameObjectsWithTag("Pick Up");

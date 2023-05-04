@@ -97,8 +97,8 @@ public class GameManager : MonoBehaviour
     {
         if (!awarded)
         {
-            killerController = GameObject.Find(killer).GetComponent<PlayerController>();
-            killerController.points++;
+            //killerController = GameObject.Find(killer).GetComponent<PlayerController>();
+            //killerController.points++;
             awarded = true;
             //Debug.Log(killer.name + " got awarded a point for their kill!");
         }

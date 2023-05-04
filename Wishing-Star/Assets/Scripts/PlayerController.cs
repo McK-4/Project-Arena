@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     //public int player = 0;
     private Rigidbody2D rb;
     public Collider2D col;
-    private SpriteRenderer spriteRen;
+    public SpriteRenderer spriteRen;
     Animator anim;
     [SerializeField]AnimatorOverrideController[] skin;
     public int activeSkin;
@@ -194,7 +194,7 @@ public class PlayerController : MonoBehaviour
         third = false;
         fourth = false;
 
-        itemTag1 = "Glove of Thunder";
+        //itemTag1 = "Glove of Thunder";
 
         Order(orderInLayer);
 
@@ -432,7 +432,7 @@ public class PlayerController : MonoBehaviour
                 died = false;
                 GameObject.Find(killerName).GetComponent<PlayerController>().points += 1;
                 transform.SetPositionAndRotation(respawn, Quaternion.identity);
-
+                //Debug.Log("New Layer: " + spriteRen.sortingOrder);
                 health = maxHealth;
                 //Order(layer);
             }
@@ -594,20 +594,11 @@ public class PlayerController : MonoBehaviour
             }
 
             //Mana Cost for items:
-
-            itemTagMinus = itemTag1;
-            //itemTag1 = "minus";
-            //itemLib.ItemLibFind(itemTag1, facing, pos, out minusMana, col, name, powerLvl);
-            //minusMana = itemLib.takeMana;
-            Debug.Log(minusMana);
-            itemTag1 = itemTagMinus;
-
             if (itemTag1 == "Bow" && tempMana >= 10)
             {
-                tempMana -= minusMana;
                 canUse1 = true;
             }
-            else if(itemTag1 == "Bomb" && tempMana >= 20 && itemLib.bombPlaced)
+            else if(itemTag1 == "Bomb" && tempMana >= 20 && !itemLib.bombPlaced)
             {
                 tempMana -= minusMana;
                 canUse1 = true;
@@ -622,7 +613,6 @@ public class PlayerController : MonoBehaviour
                 tempMana -= minusMana;
                 canUse1 = true;
             }
-            // This may not be needed (still adjusting mana cost)
             else if(itemTag1 == "Glove of Thunder" && tempMana >= 5)
             {
                 tempMana -= minusMana;
@@ -638,12 +628,6 @@ public class PlayerController : MonoBehaviour
         if(context.canceled)
         {
             //Debug.Log("Relesed!!");
-            itemTagMinus = itemTag1;
-            itemTag1 = "minus";
-            Debug.Log("minusMana is Start: " + minusMana);
-            itemLib.ItemLibFind(itemTag1, facing, pos, out minusMana, col, name, powerLvl);
-            Debug.Log("minusMana is End: " + minusMana);
-            itemTag1 = itemTagMinus;
 
             if (pickingup1)
             {
@@ -660,7 +644,8 @@ public class PlayerController : MonoBehaviour
                 drew = false;
                 drawing = false;
                 drawtimer = 0f;
-                //itemLib.ItemLibFind(itemTag1, facing, pos, minusMana, col, name, powerLvl);
+                itemLib.ItemLibFind(itemTag1, facing, pos, out minusMana, col, name, powerLvl);
+                tempMana -= minusMana;
             }
 
             if (itemTag1 == "Glove of Thunder" && tempMana >= 20 && powerLvl == 1)
@@ -811,7 +796,7 @@ public class PlayerController : MonoBehaviour
         //Reaspawn
         if (health <= 0 && !died)
         {
-            Debug.Log("Player " + name[0] + " was killed by Player " + killerName[0]);
+            //Debug.Log("Player " + name[0] + " was killed by Player " + killerName[0]);
             died = true;
             transform.SetPositionAndRotation(diedPos, Quaternion.identity);
             //Debug.LogWarning("TELEPORTED!!!");

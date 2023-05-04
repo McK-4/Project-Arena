@@ -8,8 +8,6 @@ public class ItemLibary : MonoBehaviour
 
     public string itemTag;
 
-    public int takeMana;
-
     private float angle;
 
     //Bow
@@ -144,9 +142,7 @@ public class ItemLibary : MonoBehaviour
                 }
                 else
                 {
-                    takeMana = 5;
                     minusMana = 5;
-
                 }
                 break;
             case "Tome of Ash":
