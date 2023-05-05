@@ -15,6 +15,7 @@ public class ItemManager : MonoBehaviour
     private Vector2[] itemSpawnPos;
 
     private Vector2[] powerUpSpawnPos;
+    private Vector2[] powerUpEndPos;
 
     private bool[] spawned;
 
@@ -43,6 +44,9 @@ public class ItemManager : MonoBehaviour
 
             powerUpSpawnPos[0] = new Vector2(-6.5f, -9f);
             powerUpSpawnPos[1] = new Vector2(6f, 1.5f);
+
+            powerUpEndPos[0] = new Vector2(0.3f, -4.5f);
+            powerUpEndPos[1] = new Vector2(-1.35f, 1.5f);
         }
 
         spawntimer = 30f;
@@ -66,14 +70,10 @@ public class ItemManager : MonoBehaviour
             foreach (Vector2 itemSpawn in itemSpawnPos)
             {
                 ItemSpawn();
+                PowerUpSpawn();
             }
-            /*
-            foreach(Vector2 powerUpSpawn in powerUpSpawnPos)
-            {
-
-            }
-            */
         }
+
     }
 
     private void ItemSpawn()
@@ -113,6 +113,48 @@ public class ItemManager : MonoBehaviour
             //spawning object
             GameObject ip;
             ip = Instantiate(items[ranItem], possibleSpots[ranIndex], Quaternion.identity);
+            NameChange(ip);
+            //spawned[ranIndex] = true;
+        }
+    }
+
+    private void PowerUpSpawn()
+    {
+        //getting randomItems
+        int ranPowerUp = RandomNum(0, powerUps.Length);
+
+        //getting all objects in scene
+        GameObject[] powerUpsInScene = GameObject.FindGameObjectsWithTag("PowerUp");
+
+        //finding possible spawn locations
+        List<Vector2> possibleSpots = new List<Vector2>(powerUpSpawnPos);
+
+        for (int i = 0; i < possibleSpots.Count; i++)
+        {
+            //Debug.Log(i);
+            bool remove = false;
+            foreach (GameObject powerUp in powerUpsInScene)
+            {
+                if (new Vector2(powerUp.transform.position.x, powerUp.transform.position.y) == possibleSpots[i])
+                {
+                    remove = true;
+                }
+            }
+            if (remove)
+            {
+                possibleSpots.RemoveAt(i);
+                i--;
+            }
+        }
+
+        if (possibleSpots.Count > 0)
+        {
+            //getting random location out of possible locations
+            ranIndex = RandomNum(0, possibleSpots.Count - 1);
+
+            //spawning object
+            GameObject ip;
+            ip = Instantiate(powerUps[ranPowerUp], possibleSpots[ranPowerUp], Quaternion.identity);
             NameChange(ip);
             //spawned[ranIndex] = true;
         }

@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour
     private float campTimer = 0;
     private float campCooldownTimer = 0.2f;
 
-    [SerializeField] int[] playerOrders;
+    public int[] playerOrders;
 
     public LayerMask playerLayers;
     public float antiCampRange = 1;
@@ -69,15 +69,16 @@ public class PlayerManager : MonoBehaviour
         playerSpawn_4 = player_4.transform.position;
 
         playerOrders = new int[4];
-        playerOrders[0] = player1.spriteRen.sortingOrder;
-        playerOrders[1] = player2.spriteRen.sortingOrder;
-        playerOrders[2] = player3.spriteRen.sortingOrder;
-        playerOrders[3] = player4.spriteRen.sortingOrder;
+        playerOrders[0] = player1.orderInLayer;
+        playerOrders[1] = player2.orderInLayer;
+        playerOrders[2] = player3.orderInLayer;
+        playerOrders[3] = player4.orderInLayer;
+        
         Debug.Log("P1: " + playerOrders[0]);
         Debug.Log("P2: " + playerOrders[1]);
         Debug.Log("P3: " + playerOrders[2]);
         Debug.Log("P4: " + playerOrders[3]);
-
+        
         if (master != null)
         {
             player1.activeSkin = master.player1Skin;
@@ -160,17 +161,19 @@ public class PlayerManager : MonoBehaviour
                 playerCamping = true;
                 if(player1.died)
                 {
-                    DEBUG(player_1.name);
                     if (player1.ranNum == 1)
                     {
+                        player1.orderInLayer = playerOrders[1];
                         player1.Order(playerOrders[1]);
                     }
                     else if (player1.ranNum == 2)
                     {
+                        player1.orderInLayer = playerOrders[2];
                         player1.Order(playerOrders[2]);
                     }
                     else if (player1.ranNum == 3)
                     {
+                        player1.orderInLayer = playerOrders[3];
                         player1.Order(playerOrders[3]);
                     }
                 }
@@ -191,19 +194,23 @@ public class PlayerManager : MonoBehaviour
                 playerCamping = true;
                 if (player2.died)
                 {
-                    DEBUG(player_2.name);
+                    /*
                     if (player2.ranNum == 1)
                     {
+                        player2.orderInLayer = playerOrders[0];
                         player2.Order(playerOrders[0]);
                     }
                     else if (player2.ranNum == 2)
                     {
+                        player2.orderInLayer = playerOrders[2];
                         player2.Order(playerOrders[2]);
                     }
                     else if (player2.ranNum == 3)
                     {
+                        player2.orderInLayer = playerOrders[3];
                         player2.Order(playerOrders[3]);
                     }
+                    */
                 }
             }
         }
@@ -222,17 +229,19 @@ public class PlayerManager : MonoBehaviour
                 playerCamping = true;
                 if (player3.died)
                 {
-                    DEBUG(player_3.name);
                     if (player3.ranNum == 1)
                     {
+                        player3.orderInLayer = playerOrders[1];
                         player3.Order(playerOrders[1]);
                     }
                     else if (player3.ranNum == 2)
                     {
+                        player3.orderInLayer = playerOrders[0];
                         player3.Order(playerOrders[0]);
                     }
                     else if (player3.ranNum == 3)
                     {
+                        player3.orderInLayer = playerOrders[3];
                         player3.Order(playerOrders[3]);
                     }
                 }
@@ -253,17 +262,19 @@ public class PlayerManager : MonoBehaviour
                 playerCamping = true;
                 if (player4.died)
                 {
-                    DEBUG(player_4.name);
                     if (player4.ranNum == 1)
                     {
+                        player4.orderInLayer = playerOrders[1];
                         player4.Order(playerOrders[1]);
                     }
                     else if (player4.ranNum == 2)
                     {
+                        player4.orderInLayer = playerOrders[2];
                         player4.Order(playerOrders[2]);
                     }
                     else if (player4.ranNum == 3)
                     {
+                        player4.orderInLayer = playerOrders[0];
                         player4.Order(playerOrders[0]);
                     }
                 }
@@ -397,13 +408,5 @@ public class PlayerManager : MonoBehaviour
         }
     }
     */
-
-    void DEBUG(string name)
-    {
-        Debug.Log(name + " P1: " + playerOrders[0]);
-        Debug.Log(name + " P2: " + playerOrders[1]);
-        Debug.Log(name + " P3: " + playerOrders[2]);
-        Debug.Log(name + " P4: " + playerOrders[3]);
-    }
 
 }

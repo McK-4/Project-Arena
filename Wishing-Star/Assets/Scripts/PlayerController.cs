@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
     //Map Layering
     public TilemapRenderer tileRen;
-    public int orderInLayer = 1;
+    public int orderInLayer;
     public string layerName;
     public int playerLayer;
     //public int layer;
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
     private float deathCooldownTime = 5;
     private Vector2 diedPos = new Vector2(123, 456);
     public bool died;
-    [SerializeField] int[] respawnLayers;
+    private int respawnLayer;
 
     //Movement
     public float movementSpeedMax = 7.5f;
@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
     public bool shieldUp = false;
     private bool attacked = false;
     public float attackTimer = 0;
-    public float attackCooldownTime = 1f;
+    private float attackCooldownTime = 0.5f;
     Vector2 scale = new Vector2(1,1);
     Vector2 iScale = new Vector2(-1, 1);
 
@@ -431,6 +431,7 @@ public class PlayerController : MonoBehaviour
                 deathTimer = 0;
                 died = false;
                 GameObject.Find(killerName).GetComponent<PlayerController>().points += 1;
+                Order(playerManager.playerOrders[respawnLayer]);
                 transform.SetPositionAndRotation(respawn, Quaternion.identity);
                 //Debug.Log("New Layer: " + spriteRen.sortingOrder);
                 health = maxHealth;
@@ -660,6 +661,11 @@ public class PlayerController : MonoBehaviour
                 canUse1 = true;
             }
 
+            else
+            {
+                canUse1 = false;
+            }
+
             if (canUse1 && itemTag1 == "Glove of Thunder" && charging)
             {
                 charging = false;
@@ -669,37 +675,6 @@ public class PlayerController : MonoBehaviour
                 tempMana -= minusMana;
                 powerLvl = 0;
             }
-            /* This may not be needed (still adjusting mana cost)
-            if(itemTag1 == "Glove of Thunder")
-            {
-                if(powerLvl == 0)
-                {
-                    boltDmg = 1;
-                    Debug.Log("Bolt Damage is " + boltDmg);
-                }
-                else if(powerLvl == 1)
-                {
-                    //5 mana is being added becuase it was taken away for the instant charge (also it's less confusing than taking away 5 from the end cost)
-                    tempMana += 5;
-                    
-                    tempMana -= 20;
-                    powerLvl = 0;
-                    boltDmg = 4;
-
-                    minusMana = itemLib.ItemLibFind(itemTag1, facing, pos, minusMana, col, name, powerLvl);
-                    tempMana -= minusMana;
-                }
-                else if(powerLvl == 2)
-                {
-                    //5 mana is being added becuase it was taken away for the instant charge
-                    tempMana += 5;
-
-                    tempMana -= 40;
-                    powerLvl = 0;
-                    boltDmg = 7;
-                }
-            }
-            */
         }
     }
 
@@ -711,33 +686,54 @@ public class PlayerController : MonoBehaviour
             {
                 pickingup2 = true;
             }
-            Debug.Log(itemTag2);
-            if(canUse2)
+            if (holding2)
+            {
+                swapping2 = true;
+            }
+
+            if (canUse2 && itemTag2 != "Glove of Thunder" && itemTag2 != "Bow")
             {
                 itemLib.ItemLibFind(itemTag2, facing, pos, out minusMana, col, name, powerLvl);
             }
 
+            if (canUse2 && itemTag2 == "Bow")
+            {
+                drawing = true;
+            }
+
+            if (canUse2 && itemTag2 == "Glove of Thunder")
+            {
+                //Debug.Log("Charging!");
+                powerLvl = 0;
+                charging = true;
+            }
+
             //Mana Cost for items:
-            if(itemTag2 == "Bow" && tempMana >= 10)
+            if (itemTag2 == "Bow" && tempMana >= 10)
             {
-                tempMana -= 10;
                 canUse2 = true;
             }
-            else if(itemTag2 == "Bomb" && tempMana >= 20 && !itemLib.bombPlaced)
+            else if (itemTag2 == "Bomb" && tempMana >= 20 && !itemLib.bombPlaced)
             {
-                tempMana -= 20;
+                tempMana -= minusMana;
                 canUse2 = true;
             }
-            else if(itemTag2 == "Dark Leech" && tempMana >= 50)
+            else if (itemTag2 == "Dark Leech" && tempMana >= 50)
             {
-                tempMana -= 50;
+                tempMana -= minusMana;
                 canUse2 = true;
             }
-            else if(itemTag2 == "Tome of Ash" && tempMana >= 25)
+            else if (itemTag2 == "Tome of Ash" && tempMana >= 25)
             {
-                tempMana -= 25;
+                tempMana -= minusMana;
                 canUse2 = true;
             }
+            else if (itemTag2 == "Glove of Thunder" && tempMana >= 5)
+            {
+                tempMana -= minusMana;
+                canUse2 = true;
+            }
+
             else
             {
                 canUse2 = false;
@@ -753,6 +749,42 @@ public class PlayerController : MonoBehaviour
             {
                 swapping2 = false;
                 pickUptimer = 0;
+            }
+
+            if (itemTag2 == "Bow" && drew)
+            {
+                drew = false;
+                drawing = false;
+                drawtimer = 0f;
+                itemLib.ItemLibFind(itemTag2, facing, pos, out minusMana, col, name, powerLvl);
+                tempMana -= minusMana;
+            }
+
+            if (itemTag2 == "Glove of Thunder" && tempMana >= 20 && powerLvl == 1)
+            {
+                tempMana -= minusMana;
+                canUse2 = true;
+            }
+
+            if (itemTag2 == "Glove of Thunder" && tempMana >= 40 && powerLvl == 2)
+            {
+                tempMana -= minusMana;
+                canUse2 = true;
+            }
+
+            else
+            {
+                canUse2 = false;
+            }
+
+            if (canUse2 && itemTag2 == "Glove of Thunder" && charging)
+            {
+                charging = false;
+                chargetimer = 0f;
+                itemLib.ItemLibFind(itemTag2, facing, pos, out minusMana, col, name, powerLvl);
+                //Debug.Log("Thing!");
+                tempMana -= minusMana;
+                powerLvl = 0;
             }
         }
     }
@@ -811,41 +843,74 @@ public class PlayerController : MonoBehaviour
         if (name == "1_Player")
         {
             if (ranNum == 1)
+            {
                 respawn = new Vector2(playerManager.playerSpawn_2.x, playerManager.playerSpawn_2.y);
+                respawnLayer = 1;
+            }
             else if (ranNum == 2)
+            {
                 respawn = new Vector2(playerManager.playerSpawn_3.x, playerManager.playerSpawn_3.y);
+                respawnLayer = 2;
+            }
             else if (ranNum == 3)
+            {
                 respawn = new Vector2(playerManager.playerSpawn_4.x, playerManager.playerSpawn_4.y);
+                respawnLayer = 3;
+            }
         }
         
         if (name == "2_Player")
         {
             if (ranNum == 1)
+            {
                 respawn = new Vector2(playerManager.playerSpawn_1.x, playerManager.playerSpawn_1.y);
+                respawnLayer = 0;
+            }
             else if (ranNum == 2)
+            {
                 respawn = new Vector2(playerManager.playerSpawn_3.x, playerManager.playerSpawn_3.y);
+                respawnLayer = 2;
+            }
             else if (ranNum == 3)
+            {
                 respawn = new Vector2(playerManager.playerSpawn_4.x, playerManager.playerSpawn_4.y);
+                respawnLayer = 3;
+            }
         }
         
         if (name == "3_Player")
         {
             if (ranNum == 1)
+            {
                 respawn = new Vector2(playerManager.playerSpawn_2.x, playerManager.playerSpawn_2.y);
+                respawnLayer = 1;
+            }
             else if (ranNum == 2)
+            {
                 respawn = new Vector2(playerManager.playerSpawn_1.x, playerManager.playerSpawn_1.y);
+                respawnLayer = 0;
+            }
             else if (ranNum == 3)
+            {
                 respawn = new Vector2(playerManager.playerSpawn_4.x, playerManager.playerSpawn_4.y);
+                respawnLayer = 3;
+            }
         }
         
         if (name == "4_Player")
         {
             if (ranNum == 1)
+            {
                 respawn = new Vector2(playerManager.playerSpawn_2.x, playerManager.playerSpawn_2.y);
+            }
             else if (ranNum == 2)
+            {
                 respawn = new Vector2(playerManager.playerSpawn_3.x, playerManager.playerSpawn_3.y);
+            }
             else if (ranNum == 3)
+            {
                 respawn = new Vector2(playerManager.playerSpawn_1.x, playerManager.playerSpawn_1.y);
+            }
         }
     }
 
