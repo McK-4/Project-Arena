@@ -109,10 +109,11 @@ public class ItemLibary : MonoBehaviour
     {
         //name = who is shooting the arrow
         
-        Debug.Log(tag);
+        //Debug.Log(tag);
         minusMana = 0;
         switch (tag)
         {
+            //Items
             case "Bow":
                 Bow(direction, pos, col, name);
                 minusMana = 10;
@@ -152,6 +153,30 @@ public class ItemLibary : MonoBehaviour
             case "Invisibility Mask":
                 minusMana = 0;
                 break;
+
+            //Power Ups
+            /*
+            case "Hasty Boots":
+                //HastyBoots();
+                minusMana = 0;
+                break;
+            case "Health Up":
+                //HealthUp();
+                minusMana = 0;
+                break;
+            case "Mana Up":
+                //ManaUp();
+                minusMana = 0;
+                break;
+            case "Mystic Blade":
+                //MysticBlade();
+                minusMana = 0;
+                break;
+            case "Mystic Shield":
+                //MysticShield();
+                minusMana = 0;
+                break;
+                */
         }
     }
     
@@ -215,6 +240,31 @@ public class ItemLibary : MonoBehaviour
         ta.GetComponent<Rigidbody2D>().velocity = direction * 10f;
         ta.name = (attacker + "'s ash");
         Destroy(ta, 2f);
+    }
+
+    private void HastyBoots()
+    {
+
+    }
+
+    private void HealthUp()
+    {
+
+    }
+
+    private void ManaUp()
+    {
+
+    }
+
+    private void MysticBlade()
+    {
+
+    }
+
+    private void MysticShield()
+    {
+
     }
 
     private void Angle(Vector2 direction)

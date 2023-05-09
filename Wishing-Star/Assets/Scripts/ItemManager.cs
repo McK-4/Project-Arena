@@ -8,7 +8,7 @@ public class ItemManager : MonoBehaviour
 
     [SerializeField] GameObject[] items;
 
-    [SerializeField] GameObject[] powerUps;
+    public GameObject[] powerUps;
 
     Scene currentScene;
 
@@ -74,6 +74,13 @@ public class ItemManager : MonoBehaviour
             }
         }
 
+        foreach(GameObject powerup in powerUps)
+        {
+            if((Vector2)powerup.transform.position == powerUpEndPos[0] || (Vector2)powerup.transform.position == powerUpEndPos[1])
+            {
+                Destroy(powerup);
+            }
+        }
     }
 
     private void ItemSpawn()
@@ -167,6 +174,7 @@ public class ItemManager : MonoBehaviour
 
     private void NameChange(GameObject ip)
     {
+        //Items name change
         if(ip.name.Substring(0, 3) == "Bow")
         {
             ip.name = "Bow";
@@ -182,6 +190,28 @@ public class ItemManager : MonoBehaviour
         else if(ip.name.Substring(0, 16) == "Glove of Thunder")
         {
             ip.name = "Glove of Thunder";
+        }
+
+        //Powerup name change
+        else if(ip.name.Substring(0, 11) == "Hasty Boots")
+        {
+            ip.name = "Hasty Boots";
+        }
+        else if (ip.name.Substring(0, 9) == "Health Up")
+        {
+            ip.name = "Health Up";
+        }
+        else if (ip.name.Substring(0, 6) == "Mana Up")
+        {
+            ip.name = "Mana Up";
+        }
+        else if (ip.name.Substring(0, 12) == "Mystic Blade")
+        {
+            ip.name = "Mystic Blade";
+        }
+        else if (ip.name.Substring(0, 13) == "Mystic Shield")
+        {
+            ip.name = "Mystic Shield";
         }
     }
 

@@ -110,6 +110,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 eKnockback;
     private Vector2 pKnockback;
     public GameObject attacker;
+    private bool invincible = false;
 
     //Mana 
     public int manaMax = 100;
@@ -159,6 +160,14 @@ public class PlayerController : MonoBehaviour
     public int powerLvl = 0;
     public int boltDmg;
 
+    //Mystic Blade CoolDown
+    [SerializeField] float bladetimer = 0;
+    [SerializeField] float bladeCooldownTime = 15f;
+
+    //Mystic Shield CoolDown
+    [SerializeField] float shieldtimer = 0;
+    [SerializeField] float shieldCooldownTime = 15f;
+
     //End Game (For switching scenes back to the menu)
     private GameManager gameManager;
 
@@ -188,6 +197,8 @@ public class PlayerController : MonoBehaviour
         canUse2 = true;
         leeched = false;
         powerLvl = 0;
+        damageReduction = 1;
+        invincible = false;
 
         winner = false;
         second = false;
@@ -495,6 +506,33 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        //Mystic Blade CoolDown
+        if (basicSwordDamage == 3)
+        {
+            if (bladetimer < bladeCooldownTime)
+            {
+                bladetimer += Time.deltaTime;
+            }
+            else if (bladetimer >= bladeCooldownTime)
+            {
+                bladetimer = 0;
+                basicSwordDamage = 2;
+            }
+        }
+
+        //Mystic Shield CoolDown
+        if (invincible)
+        {
+            if (shieldtimer < shieldCooldownTime)
+            {
+                shieldtimer += Time.deltaTime;
+            }
+            else if (shieldtimer >= shieldCooldownTime)
+            {
+                shieldtimer = 0;
+                invincible = false;
+            }
+        }
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -798,7 +836,11 @@ public class PlayerController : MonoBehaviour
     public void ShieldBlocked(int damage, GameObject otherPlayer)
     {
         //Debug.Log(damage);
-        damageReduction = 1;
+        //damageReduction = 1;
+        if(invincible)
+        {
+            damageReduction = damage;
+        }
         damage -= damageReduction;
         //Debug.Log(damage);
 
@@ -940,21 +982,34 @@ public class PlayerController : MonoBehaviour
         {
             Order(4);
         }
-        if(collision.gameObject.tag == "Pick Up")
+        if(collision.gameObject.tag == "Pick Up" || collision.gameObject.tag == "Power Up")
         {
             canSwap = true;
+
+            //Picking up Items
             if (pickingup1 && collision.gameObject.tag == "Pick Up" && canSwap)
             {
-                Debug.Log("LOU LOU");
+                //Debug.Log("LOU LOU");
                 itemTag1 = collision.gameObject.name;
-                Debug.Log(itemTag1);
+                //Debug.Log(itemTag1);
                 Destroy(collision.gameObject);
             }
 
-            else if (pickingup2 && collision.gameObject.tag == "Pick Up" && canSwap)
+            if (pickingup2 && collision.gameObject.tag == "Pick Up" && canSwap)
             {
-                Debug.Log("BAW???");
+                //Debug.Log("BAW???");
                 itemTag2 = collision.gameObject.name;
+                Destroy(collision.gameObject);
+            }
+
+            //Picking up Power ups
+            else if(pickingup1 && collision.gameObject.tag == "Power Up" && canSwap)
+            {
+                Destroy(collision.gameObject);
+            }
+            
+            else if(pickingup2 && collision.gameObject.tag == "Power Up" && canSwap)
+            {
                 Destroy(collision.gameObject);
             }
         }
@@ -1180,6 +1235,33 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void PowerUps(string name)
+    {
+        switch (name)
+        {
+            /*
+            case "Hasty Boots":
+                //HastyBoots();
+                break;
+            */
+            case "Health Up":
+                maxHealth = 16;
+                health = maxHealth;
+                //UI needs to be fixed for this
+                break;
+            case "Mana Up":
+                manaMax = 200;
+                //UI needs to be fixed for this
+                break;
+            case "Mystic Blade":
+                basicSwordDamage = 3;
+                break;
+            case "Mystic Shield":
+                invincible = true;
+                break;
+        }
+
+    }
 
     public void RePair()
     {
