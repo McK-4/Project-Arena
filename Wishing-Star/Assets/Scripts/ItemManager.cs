@@ -44,9 +44,10 @@ public class ItemManager : MonoBehaviour
 
             powerUpSpawnPos[0] = new Vector2(-6.5f, -9f);
             powerUpSpawnPos[1] = new Vector2(6f, 1.5f);
-
+            /*
             powerUpEndPos[0] = new Vector2(0.3f, -4.5f);
             powerUpEndPos[1] = new Vector2(-1.35f, 1.5f);
+            */
         }
 
         spawntimer = 30f;
@@ -70,7 +71,7 @@ public class ItemManager : MonoBehaviour
             foreach (Vector2 itemSpawn in itemSpawnPos)
             {
                 ItemSpawn();
-                PowerUpSpawn();
+                //PowerUpSpawn();
             }
         }
 
@@ -124,7 +125,7 @@ public class ItemManager : MonoBehaviour
             //spawned[ranIndex] = true;
         }
     }
-
+    /*
     private void PowerUpSpawn()
     {
         //getting randomItems
@@ -166,7 +167,7 @@ public class ItemManager : MonoBehaviour
             //spawned[ranIndex] = true;
         }
     }
-
+    */
     private int RandomNum(int min, int max)
     {
         return Random.Range(min, max);

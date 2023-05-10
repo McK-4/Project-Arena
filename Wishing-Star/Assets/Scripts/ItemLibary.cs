@@ -33,6 +33,11 @@ public class ItemLibary : MonoBehaviour
     //Glove of Thunder
     [SerializeField] GameObject bolt;
 
+    //Invisiblity
+    Color normalColor = new Vector4(255,255,255,255);
+    Color invisColor = new Vector4(255,255,255,0);
+    private bool invis = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -86,6 +91,7 @@ public class ItemLibary : MonoBehaviour
             }
         }
 
+        //Leeching player's magic
         if(leechThrown && GameObject.Find(leechName) != null)
         {
             Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(GameObject.Find(leechName).transform.position, 4);
@@ -102,31 +108,35 @@ public class ItemLibary : MonoBehaviour
                 }
             }
         }
-
     }
 
-    public void ItemLibFind(string tag, Vector2 direction, Vector2 pos, out int minusMana, Collider2D col, string name, int powerLvl)
+    public void ItemLibFind(string tag, Vector2 direction, Vector2 pos, out int minusMana, Collider2D col, string name, int powerLvl, GameObject player, out bool invisible)
     {
         //name = who is shooting the arrow
         
         //Debug.Log(tag);
         minusMana = 0;
+        invisible = false;
+
         switch (tag)
         {
             //Items
             case "Bow":
                 Bow(direction, pos, col, name);
                 minusMana = 10;
+                invisible = false;
                 break;
 
             case "Bomb":
                 Bomb(pos, direction, name);
                 minusMana = 20;
+                invisible = false;
                 break;
 
             case "Dark Leech":
                 DarkLeech(pos, direction, name);
                 minusMana = 50;
+                invisible = false;
                 break;
             case "Glove of Thunder":
                 Debug.Log("properStatment");
@@ -145,38 +155,26 @@ public class ItemLibary : MonoBehaviour
                 {
                     minusMana = 5;
                 }
+                invisible = false;
                 break;
             case "Tome of Ash":
                 TomeOfAsh(pos, direction, name);
                 minusMana = 25;
+                invisible = false;
                 break;
             case "Invisibility Mask":
-                minusMana = 0;
+                InvisibilityMask(player);
+                if(!invisible)
+                {
+                    invisible = true;
+                    minusMana = 10;
+                }
+                else if(invisible)
+                {
+                    invisible = false;
+                    minusMana = 0;
+                }
                 break;
-
-            //Power Ups
-            /*
-            case "Hasty Boots":
-                //HastyBoots();
-                minusMana = 0;
-                break;
-            case "Health Up":
-                //HealthUp();
-                minusMana = 0;
-                break;
-            case "Mana Up":
-                //ManaUp();
-                minusMana = 0;
-                break;
-            case "Mystic Blade":
-                //MysticBlade();
-                minusMana = 0;
-                break;
-            case "Mystic Shield":
-                //MysticShield();
-                minusMana = 0;
-                break;
-                */
         }
     }
     
@@ -242,29 +240,18 @@ public class ItemLibary : MonoBehaviour
         Destroy(ta, 2f);
     }
 
-    private void HastyBoots()
+    private void InvisibilityMask(GameObject player)
     {
-
-    }
-
-    private void HealthUp()
-    {
-
-    }
-
-    private void ManaUp()
-    {
-
-    }
-
-    private void MysticBlade()
-    {
-
-    }
-
-    private void MysticShield()
-    {
-
+        if(!invis)
+        {
+            player.GetComponent<SpriteRenderer>().color = invisColor;
+            invis = true;
+        }
+        else if(invis)
+        {
+            player.GetComponent<SpriteRenderer>().color = normalColor;
+            invis = false;
+        }
     }
 
     private void Angle(Vector2 direction)

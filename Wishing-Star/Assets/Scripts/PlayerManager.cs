@@ -73,12 +73,12 @@ public class PlayerManager : MonoBehaviour
         playerOrders[1] = player2.orderInLayer;
         playerOrders[2] = player3.orderInLayer;
         playerOrders[3] = player4.orderInLayer;
-        
+        /*
         Debug.Log("P1: " + playerOrders[0]);
         Debug.Log("P2: " + playerOrders[1]);
         Debug.Log("P3: " + playerOrders[2]);
         Debug.Log("P4: " + playerOrders[3]);
-        
+        */
         if (master != null)
         {
             player1.activeSkin = master.player1Skin;

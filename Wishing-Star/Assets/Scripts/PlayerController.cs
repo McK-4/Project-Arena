@@ -160,6 +160,12 @@ public class PlayerController : MonoBehaviour
     public int powerLvl = 0;
     public int boltDmg;
 
+    //Invisiblility Mask
+    private bool invisible = false;
+    private float invisTimer = 0;
+    private float invisCooldownTime = 1;
+    private Color normalColor = new Vector4(255, 255, 255, 255);
+
     //Mystic Blade CoolDown
     [SerializeField] float bladetimer = 0;
     [SerializeField] float bladeCooldownTime = 15f;
@@ -205,7 +211,7 @@ public class PlayerController : MonoBehaviour
         third = false;
         fourth = false;
 
-        //itemTag1 = "Glove of Thunder";
+        itemTag1 = "Invisibility Mask";
 
         Order(orderInLayer);
 
@@ -332,8 +338,18 @@ public class PlayerController : MonoBehaviour
             //tempVel.x -= acceleration;
             //tempVel.y -= acceleration;
         }
+        /*
+        if (moveinput.y == 0)
+        {
+            tempVel.y -= acceleration * 2;
+        }
 
-        if(moveAble)
+        if (moveinput.x == 0)
+        {
+            tempVel.x -= acceleration * 2;
+        }
+        */
+        if (moveAble)
         {
             tempVel.x = moveinput.x * movementSpeed;
             tempVel.y = moveinput.y * movementSpeed;
@@ -342,6 +358,7 @@ public class PlayerController : MonoBehaviour
         {
             tempVel = new Vector2(0,0);
         }
+
         if (shieldUp)
         {
             tempVel = moveinput * shieldMoveSpeed;
@@ -506,6 +523,25 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        //Invisiblility Mana Cost
+        if(invisible && tempMana >= 3)
+        {
+            if (invisTimer < invisCooldownTime)
+            {
+                invisTimer += Time.deltaTime;
+            }
+            else if (invisTimer >= invisCooldownTime)
+            {
+                invisTimer = 0;
+                tempMana -= 3;
+            }
+        }
+        if(invisible && tempMana < 3)
+        {
+            spriteRen.color = normalColor;
+            invisible = false;
+        }
+
         //Mystic Blade CoolDown
         if (basicSwordDamage == 3)
         {
@@ -617,7 +653,7 @@ public class PlayerController : MonoBehaviour
 
             if(canUse1 && itemTag1 != "Glove of Thunder" && itemTag1 != "Bow")
             {
-                itemLib.ItemLibFind(itemTag1, facing, pos, out minusMana, col, name, powerLvl);
+                itemLib.ItemLibFind(itemTag1, facing, pos, out minusMana, col, name, powerLvl, gameObject, out invisible);
             }
 
             if (canUse1 && itemTag1 == "Bow")
@@ -657,7 +693,16 @@ public class PlayerController : MonoBehaviour
                 tempMana -= minusMana;
                 canUse1 = true;
             }
-            
+            else if(itemTag1 == "Invisibility Mask" && tempMana >= 10 && !invisible)
+            {
+                tempMana -= minusMana;
+                canUse1 = true;
+            }
+            else if(itemTag1 == "Invisibility Mask" && invisible)
+            {
+                canUse1 = true;
+            }
+
             else
             {
                 canUse1 = false;
@@ -683,7 +728,7 @@ public class PlayerController : MonoBehaviour
                 drew = false;
                 drawing = false;
                 drawtimer = 0f;
-                itemLib.ItemLibFind(itemTag1, facing, pos, out minusMana, col, name, powerLvl);
+                itemLib.ItemLibFind(itemTag1, facing, pos, out minusMana, col, name, powerLvl, gameObject, out invisible);
                 tempMana -= minusMana;
             }
 
@@ -708,7 +753,7 @@ public class PlayerController : MonoBehaviour
             {
                 charging = false;
                 chargetimer = 0f;
-                itemLib.ItemLibFind(itemTag1, facing, pos, out minusMana, col, name, powerLvl);
+                itemLib.ItemLibFind(itemTag1, facing, pos, out minusMana, col, name, powerLvl, gameObject, out invisible);
                 //Debug.Log("Thing!");
                 tempMana -= minusMana;
                 powerLvl = 0;
@@ -731,7 +776,7 @@ public class PlayerController : MonoBehaviour
 
             if (canUse2 && itemTag2 != "Glove of Thunder" && itemTag2 != "Bow")
             {
-                itemLib.ItemLibFind(itemTag2, facing, pos, out minusMana, col, name, powerLvl);
+                itemLib.ItemLibFind(itemTag2, facing, pos, out minusMana, col, name, powerLvl, gameObject, out invisible);
             }
 
             if (canUse2 && itemTag2 == "Bow")
@@ -771,6 +816,15 @@ public class PlayerController : MonoBehaviour
                 tempMana -= minusMana;
                 canUse2 = true;
             }
+            else if (itemTag2 == "Invisibility Mask" && tempMana >= 10 && !invisible)
+            {
+                tempMana -= minusMana;
+                canUse2 = true;
+            }
+            else if (itemTag1 == "Invisibility Mask" && invisible)
+            {
+                canUse1 = true;
+            }
 
             else
             {
@@ -794,7 +848,7 @@ public class PlayerController : MonoBehaviour
                 drew = false;
                 drawing = false;
                 drawtimer = 0f;
-                itemLib.ItemLibFind(itemTag2, facing, pos, out minusMana, col, name, powerLvl);
+                itemLib.ItemLibFind(itemTag2, facing, pos, out minusMana, col, name, powerLvl, gameObject, out invisible);
                 tempMana -= minusMana;
             }
 
@@ -819,7 +873,7 @@ public class PlayerController : MonoBehaviour
             {
                 charging = false;
                 chargetimer = 0f;
-                itemLib.ItemLibFind(itemTag2, facing, pos, out minusMana, col, name, powerLvl);
+                itemLib.ItemLibFind(itemTag2, facing, pos, out minusMana, col, name, powerLvl, gameObject, out invisible);
                 //Debug.Log("Thing!");
                 tempMana -= minusMana;
                 powerLvl = 0;
@@ -1245,9 +1299,7 @@ public class PlayerController : MonoBehaviour
                 break;
             */
             case "Health Up":
-                maxHealth = 16;
                 health = maxHealth;
-                //UI needs to be fixed for this
                 break;
             case "Mana Up":
                 manaMax = 200;
