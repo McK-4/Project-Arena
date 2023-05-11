@@ -34,9 +34,7 @@ public class ItemLibary : MonoBehaviour
     [SerializeField] GameObject bolt;
 
     //Invisiblity
-    Color normalColor = new Vector4(255,255,255,255);
-    Color invisColor = new Vector4(255,255,255,0);
-    private bool invis = false;
+    Color invisColor = new Vector4(255,255,255,80);
 
     // Start is called before the first frame update
     void Start()
@@ -163,8 +161,8 @@ public class ItemLibary : MonoBehaviour
                 invisible = false;
                 break;
             case "Invisibility Mask":
-                InvisibilityMask(player);
-                if(!invisible)
+                InvisibilityMask(player, invisible);
+                if (!invisible)
                 {
                     invisible = true;
                     minusMana = 10;
@@ -240,17 +238,15 @@ public class ItemLibary : MonoBehaviour
         Destroy(ta, 2f);
     }
 
-    private void InvisibilityMask(GameObject player)
+    private void InvisibilityMask(GameObject player, bool invisible)
     {
-        if(!invis)
+        if(invisible)
         {
             player.GetComponent<SpriteRenderer>().color = invisColor;
-            invis = true;
         }
-        else if(invis)
+        else if(!invisible)
         {
-            player.GetComponent<SpriteRenderer>().color = normalColor;
-            invis = false;
+            player.GetComponent<SpriteRenderer>().color = Color.white;
         }
     }
 

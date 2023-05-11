@@ -7,6 +7,7 @@ public class LightFlicker : MonoBehaviour
 {
     Light2D Light;
 
+    float size;
     float max;
     [SerializeField]float min = 0.08f;
     [SerializeField]float maxT;
@@ -17,6 +18,7 @@ public class LightFlicker : MonoBehaviour
     {
         Light = gameObject.GetComponent<Light2D>();
         max = Light.intensity;
+        size = Light.pointLightOuterRadius;
         StartCoroutine(FlickIntensity());
     }
 
@@ -34,6 +36,7 @@ public class LightFlicker : MonoBehaviour
                 t0 = Time.time;
                 float r = Random.Range(min, max);
                 Light.intensity = r;
+                Light.pointLightOuterRadius = size + r;
                 t = Random.Range(minT, maxT);
                 yield return wait;
             }

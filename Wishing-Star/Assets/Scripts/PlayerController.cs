@@ -161,10 +161,9 @@ public class PlayerController : MonoBehaviour
     public int boltDmg;
 
     //Invisiblility Mask
-    private bool invisible = false;
+    public bool invisible = false;
     private float invisTimer = 0;
     private float invisCooldownTime = 1;
-    private Color normalColor = new Vector4(255, 255, 255, 255);
 
     //Mystic Blade CoolDown
     [SerializeField] float bladetimer = 0;
@@ -524,23 +523,24 @@ public class PlayerController : MonoBehaviour
         }
 
         //Invisiblility Mana Cost
-        if(invisible && tempMana >= 3)
-        {
-            if (invisTimer < invisCooldownTime)
-            {
-                invisTimer += Time.deltaTime;
-            }
-            else if (invisTimer >= invisCooldownTime)
-            {
-                invisTimer = 0;
-                tempMana -= 3;
-            }
-        }
-        if(invisible && tempMana < 3)
-        {
-            spriteRen.color = normalColor;
-            invisible = false;
-        }
+        
+        //if(invisible && tempMana >= 3)
+        //{
+            //if (invisTimer < invisCooldownTime)
+            //{
+                //invisTimer += Time.deltaTime;
+            //}
+            //else if (invisTimer >= invisCooldownTime)
+            //{
+                //invisTimer = 0;
+                //tempMana -= 3;
+            //}
+        //}
+        //if(invisible && tempMana < 3)
+        //{
+            //spriteRen.color = Color.white;
+            //invisible = false;
+        //}
 
         //Mystic Blade CoolDown
         if (basicSwordDamage == 3)

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: decor_v3_27
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: -438033423, guid: e8cdcdce1a84bc5469cf104431b35e23, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
   m_Transform:
     e00: 1
     e01: 0
