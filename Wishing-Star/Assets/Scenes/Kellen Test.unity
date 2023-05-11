@@ -19170,6 +19170,7 @@ MonoBehaviour:
   playerSpawn_2: {x: 0, y: 0}
   playerSpawn_3: {x: 0, y: 0}
   playerSpawn_4: {x: 0, y: 0}
+  playerOrders: 
   playerLayers:
     serializedVersion: 2
     m_Bits: 64
