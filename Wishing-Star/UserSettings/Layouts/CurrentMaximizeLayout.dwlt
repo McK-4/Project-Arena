@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 117
+  controlID: 675
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 72
+  controlID: 627
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 63
+  controlID: 605
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -233,7 +233,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: ae40d6ff76eaddffd4f4ddff9ef3defff0f9deff42acfcff06edffff36eeffff38f9ffffbaaf00008cb0000084b3000056b400006ab4000074b400007a100100c4400100b6410100ca410100bc420100
+      m_ExpandedIDs: 20faffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -673,8 +673,8 @@ MonoBehaviour:
     y: 805
     width: 1630
     height: 182
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
+  m_MinSize: {x: 230, y: 250}
+  m_MaxSize: {x: 10000, y: 10000}
   m_ActualView: {fileID: 10}
   m_Panes:
   - {fileID: 10}
@@ -722,22 +722,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Art
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Art
   m_LastFoldersGridSize: -1
   m_LastProjectPath: A:\Documents\GitHub\Project-Arena\Wishing-Star
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 247}
-    m_SelectedIDs: 98880000
-    m_LastClickedID: 34968
-    m_ExpandedIDs: 000000005e88000060880000628800006488000066880000688800006a8800006c8800006e880000708800008e8800009288000000ca9a3b
+    scrollPos: {x: 0, y: 79}
+    m_SelectedIDs: ec860000
+    m_LastClickedID: 34540
+    m_ExpandedIDs: 00000000ea860000ec860000ee860000f0860000f2860000f4860000f6860000f8860000fa860000fc8600001887000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -765,7 +765,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000005e88000060880000628800006488000066880000688800006a8800006c8800006e88000070880000
+    m_ExpandedIDs: 00000000ea860000ec860000ee860000f0860000f2860000f4860000f6860000f8860000fa860000fc86000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -790,8 +790,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 2e7e0000
+    m_LastClickedInstanceID: 32302
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000683f00005cb70000
     m_RenameOverlay:
