@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
     float mHP;
     int points;
 
-    bool healthboosted;
+    //bool healthboosted;
 
     void Start()
     {
@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour
         mana = pC.mana;
         manaFillAmount = mana / pC.manaMax;
         points = pC.points;
-        healthboosted = false;
+        //healthboosted = false;
         UIUpdate();
     }
 
