@@ -211,7 +211,7 @@ public class PlayerController : MonoBehaviour
         third = false;
         fourth = false;
 
-        itemTag1 = "Glove of Thunder";
+        itemTag1 = "Bomb";
 
         Order(orderInLayer);
 
@@ -669,11 +669,6 @@ public class PlayerController : MonoBehaviour
                 swapping1 = true;
             }
 
-            if(canUse1 && itemTag1 != "Glove of Thunder" && itemTag1 != "Bow")
-            {
-                itemLib.ItemLibFind(itemTag1, facing, pos, out minusMana, col, name, powerLvl, gameObject, out invisible);
-            }
-
             if (canUse1 && itemTag1 == "Bow")
             {
                 drawing = true;
@@ -705,6 +700,7 @@ public class PlayerController : MonoBehaviour
             {
                 tempMana -= minusMana;
                 canUse1 = true;
+                Debug.Log("item is payed for");
             }
             else if(itemTag1 == "Glove of Thunder" && tempMana >= 5)
             {
@@ -721,10 +717,15 @@ public class PlayerController : MonoBehaviour
             {
                 canUse1 = true;
             }
-
             else
             {
                 canUse1 = false;
+            }
+
+            if (canUse1 && itemTag1 != "Glove of Thunder" && itemTag1 != "Bow")
+            {
+                Debug.Log("Item Lib Called");
+                itemLib.ItemLibFind(itemTag1, facing, pos, out minusMana, col, name, powerLvl, gameObject, out invisible);
             }
         }
 
@@ -803,11 +804,6 @@ public class PlayerController : MonoBehaviour
                 swapping2 = true;
             }
 
-            if (canUse2 && itemTag2 != "Glove of Thunder" && itemTag2 != "Bow")
-            {
-                itemLib.ItemLibFind(itemTag2, facing, pos, out minusMana, col, name, powerLvl, gameObject, out invisible);
-            }
-
             if (canUse2 && itemTag2 == "Bow")
             {
                 drawing = true;
@@ -858,6 +854,11 @@ public class PlayerController : MonoBehaviour
             else
             {
                 canUse2 = false;
+            }
+
+            if (canUse2 && itemTag2 != "Glove of Thunder" && itemTag2 != "Bow")
+            {
+                itemLib.ItemLibFind(itemTag2, facing, pos, out minusMana, col, name, powerLvl, gameObject, out invisible);
             }
         }
         if(context.canceled)

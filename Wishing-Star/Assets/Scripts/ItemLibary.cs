@@ -10,6 +10,8 @@ public class ItemLibary : MonoBehaviour
 
     private float angle;
 
+    Animator anim;
+
     //Bow
     [SerializeField] GameObject arrow;
 
@@ -87,6 +89,10 @@ public class ItemLibary : MonoBehaviour
                     }
                 }
             }
+
+            exploded = false;
+            Destroy(bombSummoned);
+            bombPlaced = false;
         }
 
         //Leeching player's magic
@@ -156,6 +162,7 @@ public class ItemLibary : MonoBehaviour
                 invisible = false;
                 break;
             case "Tome of Ash":
+                Debug.Log("correct statment");
                 TomeOfAsh(pos, direction, name);
                 minusMana = 25;
                 invisible = false;
@@ -234,8 +241,10 @@ public class ItemLibary : MonoBehaviour
 
         GameObject ta = Instantiate(ash, pos + direction, Quaternion.Euler(0,0, angle));
         ta.GetComponent<Rigidbody2D>().velocity = direction * 10f;
+        anim = ta.GetComponent<Animator>();
         ta.name = (attacker + "'s ash");
-        Destroy(ta, 2f);
+
+        Destroy(ta, 1.5f);
     }
 
     private void InvisibilityMask(GameObject player, bool invisible)
