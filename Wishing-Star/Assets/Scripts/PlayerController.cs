@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
     private ItemLibary itemLib;
     public string itemTag1;
     public string itemTag2;
-    private string itemTagMinus;
+    //private string itemTagMinus;
     public Vector2 facing;
     public Vector2 pos;
     public bool canUse1;
@@ -158,12 +158,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float chargetimer = 0;
     [SerializeField] float chargeCooldownTime = 3f;
     public int powerLvl = 0;
-    public int boltDmg;
+    public int boltDmg = 4;
 
     //Invisiblility Mask
     public bool invisible = false;
-    private float invisTimer = 0;
-    private float invisCooldownTime = 1;
+    //private float invisTimer = 0;
+    //private float invisCooldownTime = 1;
 
     //Mystic Blade CoolDown
     [SerializeField] float bladetimer = 0;
@@ -204,13 +204,14 @@ public class PlayerController : MonoBehaviour
         powerLvl = 0;
         damageReduction = 1;
         invincible = false;
+        boltDmg = 4;
 
         winner = false;
         second = false;
         third = false;
         fourth = false;
 
-        itemTag1 = "Invisibility Mask";
+        itemTag1 = "Glove of Thunder";
 
         Order(orderInLayer);
 
@@ -358,17 +359,30 @@ public class PlayerController : MonoBehaviour
             tempVel = new Vector2(0,0);
         }
 
-        if (shieldUp)
+        if (shieldUp && !charging || shieldUp && !drawing)
         {
             tempVel = moveinput * shieldMoveSpeed;
             maxVelocityX = 3.4f;
             maxVelocityY = 3.4f;
         }
-        if(!shieldUp)
+        if(!shieldUp && !charging || !shieldUp && !drawing)
         {
             maxVelocityX = 7.60f;
             maxVelocityY = 7.60f;
         }
+        
+        if(charging & !shieldUp|| drawing & !shieldUp)
+        {
+            tempVel = moveinput * shieldMoveSpeed;
+            maxVelocityX = 3.4f;
+            maxVelocityY = 3.4f;
+        }
+        if (!charging && !shieldUp|| !drawing && !shieldUp)
+        {
+            maxVelocityX = 7.60f;
+            maxVelocityY = 7.60f;
+        }
+        
         if (movementSpeed <= movementSpeedStart && !moving)
         {
             movementSpeed = movementSpeedStart;
@@ -641,8 +655,12 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
+            //Turning the item use animation on
+            anim.SetBool("Item", true);
+            anim.SetTrigger("Use");
+
             //Debug.Log("Pressed!!");
-            if(!holding1)
+            if (!holding1)
             {
                 pickingup1 = true;
             }
@@ -692,6 +710,7 @@ public class PlayerController : MonoBehaviour
             {
                 tempMana -= minusMana;
                 canUse1 = true;
+                boltDmg = 1;
             }
             else if(itemTag1 == "Invisibility Mask" && tempMana >= 10 && !invisible)
             {
@@ -713,6 +732,9 @@ public class PlayerController : MonoBehaviour
         {
             //Debug.Log("Relesed!!");
 
+            //Turning the item use animation off
+            anim.SetBool("Item", false);
+
             if (pickingup1)
             {
                 pickingup1 = false;
@@ -731,19 +753,19 @@ public class PlayerController : MonoBehaviour
                 itemLib.ItemLibFind(itemTag1, facing, pos, out minusMana, col, name, powerLvl, gameObject, out invisible);
                 tempMana -= minusMana;
             }
-
+            
             if (itemTag1 == "Glove of Thunder" && tempMana >= 20 && powerLvl == 1)
             {
-                tempMana -= minusMana;
+                //tempMana -= minusMana;
                 canUse1 = true;
             }
 
             if (itemTag1 == "Glove of Thunder" && tempMana >= 40 && powerLvl == 2)
             {
-                tempMana -= minusMana;
+                //tempMana -= minusMana;
                 canUse1 = true;
             }
-
+            
             else
             {
                 canUse1 = false;
@@ -763,8 +785,15 @@ public class PlayerController : MonoBehaviour
 
     public void Item2(InputAction.CallbackContext context)
     {
+        if(context.started)
+        {
+            //Turning the item use animation on
+            anim.SetBool("Item", true);
+            anim.SetTrigger("Use");
+        }
         if (context.performed)
         {
+
             if (!holding2)
             {
                 pickingup2 = true;
@@ -833,6 +862,9 @@ public class PlayerController : MonoBehaviour
         }
         if(context.canceled)
         {
+            //Turning the item use animation off
+            anim.SetBool("Item", false);
+
             if (pickingup2)
             {
                 pickingup2 = false;
@@ -851,7 +883,7 @@ public class PlayerController : MonoBehaviour
                 itemLib.ItemLibFind(itemTag2, facing, pos, out minusMana, col, name, powerLvl, gameObject, out invisible);
                 tempMana -= minusMana;
             }
-
+            /*
             if (itemTag2 == "Glove of Thunder" && tempMana >= 20 && powerLvl == 1)
             {
                 tempMana -= minusMana;
@@ -863,7 +895,7 @@ public class PlayerController : MonoBehaviour
                 tempMana -= minusMana;
                 canUse2 = true;
             }
-
+            */
             else
             {
                 canUse2 = false;
