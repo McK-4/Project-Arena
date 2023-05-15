@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]List<Sprite> healthSprites;
     [SerializeField]List<Image> buttons;
     [SerializeField]List<Sprite> buttonSprites;
+    [SerializeField]List<Image> itemIcons;
+    [SerializeField]List<Sprite> itemSprites;
     [SerializeField]TextMeshProUGUI pointsText;
 
     float mana;
@@ -23,8 +25,11 @@ public class UIManager : MonoBehaviour
     int hP;
     float mHP;
     int points;
-
-    //bool healthboosted;
+    int activeBar = 1;
+    string item1;
+    string item2;
+    bool sword;
+    bool shield;
 
     void Start()
     {
@@ -34,7 +39,6 @@ public class UIManager : MonoBehaviour
         mana = pC.mana;
         manaFillAmount = mana / pC.manaMax;
         points = pC.points;
-        //healthboosted = false;
         UIUpdate();
     }
 
@@ -45,19 +49,6 @@ public class UIManager : MonoBehaviour
             icon.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
-        /*
-        if(pC.maxHealth == 16 && healthboosted == false)
-        {
-            Debug.Log("Bling Bleep Boom");
-            GameObject.Find("Heart 5").SetActive(true);
-            GameObject.Find("Heart 6").SetActive(true);
-            GameObject.Find("Heart 7").SetActive(true);
-            healthIconsP1.Add(GameObject.Find("Heart 5").GetComponent<Image>());
-            healthIconsP1.Add(GameObject.Find("Heart 6").GetComponent<Image>());
-            healthIconsP1.Add(GameObject.Find("Heart 7").GetComponent<Image>());
-            healthboosted = true;
-        }
-        */
         if (hP != pC.health || mHP != pC.maxHealth || points != pC.points || mana != pC.mana)
         {
             hP = pC.health;
@@ -106,7 +97,7 @@ public class UIManager : MonoBehaviour
         //Mana UI
         if(mana <= 0)
         {
-            manaBar.sprite = manaBarSprites[2];
+            manaBar.sprite = manaBarSprites[activeBar];
         }
         else if(mana > 0)
         {

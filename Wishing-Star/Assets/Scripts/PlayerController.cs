@@ -657,6 +657,7 @@ public class PlayerController : MonoBehaviour
         {
             //Turning the item use animation on
             anim.SetBool("Item", true);
+            anim.SetTrigger("Use");
 
             //Debug.Log("Pressed!!");
             if (!holding1)
@@ -788,6 +789,7 @@ public class PlayerController : MonoBehaviour
         {
             //Turning the item use animation on
             anim.SetBool("Item", true);
+            anim.SetTrigger("Use");
         }
         if (context.performed)
         {
