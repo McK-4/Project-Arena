@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
+using UnityEngine.InputSystem.Layouts;
 using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
 
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public int activeSkin;
     PlayerInput input;
     public InputDevice inputDevice;
+    public string serial;
 
     //Map Layering
     public TilemapRenderer tileRen;
@@ -183,7 +185,6 @@ public class PlayerController : MonoBehaviour
         spriteRen = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         input = GetComponent<PlayerInput>();
-
 
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         itemLib = GameObject.Find("GameManager").GetComponent<ItemLibary>();
@@ -1045,7 +1046,7 @@ public class PlayerController : MonoBehaviour
 
     void RandomNum()
     {
-        ranNum = Random.Range(1,3);
+        ranNum = Random.Range(0,3);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
