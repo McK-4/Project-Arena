@@ -31,9 +31,12 @@ public class ItemLibary : MonoBehaviour
 
     //Tome of Ash
     [SerializeField] GameObject ash;
+    private GameObject fireballSummoned;
+    public bool fireballHit = false;
 
     //Glove of Thunder
     [SerializeField] GameObject bolt;
+    private bool adjusted = false;
 
     //Invisiblity
     Color invisColor = new Vector4(255,255,255,80);
@@ -67,8 +70,17 @@ public class ItemLibary : MonoBehaviour
             
             bombSummoned = GameObject.Find(bombName);
 
+            bombSummoned.GetComponent<CircleCollider2D>().enabled = true;
+
+            exploded = false;
+            bombPlaced = false;
+
+            StartCoroutine(bombExplotion());
+
+
+            /*
             Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(GameObject.Find(bombName).transform.position, 4);
-            
+
             foreach(Collider2D player in hitPlayers)
             {
                 if(player.gameObject.tag == "Player")
@@ -76,6 +88,7 @@ public class ItemLibary : MonoBehaviour
                     if(player.gameObject.GetComponent<PlayerController>().shieldUp && player.gameObject.GetComponent<PlayerController>().validBlock)
                     {
                         player.gameObject.GetComponent<PlayerController>().ShieldBlocked(6, bombSummoned);
+                        player.gameObject.GetComponent<PlayerController>().killerName = bombName.Substring(0, 8);
                         exploded = false;
                         Destroy(bombSummoned);
                         bombPlaced = false;
@@ -83,20 +96,22 @@ public class ItemLibary : MonoBehaviour
                     else
                     {
                         player.gameObject.GetComponent<PlayerController>().Damaged(6, bombSummoned);
+                        player.gameObject.GetComponent<PlayerController>().killerName = bombName.Substring(0, 8);
                         exploded = false;
                         Destroy(bombSummoned);
                         bombPlaced = false;
                     }
                 }
             }
-
+            
             exploded = false;
             Destroy(bombSummoned);
             bombPlaced = false;
+            */
         }
 
         //Leeching player's magic
-        if(leechThrown && GameObject.Find(leechName) != null)
+        if (leechThrown && GameObject.Find(leechName) != null)
         {
             Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(GameObject.Find(leechName).transform.position, 4);
 
@@ -144,20 +159,20 @@ public class ItemLibary : MonoBehaviour
                 break;
             case "Glove of Thunder":
                 Debug.Log("properStatment");
-                GloveOfThunder(pos, direction, name);
+                GloveOfThunder(pos, direction, name, powerLvl);
                 if (powerLvl == 1)
                 {
-                    //returning 5 less than the actual cost because it is accounting for the instant take away
-                    minusMana = 20;
+                    //returning 5 less than the actual cost because it is accounting for the instant take away (This may not be needed)
+                    minusMana = 100;
                 }
                 else if (powerLvl == 2)
                 {
-                    //returning 5 less than the actual cost because it is accounting for the instant take away
-                    minusMana = 40;
+                    //returning 5 less than the actual cost because it is accounting for the instant take away (This may not be needed)
+                    minusMana = 100;
                 }
                 else
                 {
-                    minusMana = 5;
+                    minusMana = 100;
                 }
                 invisible = false;
                 break;
@@ -202,6 +217,7 @@ public class ItemLibary : MonoBehaviour
     private void Bomb(Vector2 pos, Vector2 direction, string attacker)
     {
         GameObject b = Instantiate(bomb, pos + direction, Quaternion.identity);
+        b.GetComponent<CircleCollider2D>().enabled = false;
         bombPlaced = true;
 
         b.name = (attacker + "'s bomb");
@@ -221,16 +237,82 @@ public class ItemLibary : MonoBehaviour
         Destroy(dl, 7f);
     }
     
-    private void GloveOfThunder(Vector2 pos, Vector2 direction, string attacker)
+    private void GloveOfThunder(Vector2 pos, Vector2 direction, string attacker, int powerLvl)
     {
         //Getting the angle: 
-        Angle(direction);
+        //Angle(direction);
 
         //lb = lighting bolt
+        if(powerLvl == 1)
+        {
+            //Quaternion.Euler(0, 0, angle)
+            GameObject lb1 = Instantiate(bolt, pos + direction, Quaternion.identity);
+
+            lb1.name = (attacker + "'s lighting bolt");
+
+            Destroy(lb1, 2f);
+        }
+        else if (powerLvl == 2)
+        {
+            GameObject lb1 = Instantiate(bolt, pos + direction, Quaternion.identity);
+
+            if (direction == new Vector2(0, 1) || direction == new Vector2(0, -1))
+            {
+                direction.y *= 2f;
+            }
+            else if (direction == new Vector2(1, 0) || direction == new Vector2(-1, 0))
+            {
+                direction.x *= 2f;
+            }
+
+            GameObject lb2 = Instantiate(bolt, pos + direction, Quaternion.identity);
+
+            lb1.name = (attacker + "'s lighting bolt");
+            lb2.name = (attacker + "'s lighting bolt");
+
+            Destroy(lb1, 2f);
+            Destroy(lb2, 2f);
+        }
+        else if (powerLvl == 3)
+        {
+            GameObject lb1 = Instantiate(bolt, pos + direction, Quaternion.identity);
+
+            if (direction == new Vector2(0, 1) || direction == new Vector2(0, -1))
+            {
+                direction.y *= 2f;
+            }
+            else if (direction == new Vector2(1, 0) || direction == new Vector2(-1, 0))
+            {
+                direction.x *= 2f;
+            }
+
+            GameObject lb2 = Instantiate(bolt, pos + direction, Quaternion.identity);
+
+            if (direction == new Vector2(0, 1) || direction == new Vector2(0, -1))
+            {
+                direction.y *= 1.5f;
+            }
+            else if (direction == new Vector2(1, 0) || direction == new Vector2(-1, 0))
+            {
+                direction.x *= 1.5f;
+            }
+
+            GameObject lb3 = Instantiate(bolt, pos + direction, Quaternion.identity);
+
+            lb1.name = (attacker + "'s lighting bolt");
+            lb2.name = (attacker + "'s lighting bolt");
+            lb3.name = (attacker + "'s lighting bolt");
+
+            Destroy(lb1, 2f);
+            Destroy(lb2, 2f);
+            Destroy(lb3, 2f);
+        }
+        /*
         GameObject lb = Instantiate(bolt, pos + direction, Quaternion.Euler(0,0, angle));
         lb.GetComponent<Rigidbody2D>().velocity = direction * 10f;
         lb.name = (attacker + "'s lighting bolt");
-        Destroy(lb, 2f);
+        */
+        //Destroy(lb, 2f);
 
     }
 
@@ -244,7 +326,14 @@ public class ItemLibary : MonoBehaviour
         anim = ta.GetComponent<Animator>();
         ta.name = (attacker + "'s ash");
 
-        Destroy(ta, 1.5f);
+        fireballSummoned = GameObject.Find(ta.name);
+
+        if(fireballHit)
+        {
+            StartCoroutine(fireballExplotion());
+        }
+
+        //Destroy(ta, 0.75f);
     }
 
     private void InvisibilityMask(GameObject player, bool invisible)
@@ -282,5 +371,35 @@ public class ItemLibary : MonoBehaviour
         {
             angle = 90;
         }
+    }
+    private void lightingPos(Vector2 direction)
+    {
+        if (!adjusted)
+        {
+            if (direction == new Vector2(0, 1) || direction == new Vector2(0, -1))
+            {
+
+            }
+            else if (direction == new Vector2(1, 0) || direction == new Vector2(-1, 0))
+            {
+
+            }
+        }
+    }
+    IEnumerator bombExplotion()
+    {
+        bombSummoned.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        yield return new WaitForSeconds(1);
+
+        Destroy(bombSummoned);
+    }
+
+    IEnumerator fireballExplotion()
+    {
+        fireballSummoned.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        yield return new WaitForSeconds(1);
+
+        Destroy(fireballSummoned);
+        fireballHit = false;
     }
 }

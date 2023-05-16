@@ -472,7 +472,13 @@ public class PlayerController : MonoBehaviour
             {
                 deathTimer = 0;
                 died = false;
-                GameObject.Find(killerName).GetComponent<PlayerController>().points += 1;
+                Debug.Log("Killer name is " + killerName);
+
+                if(killerName != name)
+                {
+                    GameObject.Find(killerName).GetComponent<PlayerController>().points += 1;
+                }
+
                 Order(playerManager.playerOrders[respawnLayer]);
                 transform.SetPositionAndRotation(respawn, Quaternion.identity);
                 //Debug.Log("New Layer: " + spriteRen.sortingOrder);
@@ -924,7 +930,7 @@ public class PlayerController : MonoBehaviour
     public void ShieldBlocked(int damage, GameObject otherPlayer)
     {
         //Debug.Log(damage);
-        //damageReduction = 1;
+        damageReduction = 1;
         if(invincible)
         {
             damageReduction = damage;
@@ -938,9 +944,9 @@ public class PlayerController : MonoBehaviour
     public void Damaged(int damage, GameObject otherPlayer)
     {
 
-        //Debug.Log(health);
+        Debug.Log(health);
         health -= damage;
-        //Debug.Log(health);
+        Debug.Log(health);
         damaged = true;
         //Debug.Log(name + " was hit by " + killerName);
 
@@ -1112,6 +1118,13 @@ public class PlayerController : MonoBehaviour
             Debug.Log(name + " " + attacker + " " +killerName);
         }
 
+        if(collision.gameObject.tag == "Bomb")
+        {
+            killerName = collision.gameObject.transform.name.Substring(0, 8);
+
+            attacker = collision.gameObject;
+        }
+
         if (collision.gameObject.tag == "Tome of Ash" && name != collision.gameObject.transform.name.Substring(0,8) && collision.gameObject.transform.name.Substring(1, 1) == "_")
         {
             killerName = collision.gameObject.transform.name.Substring(0,8);
@@ -1221,9 +1234,27 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        //Bomb
+        if(collision.gameObject.tag == "Bomb" && !damaged)
+        {
+            //if Shield Blocking
+            if (shieldUp && validBlock)
+            {
+                ShieldBlocked(6, attacker);
+            }
+
+            //No Shield Blocking
+            else
+            {
+                Damaged(6, attacker);
+            }
+        }
+
         //Tome of Ash
         if (collision.gameObject.tag == "Tome of Ash" && !damaged && collision.name.Substring(0, 8) != name && collision.gameObject.transform.name.Substring(1, 1) == "_")
         {
+            itemLib.fireballHit = true;
+
             //Debug.Log("AHHHHH!");
             //if Shield Blocking
             if (shieldUp && validBlock)
