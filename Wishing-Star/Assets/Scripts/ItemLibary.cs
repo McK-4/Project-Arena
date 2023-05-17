@@ -31,8 +31,11 @@ public class ItemLibary : MonoBehaviour
 
     //Tome of Ash
     [SerializeField] GameObject ash;
-    private GameObject fireballSummoned;
-    public bool fireballHit = false;
+    GameObject fireballSummoned;
+    public bool fireballHit;
+    float fireballTimer;
+    float fireballTime = 1.5f;
+    bool fireShoot;
 
     //Glove of Thunder
     [SerializeField] GameObject bolt;
@@ -50,6 +53,29 @@ public class ItemLibary : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //fireball despawn
+        if (fireShoot)
+        {
+            if (fireballTimer < fireballTime)
+            {
+                fireballTimer += Time.deltaTime;
+            }
+            else if (fireballTimer >= fireballTime)
+            {
+                fireShoot = false;
+                fireballTimer = 0;
+                fireballSummoned.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                StartCoroutine(fireballExplotion());
+            }
+            else if (fireballHit)
+            {
+                fireShoot = false;
+                fireballTimer = 0;
+                fireballSummoned.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                StartCoroutine(fireballExplotion());
+            }
+        }
+
         //Timer until bomb explodes
         if(bombPlaced)
         {
@@ -70,7 +96,9 @@ public class ItemLibary : MonoBehaviour
             
             bombSummoned = GameObject.Find(bombName);
 
-            bombSummoned.GetComponent<CircleCollider2D>().enabled = true;
+            bombSummoned.GetComponent<AudioSource>().Play();
+
+            bombSummoned.transform.GetChild(0).gameObject.SetActive(true);
 
             exploded = false;
             bombPlaced = false;
@@ -217,7 +245,6 @@ public class ItemLibary : MonoBehaviour
     private void Bomb(Vector2 pos, Vector2 direction, string attacker)
     {
         GameObject b = Instantiate(bomb, pos + direction, Quaternion.identity);
-        b.GetComponent<CircleCollider2D>().enabled = false;
         bombPlaced = true;
 
         b.name = (attacker + "'s bomb");
@@ -321,19 +348,11 @@ public class ItemLibary : MonoBehaviour
         //Getting the angle: 
         Angle(direction);
 
-        GameObject ta = Instantiate(ash, pos + direction, Quaternion.Euler(0,0, angle));
-        ta.GetComponent<Rigidbody2D>().velocity = direction * 10f;
-        anim = ta.GetComponent<Animator>();
-        ta.name = (attacker + "'s ash");
-
-        fireballSummoned = GameObject.Find(ta.name);
-
-        if(fireballHit)
-        {
-            StartCoroutine(fireballExplotion());
-        }
-
-        //Destroy(ta, 0.75f);
+        fireballSummoned = Instantiate(ash, pos + direction, Quaternion.Euler(0,0, angle));
+        fireballSummoned.GetComponent<Rigidbody2D>().velocity = direction * 10f;
+        anim = fireballSummoned.GetComponent<Animator>();
+        fireballSummoned.name = (attacker + "'s ash");
+        fireShoot = true;
     }
 
     private void InvisibilityMask(GameObject player, bool invisible)
@@ -396,9 +415,8 @@ public class ItemLibary : MonoBehaviour
 
     IEnumerator fireballExplotion()
     {
-        fireballSummoned.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-        yield return new WaitForSeconds(1);
-
+        anim.SetTrigger("Explode");
+        yield return new WaitForSeconds(0.5f);
         Destroy(fireballSummoned);
         fireballHit = false;
     }

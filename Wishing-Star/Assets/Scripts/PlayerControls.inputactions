@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Start",
+                    "type": "Button",
+                    "id": "5fe9e3da-c943-4d8a-acfa-02999aee114b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -121,7 +130,7 @@
                 {
                     "name": "",
                     "id": "bfc25536-8d2c-4291-8146-d9da848fb79a",
-                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button9",
+                    "path": "<Joystick>/trigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Arcade",
@@ -165,7 +174,7 @@
                 {
                     "name": "",
                     "id": "3090e247-f737-4c69-912b-b736b813315a",
-                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button8",
+                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button2",
                     "interactions": "",
                     "processors": "",
                     "groups": "Arcade",
@@ -384,6 +393,17 @@
                 },
                 {
                     "name": "",
+                    "id": "179f4bef-f45f-4047-9877-63d3ad525b82",
+                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Arcade",
+                    "action": "1_Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "87092a89-cfc1-4fb4-a304-86a1532493f6",
                     "path": "<XInputController>/buttonEast",
                     "interactions": "",
@@ -396,11 +416,44 @@
                 {
                     "name": "",
                     "id": "5235751d-493a-4569-a75d-de1af75b5db1",
-                    "path": "<Keyboard>/f",
+                    "path": "<Keyboard>/t",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "2_Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f8d484ad-aeaa-495a-94b9-3ee286efd813",
+                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "2_Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4790e26c-e3a2-4a96-861c-402deeaecfb9",
+                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Arcade",
+                    "action": "Start",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7e15e004-03fe-4230-9d03-fad1220844b0",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Start",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

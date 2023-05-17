@@ -212,7 +212,7 @@ public class PlayerController : MonoBehaviour
         third = false;
         fourth = false;
 
-        itemTag1 = "Bomb";
+        itemTag1 = "Tome of Ash";
 
         Order(orderInLayer);
 
@@ -1120,17 +1120,16 @@ public class PlayerController : MonoBehaviour
 
         if(collision.gameObject.tag == "Bomb")
         {
-            killerName = collision.gameObject.transform.name.Substring(0, 8);
+            killerName = collision.gameObject.transform.parent.name.Substring(0, 8);
 
-            attacker = collision.gameObject;
+            attacker = collision.gameObject.transform.parent.gameObject;
         }
 
         if (collision.gameObject.tag == "Tome of Ash" && name != collision.gameObject.transform.name.Substring(0,8) && collision.gameObject.transform.name.Substring(1, 1) == "_")
         {
             killerName = collision.gameObject.transform.name.Substring(0,8);
-
+            itemLib.fireballHit = true;
             attacker = collision.gameObject;
-            Destroy(collision.gameObject);
             Debug.Log(name + " " + attacker + " " +killerName);
         }
 
