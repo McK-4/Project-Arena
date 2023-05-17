@@ -413,6 +413,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 1ef66d84-148a-4a35-9596-4eeac5ac5546
     m_ActionName: Player/2_Item[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5fe9e3da-c943-4d8a-acfa-02999aee114b
+    m_ActionName: Player/Start[/Keyboard/f]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Xbox Controller
   m_DefaultActionMap: Player
@@ -452,17 +456,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   col: {fileID: 0}
+  spriteRen: {fileID: 0}
   skin:
   - {fileID: 22100000, guid: 98f643db5821ba243aa00758aeb2afdd, type: 2}
   - {fileID: 22100000, guid: f22cb4718dcb7d0429b4986955105c32, type: 2}
   - {fileID: 22100000, guid: 1d97a4ff78cb0524787f83b024c0cac4, type: 2}
   - {fileID: 22100000, guid: 86dc6a182fc497f4b8c260c8a3263864, type: 2}
   activeSkin: 0
+  serial: 
   tileRen: {fileID: 0}
   orderInLayer: 0
   layerName: 
   playerLayer: 0
-  layer: 0
   mapCollider: {fileID: 0}
   players: []
   shieldPoints: []
@@ -482,7 +487,6 @@ MonoBehaviour:
   ranNum: 0
   deathTimer: 0
   died: 0
-  respawnLayers: 
   movementSpeedMax: 7.5
   movementSpeed: 7.5
   moveinput: {x: 0, y: 0}
@@ -492,7 +496,6 @@ MonoBehaviour:
   rotationSpeed: 0
   shieldUp: 0
   attackTimer: 0
-  attackCooldownTime: 1
   attackPoint: {fileID: 493176480387860392}
   shieldPoint: {fileID: 461438071577750643}
   attackRange: 0.47
@@ -505,6 +508,7 @@ MonoBehaviour:
   manaMax: 10
   mana: 0
   tempMana: 0
+  minusMana: 0
   manaUsed: 0
   gainingMana: 0
   manaTimer: 0
@@ -514,17 +518,26 @@ MonoBehaviour:
   pos: {x: 0, y: 0}
   canUse1: 0
   canUse2: 0
+  canSwap: 0
   pickUptimer: 0
   pickUpCooldownTime: 2
+  drawing: 0
+  drew: 0
   drawtimer: 0
   drawCooldownTime: 0.3
   leeched: 0
   leechtimer: 0
   leechCooldownTime: 1
+  charging: 0
   chargetimer: 0
   chargeCooldownTime: 3
   powerLvl: 0
   boltDmg: 0
+  invisible: 0
+  bladetimer: 0
+  bladeCooldownTime: 15
+  shieldtimer: 0
+  shieldCooldownTime: 15
 --- !u!61 &2241705164052626360
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -754,7 +767,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 5
   m_Sprite: {fileID: -1040832447, guid: 52f828ed0794fea47bf6652cda60d744, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -985,7 +998,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 5
   m_Sprite: {fileID: 1596458160, guid: 52f828ed0794fea47bf6652cda60d744, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

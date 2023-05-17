@@ -145,8 +145,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float pickUpCooldownTime = 2f;
 
     //Bow charge up
-    private bool drawing = false;
-    private bool drew = false;
+    [SerializeField] bool drawing = false;
+    [SerializeField] bool drew = false;
     [SerializeField] float drawtimer = 0;
     [SerializeField] float drawCooldownTime = 0.3f;
 
@@ -212,7 +212,7 @@ public class PlayerController : MonoBehaviour
         third = false;
         fourth = false;
 
-        itemTag1 = "Tome of Ash";
+        itemTag1 = "Bow";
 
         Order(orderInLayer);
 
@@ -676,18 +676,6 @@ public class PlayerController : MonoBehaviour
                 swapping1 = true;
             }
 
-            if (canUse1 && itemTag1 == "Bow")
-            {
-                drawing = true;
-            }
-
-            if (canUse1 && itemTag1 == "Glove of Thunder")
-            {
-                //Debug.Log("Charging!");
-                powerLvl = 0;
-                charging = true;
-            }
-
             //Mana Cost for items:
             if (itemTag1 == "Bow" && tempMana >= 10)
             {
@@ -729,7 +717,20 @@ public class PlayerController : MonoBehaviour
                 canUse1 = false;
             }
 
-            if (canUse1 && itemTag1 != "Glove of Thunder" && itemTag1 != "Bow")
+            //Item charge up
+            if (canUse1 && itemTag1 == "Bow")
+            {
+                drawing = true;
+            }
+
+            if (canUse1 && itemTag1 == "Glove of Thunder")
+            {
+                //Debug.Log("Charging!");
+                powerLvl = 0;
+                charging = true;
+            }
+
+            if (canUse1 && itemTag1 != "Glove of Thunder" && itemTag1 != "Bow" && !canSwap)
             {
                 Debug.Log("Item Lib Called");
                 itemLib.ItemLibFind(itemTag1, facing, pos, out minusMana, col, name, powerLvl, gameObject, out invisible);
@@ -753,7 +754,7 @@ public class PlayerController : MonoBehaviour
                 pickUptimer = 0;
             }
 
-            if (itemTag1 == "Bow" && drew)
+            if (itemTag1 == "Bow" && drew && !canSwap)
             {
                 drew = false;
                 drawing = false;
@@ -779,7 +780,7 @@ public class PlayerController : MonoBehaviour
                 canUse1 = false;
             }
 
-            if (canUse1 && itemTag1 == "Glove of Thunder" && charging)
+            if (canUse1 && itemTag1 == "Glove of Thunder" && charging && !canSwap)
             {
                 charging = false;
                 chargetimer = 0f;
@@ -1303,7 +1304,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log(itemTag1);
             Debug.Log("LOU LOU");
-            itemTag1 = collision.gameObject.name;
+            itemTag1 = collision.gameObject.name.Substring(0, collision.gameObject.name.Length-7);
             Debug.Log(itemTag1);
             Destroy(collision.gameObject);
         }
@@ -1311,7 +1312,7 @@ public class PlayerController : MonoBehaviour
         if (pickingup2 && collision.gameObject.tag == "Pick Up")
         {
             Debug.Log("BAW???");
-            itemTag2 = collision.gameObject.name;
+            itemTag2 = collision.gameObject.name.Substring(0, collision.gameObject.name.Length - 7);
             Destroy(collision.gameObject);
         }
     }

@@ -14,10 +14,10 @@ public class ItemManager : MonoBehaviour
 
     private Vector2[] itemSpawnPos;
 
-    private Vector2[] powerUpSpawnPos;
+    //private Vector2[] powerUpSpawnPos; (not used?)
     private Vector2[] powerUpEndPos;
 
-    private bool[] spawned;
+    //private bool[] spawned; (not used)
 
     private int ranIndex;
 
@@ -30,13 +30,31 @@ public class ItemManager : MonoBehaviour
         currentScene = SceneManager.GetActiveScene();
 
         //If the map is the Marygold mines
-        if (currentScene.buildIndex == 1)
+        if (currentScene.name == "Map 1")
         {
-            itemSpawnPos = new Vector2[4];
+            itemSpawnPos = new Vector2[6];
 
-            powerUpSpawnPos = new Vector2[2];
+            powerUpEndPos = new Vector2[2];
 
             //spawned = new bool[itemSpawnPos.Length];
+            itemSpawnPos[0] = new Vector2(-9.5f, -3.1f);
+            itemSpawnPos[1] = new Vector2(-7.5f, 2.85f);
+            itemSpawnPos[2] = new Vector2(4.5f, 9.85f);
+            itemSpawnPos[3] = new Vector2(6.5f, -5.1f);
+            itemSpawnPos[4] = new Vector2(-6.5f, -9f);
+            itemSpawnPos[5] = new Vector2(6f, 1.5f);
+
+            //powerUpSpawnPos[0] = new Vector2(-6.5f, -9f);
+            //powerUpSpawnPos[1] = new Vector2(6f, 1.5f);
+            
+            powerUpEndPos[0] = new Vector2(0.3f, -4.5f);
+            powerUpEndPos[1] = new Vector2(-1.35f, 1.5f);
+            
+        }
+
+        /*
+        if(currentScene.name == "Map 3")
+        {
             itemSpawnPos[0] = new Vector2(-9.5f, -3.1f);
             itemSpawnPos[1] = new Vector2(-7.5f, 2.85f);
             itemSpawnPos[2] = new Vector2(4.5f, 9.85f);
@@ -44,11 +62,8 @@ public class ItemManager : MonoBehaviour
 
             powerUpSpawnPos[0] = new Vector2(-6.5f, -9f);
             powerUpSpawnPos[1] = new Vector2(6f, 1.5f);
-            /*
-            powerUpEndPos[0] = new Vector2(0.3f, -4.5f);
-            powerUpEndPos[1] = new Vector2(-1.35f, 1.5f);
-            */
         }
+        */
 
         spawntimer = 30f;
         spawnCooldownTime = 30f;
@@ -74,14 +89,18 @@ public class ItemManager : MonoBehaviour
                 //PowerUpSpawn();
             }
         }
-
-        foreach(GameObject powerup in powerUps)
+        /*
+        foreach(GameObject item in items)
         {
-            if((Vector2)powerup.transform.position == powerUpEndPos[0] || (Vector2)powerup.transform.position == powerUpEndPos[1])
+            if(GameObject.Find(item.name) != null)
             {
-                Destroy(powerup);
+                if ((Vector2)item.transform.position == powerUpEndPos[0] || (Vector2)item.transform.position == powerUpEndPos[1])
+                {
+                    Destroy(item);
+                }
             }
         }
+        */
     }
 
     private void ItemSpawn()
@@ -94,7 +113,12 @@ public class ItemManager : MonoBehaviour
 
         //finding possible spawn locations
         List<Vector2> possibleSpots = new List<Vector2>(itemSpawnPos);
-
+        Debug.Log(possibleSpots[0]);
+        Debug.Log(possibleSpots[1]);
+        Debug.Log(possibleSpots[2]);
+        Debug.Log(possibleSpots[3]);
+        Debug.Log(possibleSpots[4]);
+        Debug.Log(possibleSpots[5]);
         for (int i = 0; i < possibleSpots.Count; i++)
         {
             //Debug.Log(i);
@@ -121,7 +145,7 @@ public class ItemManager : MonoBehaviour
             //spawning object
             GameObject ip;
             ip = Instantiate(items[ranItem], possibleSpots[ranIndex], Quaternion.identity);
-            NameChange(ip);
+            //NameChange(ip);
             //spawned[ranIndex] = true;
         }
     }
@@ -172,7 +196,7 @@ public class ItemManager : MonoBehaviour
     {
         return Random.Range(min, max);
     }
-
+    /*
     private void NameChange(GameObject ip)
     {
         //Items name change
@@ -215,5 +239,5 @@ public class ItemManager : MonoBehaviour
             ip.name = "Mystic Shield";
         }
     }
-
+    */
 }

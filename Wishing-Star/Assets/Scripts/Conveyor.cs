@@ -16,14 +16,14 @@ public class Conveyor : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player" || collision.gameObject.tag == "Bomb" || collision.gameObject.tag == "Power Up")
+        if(collision.gameObject.tag == "Player" || collision.gameObject.tag == "Bomb" || collision.gameObject.tag == "Power Up" || collision.gameObject.tag == "Pick Up")
         {
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(direction * force, ForceMode2D.Force);
         }
     }
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Bomb" || collision.gameObject.tag == "Power Up")
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Bomb" || collision.gameObject.tag == "Power Up" || collision.gameObject.tag == "Pick Up")
         {
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(direction * force, ForceMode2D.Force);
         }
