@@ -153,7 +153,8 @@ public class PlayerManager : MonoBehaviour
             if (player.name == "2_Player" || player.name == "3_Player" || player.name == "4_Player")
             {
                 playerCamping = true;
-                if(player1.died)
+                /*
+                if (player1.died)
                 {
                     if (player1.ranNum == 1)
                     {
@@ -171,6 +172,7 @@ public class PlayerManager : MonoBehaviour
                         player1.Order(playerOrders[3]);
                     }
                 }
+                */
             }
         }
 
@@ -186,9 +188,9 @@ public class PlayerManager : MonoBehaviour
             if (player.name == "1_Player" || player.name == "3_Player" || player.name == "4_Player")
             {
                 playerCamping = true;
+                /*
                 if (player2.died)
                 {
-                    /*
                     if (player2.ranNum == 1)
                     {
                         player2.orderInLayer = playerOrders[0];
@@ -204,8 +206,8 @@ public class PlayerManager : MonoBehaviour
                         player2.orderInLayer = playerOrders[3];
                         player2.Order(playerOrders[3]);
                     }
-                    */
                 }
+                */
             }
         }
         
@@ -221,6 +223,7 @@ public class PlayerManager : MonoBehaviour
             if (player.name == "1_Player" || player.name == "2_Player" || player.name == "4_Player")
             {
                 playerCamping = true;
+                /*
                 if (player3.died)
                 {
                     if (player3.ranNum == 1)
@@ -239,6 +242,7 @@ public class PlayerManager : MonoBehaviour
                         player3.Order(playerOrders[3]);
                     }
                 }
+                */
             }
         }
         
@@ -254,6 +258,7 @@ public class PlayerManager : MonoBehaviour
             if (player.name == "1_Player" || player.name == "2_Player" || player.name == "3_Player")
             {
                 playerCamping = true;
+                /*
                 if (player4.died)
                 {
                     if (player4.ranNum == 1)
@@ -272,6 +277,7 @@ public class PlayerManager : MonoBehaviour
                         player4.Order(playerOrders[0]);
                     }
                 }
+                */
             }
         }
 

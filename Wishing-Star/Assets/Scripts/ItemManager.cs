@@ -89,18 +89,6 @@ public class ItemManager : MonoBehaviour
                 //PowerUpSpawn();
             }
         }
-        /*
-        foreach(GameObject item in items)
-        {
-            if(GameObject.Find(item.name) != null)
-            {
-                if ((Vector2)item.transform.position == powerUpEndPos[0] || (Vector2)item.transform.position == powerUpEndPos[1])
-                {
-                    Destroy(item);
-                }
-            }
-        }
-        */
     }
 
     private void ItemSpawn()
@@ -113,12 +101,14 @@ public class ItemManager : MonoBehaviour
 
         //finding possible spawn locations
         List<Vector2> possibleSpots = new List<Vector2>(itemSpawnPos);
+        /*
         Debug.Log(possibleSpots[0]);
         Debug.Log(possibleSpots[1]);
         Debug.Log(possibleSpots[2]);
         Debug.Log(possibleSpots[3]);
         Debug.Log(possibleSpots[4]);
         Debug.Log(possibleSpots[5]);
+        */
         for (int i = 0; i < possibleSpots.Count; i++)
         {
             //Debug.Log(i);

@@ -490,6 +490,7 @@ MonoBehaviour:
   - {fileID: 493176480387860392}
   - {fileID: 6441347278142255657}
   - {fileID: 7389629737610090656}
+  itemPoints: []
   killerName: 
   points: 0
   winner: 0
@@ -516,6 +517,7 @@ MonoBehaviour:
   attackTimer: 0
   attackPoint: {fileID: 493176480387860392}
   shieldPoint: {fileID: 461438071577750643}
+  itemPoint: {fileID: 0}
   attackRange: 0.47
   playerLayers:
     serializedVersion: 2

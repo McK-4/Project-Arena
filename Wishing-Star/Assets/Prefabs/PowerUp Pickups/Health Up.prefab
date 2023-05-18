@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3962357638775258226}
   - component: {fileID: 3962357638775258225}
-  - component: {fileID: 4341990410840023127}
   - component: {fileID: -3226471251190042921}
   - component: {fileID: -7669833390474824528}
   m_Layer: 0
@@ -74,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1380173875
+  m_SortingLayer: 4
   m_SortingOrder: 100
   m_Sprite: {fileID: -1426526683, guid: 3e0739e22474b4b45bf448ae1e845a09, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -88,22 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &4341990410840023127
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3962357638775258224}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.375
 --- !u!58 &-3226471251190042921
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -135,7 +118,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 11
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -193,7 +176,7 @@ MonoBehaviour:
   m_Intensity: 1.5
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000cdeab748
+  m_ApplyToSortingLayers: 00000000e7de02aad7caf224dfd896aecd37bcadcdeab748
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0

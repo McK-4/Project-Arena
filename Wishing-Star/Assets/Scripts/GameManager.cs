@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     PlayerController killerController;
     private bool awarded = false;
 
-    public int totalGameTime = 300;
+    public int totalGameTime = 180;
     public float gameTimeRemaining;
     public int minutesLeft;
     public int secondsLeft;

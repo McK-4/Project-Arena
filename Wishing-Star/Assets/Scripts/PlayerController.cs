@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
 
     //Health
     public Vector2 respawn;
+    private bool respawned;
     public int maxHealth = 10;
     public int health;
     public bool damaged;
@@ -113,6 +114,9 @@ public class PlayerController : MonoBehaviour
     private Vector2 pKnockback;
     public GameObject attacker;
     private bool invincible = false;
+    private Sprite shieldArtUp;
+    private Sprite shieldArtDown;
+    private Sprite shieldArtSide;
 
     //Mana 
     public int manaMax = 100;
@@ -140,6 +144,8 @@ public class PlayerController : MonoBehaviour
     private bool pickingup1;
     private bool pickingup2;
     [SerializeField] bool canSwap = false;
+    private Sprite item1Art;
+    private Sprite item2Art;
 
     [SerializeField] float pickUptimer = 0;
     [SerializeField] float pickUpCooldownTime = 2f;
@@ -190,6 +196,7 @@ public class PlayerController : MonoBehaviour
         itemLib = GameObject.Find("GameManager").GetComponent<ItemLibary>();
 
         playerLayer = gameObject.layer;
+        //Debug.Log(gameObject.layer);
         anim.runtimeAnimatorController = skin[activeSkin];
         Order(orderInLayer);
 
@@ -207,6 +214,11 @@ public class PlayerController : MonoBehaviour
         damageReduction = 1;
         invincible = false;
         boltDmg = 4;
+        respawned = false;
+
+        shieldArtUp = shieldPoints[2].GetComponent<SpriteRenderer>().sprite;
+        shieldArtDown = shieldPoints[0].GetComponent<SpriteRenderer>().sprite;
+        shieldArtSide = shieldPoint.GetComponent<SpriteRenderer>().sprite;
 
         winner = false;
         second = false;
@@ -215,8 +227,6 @@ public class PlayerController : MonoBehaviour
 
         itemTag1 = "Bow";
         itemTag2 = "Tome of Ash";
-
-        Order(orderInLayer);
 
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
@@ -414,7 +424,7 @@ public class PlayerController : MonoBehaviour
 
 
         //Anti-Player Spawn Camping
-        if(playerManager.playerCamping == true)
+        if(playerManager.playerCamping == true && respawned)
         {
             playerRespawnShuffle();
         }
@@ -480,11 +490,12 @@ public class PlayerController : MonoBehaviour
                 {
                     GameObject.Find(killerName).GetComponent<PlayerController>().points += 1;
                 }
-
+                respawned = true;
                 Order(playerManager.playerOrders[respawnLayer]);
                 transform.SetPositionAndRotation(respawn, Quaternion.identity);
                 //Debug.Log("New Layer: " + spriteRen.sortingOrder);
                 health = maxHealth;
+                respawned = false;
                 //Order(layer);
             }
         }
@@ -646,6 +657,10 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
+            //shieldArtUp = shieldPoints[2].GetComponent<SpriteRenderer>().sprite;
+            //shieldArtDown = shieldPoints[0].GetComponent<SpriteRenderer>().sprite;
+            //shieldArtSide = shieldPoint.GetComponent<SpriteRenderer>().sprite;
+
             anim.SetBool("Shield", true);
             shieldUp = true;
             //moveAble = false;
@@ -668,6 +683,22 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Item", true);
             anim.SetTrigger("Use");
 
+            if(characterFacing == Directions.Up)
+            {
+                anim.SetBool("Shield", true);
+                shieldPoints[2].GetComponent<SpriteRenderer>().sprite = item1Art;
+            }
+            else if (characterFacing == Directions.Down)
+            {
+                anim.SetBool("Shield", true);
+                shieldPoints[0].GetComponent<SpriteRenderer>().sprite = item1Art;
+            }
+            else if (characterFacing == Directions.Left || characterFacing == Directions.Right)
+            {
+                anim.SetBool("Shield", true);
+                shieldPoints[1].GetComponent<SpriteRenderer>().sprite = item1Art;
+            }
+
             //Debug.Log("Pressed!!");
             if (!holding1)
             {
@@ -679,44 +710,47 @@ public class PlayerController : MonoBehaviour
             }
 
             //Mana Cost for items:
-            if (itemTag1 == "Bow" && tempMana >= 10)
+            if(!canSwap)
             {
-                canUse1 = true;
-            }
-            else if(itemTag1 == "Bomb" && tempMana >= 20 && !itemLib.bombPlaced)
-            {
-                tempMana -= minusMana;
-                canUse1 = true;
-            }
-            else if(itemTag1 == "Dark Leech" && tempMana >= 50)
-            {
-                tempMana -= minusMana;
-                canUse1 = true;
-            }
-            else if(itemTag1 == "Tome of Ash" && tempMana >= 25)
-            {
-                tempMana -= minusMana;
-                canUse1 = true;
-                Debug.Log("item is payed for");
-            }
-            else if(itemTag1 == "Glove of Thunder" && tempMana >= 5)
-            {
-                tempMana -= minusMana;
-                canUse1 = true;
-                boltDmg = 1;
-            }
-            else if(itemTag1 == "Invisibility Mask" && tempMana >= 10 && !invisible)
-            {
-                tempMana -= minusMana;
-                canUse1 = true;
-            }
-            else if(itemTag1 == "Invisibility Mask" && invisible)
-            {
-                canUse1 = true;
-            }
-            else
-            {
-                canUse1 = false;
+                if (itemTag1 == "Bow" && tempMana >= 10)
+                {
+                    canUse1 = true;
+                }
+                else if (itemTag1 == "Bomb" && tempMana >= 20 && !itemLib.bombPlaced)
+                {
+                    tempMana -= minusMana;
+                    canUse1 = true;
+                }
+                else if (itemTag1 == "Dark Leech" && tempMana >= 50)
+                {
+                    tempMana -= minusMana;
+                    canUse1 = true;
+                }
+                else if (itemTag1 == "Tome of Ash" && tempMana >= 25)
+                {
+                    tempMana -= minusMana;
+                    canUse1 = true;
+                    Debug.Log("item is payed for");
+                }
+                else if (itemTag1 == "Glove of Thunder" && tempMana >= 5)
+                {
+                    tempMana -= minusMana;
+                    canUse1 = true;
+                    boltDmg = 1;
+                }
+                else if (itemTag1 == "Invisibility Mask" && tempMana >= 10 && !invisible)
+                {
+                    tempMana -= minusMana;
+                    canUse1 = true;
+                }
+                else if (itemTag1 == "Invisibility Mask" && invisible)
+                {
+                    canUse1 = true;
+                }
+                else
+                {
+                    canUse1 = false;
+                }
             }
 
             //Item charge up
@@ -745,6 +779,22 @@ public class PlayerController : MonoBehaviour
 
             //Turning the item use animation off
             anim.SetBool("Item", false);
+
+            if (shieldPoints[2].activeInHierarchy)
+            {
+                anim.SetBool("Shield", false);
+                //shieldPoints[2].GetComponent<SpriteRenderer>().sprite = item1Art;
+            }
+            else if (shieldPoints[0].activeInHierarchy)
+            {
+                anim.SetBool("Shield", false);
+                //shieldPoints[0].GetComponent<SpriteRenderer>().sprite = item1Art;
+            }
+            else if (shieldPoints[1].activeInHierarchy)
+            {
+                anim.SetBool("Shield", false);
+                //shieldPoints[1].GetComponent<SpriteRenderer>().sprite = item1Art;
+            }
 
             if (pickingup1)
             {
@@ -805,6 +855,22 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
 
+            if (characterFacing == Directions.Up)
+            {
+                anim.SetBool("Shield", true);
+                shieldPoints[2].GetComponent<SpriteRenderer>().sprite = item2Art;
+            }
+            else if (characterFacing == Directions.Down)
+            {
+                anim.SetBool("Shield", true);
+                shieldPoints[0].GetComponent<SpriteRenderer>().sprite = item2Art;
+            }
+            else if (characterFacing == Directions.Left || characterFacing == Directions.Right)
+            {
+                anim.SetBool("Shield", true);
+                shieldPoints[1].GetComponent<SpriteRenderer>().sprite = item2Art;
+            }
+
             if (!holding2)
             {
                 pickingup2 = true;
@@ -827,46 +893,49 @@ public class PlayerController : MonoBehaviour
             }
 
             //Mana Cost for items:
-            if (itemTag2 == "Bow" && tempMana >= 10)
+            if(!canSwap)
             {
-                canUse2 = true;
-            }
-            else if (itemTag2 == "Bomb" && tempMana >= 20 && !itemLib.bombPlaced)
-            {
-                tempMana -= minusMana;
-                canUse2 = true;
-            }
-            else if (itemTag2 == "Dark Leech" && tempMana >= 50)
-            {
-                tempMana -= minusMana;
-                canUse2 = true;
-            }
-            else if (itemTag2 == "Tome of Ash" && tempMana >= 25)
-            {
-                tempMana -= minusMana;
-                canUse2 = true;
-            }
-            else if (itemTag2 == "Glove of Thunder" && tempMana >= 5)
-            {
-                tempMana -= minusMana;
-                canUse2 = true;
-            }
-            else if (itemTag2 == "Invisibility Mask" && tempMana >= 10 && !invisible)
-            {
-                tempMana -= minusMana;
-                canUse2 = true;
-            }
-            else if (itemTag1 == "Invisibility Mask" && invisible)
-            {
-                canUse1 = true;
+                if (itemTag2 == "Bow" && tempMana >= 10)
+                {
+                    canUse2 = true;
+                }
+                else if (itemTag2 == "Bomb" && tempMana >= 20 && !itemLib.bombPlaced)
+                {
+                    tempMana -= minusMana;
+                    canUse2 = true;
+                }
+                else if (itemTag2 == "Dark Leech" && tempMana >= 50)
+                {
+                    tempMana -= minusMana;
+                    canUse2 = true;
+                }
+                else if (itemTag2 == "Tome of Ash" && tempMana >= 25)
+                {
+                    tempMana -= minusMana;
+                    canUse2 = true;
+                }
+                else if (itemTag2 == "Glove of Thunder" && tempMana >= 5)
+                {
+                    tempMana -= minusMana;
+                    canUse2 = true;
+                }
+                else if (itemTag2 == "Invisibility Mask" && tempMana >= 10 && !invisible)
+                {
+                    tempMana -= minusMana;
+                    canUse2 = true;
+                }
+                else if (itemTag1 == "Invisibility Mask" && invisible)
+                {
+                    canUse1 = true;
+                }
+
+                else
+                {
+                    canUse2 = false;
+                }
             }
 
-            else
-            {
-                canUse2 = false;
-            }
-
-            if (canUse2 && itemTag2 != "Glove of Thunder" && itemTag2 != "Bow")
+            if (canUse2 && itemTag2 != "Glove of Thunder" && itemTag2 != "Bow" && !canSwap)
             {
                 itemLib.ItemLibFind(itemTag2, facing, pos, out minusMana, col, name, powerLvl, gameObject, out invisible);
             }
@@ -875,6 +944,22 @@ public class PlayerController : MonoBehaviour
         {
             //Turning the item use animation off
             anim.SetBool("Item", false);
+
+            if (shieldPoints[2].activeInHierarchy)
+            {
+                anim.SetBool("Shield", false);
+                //shieldPoints[2].GetComponent<SpriteRenderer>().sprite = item1Art;
+            }
+            else if (shieldPoints[0].activeInHierarchy)
+            {
+                anim.SetBool("Shield", false);
+                //shieldPoints[0].GetComponent<SpriteRenderer>().sprite = item1Art;
+            }
+            else if (shieldPoints[1].activeInHierarchy)
+            {
+                anim.SetBool("Shield", false);
+                //shieldPoints[1].GetComponent<SpriteRenderer>().sprite = item1Art;
+            }
 
             if (pickingup2)
             {
@@ -886,7 +971,7 @@ public class PlayerController : MonoBehaviour
                 pickUptimer = 0;
             }
 
-            if (itemTag2 == "Bow" && drew)
+            if (itemTag2 == "Bow" && drew && !canSwap)
             {
                 drew = false;
                 drawing = false;
@@ -1087,7 +1172,8 @@ public class PlayerController : MonoBehaviour
             if (pickingup1 && collision.gameObject.tag == "Pick Up" && canSwap)
             {
                 //Debug.Log("LOU LOU");
-                itemTag1 = collision.gameObject.name;
+                itemTag1 = collision.gameObject.name.Substring(0, collision.gameObject.name.Length - 7);
+                item1Art = collision.gameObject.GetComponent<Sprite>();
                 //Debug.Log(itemTag1);
                 Destroy(collision.gameObject);
             }
@@ -1095,7 +1181,8 @@ public class PlayerController : MonoBehaviour
             if (pickingup2 && collision.gameObject.tag == "Pick Up" && canSwap)
             {
                 //Debug.Log("BAW???");
-                itemTag2 = collision.gameObject.name;
+                itemTag2 = collision.gameObject.name.Substring(0, collision.gameObject.name.Length - 7);
+                item2Art = collision.gameObject.GetComponent<Sprite>();
                 Destroy(collision.gameObject);
             }
 
@@ -1296,23 +1383,24 @@ public class PlayerController : MonoBehaviour
                 Damaged(GameObject.Find(killerName).GetComponent<PlayerController>().boltDmg, attacker);
             }
         }
-
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (pickingup1 && collision.gameObject.tag == "Pick Up")
+        if (pickingup1 && collision.gameObject.tag == "Pick Up" && canSwap)
         {
             Debug.Log(itemTag1);
             Debug.Log("LOU LOU");
             itemTag1 = collision.gameObject.name.Substring(0, collision.gameObject.name.Length-7);
+            item1Art = collision.gameObject.GetComponent<SpriteRenderer>().sprite;
             Debug.Log(itemTag1);
             Destroy(collision.gameObject);
         }
 
-        if (pickingup2 && collision.gameObject.tag == "Pick Up")
+        if (pickingup2 && collision.gameObject.tag == "Pick Up" && canSwap)
         {
             Debug.Log("BAW???");
             itemTag2 = collision.gameObject.name.Substring(0, collision.gameObject.name.Length - 7);
+            item2Art = collision.gameObject.GetComponent<SpriteRenderer>().sprite;
             Destroy(collision.gameObject);
         }
     }
@@ -1458,6 +1546,8 @@ public class PlayerController : MonoBehaviour
                 Physics2D.IgnoreLayerCollision(playerLayer, 7);
                 Physics2D.IgnoreLayerCollision(playerLayer, 8);
                 Physics2D.IgnoreLayerCollision(playerLayer, 9);
+
+                foreach (GameObject shieldPoint in shieldPoints)
                 {
                     shieldPoint.GetComponent<SpriteRenderer>().sortingLayerID = spriteRen.sortingLayerID;
                 }

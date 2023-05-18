@@ -18,7 +18,7 @@ public class ConveyorEnd : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Bomb" || collision.gameObject.tag == "Power Up" || collision.gameObject.tag == "Pick Up")
+        if (collision.gameObject.tag == "Bomb" || collision.gameObject.tag == "Power Up" || collision.gameObject.tag == "Pick Up")
         {
             Destroy(collision.gameObject);
         }
@@ -26,7 +26,7 @@ public class ConveyorEnd : MonoBehaviour
     void OnTriggerStay2D(Collider2D collision)
     {
         Debug.Log(collision.name);
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Bomb" || collision.gameObject.tag == "Power Up" || collision.gameObject.tag == "Pick Up")
+        if (collision.gameObject.tag == "Bomb" || collision.gameObject.tag == "Power Up" || collision.gameObject.tag == "Pick Up")
         {
             Destroy(collision.gameObject);
         }
