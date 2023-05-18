@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 using TMPro;
 
 public class PlayerMenu : MonoBehaviour
@@ -12,6 +13,7 @@ public class PlayerMenu : MonoBehaviour
     public Vector2 playerSelectInput;
 
     public InputDevice inputDevice;
+    PlayerInput pI;
 
     public List<Sprite> playerArtList;
     [SerializeField] Image playerArt;
@@ -35,6 +37,8 @@ public class PlayerMenu : MonoBehaviour
     void Start()
     {
         menuManager = GameObject.Find("Menu Manager").GetComponent<MenuManager>();
+        pI = gameObject.GetComponent<PlayerInput>();
+        pI.user.UnpairDevices();
     }
 
     public void PlayerSelect(InputAction.CallbackContext context)
@@ -147,5 +151,10 @@ public class PlayerMenu : MonoBehaviour
                 //menuManager.MapVote(activeMap, -1);
             }
         }
+    }
+
+    public void input(InputDevice device)
+    {
+        InputUser.PerformPairingWithDevice(device, pI.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
     }
 }

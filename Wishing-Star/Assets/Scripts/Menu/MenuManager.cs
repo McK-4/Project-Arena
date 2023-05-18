@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 using UnityEngine.UI;
 using TMPro;
 
@@ -10,6 +11,10 @@ public class MenuManager : MonoBehaviour
 {
     MasterManager master;
     [SerializeField] Animator fade;
+    PlayerInput input;
+
+    //controllers
+    int playerNum;
 
     //[SerializeField]GameObject settingsMenu;
     [SerializeField]GameObject mainMenu;
@@ -55,6 +60,48 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         master = GameObject.FindGameObjectWithTag("Master").GetComponent<MasterManager>();
+        input = GetComponent<PlayerInput>();
+        foreach (InputDevice device in InputSystem.devices)
+        {
+            InputUser.PerformPairingWithDevice(device, input.user);
+        }
+    }
+
+    public void Device(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            switch (playerNum)
+            {
+                case 0:
+                    playerNum++;
+                    player1Select.input(context.action.activeControl.device);
+                    input.user.UnpairDevice(context.action.activeControl.device);
+                    Debug.Log(context.action.activeControl.device);
+                    break;
+                case 1:
+                    playerNum++;
+                    player2Select.input(context.action.activeControl.device);
+                    input.user.UnpairDevice(context.action.activeControl.device);
+                    break;
+                case 2:
+                    playerNum++;
+                    player3Select.input(context.action.activeControl.device);
+                    input.user.UnpairDevice(context.action.activeControl.device);
+                    break;
+                case 3:
+                    playerNum++;
+                    player4Select.input(context.action.activeControl.device);
+                    input.user.UnpairDevice(context.action.activeControl.device);
+                    break;
+                case 4:
+                    playerNum++;
+                    InputUser.PerformPairingWithDevice(context.action.activeControl.device, input.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     void Update()
@@ -212,6 +259,7 @@ public class MenuManager : MonoBehaviour
             player4Select.playerSelectMenu = true;
         }
     }
+
     IEnumerator start()
     {
         fade.SetTrigger("Fade");

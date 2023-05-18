@@ -78,7 +78,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Global",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -89,7 +89,7 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Global",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -100,7 +100,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Global",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -111,7 +111,7 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Global",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -122,7 +122,7 @@
                     "path": "<XInputController>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Xbox Controller",
+                    "groups": "Global",
                     "action": "Sword",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -133,7 +133,7 @@
                     "path": "<Joystick>/trigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Arcade",
+                    "groups": "Global",
                     "action": "Sword",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -144,7 +144,7 @@
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Global",
                     "action": "Sword",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -155,7 +155,7 @@
                     "path": "<DualShockGamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": "DualShock",
+                    "groups": "Global",
                     "action": "Sword",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -166,7 +166,7 @@
                     "path": "<XInputController>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Xbox Controller",
+                    "groups": "Global",
                     "action": "Shield",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -177,7 +177,7 @@
                     "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button2",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Arcade",
+                    "groups": "Global",
                     "action": "Shield",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -188,7 +188,7 @@
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Global",
                     "action": "Shield",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -199,7 +199,7 @@
                     "path": "<DualShockGamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "DualShock",
+                    "groups": "Global",
                     "action": "Shield",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -221,7 +221,7 @@
                     "path": "<Joystick>/stick/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Arcade",
+                    "groups": "Global",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -232,7 +232,7 @@
                     "path": "<Joystick>/stick/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Arcade",
+                    "groups": "Global",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -243,7 +243,7 @@
                     "path": "<Joystick>/stick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Arcade",
+                    "groups": "Global",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -254,7 +254,7 @@
                     "path": "<Joystick>/stick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Arcade",
+                    "groups": "Global",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -276,7 +276,7 @@
                     "path": "<XInputController>/dpad/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Xbox Controller",
+                    "groups": "Global",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -287,7 +287,7 @@
                     "path": "<XInputController>/dpad/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Xbox Controller",
+                    "groups": "Global",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -298,7 +298,7 @@
                     "path": "<XInputController>/dpad/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Xbox Controller",
+                    "groups": "Global",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -309,7 +309,7 @@
                     "path": "<XInputController>/dpad/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Xbox Controller",
+                    "groups": "",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -331,7 +331,7 @@
                     "path": "<DualShockGamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "DualShock",
+                    "groups": "Global",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -342,7 +342,7 @@
                     "path": "<DualShockGamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "DualShock",
+                    "groups": "Global",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -353,7 +353,7 @@
                     "path": "<DualShockGamepad>/dpad/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "DualShock",
+                    "groups": "Global",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -364,7 +364,7 @@
                     "path": "<DualShockGamepad>/dpad/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "DualShock",
+                    "groups": "Global",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -375,7 +375,7 @@
                     "path": "<XInputController>/buttonNorth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Xbox Controller",
+                    "groups": "Global",
                     "action": "1_Item",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -386,7 +386,7 @@
                     "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Global",
                     "action": "1_Item",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -397,7 +397,7 @@
                     "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button3",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Arcade",
+                    "groups": "Global",
                     "action": "1_Item",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -408,7 +408,7 @@
                     "path": "<XInputController>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Xbox Controller",
+                    "groups": "Global",
                     "action": "2_Item",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -419,7 +419,7 @@
                     "path": "<Keyboard>/t",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Global",
                     "action": "2_Item",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -430,7 +430,7 @@
                     "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button4",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Global",
                     "action": "2_Item",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -441,7 +441,7 @@
                     "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button5",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Arcade",
+                    "groups": "Global",
                     "action": "Start",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -452,7 +452,7 @@
                     "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Global",
                     "action": "Start",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -462,48 +462,9 @@
     ],
     "controlSchemes": [
         {
-            "name": "Keyboard",
-            "bindingGroup": "Keyboard",
-            "devices": [
-                {
-                    "devicePath": "<Keyboard>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Xbox Controller",
-            "bindingGroup": "Xbox Controller",
-            "devices": [
-                {
-                    "devicePath": "<XInputController>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Arcade",
-            "bindingGroup": "Arcade",
-            "devices": [
-                {
-                    "devicePath": "<HID::DragonRise Inc.   Generic   USB  Joystick  >",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "DualShock",
-            "bindingGroup": "DualShock",
-            "devices": [
-                {
-                    "devicePath": "<DualShockGamepad>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
+            "name": "Global",
+            "bindingGroup": "Global",
+            "devices": []
         }
     ]
 }
