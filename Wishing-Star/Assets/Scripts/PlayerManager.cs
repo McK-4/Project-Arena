@@ -67,12 +67,6 @@ public class PlayerManager : MonoBehaviour
         playerSpawn_2 = player_2.transform.position;
         playerSpawn_3 = player_3.transform.position;
         playerSpawn_4 = player_4.transform.position;
-
-        playerOrders = new int[4];
-        playerOrders[0] = player1.orderInLayer;
-        playerOrders[1] = player2.orderInLayer;
-        playerOrders[2] = player3.orderInLayer;
-        playerOrders[3] = player4.orderInLayer;
         /*
         Debug.Log("P1: " + playerOrders[0]);
         Debug.Log("P2: " + playerOrders[1]);

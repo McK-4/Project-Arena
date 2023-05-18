@@ -191,6 +191,7 @@ public class PlayerController : MonoBehaviour
 
         playerLayer = gameObject.layer;
         anim.runtimeAnimatorController = skin[activeSkin];
+        Order(orderInLayer);
 
         health = maxHealth;
         respawn = transform.position;
@@ -213,6 +214,7 @@ public class PlayerController : MonoBehaviour
         fourth = false;
 
         itemTag1 = "Bow";
+        itemTag2 = "Tome of Ash";
 
         Order(orderInLayer);
 
@@ -1129,7 +1131,6 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Tome of Ash" && name != collision.gameObject.transform.name.Substring(0,8) && collision.gameObject.transform.name.Substring(1, 1) == "_")
         {
             killerName = collision.gameObject.transform.name.Substring(0,8);
-            itemLib.fireballHit = true;
             attacker = collision.gameObject;
             Debug.Log(name + " " + attacker + " " +killerName);
         }
@@ -1253,7 +1254,6 @@ public class PlayerController : MonoBehaviour
         //Tome of Ash
         if (collision.gameObject.tag == "Tome of Ash" && !damaged && collision.name.Substring(0, 8) != name && collision.gameObject.transform.name.Substring(1, 1) == "_")
         {
-            itemLib.fireballHit = true;
 
             //Debug.Log("AHHHHH!");
             //if Shield Blocking
@@ -1393,68 +1393,78 @@ public class PlayerController : MonoBehaviour
         switch(layer)
         {
             case 1:
-                spriteRen.sortingOrder = 1;
+                spriteRen.sortingLayerName = "Layer 1";
                 Physics2D.IgnoreLayerCollision(playerLayer, 6, false);
                 Physics2D.IgnoreLayerCollision(playerLayer, 7);
                 Physics2D.IgnoreLayerCollision(playerLayer, 8);
                 Physics2D.IgnoreLayerCollision(playerLayer, 9);
                 foreach (GameObject shieldPoint in shieldPoints)
                 {
-                    shieldPoint.GetComponent<SpriteRenderer>().sortingOrder = spriteRen.sortingOrder;
+                    shieldPoint.GetComponent<SpriteRenderer>().sortingLayerID = spriteRen.sortingLayerID;
                 }
                 foreach (GameObject attackPoint in attackPoints)
                 {
-                    attackPoint.GetComponent<SpriteRenderer>().sortingOrder = spriteRen.sortingOrder;
+                    attackPoint.GetComponent<SpriteRenderer>().sortingLayerID = spriteRen.sortingLayerID;
                 }
                 break;
             case 2:
-                spriteRen.sortingOrder = 3;
+                spriteRen.sortingLayerName = "Layer 2";
                 Physics2D.IgnoreLayerCollision(playerLayer, 6);
                 Physics2D.IgnoreLayerCollision(playerLayer, 7, false);
                 Physics2D.IgnoreLayerCollision(playerLayer, 8);
                 Physics2D.IgnoreLayerCollision(playerLayer, 9);
                 foreach (GameObject shieldPoint in shieldPoints)
                 {
-                    shieldPoint.GetComponent<SpriteRenderer>().sortingOrder = spriteRen.sortingOrder;
+                    shieldPoint.GetComponent<SpriteRenderer>().sortingLayerID = spriteRen.sortingLayerID;
                 }
                 foreach (GameObject attackPoint in attackPoints)
                 {
-                    attackPoint.GetComponent<SpriteRenderer>().sortingOrder = spriteRen.sortingOrder;
+                    attackPoint.GetComponent<SpriteRenderer>().sortingLayerID = spriteRen.sortingLayerID;
                 }
                 break;
             case 3:
-                spriteRen.sortingOrder = 5;
+                spriteRen.sortingLayerName = "Layer 3";
                 Physics2D.IgnoreLayerCollision(playerLayer, 6);
                 Physics2D.IgnoreLayerCollision(playerLayer, 7);
                 Physics2D.IgnoreLayerCollision(playerLayer, 8, false);
                 Physics2D.IgnoreLayerCollision(playerLayer, 9);
                 foreach (GameObject shieldPoint in shieldPoints)
                 {
-                    shieldPoint.GetComponent<SpriteRenderer>().sortingOrder = spriteRen.sortingOrder;
+                    shieldPoint.GetComponent<SpriteRenderer>().sortingLayerID = spriteRen.sortingLayerID;
                 }
                 foreach (GameObject attackPoint in attackPoints)
                 {
-                    attackPoint.GetComponent<SpriteRenderer>().sortingOrder = spriteRen.sortingOrder;
+                    attackPoint.GetComponent<SpriteRenderer>().sortingLayerID = spriteRen.sortingLayerID;
                 }
                 break;
             case 4:
-                spriteRen.sortingOrder = 7;
+                spriteRen.sortingLayerName = "Layer 4";
                 Physics2D.IgnoreLayerCollision(playerLayer, 6);
                 Physics2D.IgnoreLayerCollision(playerLayer, 7);
                 Physics2D.IgnoreLayerCollision(playerLayer, 8);
                 Physics2D.IgnoreLayerCollision(playerLayer, 9, false);
                 foreach (GameObject shieldPoint in shieldPoints)
                 {
-                    shieldPoint.GetComponent<SpriteRenderer>().sortingOrder = spriteRen.sortingOrder;
+                    shieldPoint.GetComponent<SpriteRenderer>().sortingLayerID = spriteRen.sortingLayerID;
                 }
                 foreach (GameObject attackPoint in attackPoints)
                 {
-                    attackPoint.GetComponent<SpriteRenderer>().sortingOrder = spriteRen.sortingOrder;
+                    attackPoint.GetComponent<SpriteRenderer>().sortingLayerID = spriteRen.sortingLayerID;
                 }
                 break;
             default:
-                spriteRen.sortingOrder = 1;
+                spriteRen.sortingLayerName = "Layer 1";
+                Physics2D.IgnoreLayerCollision(playerLayer, 6, false);
                 Physics2D.IgnoreLayerCollision(playerLayer, 7);
+                Physics2D.IgnoreLayerCollision(playerLayer, 8);
+                Physics2D.IgnoreLayerCollision(playerLayer, 9);
+                {
+                    shieldPoint.GetComponent<SpriteRenderer>().sortingLayerID = spriteRen.sortingLayerID;
+                }
+                foreach (GameObject attackPoint in attackPoints)
+                {
+                    attackPoint.GetComponent<SpriteRenderer>().sortingLayerID = spriteRen.sortingLayerID;
+                }
                 break;
         }
     }

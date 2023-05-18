@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3565138246060686706}
   - component: {fileID: 2682356986705498970}
   - component: {fileID: 3602831168716450847}
+  - component: {fileID: 103712406899481894}
   m_Layer: 0
   m_Name: Ash
   m_TagString: Tome of Ash
@@ -74,9 +75,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingLayerID: -1380173875
+  m_SortingLayer: 4
+  m_SortingOrder: 2
   m_Sprite: {fileID: 1836196481, guid: 39eb64d9f98350f4088fd61dd1a96a7a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -123,7 +124,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 0.75, y: 0.8}
   m_Direction: 0
 --- !u!95 &2682356986705498970
 Animator:
@@ -241,3 +242,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &103712406899481894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4729077863900164036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5740f0ee267b44446aae31f8f4b1e7e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 3c1fbe158f161ac4b99ca4569594c002, type: 3}

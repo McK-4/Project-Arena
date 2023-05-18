@@ -10,6 +10,10 @@ TagManager:
   - Bow
   - Bomb
   - Master
+  - Pick Up
+  - Tome of Ash
+  - Glove of Thunder
+  - Layer 3
   layers:
   - Default
   - TransparentFX
@@ -46,6 +50,18 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Layer 1
+    uniqueID: 2852314855
+    locked: 0
+  - name: Layer 2
+    uniqueID: 619891415
+    locked: 0
+  - name: Layer 3
+    uniqueID: 2929121503
+    locked: 0
+  - name: Layer 4
+    uniqueID: 2914793421
     locked: 0
   - name: UI
     uniqueID: 1220012749

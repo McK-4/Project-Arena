@@ -9,6 +9,7 @@ using TMPro;
 public class MenuManager : MonoBehaviour
 {
     MasterManager master;
+    [SerializeField] Animator fade;
 
     //[SerializeField]GameObject settingsMenu;
     [SerializeField]GameObject mainMenu;
@@ -159,7 +160,7 @@ public class MenuManager : MonoBehaviour
                 master.player3Skin = player3Select.currentArtNum;
                 master.player4Skin = player4Select.currentArtNum;
 
-                SceneManager.LoadScene(1);
+                StartCoroutine("start");
 
                 //mapSelectMenu.SetActive(true);
                 //player1Select.mapSelectMenu = true;
@@ -210,6 +211,12 @@ public class MenuManager : MonoBehaviour
             player3Select.playerSelectMenu = true;
             player4Select.playerSelectMenu = true;
         }
+    }
+    IEnumerator start()
+    {
+        fade.SetTrigger("Fade");
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(Random.Range(1,2));
     }
 
     //public void MapVote(int votedMap, int change)

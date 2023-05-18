@@ -29,13 +29,9 @@ public class ItemLibary : MonoBehaviour
     private string leechName;
     private bool leechThrown = false;
 
-    //Tome of Ash
+    //Ash
     [SerializeField] GameObject ash;
     GameObject fireballSummoned;
-    public bool fireballHit;
-    float fireballTimer;
-    float fireballTime = 1.5f;
-    bool fireShoot;
 
     //Glove of Thunder
     [SerializeField] GameObject bolt;
@@ -53,28 +49,6 @@ public class ItemLibary : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //fireball despawn
-        if (fireShoot)
-        {
-            if (fireballTimer < fireballTime)
-            {
-                fireballTimer += Time.deltaTime;
-            }
-            else if (fireballTimer >= fireballTime)
-            {
-                fireShoot = false;
-                fireballTimer = 0;
-                fireballSummoned.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-                StartCoroutine(fireballExplotion());
-            }
-            else if (fireballHit)
-            {
-                fireShoot = false;
-                fireballTimer = 0;
-                fireballSummoned.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-                StartCoroutine(fireballExplotion());
-            }
-        }
 
         //Timer until bomb explodes
         if(bombPlaced)
@@ -350,9 +324,7 @@ public class ItemLibary : MonoBehaviour
 
         fireballSummoned = Instantiate(ash, pos + direction, Quaternion.Euler(0,0, angle));
         fireballSummoned.GetComponent<Rigidbody2D>().velocity = direction * 10f;
-        anim = fireballSummoned.GetComponent<Animator>();
         fireballSummoned.name = (attacker + "'s ash");
-        fireShoot = true;
     }
 
     private void InvisibilityMask(GameObject player, bool invisible)
@@ -411,13 +383,5 @@ public class ItemLibary : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         Destroy(bombSummoned);
-    }
-
-    IEnumerator fireballExplotion()
-    {
-        anim.SetTrigger("Explode");
-        yield return new WaitForSeconds(0.5f);
-        Destroy(fireballSummoned);
-        fireballHit = false;
     }
 }
