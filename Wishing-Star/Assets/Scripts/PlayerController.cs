@@ -128,6 +128,10 @@ public class PlayerController : MonoBehaviour
     private ItemLibary itemLib;
     public string itemTag1;
     public string itemTag2;
+
+    public bool bladeUp;
+    public bool manaUp;
+    public bool shieldUpgrade;
     //private string itemTagMinus;
     public Vector2 facing;
     public Vector2 pos;
@@ -141,8 +145,8 @@ public class PlayerController : MonoBehaviour
     private bool pickingup2;
     [SerializeField] bool canSwap = false;
 
-    [SerializeField] float pickUptimer = 0;
-    [SerializeField] float pickUpCooldownTime = 2f;
+    float pickUptimer = 0;
+    float pickUpCooldownTime = 0.5f;
 
     //Bow charge up
     [SerializeField] bool drawing = false;
@@ -212,9 +216,6 @@ public class PlayerController : MonoBehaviour
         second = false;
         third = false;
         fourth = false;
-
-        itemTag1 = "Bow";
-        itemTag2 = "Tome of Ash";
 
         Order(orderInLayer);
 
@@ -616,12 +617,18 @@ public class PlayerController : MonoBehaviour
 
     public void Sword(InputAction.CallbackContext context)
     {
-        if(context.performed && !attacked)
+        if(context.performed && !attacked && !gameManager.readyForScene)
         {
             anim.SetTrigger("Attack");
             moveAble = false;
             attacked = true;
             basicSwordDamage = 2;
+        }
+        else if (context.performed && gameManager.readyForScene)
+        {
+            moveAble = false;
+            gameManager.StartCoroutine("NextScene");
+
         }
         
         if (context.canceled)
@@ -632,12 +639,6 @@ public class PlayerController : MonoBehaviour
                 moving = true;
             }
             //movementSpeed = movementSpeedStart;
-        }
-
-        if (gameManager.readyForScene)
-        {
-            moveAble = false;
-            SceneManager.LoadScene(0);
         }
 
     }
@@ -796,14 +797,10 @@ public class PlayerController : MonoBehaviour
 
     public void Item2(InputAction.CallbackContext context)
     {
-        if(context.started)
-        {
-            //Turning the item use animation on
-            anim.SetBool("Item", true);
-            anim.SetTrigger("Use");
-        }
         if (context.performed)
         {
+            anim.SetBool("Item", true);
+            anim.SetTrigger("Use");
 
             if (!holding2)
             {
@@ -1100,13 +1097,10 @@ public class PlayerController : MonoBehaviour
             }
 
             //Picking up Power ups
-            else if(pickingup1 && collision.gameObject.tag == "Power Up" && canSwap)
+            else if(pickingup1 && collision.gameObject.tag == "Power Up" && canSwap || pickingup2 && collision.gameObject.tag == "Power Up" && canSwap)
             {
-                Destroy(collision.gameObject);
-            }
-            
-            else if(pickingup2 && collision.gameObject.tag == "Power Up" && canSwap)
-            {
+                PowerUps(collision.gameObject.name.Substring(0, collision.gameObject.name.Length - 7));
+
                 Destroy(collision.gameObject);
             }
         }
@@ -1315,11 +1309,18 @@ public class PlayerController : MonoBehaviour
             itemTag2 = collision.gameObject.name.Substring(0, collision.gameObject.name.Length - 7);
             Destroy(collision.gameObject);
         }
+
+        if (pickingup1 && collision.gameObject.tag == "Power Up" && canSwap || pickingup2 && collision.gameObject.tag == "Power Up" && canSwap)
+        {
+            PowerUps(collision.gameObject.name.Substring(0, collision.gameObject.name.Length - 7));
+
+            Destroy(collision.gameObject);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Pick Up")
+        if(collision.gameObject.tag == "Pick Up" || collision.gameObject.tag == "Power Up")
         {
             canSwap = false;
         }
@@ -1368,13 +1369,15 @@ public class PlayerController : MonoBehaviour
                 break;
             case "Mana Up":
                 manaMax = 200;
-                //UI needs to be fixed for this
+                manaUp = true;
                 break;
             case "Mystic Blade":
                 basicSwordDamage = 3;
+                bladeUp = true;
                 break;
             case "Mystic Shield":
                 invincible = true;
+                shieldUpgrade = true;
                 break;
         }
 

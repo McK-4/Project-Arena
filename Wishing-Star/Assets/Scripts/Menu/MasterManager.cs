@@ -7,10 +7,13 @@ public class MasterManager : MonoBehaviour
 {
     GameObject[] other;
 
+    public bool setUp;
+
     public InputDevice player1Input;
     public InputDevice player2Input;
     public InputDevice player3Input;
     public InputDevice player4Input;
+    public InputDevice uniInput;
 
     public bool player1Active;
     public bool player2Active;

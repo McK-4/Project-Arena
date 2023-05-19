@@ -41,10 +41,6 @@ public class MenuManager : MonoBehaviour
     bool player2Active;
     bool player3Active;
     bool player4Active;
-    InputDevice player1Input;
-    InputDevice player2Input;
-    InputDevice player3Input;
-    InputDevice player4Input;
     [SerializeField]TextMeshProUGUI selectTimer;
     float startTimer;
     float waitTime = 5f;
@@ -61,10 +57,22 @@ public class MenuManager : MonoBehaviour
     {
         master = GameObject.FindGameObjectWithTag("Master").GetComponent<MasterManager>();
         input = GetComponent<PlayerInput>();
-        foreach (InputDevice device in InputSystem.devices)
+        if (!master.setUp)
         {
-            InputUser.PerformPairingWithDevice(device, input.user);
+            foreach (InputDevice device in InputSystem.devices)
+            {
+                InputUser.PerformPairingWithDevice(device, input.user);
+            }
         }
+        else
+        {
+            InputUser.PerformPairingWithDevice(master.uniInput, input.user);
+            player1Select.input(master.player1Input);
+            player1Select.input(master.player2Input);
+            player3Select.input(master.player3Input);
+            player4Select.input(master.player4Input);
+        }
+        
     }
 
     public void Device(InputAction.CallbackContext context)
@@ -77,28 +85,35 @@ public class MenuManager : MonoBehaviour
                     playerNum++;
                     player1Select.input(context.action.activeControl.device);
                     input.user.UnpairDevice(context.action.activeControl.device);
+                    master.player1Input = context.action.activeControl.device;
                     Debug.Log(context.action.activeControl.device);
                     break;
                 case 1:
                     playerNum++;
                     player2Select.input(context.action.activeControl.device);
                     input.user.UnpairDevice(context.action.activeControl.device);
+                    master.player2Input = context.action.activeControl.device;
                     break;
                 case 2:
                     playerNum++;
                     player3Select.input(context.action.activeControl.device);
                     input.user.UnpairDevice(context.action.activeControl.device);
+                    master.player3Input = context.action.activeControl.device;
                     break;
                 case 3:
                     playerNum++;
                     player4Select.input(context.action.activeControl.device);
                     input.user.UnpairDevice(context.action.activeControl.device);
+                    master.player4Input = context.action.activeControl.device;
                     break;
                 case 4:
                     playerNum++;
                     InputUser.PerformPairingWithDevice(context.action.activeControl.device, input.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
+                    master.uniInput = context.action.activeControl.device;
+                    master.setUp = true;
                     break;
                 default:
+                    StartGame(context);
                     break;
             }
         }
@@ -166,38 +181,18 @@ public class MenuManager : MonoBehaviour
                 {
                     player1Select.gameObject.SetActive(false);
                 }
-                else if(player1Active)
-                {
-                    player1Input = player1Select.inputDevice.device;
-                }
                 if (!player2Active)
                 {
                     player2Select.gameObject.SetActive(false);
-                }
-                else if (player2Active)
-                {
-                    player2Input = player2Select.inputDevice.device;
                 }
                 if (!player3Active)
                 {
                     player3Select.gameObject.SetActive(false);
                 }
-                else if (player3Active)
-                {
-                    player3Input = player3Select.inputDevice.device;
-                }
                 if (!player4Active)
                 {
                     player4Select.gameObject.SetActive(false);
                 }
-                else if (player4Active)
-                {
-                    player4Input = player4Select.inputDevice.device;
-                }
-                master.player1Input = player1Input;
-                master.player2Input = player2Input;
-                master.player3Input = player3Input;
-                master.player4Input = player4Input;
                 master.player1Active = player1Active;
                 master.player2Active = player2Active;
                 master.player3Active = player3Active;
@@ -264,7 +259,7 @@ public class MenuManager : MonoBehaviour
     {
         fade.SetTrigger("Fade");
         yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene(Random.Range(1,2));
+        SceneManager.LoadScene(Random.Range(1,3));
     }
 
     //public void MapVote(int votedMap, int change)

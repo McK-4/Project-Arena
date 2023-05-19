@@ -1,72 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ItemManager : MonoBehaviour
 {
 
     [SerializeField] GameObject[] items;
 
-    public GameObject[] powerUps;
-
-    Scene currentScene;
-
+    public GameObject[] pos;
     private Vector2[] itemSpawnPos;
-
-    //private Vector2[] powerUpSpawnPos; (not used?)
-    private Vector2[] powerUpEndPos;
-
-    //private bool[] spawned; (not used)
+    int positions;
 
     private int ranIndex;
 
-    [SerializeField] float spawntimer = 0;
+    [SerializeField] float spawntimer = 30f;
     [SerializeField] float spawnCooldownTime = 30f;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentScene = SceneManager.GetActiveScene();
-
-        //If the map is the Marygold mines
-        if (currentScene.name == "Map 1")
+        itemSpawnPos = new Vector2[pos.Length];
+        foreach (GameObject position in pos)
         {
-            itemSpawnPos = new Vector2[6];
-
-            powerUpEndPos = new Vector2[2];
-
-            //spawned = new bool[itemSpawnPos.Length];
-            itemSpawnPos[0] = new Vector2(-9.5f, -3.1f);
-            itemSpawnPos[1] = new Vector2(-7.5f, 2.85f);
-            itemSpawnPos[2] = new Vector2(4.5f, 9.85f);
-            itemSpawnPos[3] = new Vector2(6.5f, -5.1f);
-            itemSpawnPos[4] = new Vector2(-6.5f, -9f);
-            itemSpawnPos[5] = new Vector2(6f, 1.5f);
-
-            //powerUpSpawnPos[0] = new Vector2(-6.5f, -9f);
-            //powerUpSpawnPos[1] = new Vector2(6f, 1.5f);
-            
-            powerUpEndPos[0] = new Vector2(0.3f, -4.5f);
-            powerUpEndPos[1] = new Vector2(-1.35f, 1.5f);
-            
+            itemSpawnPos[positions] = position.transform.position;
+            positions++;
         }
-
-        /*
-        if(currentScene.name == "Map 3")
-        {
-            itemSpawnPos[0] = new Vector2(-9.5f, -3.1f);
-            itemSpawnPos[1] = new Vector2(-7.5f, 2.85f);
-            itemSpawnPos[2] = new Vector2(4.5f, 9.85f);
-            itemSpawnPos[3] = new Vector2(6.5f, -5.1f);
-
-            powerUpSpawnPos[0] = new Vector2(-6.5f, -9f);
-            powerUpSpawnPos[1] = new Vector2(6f, 1.5f);
-        }
-        */
-
-        spawntimer = 30f;
-        spawnCooldownTime = 30f;
 
     }
 
@@ -97,7 +56,7 @@ public class ItemManager : MonoBehaviour
         int ranItem = RandomNum(0, items.Length);
 
         //getting all objects in scene
-        GameObject[] itemsInScene = GameObject.FindGameObjectsWithTag("Pick Up");
+        GameObject[] itemsInScene = GameObject.FindGameObjectsWithTag("Pick Up").Concat(GameObject.FindGameObjectsWithTag("Power Up")).ToArray();
 
         //finding possible spawn locations
         List<Vector2> possibleSpots = new List<Vector2>(itemSpawnPos);

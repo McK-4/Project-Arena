@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 {
     Scene currentScene;
 
+    [SerializeField] Animator fade;
+
     [SerializeField]PlayerController player_1;
     [SerializeField]PlayerController player_2;
     [SerializeField]PlayerController player_3;
@@ -19,7 +21,7 @@ public class GameManager : MonoBehaviour
     PlayerController killerController;
     private bool awarded = false;
 
-    public int totalGameTime = 180;
+    int totalGameTime = 180;
     public float gameTimeRemaining;
     public int minutesLeft;
     public int secondsLeft;
@@ -151,5 +153,12 @@ public class GameManager : MonoBehaviour
                 contButton.SetActive(true);
             }
         }
+    }
+
+    public IEnumerator NextScene()
+    {
+        fade.SetTrigger("Fade");
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(0);
     }
 }

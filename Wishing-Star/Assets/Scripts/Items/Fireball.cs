@@ -48,6 +48,7 @@ public class Fireball : MonoBehaviour
     {
         anim.SetTrigger("Explode");
         source.clip = clip;
+        source.volume = 0.6f;
         source.Play();
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);

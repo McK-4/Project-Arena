@@ -284,7 +284,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1442652441
   m_SortingLayer: 1
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 2029724897, guid: 93d8345d30572874cbbb76afbd61de56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -430,7 +430,7 @@ MonoBehaviour:
     m_ActionId: 5fe9e3da-c943-4d8a-acfa-02999aee114b
     m_ActionName: Player/Start[/Keyboard/f]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Xbox Controller
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -490,7 +490,6 @@ MonoBehaviour:
   - {fileID: 493176480387860392}
   - {fileID: 6441347278142255657}
   - {fileID: 7389629737610090656}
-  itemPoints: []
   killerName: 
   points: 0
   winner: 0
@@ -517,7 +516,6 @@ MonoBehaviour:
   attackTimer: 0
   attackPoint: {fileID: 493176480387860392}
   shieldPoint: {fileID: 461438071577750643}
-  itemPoint: {fileID: 0}
   attackRange: 0.47
   playerLayers:
     serializedVersion: 2
@@ -534,13 +532,14 @@ MonoBehaviour:
   manaTimer: 0
   itemTag1: 
   itemTag2: 
+  bladeUp: 0
+  manaUp: 0
+  shieldUpgrade: 0
   facing: {x: 0, y: 0}
   pos: {x: 0, y: 0}
   canUse1: 0
   canUse2: 0
   canSwap: 0
-  pickUptimer: 0
-  pickUpCooldownTime: 2
   drawing: 0
   drew: 0
   drawtimer: 0
