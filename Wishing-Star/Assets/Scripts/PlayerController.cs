@@ -217,8 +217,6 @@ public class PlayerController : MonoBehaviour
         third = false;
         fourth = false;
 
-        itemTag1 = "Bow";
-
         Order(orderInLayer);
 
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
