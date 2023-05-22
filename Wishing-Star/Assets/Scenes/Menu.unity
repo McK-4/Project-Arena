@@ -826,12 +826,8 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 1ef66d84-148a-4a35-9596-4eeac5ac5546
     m_ActionName: Player/2_Item[/Keyboard/f]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5fe9e3da-c943-4d8a-acfa-02999aee114b
-    m_ActionName: Player/Start[/DragonRise Inc.   Generic   USB  Joystick  /button5,/Keyboard/f]
-  m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Global
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Arcade
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -1487,6 +1483,82 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 292020509}
+  m_CullTransparentMesh: 1
+--- !u!1 &332067503
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 332067504}
+  - component: {fileID: 332067506}
+  - component: {fileID: 332067505}
+  m_Layer: 5
+  m_Name: Controls_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &332067504
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332067503}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1374978563}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 640, y: -370}
+  m_SizeDelta: {x: 320, y: 180}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &332067505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332067503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 222720ee55de70e488b07a5d3b20e0d2, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &332067506
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332067503}
   m_CullTransparentMesh: 1
 --- !u!1 &384476989
 GameObject:
@@ -3229,14 +3301,8 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 1ef66d84-148a-4a35-9596-4eeac5ac5546
     m_ActionName: Player/2_Item[/Keyboard/f]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5fe9e3da-c943-4d8a-acfa-02999aee114b
-    m_ActionName: Player/Start[/DragonRise Inc.   Generic   USB  Joystick  /button5,/DragonRise
-      Inc.   Generic   USB  Joystick  1/button5,/DragonRise Inc.   Generic   USB 
-      Joystick  2/button5,/DragonRise Inc.   Generic   USB  Joystick  3/button5,/Keyboard/f]
-  m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Global
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Arcade
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -4071,6 +4137,7 @@ RectTransform:
   - {fileID: 1130322538}
   - {fileID: 171100635}
   - {fileID: 695641395}
+  - {fileID: 332067504}
   m_Father: {fileID: 1311765881}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4481,7 +4548,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8012a90d2bea89e4cb07f6e8438130b6, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4577,7 +4644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 9c5249a94f1959a42991b65acc02f30e, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: c7a344869c7bc6f47a970e8564e816b1, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -4591,21 +4658,6 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 346a323c-5ff9-4f1c-9788-f568018f5fa7
-    m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/DragonRise
-      Inc.   Generic   USB  Joystick  /stick/up,/DragonRise Inc.   Generic   USB 
-      Joystick  1/stick/up,/DragonRise Inc.   Generic   USB  Joystick  2/stick/up,/DragonRise
-      Inc.   Generic   USB  Joystick  3/stick/up,/DragonRise Inc.   Generic   USB 
-      Joystick  /stick/down,/DragonRise Inc.   Generic   USB  Joystick  1/stick/down,/DragonRise
-      Inc.   Generic   USB  Joystick  2/stick/down,/DragonRise Inc.   Generic   USB 
-      Joystick  3/stick/down,/DragonRise Inc.   Generic   USB  Joystick  /stick/left,/DragonRise
-      Inc.   Generic   USB  Joystick  1/stick/left,/DragonRise Inc.   Generic   USB 
-      Joystick  2/stick/left,/DragonRise Inc.   Generic   USB  Joystick  3/stick/left,/DragonRise
-      Inc.   Generic   USB  Joystick  /stick/right,/DragonRise Inc.   Generic   USB 
-      Joystick  1/stick/right,/DragonRise Inc.   Generic   USB  Joystick  2/stick/right,/DragonRise
-      Inc.   Generic   USB  Joystick  3/stick/right]
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1456786248}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
@@ -4619,72 +4671,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 6d7eaec5-b494-4f7d-8ada-491ea3d99b89
-    m_ActionName: Player/Sword[/DragonRise Inc.   Generic   USB  Joystick  /trigger,/DragonRise
-      Inc.   Generic   USB  Joystick  1/trigger,/DragonRise Inc.   Generic   USB 
-      Joystick  2/trigger,/DragonRise Inc.   Generic   USB  Joystick  3/trigger,/Keyboard/e]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1456786248}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: Device
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: ce02eb0d-442b-474c-ad79-94b1f22ed368
-    m_ActionName: Player/Shield[/DragonRise Inc.   Generic   USB  Joystick  /button2,/DragonRise
-      Inc.   Generic   USB  Joystick  1/button2,/DragonRise Inc.   Generic   USB 
-      Joystick  2/button2,/DragonRise Inc.   Generic   USB  Joystick  3/button2,/Keyboard/q]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1456786248}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: Device
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: bb8d21f6-8b26-413d-84ed-4ba21b728006
-    m_ActionName: Player/1_Item[/Keyboard/r,/DragonRise Inc.   Generic   USB  Joystick 
-      /button3,/DragonRise Inc.   Generic   USB  Joystick  1/button3,/DragonRise
-      Inc.   Generic   USB  Joystick  2/button3,/DragonRise Inc.   Generic   USB 
-      Joystick  3/button3]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1456786248}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: Device
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 1ef66d84-148a-4a35-9596-4eeac5ac5546
-    m_ActionName: Player/2_Item[/Keyboard/t,/DragonRise Inc.   Generic   USB  Joystick 
-      /button4,/DragonRise Inc.   Generic   USB  Joystick  1/button4,/DragonRise
-      Inc.   Generic   USB  Joystick  2/button4,/DragonRise Inc.   Generic   USB 
-      Joystick  3/button4]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5fe9e3da-c943-4d8a-acfa-02999aee114b
-    m_ActionName: Player/Start[/DragonRise Inc.   Generic   USB  Joystick  /button5,/DragonRise
-      Inc.   Generic   USB  Joystick  1/button5,/DragonRise Inc.   Generic   USB 
-      Joystick  2/button5,/DragonRise Inc.   Generic   USB  Joystick  3/button5,/Keyboard/f]
+    m_ActionId: 0846b2a5-ef21-4f83-99f3-f81191e295c7
+    m_ActionName: Player/Button[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Global
   m_DefaultActionMap: Player
@@ -5678,14 +5666,8 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 1ef66d84-148a-4a35-9596-4eeac5ac5546
     m_ActionName: Player/2_Item[/Keyboard/f]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5fe9e3da-c943-4d8a-acfa-02999aee114b
-    m_ActionName: Player/Start[/DragonRise Inc.   Generic   USB  Joystick  /button5,/DragonRise
-      Inc.   Generic   USB  Joystick  1/button5,/DragonRise Inc.   Generic   USB 
-      Joystick  2/button5,/DragonRise Inc.   Generic   USB  Joystick  3/button5,/Keyboard/f]
-  m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Global
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Xbox
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -6285,14 +6267,8 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 1ef66d84-148a-4a35-9596-4eeac5ac5546
     m_ActionName: Player/2_Item[/Keyboard/f]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5fe9e3da-c943-4d8a-acfa-02999aee114b
-    m_ActionName: Player/Start[/DragonRise Inc.   Generic   USB  Joystick  /button5,/DragonRise
-      Inc.   Generic   USB  Joystick  1/button5,/DragonRise Inc.   Generic   USB 
-      Joystick  2/button5,/DragonRise Inc.   Generic   USB  Joystick  3/button5,/Keyboard/f]
-  m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Global
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Arcade
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

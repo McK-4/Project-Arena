@@ -156,5 +156,6 @@ public class PlayerMenu : MonoBehaviour
     public void input(InputDevice device)
     {
         InputUser.PerformPairingWithDevice(device, pI.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
+        pI.SwitchCurrentControlScheme(device);
     }
 }

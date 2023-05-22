@@ -49,15 +49,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Start",
-                    "type": "Button",
-                    "id": "5fe9e3da-c943-4d8a-acfa-02999aee114b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -78,7 +69,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
+                    "groups": "Keyboard",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -89,7 +80,7 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
+                    "groups": "Keyboard",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -100,7 +91,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
+                    "groups": "Keyboard",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -111,7 +102,7 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
+                    "groups": "Keyboard",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -122,7 +113,7 @@
                     "path": "<XInputController>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
+                    "groups": "Xbox",
                     "action": "Sword",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -133,7 +124,7 @@
                     "path": "<Joystick>/trigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
+                    "groups": "Arcade",
                     "action": "Sword",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -144,18 +135,7 @@
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
-                    "action": "Sword",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e599c216-e4a5-457d-a232-f12644586f83",
-                    "path": "<DualShockGamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Global",
+                    "groups": "Keyboard",
                     "action": "Sword",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -166,7 +146,7 @@
                     "path": "<XInputController>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
+                    "groups": "Xbox",
                     "action": "Shield",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -177,7 +157,7 @@
                     "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button2",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
+                    "groups": "Arcade",
                     "action": "Shield",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -188,18 +168,7 @@
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
-                    "action": "Shield",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "319beb53-aa59-4e2b-8a4b-03f11d958230",
-                    "path": "<DualShockGamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Global",
+                    "groups": "Keyboard",
                     "action": "Shield",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -221,7 +190,7 @@
                     "path": "<Joystick>/stick/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
+                    "groups": "Arcade",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -232,7 +201,7 @@
                     "path": "<Joystick>/stick/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
+                    "groups": "Arcade",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -243,7 +212,7 @@
                     "path": "<Joystick>/stick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
+                    "groups": "Arcade",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -254,7 +223,7 @@
                     "path": "<Joystick>/stick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
+                    "groups": "Arcade",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -276,7 +245,7 @@
                     "path": "<XInputController>/dpad/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
+                    "groups": "Xbox",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -287,7 +256,7 @@
                     "path": "<XInputController>/dpad/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
+                    "groups": "Xbox",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -298,7 +267,7 @@
                     "path": "<XInputController>/dpad/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
+                    "groups": "Xbox",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -309,7 +278,7 @@
                     "path": "<XInputController>/dpad/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -326,56 +295,12 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "69c968df-db03-4dfb-ae2d-400567f1d143",
-                    "path": "<DualShockGamepad>/dpad/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Global",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "1911cbba-8e3c-4acd-b2a2-cfd31493d094",
-                    "path": "<DualShockGamepad>/dpad/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Global",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "e6a6db95-ea7f-447e-9f7e-74cee82fdb43",
-                    "path": "<DualShockGamepad>/dpad/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Global",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "29ba474c-145f-40d2-a88d-102aaab0199d",
-                    "path": "<DualShockGamepad>/dpad/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Global",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "",
                     "id": "c4d48cd0-b2ca-41e4-bc16-566873c82c6a",
                     "path": "<XInputController>/buttonNorth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
+                    "groups": "Xbox",
                     "action": "1_Item",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -386,7 +311,7 @@
                     "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
+                    "groups": "Keyboard",
                     "action": "1_Item",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -397,7 +322,7 @@
                     "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button3",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
+                    "groups": "Arcade",
                     "action": "1_Item",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -408,7 +333,7 @@
                     "path": "<XInputController>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
+                    "groups": "Xbox",
                     "action": "2_Item",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -419,7 +344,7 @@
                     "path": "<Keyboard>/t",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
+                    "groups": "Keyboard",
                     "action": "2_Item",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -430,30 +355,8 @@
                     "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button4",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Global",
+                    "groups": "Arcade",
                     "action": "2_Item",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4790e26c-e3a2-4a96-861c-402deeaecfb9",
-                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button5",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Global",
-                    "action": "Start",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7e15e004-03fe-4230-9d03-fad1220844b0",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Global",
-                    "action": "Start",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -462,9 +365,37 @@
     ],
     "controlSchemes": [
         {
-            "name": "Global",
-            "bindingGroup": "Global",
-            "devices": []
+            "name": "Xbox",
+            "bindingGroup": "Xbox",
+            "devices": [
+                {
+                    "devicePath": "<XInputController>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Arcade",
+            "bindingGroup": "Arcade",
+            "devices": [
+                {
+                    "devicePath": "<Joystick>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
         }
     ]
 }

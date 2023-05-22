@@ -425,12 +425,8 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 1ef66d84-148a-4a35-9596-4eeac5ac5546
     m_ActionName: Player/2_Item[/Keyboard/f]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5fe9e3da-c943-4d8a-acfa-02999aee114b
-    m_ActionName: Player/Start[/Keyboard/f]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Arcade
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -502,7 +498,6 @@ MonoBehaviour:
   health: 0
   damaged: 0
   healthTimer: 0
-  ranNum: 0
   deathTimer: 0
   died: 0
   movementSpeedMax: 7.5
@@ -593,7 +588,7 @@ Animator:
   m_GameObject: {fileID: 1654785569651679614}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 86dc6a182fc497f4b8c260c8a3263864, type: 2}
+  m_Controller: {fileID: 9100000, guid: b341577d40e11a24d86c78048cf7d8d4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -616,7 +611,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.000000029802322, y: 0.09803659}
+  m_Offset: {x: 0, y: 0.1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -627,7 +622,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9205957, y: 1.3039268}
+  m_Size: {x: 0.9, y: 1.3}
   m_EdgeRadius: 0
 --- !u!1 &4410748543114760453
 GameObject:

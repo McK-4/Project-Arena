@@ -66,7 +66,6 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            InputUser.PerformPairingWithDevice(master.uniInput, input.user);
             player1Select.input(master.player1Input);
             player1Select.input(master.player2Input);
             player3Select.input(master.player3Input);
@@ -105,11 +104,6 @@ public class MenuManager : MonoBehaviour
                     player4Select.input(context.action.activeControl.device);
                     input.user.UnpairDevice(context.action.activeControl.device);
                     master.player4Input = context.action.activeControl.device;
-                    break;
-                case 4:
-                    playerNum++;
-                    InputUser.PerformPairingWithDevice(context.action.activeControl.device, input.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
-                    master.uniInput = context.action.activeControl.device;
                     master.setUp = true;
                     break;
                 default:

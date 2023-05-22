@@ -2928,7 +2928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: aeca2f1a1055e62429622566bf203460, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -4244,8 +4244,10 @@ MonoBehaviour:
   - {fileID: 291846218, guid: 988f2daff6fa4bc4fa4f92169071af1e, type: 3}
   swordIcon: {fileID: 1344486249}
   swordUpgrade: {fileID: 1775270774, guid: 988f2daff6fa4bc4fa4f92169071af1e, type: 3}
+  swordSprite: {fileID: 2095584783, guid: 988f2daff6fa4bc4fa4f92169071af1e, type: 3}
   shieldIcon: {fileID: 265106294}
   shieldUpgrade: {fileID: -1913739326, guid: 988f2daff6fa4bc4fa4f92169071af1e, type: 3}
+  shieldSprite: {fileID: -601214876, guid: 988f2daff6fa4bc4fa4f92169071af1e, type: 3}
   pointsText: {fileID: 3981984043164477759}
 --- !u!1 &3981984042292852130
 GameObject:
@@ -6713,8 +6715,10 @@ MonoBehaviour:
   - {fileID: 291846218, guid: 988f2daff6fa4bc4fa4f92169071af1e, type: 3}
   swordIcon: {fileID: 1727477956}
   swordUpgrade: {fileID: 1775270774, guid: 988f2daff6fa4bc4fa4f92169071af1e, type: 3}
+  swordSprite: {fileID: 2095584783, guid: 988f2daff6fa4bc4fa4f92169071af1e, type: 3}
   shieldIcon: {fileID: 504493146}
   shieldUpgrade: {fileID: -1913739326, guid: 988f2daff6fa4bc4fa4f92169071af1e, type: 3}
+  shieldSprite: {fileID: -601214876, guid: 988f2daff6fa4bc4fa4f92169071af1e, type: 3}
   pointsText: {fileID: 3981984043292575737}
 --- !u!1 &3981984043624660396
 GameObject:
@@ -7809,8 +7813,10 @@ MonoBehaviour:
   - {fileID: 291846218, guid: 988f2daff6fa4bc4fa4f92169071af1e, type: 3}
   swordIcon: {fileID: 1213602059}
   swordUpgrade: {fileID: 1775270774, guid: 988f2daff6fa4bc4fa4f92169071af1e, type: 3}
+  swordSprite: {fileID: 2095584783, guid: 988f2daff6fa4bc4fa4f92169071af1e, type: 3}
   shieldIcon: {fileID: 964823010}
   shieldUpgrade: {fileID: -1913739326, guid: 988f2daff6fa4bc4fa4f92169071af1e, type: 3}
+  shieldSprite: {fileID: -601214876, guid: 988f2daff6fa4bc4fa4f92169071af1e, type: 3}
   pointsText: {fileID: 3981984043382622712}
 --- !u!1 &3981984043981705575
 GameObject:
@@ -8293,6 +8299,8 @@ MonoBehaviour:
   - {fileID: 291846218, guid: 988f2daff6fa4bc4fa4f92169071af1e, type: 3}
   swordIcon: {fileID: 898257193}
   swordUpgrade: {fileID: 1775270774, guid: 988f2daff6fa4bc4fa4f92169071af1e, type: 3}
+  swordSprite: {fileID: 2095584783, guid: 988f2daff6fa4bc4fa4f92169071af1e, type: 3}
   shieldIcon: {fileID: 2084283846}
   shieldUpgrade: {fileID: -1913739326, guid: 988f2daff6fa4bc4fa4f92169071af1e, type: 3}
+  shieldSprite: {fileID: -601214876, guid: 988f2daff6fa4bc4fa4f92169071af1e, type: 3}
   pointsText: {fileID: 3981984043943131068}

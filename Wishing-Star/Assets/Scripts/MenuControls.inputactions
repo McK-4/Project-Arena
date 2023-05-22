@@ -1,0 +1,62 @@
+{
+    "name": "MenuControls",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "f65a5028-5466-4251-9024-2a447b5951d7",
+            "actions": [
+                {
+                    "name": "Button",
+                    "type": "Button",
+                    "id": "0846b2a5-ef21-4f83-99f3-f81191e295c7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c2f73aae-14c0-43e0-85de-de4d80f47b75",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Global",
+                    "action": "Button",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fc52168c-c3df-46b7-8318-6cbc73b54c61",
+                    "path": "<Joystick>/trigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Global",
+                    "action": "Button",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7bc77c96-6ad5-4a87-85b4-90095ec983e1",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Global",
+                    "action": "Button",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Global",
+            "bindingGroup": "Global",
+            "devices": []
+        }
+    ]
+}

@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public Collider2D col;
     public SpriteRenderer spriteRen;
     Animator anim;
-    [SerializeField]AnimatorOverrideController[] skin;
+    [SerializeField] AnimatorOverrideController[] skin;
     public int activeSkin;
     PlayerInput input;
     public InputDevice inputDevice;
@@ -31,8 +31,8 @@ public class PlayerController : MonoBehaviour
     private PlayerManager playerManager;
     public GameObject[] players;
 
-    [SerializeField] GameObject[] shieldPoints; 
-    [SerializeField] GameObject[] attackPoints; 
+    [SerializeField] GameObject[] shieldPoints;
+    [SerializeField] GameObject[] attackPoints;
 
     //Rewarding players with points
     public string killerName;
@@ -63,12 +63,11 @@ public class PlayerController : MonoBehaviour
     float healthCooldownTime = 0.5f;
     //private int damageTaken = 0;
     //Death
-    public int ranNum;
     public float deathTimer = 0;
     private float deathCooldownTime = 5;
     private Vector2 diedPos = new Vector2(123, 456);
     public bool died;
-    private int respawnLayer;
+    int spawnNum;
 
     //Movement
     public float movementSpeedMax = 7.5f;
@@ -81,9 +80,9 @@ public class PlayerController : MonoBehaviour
     private float maxVelocityY = 7.60f;
     [SerializeField] Vector2 moveinput = Vector2.zero;
     public bool moving = false;
-    public bool moveAble = true;
-   // private bool moveMaxX = false;
-   // private bool moveMaxY = false;
+    public bool movable;
+    // private bool moveMaxX = false;
+    // private bool moveMaxY = false;
 
     //Attacking
     Vector2 movingTo;
@@ -93,11 +92,11 @@ public class PlayerController : MonoBehaviour
     private bool attacked = false;
     public float attackTimer = 0;
     private float attackCooldownTime = 0.5f;
-    Vector2 scale = new Vector2(1,1);
+    Vector2 scale = new Vector2(1, 1);
     Vector2 iScale = new Vector2(-1, 1);
 
-    [SerializeField]GameObject attackPoint;
-    [SerializeField]GameObject shieldPoint;
+    [SerializeField] GameObject attackPoint;
+    [SerializeField] GameObject shieldPoint;
     public float attackRange = 0.5f;
 
     //Shield Stuff
@@ -197,6 +196,7 @@ public class PlayerController : MonoBehaviour
         anim.runtimeAnimatorController = skin[activeSkin];
         Order(orderInLayer);
 
+        movable = true;
         health = maxHealth;
         respawn = transform.position;
         manaMax = 100;
@@ -234,11 +234,11 @@ public class PlayerController : MonoBehaviour
         pos = transform.position;
 
         //Item Pickup
-        if(itemTag1 != "")
+        if (itemTag1 != "")
         {
             holding1 = true;
         }
-        if(itemTag1 == "")
+        if (itemTag1 == "")
         {
             holding1 = false;
         }
@@ -267,7 +267,7 @@ public class PlayerController : MonoBehaviour
         //Mana Regeneration
         if (mana != tempMana)
         {
-            if(gainingMana)
+            if (gainingMana)
             {
                 gainingMana = false;
             }
@@ -277,7 +277,7 @@ public class PlayerController : MonoBehaviour
             mana = tempMana;
         }
 
-        if(manaUsed)
+        if (manaUsed)
         {
             if (manaTimer < manaCooldownTime)
             {
@@ -289,26 +289,26 @@ public class PlayerController : MonoBehaviour
                 manaUsed = false;
             }
         }
-        
-        if(!manaUsed && mana != manaMax)
+
+        if (!manaUsed && mana != manaMax)
         {
             mana += (5 * Time.deltaTime);
             tempMana = mana;
             gainingMana = true;
         }
 
-        if(mana > manaMax )
+        if (mana > manaMax)
         {
             mana = manaMax;
             tempMana = mana;
             gainingMana = false;
         }
-    
+
         //Facing (for items)
         switch (characterFacing)
         {
             case Directions.Up:
-                facing = new Vector2 (0, 1);
+                facing = new Vector2(0, 1);
                 break;
 
             case Directions.Down:
@@ -328,130 +328,110 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
-        //Movement
-        //tempVel = rb.velocity;
 
+        //Movement
+        if (moveinput != Vector2.zero)
+        {
+            moving = true;
+        }
+        else 
+        { 
+            moving = false; 
+        }
+        if (!movable)
+        {
+            moving = false;
+        }
         if (moving)
         {
             movementSpeed += acceleration;
-            //Debug.Log(rb.velocity);
         }
-        else if (!moving )
+        else if (!moving)
         {
             movementSpeed -= acceleration;
-            //tempVel.x -= acceleration;
-            //tempVel.y -= acceleration;
         }
-        /*
-        if (moveinput.y == 0)
-        {
-            tempVel.y -= acceleration * 2;
-        }
-
-        if (moveinput.x == 0)
-        {
-            tempVel.x -= acceleration * 2;
-        }
-        */
-        if (moveAble)
+        if (movable)
         {
             tempVel.x = moveinput.x * movementSpeed;
             tempVel.y = moveinput.y * movementSpeed;
         }
-        if(!moveAble)
-        {
-            tempVel = new Vector2(0,0);
-        }
-
         if (shieldUp && !charging || shieldUp && !drawing)
         {
             tempVel = moveinput * shieldMoveSpeed;
             maxVelocityX = 3.4f;
             maxVelocityY = 3.4f;
         }
-        if(!shieldUp && !charging || !shieldUp && !drawing)
+        if (!shieldUp && !charging || !shieldUp && !drawing)
         {
             maxVelocityX = 7.60f;
             maxVelocityY = 7.60f;
         }
-        
-        if(charging & !shieldUp|| drawing & !shieldUp)
+
+        if (charging & !shieldUp || drawing & !shieldUp)
         {
             tempVel = moveinput * shieldMoveSpeed;
             maxVelocityX = 3.4f;
             maxVelocityY = 3.4f;
         }
-        if (!charging && !shieldUp|| !drawing && !shieldUp)
+        if (!charging && !shieldUp || !drawing && !shieldUp)
         {
             maxVelocityX = 7.60f;
             maxVelocityY = 7.60f;
         }
-        
+
         if (movementSpeed <= movementSpeedStart && !moving)
         {
             movementSpeed = movementSpeedStart;
         }
 
-        
+
         if (movementSpeed >= movementSpeedMax)
             movementSpeed = movementSpeedMax;
-
-        if (tempVel == new Vector2(0, 0))
-            moving = false;
-
-        //rb.velocity.x = Mathf.Clamp(tempVel.x, -maxVelocityX, maxVelocityX);
+            
         rb.velocity += tempVel;
-        rb.velocity = new Vector2 (Mathf.Clamp(rb.velocity.x, -maxVelocityX, maxVelocityX), Mathf.Clamp(rb.velocity.y, -maxVelocityY, maxVelocityY));
-        //tempVel.y = Mathf.Clamp(tempVel.y, -maxVelocityY, maxVelocityY);
-        /*
-        if (moveinput.y == 0 && moveinput.x == 0)
+        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -maxVelocityX, maxVelocityX), Mathf.Clamp(rb.velocity.y, -maxVelocityY, maxVelocityY));
+        if (!movable)
         {
-            tempVel.x = 0;
-            tempVel.y = 0;
-            Debug.Log(tempVel);
+            rb.velocity = Vector2.zero;
         }
-        */
-        anim.SetFloat("Velocity", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y));
+        anim.SetFloat("Velocity", Mathf.Abs(moveinput.x) + Mathf.Abs(moveinput.y));
 
-
-        //Anti-Player Spawn Camping
-        if(playerManager.playerCamping == true)
-        {
-            playerRespawnShuffle();
-        }
 
         //Rotating the ShieldPoint and AttackPoint
-        if (moveinput.y > 0)
+        if (movable)
         {
-            characterFacing = Directions.Up;
-            anim.SetInteger("Direction", 1);
-            gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            if (moveinput.y > 0)
+            {
+                characterFacing = Directions.Up;
+                anim.SetInteger("Direction", 1);
+                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            }
+            if (moveinput.y < 0)
+            {
+                characterFacing = Directions.Down;
+                anim.SetInteger("Direction", 0);
+                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            }
+            if (moveinput.x > 0)
+            {
+                characterFacing = Directions.Right;
+                anim.SetInteger("Direction", 2);
+                attackPoint.transform.localScale = iScale;
+                shieldPoint.transform.localScale = iScale;
+                gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            }
+            if (moveinput.x < 0)
+            {
+                characterFacing = Directions.Left;
+                anim.SetInteger("Direction", 2);
+                attackPoint.transform.localScale = scale;
+                shieldPoint.transform.localScale = scale;
+                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            }
         }
-        if (moveinput.y < 0)
-        {
-            characterFacing = Directions.Down;
-            anim.SetInteger("Direction", 0);
-            gameObject.GetComponent<SpriteRenderer>().flipX = false;
-        }
-        if(moveinput.x > 0)
-        {
-            characterFacing = Directions.Right;
-            anim.SetInteger("Direction", 2);
-            attackPoint.transform.localScale = iScale;
-            shieldPoint.transform.localScale = iScale;
-            gameObject.GetComponent<SpriteRenderer>().flipX = true;
-        }
-        if(moveinput.x < 0)
-        {
-            characterFacing = Directions.Left;
-            anim.SetInteger("Direction", 2);
-            attackPoint.transform.localScale = scale;
-            shieldPoint.transform.localScale = scale;
-            gameObject.GetComponent<SpriteRenderer>().flipX = false;
-        }
-
+        
         //Attack delay
-        if(attacked)
+        if (attacked)
         {
             if (attackTimer < attackCooldownTime)
             {
@@ -475,18 +455,8 @@ public class PlayerController : MonoBehaviour
             {
                 deathTimer = 0;
                 died = false;
-                Debug.Log("Killer name is " + killerName);
-
-                if(killerName != name)
-                {
-                    GameObject.Find(killerName).GetComponent<PlayerController>().points += 1;
-                }
-
-                Order(playerManager.playerOrders[respawnLayer]);
-                transform.SetPositionAndRotation(respawn, Quaternion.identity);
-                //Debug.Log("New Layer: " + spriteRen.sortingOrder);
+                playerManager.Respawn(this);
                 health = maxHealth;
-                //Order(layer);
             }
         }
 
@@ -533,7 +503,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Glove of Thunder charge up
-        if(charging && powerLvl < 2)
+        if (charging && powerLvl < 2)
         {
             if (chargetimer < chargeCooldownTime)
             {
@@ -547,27 +517,27 @@ public class PlayerController : MonoBehaviour
         }
 
         //Invisiblility Mana Cost
-        
+
         //if(invisible && tempMana >= 3)
         //{
-            //if (invisTimer < invisCooldownTime)
-            //{
-                //invisTimer += Time.deltaTime;
-            //}
-            //else if (invisTimer >= invisCooldownTime)
-            //{
-                //invisTimer = 0;
-                //tempMana -= 3;
-            //}
+        //if (invisTimer < invisCooldownTime)
+        //{
+        //invisTimer += Time.deltaTime;
+        //}
+        //else if (invisTimer >= invisCooldownTime)
+        //{
+        //invisTimer = 0;
+        //tempMana -= 3;
+        //}
         //}
         //if(invisible && tempMana < 3)
         //{
-            //spriteRen.color = Color.white;
-            //invisible = false;
+        //spriteRen.color = Color.white;
+        //invisible = false;
         //}
 
         //Mystic Blade CoolDown
-        if (basicSwordDamage == 3)
+        if (bladeUp)
         {
             if (bladetimer < bladeCooldownTime)
             {
@@ -577,6 +547,7 @@ public class PlayerController : MonoBehaviour
             {
                 bladetimer = 0;
                 basicSwordDamage = 2;
+                bladeUp = false;
             }
         }
 
@@ -591,27 +562,42 @@ public class PlayerController : MonoBehaviour
             {
                 shieldtimer = 0;
                 invincible = false;
+                shieldUpgrade = false;
             }
         }
 
     }
 
+    public void Spawn(int spawnPos)
+    {
+        switch (spawnPos)
+        {
+            case 1:
+                gameObject.transform.position = playerManager.playerSpawns[0];
+                Order(playerManager.playerOrders[0]);
+                break;
+            case 2:
+                gameObject.transform.position = playerManager.playerSpawns[1];
+                Order(playerManager.playerOrders[1]);
+                break;
+            case 3:
+                gameObject.transform.position = playerManager.playerSpawns[2];
+                Order(playerManager.playerOrders[2]);
+                break;
+            case 4:
+                gameObject.transform.position = playerManager.playerSpawns[3];
+                Order(playerManager.playerOrders[3]);
+                break;
+            default:
+                gameObject.transform.position = playerManager.playerSpawns[0];
+                Order(playerManager.playerOrders[0]);
+            break;
+        }
+    }
+
     public void Move(InputAction.CallbackContext context)
     {
-        if(moveAble)
-        {
-            moveinput = context.ReadValue<Vector2>();
-        }
-
-        if (context.performed)
-        {
-            moving = true;
-        }
-
-        if (context.canceled)
-        {
-            moving = false;
-        }
+        moveinput = context.ReadValue<Vector2>();
 
         //Debug.Log(moveinput);
     }
@@ -621,27 +607,15 @@ public class PlayerController : MonoBehaviour
         if(context.performed && !attacked && !gameManager.readyForScene)
         {
             anim.SetTrigger("Attack");
-            moveAble = false;
+            movable = false;
             attacked = true;
-            basicSwordDamage = 2;
         }
         else if (context.performed && gameManager.readyForScene)
         {
-            moveAble = false;
+            movable = false;
             gameManager.StartCoroutine("NextScene");
 
         }
-        
-        if (context.canceled)
-        {
-            moveAble = true;
-            if(moveinput.y != 0 || moveinput.x != 0)
-            {
-                moving = true;
-            }
-            //movementSpeed = movementSpeedStart;
-        }
-
     }
 
     public void Shield(InputAction.CallbackContext context)
@@ -967,93 +941,15 @@ public class PlayerController : MonoBehaviour
         {
             //Debug.Log("Player " + name[0] + " was killed by Player " + killerName[0]);
             died = true;
+            if (killerName != name)
+            {
+                GameObject.Find(killerName).GetComponent<PlayerController>().points += 1;
+                Debug.Log("Killer name is " + killerName);
+            }
             transform.SetPositionAndRotation(diedPos, Quaternion.identity);
             //Debug.LogWarning("TELEPORTED!!!");
         }
         
-    }
-    
-    public void playerRespawnShuffle()
-    {
-        RandomNum();
-
-        if (name == "1_Player")
-        {
-            if (ranNum == 1)
-            {
-                respawn = new Vector2(playerManager.playerSpawn_2.x, playerManager.playerSpawn_2.y);
-                respawnLayer = 1;
-            }
-            else if (ranNum == 2)
-            {
-                respawn = new Vector2(playerManager.playerSpawn_3.x, playerManager.playerSpawn_3.y);
-                respawnLayer = 2;
-            }
-            else if (ranNum == 3)
-            {
-                respawn = new Vector2(playerManager.playerSpawn_4.x, playerManager.playerSpawn_4.y);
-                respawnLayer = 3;
-            }
-        }
-        
-        if (name == "2_Player")
-        {
-            if (ranNum == 1)
-            {
-                respawn = new Vector2(playerManager.playerSpawn_1.x, playerManager.playerSpawn_1.y);
-                respawnLayer = 0;
-            }
-            else if (ranNum == 2)
-            {
-                respawn = new Vector2(playerManager.playerSpawn_3.x, playerManager.playerSpawn_3.y);
-                respawnLayer = 2;
-            }
-            else if (ranNum == 3)
-            {
-                respawn = new Vector2(playerManager.playerSpawn_4.x, playerManager.playerSpawn_4.y);
-                respawnLayer = 3;
-            }
-        }
-        
-        if (name == "3_Player")
-        {
-            if (ranNum == 1)
-            {
-                respawn = new Vector2(playerManager.playerSpawn_2.x, playerManager.playerSpawn_2.y);
-                respawnLayer = 1;
-            }
-            else if (ranNum == 2)
-            {
-                respawn = new Vector2(playerManager.playerSpawn_1.x, playerManager.playerSpawn_1.y);
-                respawnLayer = 0;
-            }
-            else if (ranNum == 3)
-            {
-                respawn = new Vector2(playerManager.playerSpawn_4.x, playerManager.playerSpawn_4.y);
-                respawnLayer = 3;
-            }
-        }
-        
-        if (name == "4_Player")
-        {
-            if (ranNum == 1)
-            {
-                respawn = new Vector2(playerManager.playerSpawn_2.x, playerManager.playerSpawn_2.y);
-            }
-            else if (ranNum == 2)
-            {
-                respawn = new Vector2(playerManager.playerSpawn_3.x, playerManager.playerSpawn_3.y);
-            }
-            else if (ranNum == 3)
-            {
-                respawn = new Vector2(playerManager.playerSpawn_1.x, playerManager.playerSpawn_1.y);
-            }
-        }
-    }
-
-    void RandomNum()
-    {
-        ranNum = Random.Range(0,3);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -1143,7 +1039,10 @@ public class PlayerController : MonoBehaviour
         {
             killerName = collision.gameObject.transform.parent.name;
 
-            attacker = collision.gameObject.transform.parent.gameObject;
+            if (collision.gameObject.transform.parent.gameObject != gameObject)
+            {
+                attacker = collision.gameObject.transform.parent.gameObject;
+            }
         }
         
         //Making sure that there is an attacker before getting a angle
@@ -1327,35 +1226,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag == "Player")
-        {
-
-            //UP
-            if (collision.gameObject.GetComponent<PlayerController>().characterFacing == Directions.Up && moveinput.y != 0)
-            {
-
-            }
-            //Down
-            else if (collision.transform.position.y < pos.y)
-            {
-
-            }
-            //Left
-            else if (collision.transform.position.x < pos.x)
-            {
-
-            }
-            //Right
-            else if (collision.transform.position.x > pos.x)
-            {
-
-            }
-            //Debug.Log("YOU ARE IN MY WAY");
-        }
-    }
-
     private void PowerUps(string name)
     {
         switch (name)
@@ -1475,14 +1345,13 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator Teleported(int layer)
     {
+        Debug.Log("Teleported");
         Order(layer);
-        rb.velocity.Set(0,0);
-        moveAble = false;
-        rb.AddForce(Vector2.down * 20, ForceMode2D.Impulse);
+        movable = false;
         gameObject.GetComponent<SpriteRenderer>().flipX = false;
-        yield return new WaitForSeconds(0.2f);
-        moveAble = true;
         characterFacing = Directions.Down;
         anim.SetInteger("Direction", 0);
+        yield return new WaitForSeconds(0.2f);
+        movable = true;
     }
 }

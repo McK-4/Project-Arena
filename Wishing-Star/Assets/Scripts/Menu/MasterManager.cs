@@ -13,7 +13,6 @@ public class MasterManager : MonoBehaviour
     public InputDevice player2Input;
     public InputDevice player3Input;
     public InputDevice player4Input;
-    public InputDevice uniInput;
 
     public bool player1Active;
     public bool player2Active;

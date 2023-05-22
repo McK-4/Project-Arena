@@ -20,15 +20,8 @@ public class PlayerManager : MonoBehaviour
     PlayerController player4;
 
     //Anti-Player Camping Variable
-    public Vector2 playerSpawn_1;
-    public Vector2 playerSpawn_2;
-    public Vector2 playerSpawn_3;
-    public Vector2 playerSpawn_4;
-
-    private float campTimer = 0;
-    private float campCooldownTimer = 0.2f;
-
-    public int[] playerOrders;
+    public Vector2[] playerSpawns = new Vector2[4];
+    public int[] playerOrders = new int[4];
 
     public LayerMask playerLayers;
     public float antiCampRange = 1;
@@ -56,17 +49,24 @@ public class PlayerManager : MonoBehaviour
         {
             master = GameObject.FindGameObjectWithTag("Master").GetComponent<MasterManager>();
         }
-        catch { }
+        catch
+        {
+            master = null;
+        }
 
         player1 = player_1.GetComponent<PlayerController>();
         player2 = player_2.GetComponent<PlayerController>();
         player3 = player_3.GetComponent<PlayerController>();
         player4 = player_4.GetComponent<PlayerController>();
 
-        playerSpawn_1 = player_1.transform.position;
-        playerSpawn_2 = player_2.transform.position;
-        playerSpawn_3 = player_3.transform.position;
-        playerSpawn_4 = player_4.transform.position;
+        playerSpawns[0] = player_1.transform.position;
+        playerOrders[0] = player1.orderInLayer;
+        playerSpawns[1] = player_2.transform.position;
+        playerOrders[1] = player2.orderInLayer;
+        playerSpawns[2] = player_3.transform.position;
+        playerOrders[2] = player3.orderInLayer;
+        playerSpawns[3] = player_4.transform.position;
+        playerOrders[3] = player4.orderInLayer;
         /*
         Debug.Log("P1: " + playerOrders[0]);
         Debug.Log("P2: " + playerOrders[1]);
@@ -125,192 +125,7 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Anti-Player Camping
-
-        //Player camping refresh timer
-        if (playerCamping)
-        {
-            if (campTimer < campCooldownTimer)
-            {
-                campTimer += Time.deltaTime;
-            }
-            else if (campTimer >= campCooldownTimer)
-            {
-                campTimer = 0;
-                playerCamping = false;
-            }
-        }
-
-        //Player1
-        Collider2D[] hitPlayers_1 = Physics2D.OverlapCircleAll(playerSpawn_1, antiCampRange, playerLayers);
-
-        foreach (Collider2D player in hitPlayers_1)
-        {
-            Physics2D.IgnoreCollision(player_1.GetComponent<BoxCollider2D>(), player);
-
-            //Debug.Log("Hit " + player.name);
-
-            if (player.name == "2_Player" || player.name == "3_Player" || player.name == "4_Player")
-            {
-                playerCamping = true;
-                /*
-                if (player1.died)
-                {
-                    if (player1.ranNum == 1)
-                    {
-                        player1.orderInLayer = playerOrders[1];
-                        player1.Order(playerOrders[1]);
-                    }
-                    else if (player1.ranNum == 2)
-                    {
-                        player1.orderInLayer = playerOrders[2];
-                        player1.Order(playerOrders[2]);
-                    }
-                    else if (player1.ranNum == 3)
-                    {
-                        player1.orderInLayer = playerOrders[3];
-                        player1.Order(playerOrders[3]);
-                    }
-                }
-                */
-            }
-        }
-
-        //Player 2
-        Collider2D[] hitPlayers_2 = Physics2D.OverlapCircleAll(playerSpawn_2, antiCampRange, playerLayers);
-
-        foreach (Collider2D player in hitPlayers_2)
-        {
-            Physics2D.IgnoreCollision(player_2.GetComponent<BoxCollider2D>(), player);
-
-            //Debug.Log("Hit " + player.name);
-
-            if (player.name == "1_Player" || player.name == "3_Player" || player.name == "4_Player")
-            {
-                playerCamping = true;
-                /*
-                if (player2.died)
-                {
-                    if (player2.ranNum == 1)
-                    {
-                        player2.orderInLayer = playerOrders[0];
-                        player2.Order(playerOrders[0]);
-                    }
-                    else if (player2.ranNum == 2)
-                    {
-                        player2.orderInLayer = playerOrders[2];
-                        player2.Order(playerOrders[2]);
-                    }
-                    else if (player2.ranNum == 3)
-                    {
-                        player2.orderInLayer = playerOrders[3];
-                        player2.Order(playerOrders[3]);
-                    }
-                }
-                */
-            }
-        }
         
-        //Player 3
-        Collider2D[] hitPlayers_3 = Physics2D.OverlapCircleAll(playerSpawn_3, antiCampRange, playerLayers);
-
-        foreach (Collider2D player in hitPlayers_3)
-        {
-            Physics2D.IgnoreCollision(player_3.GetComponent<BoxCollider2D>(), player);
-
-            //Debug.Log("Hit " + player.name);
-
-            if (player.name == "1_Player" || player.name == "2_Player" || player.name == "4_Player")
-            {
-                playerCamping = true;
-                /*
-                if (player3.died)
-                {
-                    if (player3.ranNum == 1)
-                    {
-                        player3.orderInLayer = playerOrders[1];
-                        player3.Order(playerOrders[1]);
-                    }
-                    else if (player3.ranNum == 2)
-                    {
-                        player3.orderInLayer = playerOrders[0];
-                        player3.Order(playerOrders[0]);
-                    }
-                    else if (player3.ranNum == 3)
-                    {
-                        player3.orderInLayer = playerOrders[3];
-                        player3.Order(playerOrders[3]);
-                    }
-                }
-                */
-            }
-        }
-        
-        //Player 4
-        Collider2D[] hitPlayers_4 = Physics2D.OverlapCircleAll(playerSpawn_4, antiCampRange, playerLayers);
-
-        foreach (Collider2D player in hitPlayers_4)
-        {
-            Physics2D.IgnoreCollision(player_4.GetComponent<BoxCollider2D>(), player);
-
-            //Debug.Log("Hit " + player.name);
-
-            if (player.name == "1_Player" || player.name == "2_Player" || player.name == "3_Player")
-            {
-                playerCamping = true;
-                /*
-                if (player4.died)
-                {
-                    if (player4.ranNum == 1)
-                    {
-                        player4.orderInLayer = playerOrders[1];
-                        player4.Order(playerOrders[1]);
-                    }
-                    else if (player4.ranNum == 2)
-                    {
-                        player4.orderInLayer = playerOrders[2];
-                        player4.Order(playerOrders[2]);
-                    }
-                    else if (player4.ranNum == 3)
-                    {
-                        player4.orderInLayer = playerOrders[0];
-                        player4.Order(playerOrders[0]);
-                    }
-                }
-                */
-            }
-        }
-
-        //Making sure players don't respawn at the same spot
-        if (player1.died)
-        {
-            if (player1.respawn == player2.respawn || player1.respawn == player3.respawn || player1.respawn == player4.respawn)
-            {
-                player1.playerRespawnShuffle();
-            }
-        }
-        if (player2.died)
-        {
-            if (player2.respawn == player1.respawn || player2.respawn == player3.respawn || player2.respawn == player4.respawn)
-            {
-                player2.playerRespawnShuffle();
-            }
-        }
-        if (player3.died)
-        {
-            if (player3.respawn == player2.respawn || player3.respawn == player1.respawn || player3.respawn == player4.respawn)
-            {
-                player3.playerRespawnShuffle();
-            }
-        }
-        if (player4.died)
-        {
-            if (player4.respawn == player2.respawn || player4.respawn == player3.respawn || player4.respawn == player1.respawn)
-            {
-                player4.playerRespawnShuffle();
-            }
-        }
-
         //Player Leaderboard sorting:
         Player[] playerPoints = { new Player(player1.gameObject,player1.points), new Player(player2.gameObject, player2.points), new Player(player3.gameObject, player3.points), new Player(player4.gameObject, player4.points), };
         playerPoints = playerPoints.OrderByDescending(p => p.score).ToArray();
@@ -327,6 +142,28 @@ public class PlayerManager : MonoBehaviour
         playerPoints[3].playerGameObject.transform.position = fourthPos;
         */
     }
+
+    //Cast and check in sequential order for available spawns and return value of available spawn
+    public void Respawn(PlayerController player)
+    {
+        if (Physics2D.OverlapCircle(playerSpawns[0], antiCampRange, playerLayers) == null)
+        {
+            player.Spawn(1);
+        }
+        else if (Physics2D.OverlapCircle(playerSpawns[1], antiCampRange, playerLayers) == null)
+        {
+            player.Spawn(2);
+        }
+        else if (Physics2D.OverlapCircle(playerSpawns[2], antiCampRange, playerLayers) == null)
+        {
+            player.Spawn(3);
+        }
+        else if (Physics2D.OverlapCircle(playerSpawns[3], antiCampRange, playerLayers) == null)
+        {
+            player.Spawn(4);
+        }
+    }
+
     public void GameWin()
     {
         gameManager.winPlayerArtMat = winningPlayer.GetComponent<SpriteRenderer>();
@@ -344,69 +181,12 @@ public class PlayerManager : MonoBehaviour
     //Anti-camping suff
     private void OnDrawGizmosSelected()
     {
-        if (playerSpawn_1 == null)
+        if (playerSpawns == null)
             return;
 
-        Gizmos.DrawWireSphere(playerSpawn_1, antiCampRange);
-        Gizmos.DrawWireSphere(playerSpawn_2, antiCampRange);
-        Gizmos.DrawWireSphere(playerSpawn_3, antiCampRange);
-        Gizmos.DrawWireSphere(playerSpawn_4, antiCampRange);
+        Gizmos.DrawWireSphere(playerSpawns[0], antiCampRange);
+        Gizmos.DrawWireSphere(playerSpawns[1], antiCampRange);
+        Gizmos.DrawWireSphere(playerSpawns[2], antiCampRange);
+        Gizmos.DrawWireSphere(playerSpawns[3], antiCampRange);
     }
-    /*
-    private void PlayerPointsTimer()
-    {
-        if(p1PointsRewarded)
-        {
-            if (pointsTimer < pointsCooldownTimer)
-            {
-                pointsTimer += Time.deltaTime;
-            }
-            else if (pointsTimer >= pointsCooldownTimer)
-            {
-                pointsTimer = 0;
-                p1PointsRewarded = false;
-            }
-        }
-
-        if(p2PointsRewarded)
-        {
-            if (pointsTimer < pointsCooldownTimer)
-            {
-                pointsTimer += Time.deltaTime;
-            }
-            else if (pointsTimer >= pointsCooldownTimer)
-            {
-                pointsTimer = 0;
-                p2PointsRewarded = false;
-            }
-        }
-
-        if(p3PointsRewarded)
-        {
-            if (pointsTimer < pointsCooldownTimer)
-            {
-                pointsTimer += Time.deltaTime;
-            }
-            else if (pointsTimer >= pointsCooldownTimer)
-            {
-                pointsTimer = 0;
-                p3PointsRewarded = false;
-            }
-        }
-
-        if(p4PointsRewarded)
-        {
-            if (pointsTimer < pointsCooldownTimer)
-            {
-                pointsTimer += Time.deltaTime;
-            }
-            else if (pointsTimer >= pointsCooldownTimer)
-            {
-                pointsTimer = 0;
-                p4PointsRewarded = false;
-            }
-        }
-    }
-    */
-
 }

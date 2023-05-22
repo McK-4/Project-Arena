@@ -21,9 +21,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]List<Image> itemIcons;
     [SerializeField]List<Sprite> itemSprites;
     [SerializeField]Image swordIcon;
-    [SerializeField]Sprite swordUpgrade;
+    [SerializeField]Sprite swordUpgrade, swordSprite;
     [SerializeField]Image shieldIcon;
-    [SerializeField]Sprite shieldUpgrade;
+    [SerializeField]Sprite shieldUpgrade, shieldSprite;
     [SerializeField]TextMeshProUGUI pointsText;
 
     float mana;
@@ -78,6 +78,10 @@ public class UIManager : MonoBehaviour
         {
             swordIcon.sprite = swordUpgrade;
         }
+        else
+        {
+            swordIcon.sprite = swordSprite;
+        }
         manaUpgrade = pC.manaUp;
         if (manaUpgrade)
         {
@@ -87,6 +91,10 @@ public class UIManager : MonoBehaviour
         if (shield)
         {
             shieldIcon.sprite = shieldUpgrade;
+        }
+        else
+        {
+            shieldIcon.sprite = shieldSprite;
         }
 
         item1 = pC.itemTag1;
